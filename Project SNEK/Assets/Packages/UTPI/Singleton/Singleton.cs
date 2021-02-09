@@ -20,9 +20,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component
                 instance = FindObjectOfType<T>();
                 if (instance == null)
                 {
-                    GameObject obj = new GameObject();
-                    obj.name = typeof(T).Name;
-                    instance = obj.AddComponent<T>();
+                    throw new System.Exception("Instance not found.");
                 }
             }
             return instance;
@@ -58,5 +56,11 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component
             return true;
         }
         return false;
+    }
+
+    private void OnApplicationQuit()
+    {
+        instance = null;
+        Destroy(gameObject);
     }
 }
