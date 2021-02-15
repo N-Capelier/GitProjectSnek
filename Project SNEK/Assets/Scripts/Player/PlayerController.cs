@@ -10,7 +10,8 @@ namespace Player.Controller
     public abstract class PlayerController : MonoBehaviour
     {
 
-
+        Rigidbody rb = null;
+        [SerializeField] [Range(0, 500)] float moveSpeed = 100;
 
     }
 }
