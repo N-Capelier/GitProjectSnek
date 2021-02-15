@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace GameManagement.GameStates
 {
+    /// <summary>
+    /// Nico
+    /// </summary>
     public class MainMenuGameState : StateMachineBehaviour
     {
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state

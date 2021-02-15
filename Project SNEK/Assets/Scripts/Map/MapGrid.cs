@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Map
 {
+    /// <summary>
+    /// Nico
+    /// </summary>
     public class MapGrid : Singleton<MapGrid>
     {
         [Header("Variables")]

@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace GameManagement
 {
+    /// <summary>
+    /// Nico
+    /// </summary>
     public class GameManager : Singleton<GameManager>
     {
         [Header("References")]

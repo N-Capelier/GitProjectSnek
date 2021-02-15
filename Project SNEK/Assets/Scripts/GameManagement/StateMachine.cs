@@ -14,6 +14,9 @@ namespace GameManagement
         Run
     }
 
+    /// <summary>
+    /// Nico
+    /// </summary>
     public class StateMachine : MonoBehaviour
     {
         Animator animator;
