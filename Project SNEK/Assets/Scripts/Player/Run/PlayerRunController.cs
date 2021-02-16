@@ -20,7 +20,7 @@ namespace Player.Controller
             currentDirection = PlayerDirection.Up;
             nextDirection = PlayerDirection.Up;
             nextNode = GetNextNode();
-            InputHandler.InputReveived += HandleInput;
+            InputHandler.InputReceived += HandleInput;
         }
 
         private void Update()

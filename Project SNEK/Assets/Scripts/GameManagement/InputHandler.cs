@@ -16,10 +16,13 @@ namespace GameManagement
         SwipeLeft
     }
 
+    /// <summary>
+    /// Nico
+    /// </summary>
     public class InputHandler : MonoBehaviour
     {
         public delegate void InputReveiver(InputType inputType);
-        public static event InputReveiver InputReveived;
+        public static event InputReveiver InputReceived;
 
         [SerializeField] [Range(0, 500)] float deadzone = 100f;
         [SerializeField] [Range(0, 1)] float tapTimerDuration = 0.2f;
@@ -46,13 +49,13 @@ namespace GameManagement
         private void HandleKeyboard()
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
-                InputReveived?.Invoke(InputType.SwipeUp);
+                InputReceived?.Invoke(InputType.SwipeUp);
             if (Input.GetKeyDown(KeyCode.RightArrow))
-                InputReveived?.Invoke(InputType.SwipeRight);
+                InputReceived?.Invoke(InputType.SwipeRight);
             if (Input.GetKeyDown(KeyCode.DownArrow))
-                InputReveived?.Invoke(InputType.SwipeDown);
+                InputReceived?.Invoke(InputType.SwipeDown);
             if (Input.GetKeyDown(KeyCode.LeftArrow))
-                InputReveived?.Invoke(InputType.SwipeLeft);
+                InputReceived?.Invoke(InputType.SwipeLeft);
         }
 
         void HandleTap()
@@ -83,16 +86,16 @@ namespace GameManagement
                 if(Mathf.Abs(x) > Mathf.Abs(y))
                 {
                     if (x < 0)
-                        InputReveived?.Invoke(InputType.SwipeLeft);
+                        InputReceived?.Invoke(InputType.SwipeLeft);
                     else
-                        InputReveived?.Invoke(InputType.SwipeRight);
+                        InputReceived?.Invoke(InputType.SwipeRight);
                 }
                 else
                 {
                     if (y < 0)
-                        InputReveived?.Invoke(InputType.SwipeDown);
+                        InputReceived?.Invoke(InputType.SwipeDown);
                     else
-                        InputReveived?.Invoke(InputType.SwipeUp);
+                        InputReceived?.Invoke(InputType.SwipeUp);
                 }
                 startPos = currentPos = Vector2.zero;
             }
@@ -102,7 +105,7 @@ namespace GameManagement
         {
             if(!Input.GetMouseButton(0))
             {
-                InputReveived?.Invoke(InputType.Tap);
+                InputReceived?.Invoke(InputType.Tap);
             }
         }
     }
