@@ -13,6 +13,11 @@ namespace GameManagement.DebugTools
         [Space]
         [SerializeField] GameObject[] tools;
 
+        private void Start()
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+
         private void Update()
         {
             if(tools.Length != 0)

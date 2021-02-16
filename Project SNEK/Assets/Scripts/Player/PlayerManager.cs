@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Player.Controller;
-using GameManagement;
 
 namespace Player
 {
     /// <summary>
     /// Nico
     /// </summary>
-    public class PlayerManager : MonoBehaviour
+    public class PlayerManager : Singleton<PlayerManager>
     {
         [Header("References")]
         public GameObject hubPlayer = null;
@@ -17,27 +16,9 @@ namespace Player
 
         [HideInInspector] public PlayerController currentController = null;
 
-        public void InitController(GameState _state)
+        private void Awake()
         {
-            GameObject _stateObject = null;
-
-            switch(_state)
-            {
-                case GameState.Hub:
-                    _stateObject = hubPlayer;
-                    break;
-                case GameState.Run:
-                    _stateObject = runPlayer;
-                    break;
-                default:
-                    break;
-            }
-
-            if(_stateObject != currentController)
-            {
-                GameObject _newController = Instantiate(_stateObject, transform);
-                currentController = _newController.GetComponentInChildren<PlayerController>();
-            }
+            CreateSingleton(true);
         }
     }
 }

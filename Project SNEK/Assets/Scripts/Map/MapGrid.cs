@@ -18,7 +18,7 @@ namespace Map
         [Header("Display")]
         [SerializeField] bool displayGridLines = false;
         Clock refreshTimer;
-        float refreshRate = 1f;
+        float refreshRate = 2f;
 
         #region Private methods
 
@@ -36,12 +36,19 @@ namespace Map
             RefreshLines();
         }
 
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                RefreshLines();
+            }
+        }
+
 
         void RefreshLines()
         {
             if (!displayGridLines)
                 return;
-
             Vector3 _offset = new Vector3(cellSize, 0, cellSize) * 0.5f;
 
             for (int x = 0; x < cells.GetLength(0); x++)
@@ -62,7 +69,7 @@ namespace Map
 
         public Vector3 GetWorldPos(int x, int z)
         {
-            return new Vector3(x + transform.position.x, 0 + transform.position.y, z + transform.position.z) * cellSize;
+            return new Vector3(x + transform.position.x, transform.position.y, z + transform.position.z) * cellSize;
         }
     }
 }
