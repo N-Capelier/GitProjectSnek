@@ -18,17 +18,12 @@ namespace Player.Controller
         {
             currentNode = startingNode;
             currentDirection = PlayerDirection.Up;
+            nextDirection = PlayerDirection.Up;
             nextNode = GetNextNode();
-            rb.velocity = (currentNode - nextNode) * moveSpeed * Time.deltaTime;
             InputHandler.InputReveived += HandleInput;
         }
 
         private void Update()
-        {
-
-        }
-
-        private void FixedUpdate()
         {
             if ((currentDirection == PlayerDirection.Up && transform.position.z >= MapGrid.Instance.GetWorldPos(0, (int)nextNode.z).z) ||
                 (currentDirection == PlayerDirection.Right && transform.position.x >= MapGrid.Instance.GetWorldPos((int)nextNode.x, 0).x) ||
@@ -39,32 +34,41 @@ namespace Player.Controller
             }
         }
 
-        void HandleInput(InputType inputType)
+        private void FixedUpdate()
         {
-            switch(inputType)
-            {
-                case InputType.SwipeUp:
-                    nextDirection = PlayerDirection.Up;
-                    break;
-                case InputType.SwipeRight:
-                    nextDirection = PlayerDirection.Right;
-                    break;
-                case InputType.SwipeDown:
-                    nextDirection = PlayerDirection.Down;
-                    break;
-                case InputType.SwipeLeft:
-                    nextDirection = PlayerDirection.Left;
-                    break;
-                default:
-                    break;
-            }
+            rb.velocity = (nextNode - currentNode);
         }
 
         void UpdateMovement()
         {
             currentDirection = nextDirection;
+            currentNode = nextNode;
             nextNode = GetNextNode();
-            rb.velocity = (currentNode - nextNode) * Time.deltaTime;
+        }
+
+        void HandleInput(InputType inputType)
+        {
+            switch (inputType)
+            {
+                case InputType.SwipeUp:
+                    if (currentDirection != PlayerDirection.Down)
+                        nextDirection = PlayerDirection.Up;
+                    break;
+                case InputType.SwipeRight:
+                    if (currentDirection != PlayerDirection.Left)
+                        nextDirection = PlayerDirection.Right;
+                    break;
+                case InputType.SwipeDown:
+                    if (currentDirection != PlayerDirection.Up)
+                        nextDirection = PlayerDirection.Down;
+                    break;
+                case InputType.SwipeLeft:
+                    if (currentDirection != PlayerDirection.Right)
+                        nextDirection = PlayerDirection.Left;
+                    break;
+                default:
+                    break;
+            }
         }
 
         Vector3 GetNextNode()
@@ -88,7 +92,6 @@ namespace Player.Controller
                 default:
                     throw new System.NotImplementedException("Player direction not implemented.");
             }
-
             return _nextNode;
         }
 

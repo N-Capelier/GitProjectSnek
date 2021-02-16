@@ -23,11 +23,11 @@ namespace GameManagement
         public Dictionary<GameState, string> gameStates = new Dictionary<GameState, string>();
         public GameState ActiveState { get; private set; } = GameState.Cinematic;
 
+        [SerializeField] GameState startingState = GameState.Run;
+
         private void Awake()
         {
             animator = GetComponent<Animator>();
-
-            Set(GameState.Cinematic);
 
             gameStates.Add(GameState.Cinematic, "Cinematic");
             gameStates.Add(GameState.Dialog, "Dialog");
@@ -35,6 +35,8 @@ namespace GameManagement
             gameStates.Add(GameState.MainMenu, "MainMenu");
             gameStates.Add(GameState.PauseMenu, "PauseMenu");
             gameStates.Add(GameState.Run, "Run");
+
+            Set(startingState);
         }
 
         public void Set(GameState newState)

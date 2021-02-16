@@ -17,7 +17,7 @@ namespace GameManagement.GameStates
         {
             GameObject _newController = Instantiate(PlayerManager.Instance.runPlayer, PlayerManager.Instance.transform);
             PlayerManager.Instance.currentController = _newController.GetComponent<PlayerController>();
-            PlayerManager.Instance.currentController.transform.position = MapGrid.Instance.GetWorldPos(2, 0);
+            PlayerManager.Instance.currentController.transform.position = MapGrid.Instance.GetWorldPos(3, 1);
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

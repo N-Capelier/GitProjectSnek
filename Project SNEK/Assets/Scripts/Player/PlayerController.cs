@@ -17,13 +17,13 @@ namespace Player.Controller
     /// </summary>
     public abstract class PlayerController : MonoBehaviour
     {
-        public Vector2 startingNode;
+        public Vector3 startingNode = new Vector3(3, 0, 1);
         [HideInInspector] public PlayerDirection currentDirection;
         [HideInInspector] public PlayerDirection nextDirection;
 
         [Space]
         [HideInInspector] public Rigidbody rb = null;
-        [Range(0, 500)] public float moveSpeed = 100;
+        [Range(0, 500)] public float moveSpeed = 50;
 
         public virtual void Awake()
         {

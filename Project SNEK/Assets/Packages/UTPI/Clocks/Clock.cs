@@ -92,14 +92,7 @@ public class Clock
         {
             //onFinish = false;
 
-            if (canInvoke)
-            {
-                ClockEnded?.Invoke();
-            }
-            else
-            {
-                canInvoke = true;
-            }
+
             subscription = false;
             UpdateCaller.OnUpdate -= Run;
             return;
@@ -116,6 +109,14 @@ public class Clock
         {
             finished = true;
             //onFinish = true;
+            if (canInvoke)
+            {
+                ClockEnded?.Invoke();
+            }
+            else
+            {
+                canInvoke = true;
+            }
         }
     }
 
