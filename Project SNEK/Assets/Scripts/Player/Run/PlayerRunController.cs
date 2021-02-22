@@ -46,6 +46,10 @@ namespace Player.Controller
             nextNode = GetNextNode();
         }
 
+        /// <summary>
+        /// Get new direction on user input
+        /// </summary>
+        /// <param name="inputType"></param>
         void HandleInput(InputType inputType)
         {
             switch (inputType)
@@ -71,6 +75,10 @@ namespace Player.Controller
             }
         }
 
+        /// <summary>
+        /// find next targeted node on the grid
+        /// </summary>
+        /// <returns></returns>
         Vector3 GetNextNode()
         {
             Vector3 _nextNode;

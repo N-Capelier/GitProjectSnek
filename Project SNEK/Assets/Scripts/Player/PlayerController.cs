@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Player.Controller
 {
@@ -25,9 +26,52 @@ namespace Player.Controller
         [HideInInspector] public Rigidbody rb = null;
         [Range(0, 500)] public float moveSpeed = 50;
 
+        [Space]
+        [SerializeField] [Range(0, 10)] int baseHP = 4;
+        int currentHP;
+        public Transform checkPoint;
+
+
         public virtual void Awake()
         {
             rb = GetComponent<Rigidbody>();
+        }
+
+        public void Init(int _bonusHP)
+        {
+            currentHP = baseHP + _bonusHP;
+        }
+
+        public void Death()
+        {
+            currentHP--;
+            if(currentHP <= 0)
+            {
+                StartCoroutine(DeathCoroutine());
+            }
+            else
+            {
+                StartCoroutine(RespawnCoroutine());
+            }
+        }
+
+        IEnumerator RespawnCoroutine()
+        {
+            //play death anim
+
+            yield return new WaitForSeconds(0.5f);
+            AsyncOperation _loadingScene = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+            yield return new WaitUntil(() => _loadingScene.isDone);
+            transform.position = checkPoint.position;
+            //play respawn anim
+        }
+
+        IEnumerator DeathCoroutine()
+        {
+            //play defeat anim
+
+            yield return new WaitForSeconds(0.5f);
+            GameManagement.GameManager.Instance.gameState.Set(GameManagement.GameState.Hub);
         }
     }
 }
