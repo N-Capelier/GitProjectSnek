@@ -8,7 +8,7 @@ namespace Hub
 
         public void StartLevel1()
         {
-            StartCoroutine(GameManager.Instance.levelLauncher.StartLevel("Run"));
+            GameManager.Instance.StartCoroutine(GameManager.Instance.levelLauncher.StartLevel("Run"));
         }
 
     }

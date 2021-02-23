@@ -4,6 +4,9 @@ using UnityEngine.SceneManagement;
 
 namespace GameManagement
 {
+    /// <summary>
+    /// Nico
+    /// </summary>
     public class LevelLauncher : MonoBehaviour
     {
         public IEnumerator StartLevel(string _levelName)
