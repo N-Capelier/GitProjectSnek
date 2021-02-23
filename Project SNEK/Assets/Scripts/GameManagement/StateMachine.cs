@@ -21,9 +21,9 @@ namespace GameManagement
     {
         Animator animator;
         public Dictionary<GameState, string> gameStates = new Dictionary<GameState, string>();
-        public GameState ActiveState { get; private set; } = GameState.Cinematic;
+        public GameState ActiveState { get; private set; } = GameState.MainMenu;
 
-        [SerializeField] GameState startingState = GameState.Run;
+        [SerializeField] GameState startingState = GameState.MainMenu;
 
         private void Awake()
         {

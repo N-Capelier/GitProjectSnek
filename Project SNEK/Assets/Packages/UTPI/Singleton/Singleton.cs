@@ -7,7 +7,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component
     /// The instance.
     /// </summary>
     private static T instance;
-
+    
     /// <summary>
     /// Gets the instance of the Singleton.
     /// </summary>

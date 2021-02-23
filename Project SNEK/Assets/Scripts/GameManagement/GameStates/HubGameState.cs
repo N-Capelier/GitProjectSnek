@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Player;
 using Player.Controller;
+using UnityEngine.SceneManagement;
 
 namespace GameManagement.GameStates
 {
@@ -14,6 +15,7 @@ namespace GameManagement.GameStates
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            SceneManager.LoadScene("Hub");
             GameObject _newController = Instantiate(PlayerManager.Instance.hubPlayer, PlayerManager.Instance.transform);
             PlayerManager.Instance.currentController = _newController.GetComponent<PlayerController>();
         }

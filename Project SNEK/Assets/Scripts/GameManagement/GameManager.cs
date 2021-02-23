@@ -11,6 +11,7 @@ namespace GameManagement
     {
         [Header("References")]
         public StateMachine gameState = null;
+        public LevelLauncher levelLauncher = null;
 
         private void Awake()
         {
