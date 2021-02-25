@@ -26,6 +26,7 @@ public class Clock
     public bool finished { get; protected set; } = false;
 
     bool subscription = false;
+    bool canInvoke = true;
 
     #endregion
 
@@ -87,9 +88,11 @@ public class Clock
         if (paused)
             return;
 
-        if (time <= 0)
+        if (finished)
         {
             //onFinish = false;
+
+
             subscription = false;
             UpdateCaller.OnUpdate -= Run;
             return;
@@ -106,7 +109,14 @@ public class Clock
         {
             finished = true;
             //onFinish = true;
-            ClockEnded?.Invoke();
+            if (canInvoke)
+            {
+                ClockEnded?.Invoke();
+            }
+            else
+            {
+                canInvoke = true;
+            }
         }
     }
 
@@ -151,6 +161,12 @@ public class Clock
     /// <param name="clock"></param>
     public void Stop()
     {
+        time = 0f;
+    }
+
+    public void StopWithoutEvent()
+    {
+        canInvoke = false;
         time = 0f;
     }
 

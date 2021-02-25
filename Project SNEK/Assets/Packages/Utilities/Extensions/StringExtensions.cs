@@ -506,7 +506,7 @@ public static class StringExtensions
 			throw new ArgumentException ("Type provided must be an Enum.", "T");
 		}
 
-		return (T)Enum.Parse (t, value, ignorecase);
+		return (T)System.Enum.Parse (t, value, ignorecase);
 	}
 
 
