@@ -59,10 +59,10 @@ namespace Player.Controller
         {
             //play death anim
 
-            yield return new WaitForSeconds(0.5f);
+            //yield return new WaitForSeconds(0.5f);
             AsyncOperation _loadingScene = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
-            yield return new WaitUntil(() => _loadingScene.isDone);
             transform.position = checkPoint.position;
+            yield return new WaitUntil(() => _loadingScene.isDone);
             //play respawn anim
         }
 

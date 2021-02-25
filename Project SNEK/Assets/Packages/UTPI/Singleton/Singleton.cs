@@ -39,7 +39,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component
         }
         else
         {
-            Debug.LogError("Destroyed a non-unique gameObject named " + gameObject.name);
+            Debug.LogWarning("Destroyed a non-unique gameObject named " + gameObject.name);
             Destroy(gameObject);
             return false;
         }

@@ -29,6 +29,7 @@ namespace GameManagement.GameStates
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             Destroy(PlayerManager.Instance.currentController.gameObject);
+            Destroy(MapGrid.Instance.gameObject);
         }
     }
 }
