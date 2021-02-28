@@ -68,17 +68,12 @@ namespace Player.Attack
                     //attack.GetComponent<BoxCollider>().center = new Vector3(0.5f, 0, 0);
                     break;
             }
+
             yield return new WaitForSeconds(0.2f);
             PlayerManager.Instance.currentController.canMove = true;
             Destroy(attack);
 
         }
-
-        void SetAttackDir()
-        {
-
-        }
-
         void OnCooldownEnded()
         {
             canAttack = true;
