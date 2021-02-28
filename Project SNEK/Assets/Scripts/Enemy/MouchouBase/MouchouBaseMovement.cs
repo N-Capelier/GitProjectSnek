@@ -22,7 +22,7 @@ public class MouchouBaseMovement : MonoBehaviour
 
     Vector3 currentNode;
     Vector3 nextNode;
-    [SerializeField] bool canMove = true;
+    bool canMove = true;
 
     [Space]
     public bool lineVertical = false;
