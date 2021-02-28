@@ -44,23 +44,31 @@ namespace Player.Attack
             {
                 // Ajouter un * par rapport à la range
                 case Controller.PlayerDirection.Up:
-                    attack.GetComponent<BoxCollider>().size = new Vector3(3, 1, 2);
-                    attack.GetComponent<BoxCollider>().center = new Vector3(0, 0, 0.5f);
+                    attack.transform.localScale = new Vector3(3, 1, 2);
+                    attack.transform.position = transform.position + new Vector3(0, 0, 0.5f);
+                    //attack.GetComponent<BoxCollider>().size = new Vector3(3, 1, 2);
+                    //attack.GetComponent<BoxCollider>().center = new Vector3(0, 0, 0.5f);
                     break;
                 case Controller.PlayerDirection.Down:
-                    attack.GetComponent<BoxCollider>().size = new Vector3(3, 1, 2);
-                    attack.GetComponent<BoxCollider>().center = new Vector3(0, 0, -0.5f);
+                    attack.transform.localScale = new Vector3(3, 1, 2);
+                    attack.transform.position = transform.position + new Vector3(0, 0, -0.5f);
+                    //attack.GetComponent<BoxCollider>().size = new Vector3(3, 1, 2);
+                    //attack.GetComponent<BoxCollider>().center = new Vector3(0, 0, -0.5f);
                     break;
                 case Controller.PlayerDirection.Left:
-                    attack.GetComponent<BoxCollider>().size = new Vector3(2, 1, 3);
-                    attack.GetComponent<BoxCollider>().center = new Vector3(-0.5f, 0, 0);
+                    attack.transform.localScale = new Vector3(2, 1, 3);
+                    attack.transform.position = transform.position + new Vector3(-0.5f, 0, 0);
+                    //attack.GetComponent<BoxCollider>().size = new Vector3(2, 1, 3);
+                    //attack.GetComponent<BoxCollider>().center = new Vector3(-0.5f, 0, 0);
                     break;
                 case Controller.PlayerDirection.Right:
-                    attack.GetComponent<BoxCollider>().size = new Vector3(2, 1, 3);
-                    attack.GetComponent<BoxCollider>().center = new Vector3(0.5f, 0, 0);
+                    attack.transform.localScale = new Vector3(2, 1, 3);
+                    attack.transform.position = transform.position + new Vector3(0.5f, 0, 0);
+                    //attack.GetComponent<BoxCollider>().size = new Vector3(2, 1, 3);
+                    //attack.GetComponent<BoxCollider>().center = new Vector3(0.5f, 0, 0);
                     break;
             }
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.2f);
             PlayerManager.Instance.currentController.canMove = true;
             Destroy(attack);
 
