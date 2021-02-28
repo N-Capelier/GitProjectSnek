@@ -14,8 +14,8 @@ namespace Enemy
         [SerializeField] [Range(0f, 10f)] float movementCooldown = 2f;
 
         [Space]
-        [SerializeField] [Range(0, 10)] int maxHp = 1;
-        [HideInInspector] public int currentHp;
+        [SerializeField] [Range(0, 10)] float maxHp = 1;
+        [HideInInspector] public float currentHp;
 
         [Space]
         [HideInInspector] public Rigidbody rb = null;
