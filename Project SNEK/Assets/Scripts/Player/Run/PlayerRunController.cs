@@ -36,7 +36,12 @@ namespace Player.Controller
 
         private void FixedUpdate()
         {
+            if(canMove == true)
             rb.velocity = (nextNode - currentNode);
+            else
+            {
+                rb.velocity = Vector3.zero;
+            }
         }
 
         void UpdateMovement()
