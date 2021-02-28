@@ -16,6 +16,7 @@ namespace Player.Attack
 
         bool canAttack = true;
         Clock cooldownTimer;
+        public GameObject attackCollision;
 
         private void Start()
         {
@@ -27,18 +28,52 @@ namespace Player.Attack
         void HandleInput(InputType inputType)
         {
             if (inputType == InputType.Tap && canAttack)
-                Attack();
+                StartCoroutine(Attack());
         }
 
-        private void Attack()
+        private IEnumerator Attack()
         {
             canAttack = false;
+            PlayerManager.Instance.currentController.canMove = false;
             cooldownTimer.SetTime(attackCooldown);
 
             //attack
-            print("Attack!");
-        }
+            GameObject attack = Instantiate(attackCollision, transform.position, Quaternion.identity);
 
+            switch (PlayerManager.Instance.currentController.currentDirection)
+            {
+                // Ajouter un * par rapport à la range
+                case Controller.PlayerDirection.Up:
+                    attack.transform.localScale = new Vector3(3, 1, 2);
+                    attack.transform.position = transform.position + new Vector3(0, 0, 0.5f);
+                    //attack.GetComponent<BoxCollider>().size = new Vector3(3, 1, 2);
+                    //attack.GetComponent<BoxCollider>().center = new Vector3(0, 0, 0.5f);
+                    break;
+                case Controller.PlayerDirection.Down:
+                    attack.transform.localScale = new Vector3(3, 1, 2);
+                    attack.transform.position = transform.position + new Vector3(0, 0, -0.5f);
+                    //attack.GetComponent<BoxCollider>().size = new Vector3(3, 1, 2);
+                    //attack.GetComponent<BoxCollider>().center = new Vector3(0, 0, -0.5f);
+                    break;
+                case Controller.PlayerDirection.Left:
+                    attack.transform.localScale = new Vector3(2, 1, 3);
+                    attack.transform.position = transform.position + new Vector3(-0.5f, 0, 0);
+                    //attack.GetComponent<BoxCollider>().size = new Vector3(2, 1, 3);
+                    //attack.GetComponent<BoxCollider>().center = new Vector3(-0.5f, 0, 0);
+                    break;
+                case Controller.PlayerDirection.Right:
+                    attack.transform.localScale = new Vector3(2, 1, 3);
+                    attack.transform.position = transform.position + new Vector3(0.5f, 0, 0);
+                    //attack.GetComponent<BoxCollider>().size = new Vector3(2, 1, 3);
+                    //attack.GetComponent<BoxCollider>().center = new Vector3(0.5f, 0, 0);
+                    break;
+            }
+
+            yield return new WaitForSeconds(0.2f);
+            PlayerManager.Instance.currentController.canMove = true;
+            Destroy(attack);
+
+        }
         void OnCooldownEnded()
         {
             canAttack = true;

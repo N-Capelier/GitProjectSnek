@@ -29,6 +29,7 @@ namespace Player.Controller
         [Space]
         [SerializeField] [Range(0, 10)] int baseHP = 4;
         int currentHP;
+        public bool canMove = true;
         public Transform checkPoint;
 
 
