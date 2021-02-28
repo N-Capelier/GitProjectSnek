@@ -10,7 +10,7 @@ namespace Rendering.Run
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            RunCamController.Instance.rb.velocity.SetZ(RunCamController.Instance.scrollSpeed);
+            RunCamController.Instance.rb.velocity = new Vector3(0, 0, RunCamController.Instance.scrollSpeed);
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

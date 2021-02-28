@@ -9,6 +9,7 @@ namespace Rendering.Run
         PlayerScrolling,
         Boss
     }
+
     /// <summary>
     /// Nico
     /// </summary>
@@ -18,7 +19,7 @@ namespace Rendering.Run
         Animator animator;
         public CamState ActiveState { get; private set; }
         [SerializeField] CamState startingState;
-        [Range(0f, 200f)] public float scrollSpeed;
+        [Range(0f, 2f)] public float scrollSpeed;
         [HideInInspector] public Rigidbody rb;
 
         private void Awake()
