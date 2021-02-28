@@ -10,8 +10,8 @@ namespace Enemy
         [HideInInspector] public Clock attackClock;
         [HideInInspector] public Clock movementClock;
 
-        [SerializeField] [Range(0, 10)] int attackCooldown = 5;
-        [SerializeField] [Range(0, 10)] int movementCooldown = 2;
+        [SerializeField] [Range(0f, 10f)] float attackCooldown = 5f;
+        [SerializeField] [Range(0f, 10f)] float movementCooldown = 2f;
 
         [Space]
         [SerializeField] [Range(0, 10)] int maxHp = 1;
@@ -37,7 +37,10 @@ namespace Enemy
         {    
             attackClock.ClockEnded += onTimerAttackEnd;  
             movementClock.ClockEnded += onTimerMovementEnd;
-        }
+        }               
+        
+        #region Clock Methods
+
 
         void onTimerAttackEnd()
         {
@@ -45,8 +48,28 @@ namespace Enemy
         }
 
         void onTimerMovementEnd()
-        {
+        { 
             movementClock.SetTime(movementCooldown);
+        }
+
+        #endregion
+
+        public void TakeDamage(int damage)
+        {
+            currentHp -= damage;
+
+            if (currentHp > 0)
+            {
+                //Play Hit Anim
+            }
+            else
+                Death();
+        }
+
+        public void Death()
+        {
+            //play Death Anim
+            Destroy(gameObject);
         }
 
         private void OnDestroy()
