@@ -142,7 +142,7 @@ namespace Tools.LevelEdition
                     GameObject element = Instantiate(levelPreset.levelElements[index].element,
                         new Vector3(_x * MapGrid.Instance.cellSize, 0, _y * MapGrid.Instance.cellSize),
                         Quaternion.identity, parentObject.transform);
-                    element.name = levelPreset.levelElements[index].element.name;
+                    element.name = $"[{_x}|{_y}] {levelPreset.levelElements[index].element.name}";
                 }
             }
         }
