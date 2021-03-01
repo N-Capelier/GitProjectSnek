@@ -13,29 +13,28 @@ namespace Player.Attack
     {
         [SerializeField] [Range(0f, 100f)] float attackCooldown = 1f;
         [SerializeField] [Range(0f, 1f)] float comboCooldown = 0.05f; 
-        [SerializeField] [Range(0, 100)] int attackDamages = 10;
+        [SerializeField] [Range(0, 100)] public float attackDamages = 10; // A REFERENCER
 
-        [HideInInspector] float damage; // A REFERENCER
-        [HideInInspector] int combo = 2; // A REFERENCER
-        [HideInInspector] int comboMeter = 1;// A REFERENCER
-        [HideInInspector] float rangeBonus = 1.25f;
+        [HideInInspector] int combo = 3; // A REFERENCER
+        [HideInInspector] int comboMeter = 1;
+        [HideInInspector] float rangeBonus = 1.40f;// A REFERENCER
+        [HideInInspector] float rangeBonusOffSet = 1.2f;
         bool canAttack = true;
         Clock cooldownTimer;
         public GameObject attackCollision;
 
         private void Start()
         {
+            PlayerManager.Instance.currentController.playerRunAttack = this;
             cooldownTimer = new Clock();
             InputHandler.InputReceived += HandleInput;
             cooldownTimer.ClockEnded += OnCooldownEnded;
         }
-
         void HandleInput(InputType inputType)
         {
             if (inputType == InputType.Tap && canAttack && comboMeter > 0)
                 StartCoroutine(Attack());
         }
-
         private IEnumerator Attack()
         {
 
@@ -58,25 +57,25 @@ namespace Player.Attack
                     // Ajouter un * par rapport à la range
                     case Controller.PlayerDirection.Up:
                         attack.transform.localScale = new Vector3(3 * rangeBonus, 1, 2 * rangeBonus);
-                        attack.transform.position = transform.position + new Vector3(0, 0, 0.5f * rangeBonus);
+                        attack.transform.position = transform.position + new Vector3(0, 0, 0.5f * rangeBonus * rangeBonusOffSet);
                         //attack.GetComponent<BoxCollider>().size = new Vector3(3 * rangeBonus, 1, 2 * rangeBonus);
                         //attack.GetComponent<BoxCollider>().center = new Vector3(0, 0, 0.5f);
                         break;
                     case Controller.PlayerDirection.Down:
                         attack.transform.localScale = new Vector3(3 * rangeBonus, 1, 2 * rangeBonus);
-                        attack.transform.position = transform.position + new Vector3(0, 0, -0.5f * rangeBonus);
+                        attack.transform.position = transform.position + new Vector3(0, 0, -0.5f * rangeBonus * rangeBonusOffSet);
                         //attack.GetComponent<BoxCollider>().size = new Vector3(3 * rangeBonus, 1, 2 * rangeBonus);
                         //attack.GetComponent<BoxCollider>().center = new Vector3(0, 0, -0.5f);
                         break;
                     case Controller.PlayerDirection.Left:
                         attack.transform.localScale = new Vector3(2 * rangeBonus, 1, 3 * rangeBonus);
-                        attack.transform.position = transform.position + new Vector3(-0.5f * rangeBonus, 0, 0);
+                        attack.transform.position = transform.position + new Vector3(-0.5f * rangeBonus * rangeBonusOffSet, 0, 0);
                         //attack.GetComponent<BoxCollider>().size = new Vector3(2 * rangeBonus, 1, 3 * rangeBonus);
                         //attack.GetComponent<BoxCollider>().center = new Vector3(-0.5f, 0, 0);
                         break;
                     case Controller.PlayerDirection.Right:
                         attack.transform.localScale = new Vector3(2 * rangeBonus, 1, 3 * rangeBonus);
-                        attack.transform.position = transform.position + new Vector3(0.5f * rangeBonus, 0, 0);
+                        attack.transform.position = transform.position + new Vector3(0.5f * rangeBonus * rangeBonusOffSet, 0, 0);
                         //attack.GetComponent<BoxCollider>().size = new Vector3(2 * rangeBonus, 1, 3 * rangeBonus);
                         //attack.GetComponent<BoxCollider>().center = new Vector3(0.5f, 0, 0);
                         break;
@@ -86,11 +85,11 @@ namespace Player.Attack
                 Debug.Log("Combo equal " + comboMeter);
   
             }
+            yield return new WaitForSeconds(0.05f);
+            Destroy(attack);
             yield return new WaitForSeconds(0.4f);
             comboMeter = combo;
             PlayerManager.Instance.currentController.canMove = true;
-            Destroy(attack);
-
         }
         void OnCooldownEnded()
         {

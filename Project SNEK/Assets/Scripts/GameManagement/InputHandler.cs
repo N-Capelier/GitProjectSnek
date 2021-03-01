@@ -25,7 +25,7 @@ namespace GameManagement
         public static event InputReveiver InputReceived;
 
         [SerializeField] [Range(0, 500)] float deadzone = 100f;
-        [SerializeField] [Range(0, 1)] float tapTimerDuration = 0.2f;
+        [SerializeField] [Range(0, 1)] float tapTimerDuration = 0.1f;
         float sqrDeadzone;
 
         Vector2 startPos;

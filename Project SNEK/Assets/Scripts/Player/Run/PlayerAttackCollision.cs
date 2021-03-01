@@ -2,13 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttackCollision : MonoBehaviour
+namespace Player.Attack
 {
-    private void OnTriggerEnter(Collider enemy)
+    /// <summary>
+    /// Coco
+    /// </summary>
+    public class PlayerAttackCollision : MonoBehaviour
     {
-        if (enemy.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        private void OnTriggerEnter(Collider enemy)
         {
-            enemy.GetComponent<TestStat>().TakeDamage(1);
+            if (enemy.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            {
+                enemy.GetComponent<TestStat>().TakeDamage(PlayerManager.Instance.currentController.playerRunAttack.attackDamages);
+            }
         }
     }
 }
+

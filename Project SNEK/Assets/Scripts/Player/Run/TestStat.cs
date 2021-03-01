@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class TestStat : MonoBehaviour
 {
-    public int Hp = 10;
+    public float Hp = 1;
     
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         Hp -= damage;
         Debug.Log("AIe, j'ai plus que " + Hp + "point de vie");
