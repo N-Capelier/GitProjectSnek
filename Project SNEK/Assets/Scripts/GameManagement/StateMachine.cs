@@ -35,16 +35,23 @@ namespace GameManagement
 
         public void Set(GameState newState, string levelName = "")
         {
-            /*if(newState == GameState.Run)
+            if(newState == GameState.Run)
             {
                 if(levelName == null || levelName == "")
                 {
-                    throw new System.Exception("Run Game State must have an associated level name");
+                    throw new System.Exception("Run Game State must have an associated level name.");
+                }
+                else
+                {
+                    LoadRun(levelName);
                 }
 
-
             }
-            else */if(ActiveState != newState)
+            else if(newState == GameState.PauseMenu)
+            {
+                throw new System.NotImplementedException("Pause state is not implemented yet.");
+            }
+            else if(ActiveState != newState)
             {
                 animator.Play(newState.ToString());
                 ActiveState = newState;
