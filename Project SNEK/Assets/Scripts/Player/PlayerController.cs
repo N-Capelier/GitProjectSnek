@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Player.Attack;
 
 namespace Player.Controller
 {
@@ -18,6 +19,8 @@ namespace Player.Controller
     /// </summary>
     public abstract class PlayerController : MonoBehaviour
     {
+        [HideInInspector] public PlayerRunAttack playerRunAttack;
+
         public Vector3 startingNode = new Vector3(3, 0, 1);
         [HideInInspector] public PlayerDirection currentDirection;
         [HideInInspector] public PlayerDirection nextDirection;
