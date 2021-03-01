@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using GameManagement.GameStates;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 namespace GameManagement
 {
@@ -31,13 +33,29 @@ namespace GameManagement
             Set(startingState);
         }
 
-        public void Set(GameState newState)
+        public void Set(GameState newState, string levelName = "")
         {
-            if (ActiveState != newState)
+            /*if(newState == GameState.Run)
+            {
+                if(levelName == null || levelName == "")
+                {
+                    throw new System.Exception("Run Game State must have an associated level name");
+                }
+
+
+            }
+            else */if(ActiveState != newState)
             {
                 animator.Play(newState.ToString());
                 ActiveState = newState;
             }
+        }
+
+        IEnumerator LoadRun(string levelName)
+        {
+            AsyncOperation _newScene;
+            _newScene = SceneManager.LoadSceneAsync("Nico");
+            yield return new WaitUntil(() => _newScene.isDone);
         }
     }
 }
