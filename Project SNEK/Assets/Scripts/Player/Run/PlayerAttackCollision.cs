@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Enemy;
 
 namespace Player.Attack
 {
@@ -13,7 +14,7 @@ namespace Player.Attack
         {
             if (enemy.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                enemy.GetComponent<TestStat>().TakeDamage(PlayerManager.Instance.currentController.playerRunAttack.attackDamages);
+                enemy.GetComponent<EnemyStats>().TakeDamage(PlayerManager.Instance.currentController.playerRunAttack.attackDamages);
             }
         }
     }

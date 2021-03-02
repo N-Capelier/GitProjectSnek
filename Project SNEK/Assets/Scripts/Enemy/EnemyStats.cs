@@ -54,7 +54,7 @@ namespace Enemy
 
         #endregion
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(float damage)
         {
             currentHp -= damage;
 
