@@ -12,7 +12,7 @@ namespace Map
         [Header("Variables")]
         [SerializeField] int width;
         [SerializeField] int height;
-        [SerializeField] [Range(0, 10)] float cellSize = 1;
+        [Range(0, 10)] public float cellSize = 1;
         int[,] cells;
 
         [Header("Display")]
@@ -24,7 +24,7 @@ namespace Map
 
         private void Awake()
         {
-            CreateSingleton();
+            CreateSingleton(true);
         }
 
         private void Start()
@@ -44,6 +44,10 @@ namespace Map
             }
         }
 
+        private void OnDestroy()
+        {
+            refreshTimer.ClockEnded -= RefreshLines;
+        }
 
         void RefreshLines()
         {

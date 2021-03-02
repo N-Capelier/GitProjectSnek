@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Player.Attack;
 
 namespace Player.Controller
 {
@@ -18,6 +19,8 @@ namespace Player.Controller
     /// </summary>
     public abstract class PlayerController : MonoBehaviour
     {
+        [HideInInspector] public PlayerRunAttack playerRunAttack;
+
         public Vector3 startingNode = new Vector3(3, 0, 1);
         [HideInInspector] public PlayerDirection currentDirection;
         [HideInInspector] public PlayerDirection nextDirection;
@@ -29,6 +32,7 @@ namespace Player.Controller
         [Space]
         [SerializeField] [Range(0, 10)] int baseHP = 4;
         int currentHP;
+        public bool canMove = true;
         public Transform checkPoint;
 
 
@@ -59,10 +63,10 @@ namespace Player.Controller
         {
             //play death anim
 
-            yield return new WaitForSeconds(0.5f);
+            //yield return new WaitForSeconds(0.5f);
             AsyncOperation _loadingScene = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
-            yield return new WaitUntil(() => _loadingScene.isDone);
             transform.position = checkPoint.position;
+            yield return new WaitUntil(() => _loadingScene.isDone);
             //play respawn anim
         }
 
@@ -71,7 +75,7 @@ namespace Player.Controller
             //play defeat anim
 
             yield return new WaitForSeconds(0.5f);
-            GameManagement.GameManager.Instance.gameState.Set(GameManagement.GameState.Hub);
+            GameManagement.GameManager.Instance.gameState.Set(GameManagement.GameState.Hub, "Hub");
         }
     }
 }

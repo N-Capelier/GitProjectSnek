@@ -28,6 +28,5 @@ namespace GameManagement
                     break;
             }
         }
-
     }
 }
