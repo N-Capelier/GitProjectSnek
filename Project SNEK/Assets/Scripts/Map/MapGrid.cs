@@ -44,6 +44,10 @@ namespace Map
             }
         }
 
+        private void OnDestroy()
+        {
+            refreshTimer.ClockEnded -= RefreshLines;
+        }
 
         void RefreshLines()
         {

@@ -75,7 +75,7 @@ namespace Player.Controller
             //play defeat anim
 
             yield return new WaitForSeconds(0.5f);
-            GameManagement.GameManager.Instance.gameState.Set(GameManagement.GameState.Hub);
+            GameManagement.GameManager.Instance.gameState.Set(GameManagement.GameState.Hub, "Hub");
         }
     }
 }

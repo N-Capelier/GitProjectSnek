@@ -8,7 +8,7 @@ namespace Hub
 
         public void StartLevel1()
         {
-            GameManager.Instance.StartCoroutine(GameManager.Instance.levelLauncher.StartLevel("Run"));
+            GameManager.Instance.gameState.Set(GameState.Run, "Nico");
         }
 
     }

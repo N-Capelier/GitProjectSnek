@@ -8,7 +8,7 @@ namespace MainMenu
     {
         public void LaunchGame()
         {
-            GameManager.Instance.StartCoroutine(GameManager.Instance.levelLauncher.StartLevel("Hub"));
+            GameManager.Instance.gameState.Set(GameState.Hub);
         }
 
     }

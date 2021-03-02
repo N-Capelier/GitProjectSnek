@@ -9,13 +9,21 @@ namespace GameManagement.DebugTools
     {
 
         [SerializeField] GameState gameState;
+        [SerializeField] string sceneName;
+
+        [Space]
         [SerializeField] bool forceState = false;
+
+        private void Start()
+        {
+            DontDestroyOnLoad(gameObject);
+        }
 
         private void Update()
         {
             if (forceState)
             {
-                GameManager.Instance.gameState.Set(gameState);
+                GameManager.Instance.gameState.Set(gameState, sceneName);
                 forceState = false;
             }
         }

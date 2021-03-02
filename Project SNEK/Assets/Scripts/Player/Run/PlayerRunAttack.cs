@@ -12,7 +12,7 @@ namespace Player.Attack
     public class PlayerRunAttack : MonoBehaviour
     {
         [SerializeField] [Range(0f, 100f)] float attackCooldown = 1f;
-        [SerializeField] [Range(0f, 1f)] float comboCooldown = 0.05f; 
+        [SerializeField] [Range(0f, 1f)] float comboCooldown = 0.05f;
         [SerializeField] [Range(0, 100)] public float attackDamages = 10; // A REFERENCER
 
         [HideInInspector] int combo = 3; // A REFERENCER
@@ -30,6 +30,13 @@ namespace Player.Attack
             InputHandler.InputReceived += HandleInput;
             cooldownTimer.ClockEnded += OnCooldownEnded;
         }
+
+        private void OnDestroy()
+        {
+            cooldownTimer.ClockEnded -= OnCooldownEnded;
+            InputHandler.InputReceived -= HandleInput;
+        }
+
         void HandleInput(InputType inputType)
         {
             if (inputType == InputType.Tap && canAttack && comboMeter > 0)
@@ -39,9 +46,9 @@ namespace Player.Attack
         {
 
             PlayerManager.Instance.currentController.canMove = false;
-            if(combo > 0)
-            cooldownTimer.SetTime(attackCooldown);
-            else if(combo <= 0)
+            if (combo > 0)
+                cooldownTimer.SetTime(attackCooldown);
+            else if (combo <= 0)
             {
                 canAttack = false;
                 cooldownTimer.SetTime(comboCooldown);
@@ -83,7 +90,7 @@ namespace Player.Attack
 
                 comboMeter -= 1;
                 Debug.Log("Combo equal " + comboMeter);
-  
+
             }
             yield return new WaitForSeconds(0.05f);
             Destroy(attack);

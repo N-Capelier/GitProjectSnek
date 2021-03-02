@@ -29,40 +29,24 @@ namespace GameManagement
         private void Awake()
         {
             animator = GetComponent<Animator>();
-
             Set(startingState);
         }
 
         public void Set(GameState newState, string levelName = "")
         {
-            if(newState == GameState.Run)
-            {
-                if(levelName == null || levelName == "")
-                {
-                    throw new System.Exception("Run Game State must have an associated level name.");
-                }
-                else
-                {
-                    LoadRun(levelName);
-                }
+            if (ActiveState == newState)
+                return;
 
-            }
-            else if(newState == GameState.PauseMenu)
+            if(levelName != "")
             {
-                throw new System.NotImplementedException("Pause state is not implemented yet.");
+                SceneManager.LoadScene(levelName);
+                Set(newState);
             }
-            else if(ActiveState != newState)
+            else
             {
                 animator.Play(newState.ToString());
                 ActiveState = newState;
             }
-        }
-
-        IEnumerator LoadRun(string levelName)
-        {
-            AsyncOperation _newScene;
-            _newScene = SceneManager.LoadSceneAsync("Nico");
-            yield return new WaitUntil(() => _newScene.isDone);
         }
     }
 }
