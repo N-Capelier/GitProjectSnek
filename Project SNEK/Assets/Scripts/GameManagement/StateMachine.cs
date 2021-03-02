@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using GameManagement.GameStates;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 namespace GameManagement
 {
@@ -20,7 +22,6 @@ namespace GameManagement
     public class StateMachine : MonoBehaviour
     {
         Animator animator;
-        public Dictionary<GameState, string> gameStates = new Dictionary<GameState, string>();
         public GameState ActiveState { get; private set; } = GameState.MainMenu;
 
         [SerializeField] GameState startingState = GameState.MainMenu;
@@ -28,22 +29,22 @@ namespace GameManagement
         private void Awake()
         {
             animator = GetComponent<Animator>();
-
-            gameStates.Add(GameState.Cinematic, "Cinematic");
-            gameStates.Add(GameState.Dialog, "Dialog");
-            gameStates.Add(GameState.Hub, "Hub");
-            gameStates.Add(GameState.MainMenu, "MainMenu");
-            gameStates.Add(GameState.PauseMenu, "PauseMenu");
-            gameStates.Add(GameState.Run, "Run");
-
             Set(startingState);
         }
 
-        public void Set(GameState newState)
+        public void Set(GameState newState, string levelName = "")
         {
-            if (ActiveState != newState)
+            if (ActiveState == newState)
+                return;
+
+            if(levelName != "")
             {
-                animator.Play(gameStates[newState]);
+                SceneManager.LoadScene(levelName);
+                Set(newState);
+            }
+            else
+            {
+                animator.Play(newState.ToString());
                 ActiveState = newState;
             }
         }

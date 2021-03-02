@@ -2,6 +2,7 @@
 using Player;
 using Player.Controller;
 using Map;
+using Rendering.Run;
 
 namespace GameManagement.GameStates
 {
@@ -17,6 +18,7 @@ namespace GameManagement.GameStates
             PlayerManager.Instance.currentController = _newController.GetComponent<PlayerController>();
             PlayerManager.Instance.currentController.Init(0); //Add bonus HP from HUB
             PlayerManager.Instance.currentController.transform.position = MapGrid.Instance.GetWorldPos(3, 1);
+            RunCamController.Instance.Set(CamState.PlayerScrolling);
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
