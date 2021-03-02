@@ -28,12 +28,16 @@ namespace Tools.LevelEdition
         static bool useExistingParentObject = true;
         GameObject parentObject;
         static string parentObjectName = "Level Elements";
+
+        Texture2D levelMap;
+
         static LevelPreset levelPreset;
 
         private void OnGUI()
         {
             InitStyles();
 
+            //MapGrid
             try
             {
                 if (MapGrid.Instance) { };
@@ -44,6 +48,7 @@ namespace Tools.LevelEdition
                 return;
             }
 
+            //Parent GameObject
             if (useExistingParentObject = GUILayout.Toggle(useExistingParentObject, "Use existing parent gameObject"))
             {
                 parentObject = (GameObject)EditorGUILayout.ObjectField("Parent object:", parentObject, typeof(GameObject), true);
@@ -57,6 +62,12 @@ namespace Tools.LevelEdition
 
             GUILayout.Label("");
 
+            //LevelMap
+            levelMap = (Texture2D)EditorGUILayout.ObjectField("Level Map:", levelMap, typeof(Texture2D), false);
+
+            GUILayout.Label("");
+
+            //Level Preset
             levelPreset = (LevelPreset)EditorGUILayout.ObjectField("Level Preset:", levelPreset, typeof(LevelPreset), false);
 
             GUILayout.Label("");
@@ -68,6 +79,10 @@ namespace Tools.LevelEdition
             else if (!useExistingParentObject && (parentObjectName == null || parentObjectName == ""))
             {
                 GUILayout.Label(" Parent object name can not be empty.", errorTextStyle);
+            }
+            else if(levelMap == null)
+            {
+                GUILayout.Label(" Missing level map.", errorTextStyle);
             }
             else if (levelPreset == null)
             {
@@ -88,6 +103,48 @@ namespace Tools.LevelEdition
         public void BuildLevel()
         {
             Debug.Log("Building Level. Please wait...");
+            float _startTime = System.DateTime.Now.Millisecond;
+
+            try
+            {
+                if (!useExistingParentObject)
+                {
+                    parentObject = new GameObject(parentObjectName);
+                }
+
+                for (int x = 0; x < levelMap.width; x++)
+                {
+                    for (int y = 0; y < levelMap.height; y++)
+                    {
+                        GenerateObject(x, y);
+                    }
+                }
+            }
+            catch(System.Exception e)
+            {
+                throw new System.Exception($"Error on level build: {e}");
+            }
+
+            Debug.Log($"Level built successfully in {(System.DateTime.Now.Millisecond - _startTime) * 0.001f} seconds.");
+        }
+
+        public void GenerateObject(int _x, int _y)
+        {
+            Color _pixelColor = levelMap.GetPixel(_x, _y);
+
+            if (_pixelColor.a == 0 || _pixelColor == Color.white)
+                return;
+
+            for (int index = 0; index < levelPreset.levelElements.Length; index++)
+            {
+                if(levelPreset.levelElements[index].importColor.Equals(_pixelColor))
+                {
+                    GameObject element = Instantiate(levelPreset.levelElements[index].element,
+                        new Vector3(_x * MapGrid.Instance.cellSize, 0, _y * MapGrid.Instance.cellSize),
+                        Quaternion.identity, parentObject.transform);
+                    element.name = levelPreset.levelElements[index].element.name;
+                }
+            }
         }
     }
 }
