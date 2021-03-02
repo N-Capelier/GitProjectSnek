@@ -44,13 +44,13 @@ public class MouchouBaseMovement : MonoBehaviour
 
     void Update()
     {
-       if ((currentDirection == MouchouDirection.Up && transform.position.z >= MapGrid.Instance.GetWorldPos(0, (int)nextNode.z).z) ||
-           (currentDirection == MouchouDirection.Right && transform.position.x >= MapGrid.Instance.GetWorldPos((int)nextNode.x, 0).x) ||
-           (currentDirection == MouchouDirection.Down && transform.position.z <= MapGrid.Instance.GetWorldPos(0, (int)nextNode.z).z) ||
-           (currentDirection == MouchouDirection.Left && transform.position.x <= MapGrid.Instance.GetWorldPos((int)nextNode.x, 0).x))
-       {
-          StopMove();
-       }                
+        if ((currentDirection == MouchouDirection.Up && transform.position.z >= MapGrid.Instance.GetWorldPos(0, (int)nextNode.z).z) ||
+            (currentDirection == MouchouDirection.Right && transform.position.x >= MapGrid.Instance.GetWorldPos((int)nextNode.x, 0).x) ||
+            (currentDirection == MouchouDirection.Down && transform.position.z <= MapGrid.Instance.GetWorldPos(0, (int)nextNode.z).z) ||
+            (currentDirection == MouchouDirection.Left && transform.position.x <= MapGrid.Instance.GetWorldPos((int)nextNode.x, 0).x))
+        {
+            StopMove();
+        }
     }
 
     public void UpdateMovement()
@@ -61,14 +61,14 @@ public class MouchouBaseMovement : MonoBehaviour
 
     void StopMove()
     {
-        rb.velocity = new Vector3(0, 0, 0);        
+        rb.velocity = new Vector3(0, 0, 0);
         currentNode = nextNode;
         isMoving = false;
     }
 
     void OnShouldMove()
     {
-        if(canMove == true)
+        if (canMove == true)
         {
             if (lineVertical == true)
             {
@@ -79,18 +79,18 @@ public class MouchouBaseMovement : MonoBehaviour
             {
                 SquarePattern();
             }
-        }        
+        }
     }
 
     void LineVerticalPattern()
     {
-        currentDirection = MouchouDirection.Down;  
+        currentDirection = MouchouDirection.Down;
         GetNextNode();
         UpdateMovement();
     }
 
     void SquarePattern()
-    {       
+    {
 
         switch (currentDirection)
         {
