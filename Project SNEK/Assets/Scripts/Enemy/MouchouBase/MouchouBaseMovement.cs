@@ -17,12 +17,13 @@ public class MouchouBaseMovement : MonoBehaviour
     EnemyStats stats;
     Rigidbody rb;
 
-    MouchouDirection currentDirection;
-    MouchouDirection nextDirection;
+    [HideInInspector] public MouchouDirection currentDirection;
+    //MouchouDirection nextDirection;
 
-    Vector3 currentNode;
+    [HideInInspector] public Vector3 currentNode;
     Vector3 nextNode;
-    bool canMove = true;
+    [HideInInspector] public bool isMoving = false;
+    [HideInInspector] public bool canMove = true;
 
     [Space]
     public bool lineVertical = false;
@@ -35,62 +36,61 @@ public class MouchouBaseMovement : MonoBehaviour
         rb = GetComponentInParent<Rigidbody>();
 
         stats.movementClock.ClockEnded += OnShouldMove;
-        currentNode = stats.gameObject.transform.position;
 
+        currentNode = stats.gameObject.transform.position;
         currentDirection = MouchouDirection.Down;
     }
 
 
     void Update()
     {
-        if (canMove == false)
-        {
-            if ((currentDirection == MouchouDirection.Up && transform.position.z >= MapGrid.Instance.GetWorldPos(0, (int)nextNode.z).z) ||
-                (currentDirection == MouchouDirection.Right && transform.position.x >= MapGrid.Instance.GetWorldPos((int)nextNode.x, 0).x) ||
-                (currentDirection == MouchouDirection.Down && transform.position.z <= MapGrid.Instance.GetWorldPos(0, (int)nextNode.z).z) ||
-                (currentDirection == MouchouDirection.Left && transform.position.x <= MapGrid.Instance.GetWorldPos((int)nextNode.x, 0).x))
-            {
-                StopMove();
-            }                
-        }
+       if ((currentDirection == MouchouDirection.Up && transform.position.z >= MapGrid.Instance.GetWorldPos(0, (int)nextNode.z).z) ||
+           (currentDirection == MouchouDirection.Right && transform.position.x >= MapGrid.Instance.GetWorldPos((int)nextNode.x, 0).x) ||
+           (currentDirection == MouchouDirection.Down && transform.position.z <= MapGrid.Instance.GetWorldPos(0, (int)nextNode.z).z) ||
+           (currentDirection == MouchouDirection.Left && transform.position.x <= MapGrid.Instance.GetWorldPos((int)nextNode.x, 0).x))
+       {
+          StopMove();
+       }                
     }
 
-    void UpdateMovement()
+    public void UpdateMovement()
     {
         rb.velocity = (nextNode - currentNode) * stats.moveSpeed;
+        isMoving = true;
     }
 
     void StopMove()
     {
-        rb.velocity = new Vector3(0, 0, 0);
-        canMove = true;
+        rb.velocity = new Vector3(0, 0, 0);        
         currentNode = nextNode;
+        isMoving = false;
     }
 
     void OnShouldMove()
     {
-        if(lineVertical == true && canMove == true)
+        if(canMove == true)
         {
-            LineVerticalPattern();
-        }
+            if (lineVertical == true)
+            {
+                LineVerticalPattern();
+            }
 
-        if (square == true && canMove == true)
-        {
-            SquarePattern();
-        }
+            if (square == true)
+            {
+                SquarePattern();
+            }
+        }        
     }
 
     void LineVerticalPattern()
     {
-        currentDirection = MouchouDirection.Down;
-        canMove = false;
+        currentDirection = MouchouDirection.Down;  
         GetNextNode();
         UpdateMovement();
     }
 
     void SquarePattern()
-    {
-        canMove = false;
+    {       
 
         switch (currentDirection)
         {
@@ -112,7 +112,7 @@ public class MouchouBaseMovement : MonoBehaviour
         UpdateMovement();
     }
 
-    Vector3 GetNextNode()
+    public Vector3 GetNextNode()
     {
         switch (currentDirection)
         {

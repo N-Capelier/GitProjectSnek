@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 8965832297510806389}
   - component: {fileID: 8965832297510806386}
   m_Layer: 0
-  m_Name: Enemy Base
+  m_Name: Mouchou
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -202,7 +202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8965832298396089457}
-  - component: {fileID: 8965832298396089456}
+  - component: {fileID: 1672555298535874065}
   m_Layer: 0
   m_Name: Movement
   m_TagString: Untagged
@@ -224,7 +224,7 @@ Transform:
   m_Father: {fileID: 8965832297510806388}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8965832298396089456
+--- !u!114 &1672555298535874065
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -236,6 +236,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba057bf2316c7143a4a620fa20599c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentDirection: 0
+  currentNode: {x: 0, y: 0, z: 0}
+  isMoving: 0
   canMove: 1
   lineVertical: 0
   square: 1
