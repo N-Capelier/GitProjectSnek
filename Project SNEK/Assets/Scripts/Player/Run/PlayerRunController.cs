@@ -13,9 +13,12 @@ namespace Player.Controller
     {
         Vector3 currentNode;
         Vector3 nextNode;
+        Animator animator;
+       
 
         private void Start()
         {
+            animator = renderer.GetComponent<Animator>();
             currentNode = startingNode;
             currentDirection = PlayerDirection.Up;
             nextDirection = PlayerDirection.Up;
@@ -36,8 +39,8 @@ namespace Player.Controller
 
         private void FixedUpdate()
         {
-            if(canMove == true)
-            rb.velocity = (nextNode - currentNode) * moveSpeed;
+            if (canMove == true)
+                rb.velocity = (nextNode - currentNode) * moveSpeed;
             else
             {
                 rb.velocity = Vector3.zero;
@@ -46,6 +49,39 @@ namespace Player.Controller
 
         void UpdateMovement()
         {
+            switch (nextDirection)
+            {
+                case PlayerDirection.Up:
+                    renderer.transform.rotation = new Quaternion(0, 0, 0, 0);
+                    break;
+                case PlayerDirection.Right:
+                    renderer.transform.rotation = new Quaternion(0, 90, 0, 0);
+                    break;
+                case PlayerDirection.Down:
+                    renderer.transform.rotation = new Quaternion(0, 180, 0, 0);
+                    break;
+                case PlayerDirection.Left:
+                    renderer.transform.rotation = new Quaternion(0, 270, 0, 0);
+                    break;
+                default:
+                    throw new System.NotImplementedException("Enum uncomplete ");
+            }
+            print(nextDirection);
+            if (currentDirection == PlayerDirection.Up && nextDirection == PlayerDirection.Right
+                || currentDirection == PlayerDirection.Right && nextDirection == PlayerDirection.Down
+                || currentDirection == PlayerDirection.Down && nextDirection == PlayerDirection.Left
+                || currentDirection == PlayerDirection.Left && nextDirection == PlayerDirection.Up)
+            {
+                animator.Play("Anim_PlayerRun_TurnL");
+            }
+            else if (currentDirection == PlayerDirection.Up && nextDirection == PlayerDirection.Left
+                || currentDirection == PlayerDirection.Right && nextDirection == PlayerDirection.Up
+                || currentDirection == PlayerDirection.Down && nextDirection == PlayerDirection.Right
+                || currentDirection == PlayerDirection.Left && nextDirection == PlayerDirection.Down)
+            {
+                animator.Play("Anim_PlayerRun_TurnR");
+            }
+
             currentDirection = nextDirection;
             currentNode = nextNode;
             nextNode = GetNextNode();
