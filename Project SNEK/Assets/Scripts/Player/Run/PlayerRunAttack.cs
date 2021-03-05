@@ -46,6 +46,7 @@ namespace Player.Attack
             //attack
             GameObject attack = Instantiate(attackCollision, transform.position, Quaternion.identity);
             //Play Attack animation
+            PlayerManager.Instance.currentController.renderer.GetComponent<Animator>().Play("Anim_PlayerRun_attack");
                 switch (PlayerManager.Instance.currentController.currentDirection)
                 {
                     // Ajouter un * par rapport à la range

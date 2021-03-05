@@ -13,9 +13,11 @@ namespace Player.Controller
     {
         Vector3 currentNode;
         Vector3 nextNode;
+        Animator animator;
 
         private void Start()
         {
+            animator = renderer.GetComponent<Animator>();
             currentNode = startingNode;
             currentDirection = PlayerDirection.Up;
             nextDirection = PlayerDirection.Up;
@@ -36,8 +38,8 @@ namespace Player.Controller
 
         private void FixedUpdate()
         {
-            if(canMove == true)
-            rb.velocity = (nextNode - currentNode) * moveSpeed;
+            if (canMove == true)
+                rb.velocity = (nextNode - currentNode) * moveSpeed;
             else
             {
                 rb.velocity = Vector3.zero;
@@ -46,6 +48,23 @@ namespace Player.Controller
 
         void UpdateMovement()
         {
+            if (currentDirection == PlayerDirection.Up && nextDirection == PlayerDirection.Right
+                || currentDirection == PlayerDirection.Right && nextDirection == PlayerDirection.Down
+                || currentDirection == PlayerDirection.Down && nextDirection == PlayerDirection.Left
+                || currentDirection == PlayerDirection.Left && nextDirection == PlayerDirection.Up)
+            {
+                renderer.transform.Rotate(0, 90, 0);
+                animator.Play("Anim_PlayerRun_TurnR");
+            }
+            else if (currentDirection == PlayerDirection.Up && nextDirection == PlayerDirection.Left
+                || currentDirection == PlayerDirection.Right && nextDirection == PlayerDirection.Up
+                || currentDirection == PlayerDirection.Down && nextDirection == PlayerDirection.Right
+                || currentDirection == PlayerDirection.Left && nextDirection == PlayerDirection.Down)
+            {
+                renderer.transform.Rotate(0, -90, 0);
+                animator.Play("Anim_PlayerRun_TurnL");
+            }
+
             currentDirection = nextDirection;
             currentNode = nextNode;
             nextNode = GetNextNode();
