@@ -27,7 +27,7 @@ namespace Player.Controller
 
         [Space]
         [HideInInspector] public Rigidbody rb = null;
-        [Range(0, 500)] public float moveSpeed = 50;
+        [Range(0, 4)] public float moveSpeed = 50;
 
         [Space]
         [SerializeField] [Range(0, 10)] int baseHP = 4;

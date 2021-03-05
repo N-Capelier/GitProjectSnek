@@ -12,13 +12,9 @@ namespace Player.Attack
     public class PlayerRunAttack : MonoBehaviour
     {
         [SerializeField] [Range(0f, 100f)] float attackCooldown = 1f;
-        [SerializeField] [Range(0f, 1f)] float comboCooldown = 0.05f;
         [SerializeField] [Range(0, 100)] public float attackDamages = 10; // A REFERENCER
-
-        [HideInInspector] int combo = 3; // A REFERENCER
-        [HideInInspector] int comboMeter = 1;
-        [HideInInspector] float rangeBonus = 1.40f;// A REFERENCER
-        [HideInInspector] float rangeBonusOffSet = 1.2f;
+        [HideInInspector] float rangeBonus = 1f;// A REFERENCER
+        [HideInInspector] float rangeBonusOffSet = 1f;// A REFERENCER
         bool canAttack = true;
         Clock cooldownTimer;
         public GameObject attackCollision;
@@ -39,26 +35,17 @@ namespace Player.Attack
 
         void HandleInput(InputType inputType)
         {
-            if (inputType == InputType.Tap && canAttack && comboMeter > 0)
+            if (inputType == InputType.Tap && canAttack)
                 StartCoroutine(Attack());
         }
         private IEnumerator Attack()
         {
 
             PlayerManager.Instance.currentController.canMove = false;
-            if (combo > 0)
-                cooldownTimer.SetTime(attackCooldown);
-            else if (combo <= 0)
-            {
-                canAttack = false;
-                cooldownTimer.SetTime(comboCooldown);
-            }
+            canAttack = false;
             //attack
             GameObject attack = Instantiate(attackCollision, transform.position, Quaternion.identity);
             //Play Attack animation
-
-            if (comboMeter > 0)
-            {
                 switch (PlayerManager.Instance.currentController.currentDirection)
                 {
                     // Ajouter un * par rapport à la range
@@ -87,16 +74,12 @@ namespace Player.Attack
                         //attack.GetComponent<BoxCollider>().center = new Vector3(0.5f, 0, 0);
                         break;
                 }
-
-                comboMeter -= 1;
-                Debug.Log("Combo equal " + comboMeter);
-
-            }
             yield return new WaitForSeconds(0.05f);
             Destroy(attack);
-            yield return new WaitForSeconds(0.4f);
-            comboMeter = combo;
+            yield return new WaitForSeconds(attackCooldown * 0.4f);
             PlayerManager.Instance.currentController.canMove = true;
+            yield return new WaitForSeconds(attackCooldown * 0.6f);
+            canAttack = true;
         }
         void OnCooldownEnded()
         {

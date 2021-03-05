@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Player.Controller;
+using Player;
 
 namespace Enemy
 {
@@ -78,6 +78,15 @@ namespace Enemy
             attackClock.ClockEnded -= onTimerAttackEnd;
             movementClock.ClockEnded -= onTimerMovementEnd;
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController"))
+            {
+                PlayerManager.Instance.currentController.Death();
+            }
+        }
+
     }    
 }
 

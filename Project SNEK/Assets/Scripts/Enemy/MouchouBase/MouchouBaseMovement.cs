@@ -21,7 +21,7 @@ public class MouchouBaseMovement : MonoBehaviour
     //MouchouDirection nextDirection;
 
     [HideInInspector] public Vector3 currentNode;
-    Vector3 nextNode;
+    [HideInInspector] public Vector3 nextNode;
     [HideInInspector] public bool isMoving = false;
     [HideInInspector] public bool canMove = true;
 

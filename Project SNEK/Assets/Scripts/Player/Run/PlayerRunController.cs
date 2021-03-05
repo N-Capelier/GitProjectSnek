@@ -37,7 +37,7 @@ namespace Player.Controller
         private void FixedUpdate()
         {
             if(canMove == true)
-            rb.velocity = (nextNode - currentNode);
+            rb.velocity = (nextNode - currentNode) * moveSpeed;
             else
             {
                 rb.velocity = Vector3.zero;
