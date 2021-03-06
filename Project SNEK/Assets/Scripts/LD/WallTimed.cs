@@ -8,6 +8,7 @@ public class WallTimed : WallBehaviour
     public bool deadByTime;
 
     [Range(0, 5)] public float timeToDeath;
+    public ParticleSystem trail;
 
     // Start is called before the first frame update
     void Start()
@@ -15,13 +16,14 @@ public class WallTimed : WallBehaviour
         if(deadByTime == true)
         {
             StartCoroutine(DeathByTime(timeToDeath));
+            //trail.duration = timeToDeath;
         }
         
     }
 
     IEnumerator DeathByTime(float time)
     {
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(time + 1);
         Destroy(gameObject);
     }
 }
