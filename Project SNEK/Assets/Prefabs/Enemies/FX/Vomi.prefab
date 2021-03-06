@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deadByTime: 1
   timeToDeath: 5
+  trail: {fileID: 3531285954011937215}
 --- !u!1001 &890541290801514550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21,6 +22,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3797734115914040467}
     m_Modifications:
+    - target: {fileID: 4420972739058200969, guid: 873ebc127df771a4894bea3255316b03,
+        type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4420972739058200970, guid: 873ebc127df771a4894bea3255316b03,
         type: 3}
       propertyPath: m_RootOrder
@@ -83,6 +89,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 873ebc127df771a4894bea3255316b03, type: 3}
+--- !u!198 &3531285954011937215 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4420972739058200969, guid: 873ebc127df771a4894bea3255316b03,
+    type: 3}
+  m_PrefabInstance: {fileID: 890541290801514550}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4040656376368320461
 PrefabInstance:
   m_ObjectHideFlags: 0
