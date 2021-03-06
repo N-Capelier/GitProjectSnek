@@ -18,6 +18,8 @@ namespace Player.Attack
         bool canAttack = true;
         Clock cooldownTimer;
         public GameObject attackCollision;
+        [SerializeField] GameObject attackFx;
+        [SerializeField] float fxOffSet = 0.15f;
 
         private void Start()
         {
@@ -44,32 +46,56 @@ namespace Player.Attack
             PlayerManager.Instance.currentController.canMove = false;
             canAttack = false;
             //attack
-            GameObject attack = Instantiate(attackCollision, transform.position, Quaternion.identity);
-            //Play Attack animation
+
+            //Faire un switch à l'instantiation
             PlayerManager.Instance.currentController.renderer.GetComponent<Animator>().Play("Anim_PlayerRun_attack");
-                switch (PlayerManager.Instance.currentController.currentDirection)
+            yield return new WaitForSeconds(0.04f);
+            GameObject slashFx = Instantiate(attackFx, gameObject.transform.GetChild(0).gameObject.transform.position, Quaternion.identity);
+            slashFx.gameObject.transform.localScale = new Vector3(rangeBonus + 0.2f, 1, rangeBonus + 0.2f);
+            switch (PlayerManager.Instance.currentController.currentDirection)
+            {
+                case Controller.PlayerDirection.Up:
+                    slashFx.transform.Rotate(new Vector3(90, 0, 0));
+                    slashFx.transform.position += new Vector3(0,0,-fxOffSet);
+                    break;  
+                case Controller.PlayerDirection.Down:
+                    slashFx.transform.Rotate(new Vector3(90, 0, 180));
+                    slashFx.transform.position += new Vector3(0,0,fxOffSet) ;
+                    break;       
+                case Controller.PlayerDirection.Left:
+                    slashFx.transform.Rotate(new Vector3(90, 0, 90));
+                    slashFx.transform.position += new Vector3(fxOffSet,0,0);
+                    break;  
+                case Controller.PlayerDirection.Right:
+                    slashFx.transform.Rotate(new Vector3(90, 0, 270));
+                    slashFx.transform.position += new Vector3(-fxOffSet,0,0);
+                    break;
+            }
+            yield return new WaitForSeconds(0.1f);
+            GameObject attack = Instantiate(attackCollision, transform.position, Quaternion.identity);
+            switch (PlayerManager.Instance.currentController.currentDirection)
                 {
                     // Ajouter un * par rapport à la range
                     case Controller.PlayerDirection.Up:
-                        attack.transform.localScale = new Vector3(3 * rangeBonus, 1, 2 * rangeBonus);
+                        attack.transform.localScale = new Vector3(2.9f * rangeBonus, 1, 2 * rangeBonus);
                         attack.transform.position = transform.position + new Vector3(0, 0, 0.5f * rangeBonus * rangeBonusOffSet);
                         //attack.GetComponent<BoxCollider>().size = new Vector3(3 * rangeBonus, 1, 2 * rangeBonus);
                         //attack.GetComponent<BoxCollider>().center = new Vector3(0, 0, 0.5f);
                         break;
                     case Controller.PlayerDirection.Down:
-                        attack.transform.localScale = new Vector3(3 * rangeBonus, 1, 2 * rangeBonus);
+                        attack.transform.localScale = new Vector3(2.9f * rangeBonus, 1, 2 * rangeBonus);
                         attack.transform.position = transform.position + new Vector3(0, 0, -0.5f * rangeBonus * rangeBonusOffSet);
                         //attack.GetComponent<BoxCollider>().size = new Vector3(3 * rangeBonus, 1, 2 * rangeBonus);
                         //attack.GetComponent<BoxCollider>().center = new Vector3(0, 0, -0.5f);
                         break;
                     case Controller.PlayerDirection.Left:
-                        attack.transform.localScale = new Vector3(2 * rangeBonus, 1, 3 * rangeBonus);
+                        attack.transform.localScale = new Vector3(2 * rangeBonus, 1, 2.9f * rangeBonus);
                         attack.transform.position = transform.position + new Vector3(-0.5f * rangeBonus * rangeBonusOffSet, 0, 0);
                         //attack.GetComponent<BoxCollider>().size = new Vector3(2 * rangeBonus, 1, 3 * rangeBonus);
                         //attack.GetComponent<BoxCollider>().center = new Vector3(-0.5f, 0, 0);
                         break;
                     case Controller.PlayerDirection.Right:
-                        attack.transform.localScale = new Vector3(2 * rangeBonus, 1, 3 * rangeBonus);
+                        attack.transform.localScale = new Vector3(2 * rangeBonus, 1, 2.9f * rangeBonus);
                         attack.transform.position = transform.position + new Vector3(0.5f * rangeBonus * rangeBonusOffSet, 0, 0);
                         //attack.GetComponent<BoxCollider>().size = new Vector3(2 * rangeBonus, 1, 3 * rangeBonus);
                         //attack.GetComponent<BoxCollider>().center = new Vector3(0.5f, 0, 0);
