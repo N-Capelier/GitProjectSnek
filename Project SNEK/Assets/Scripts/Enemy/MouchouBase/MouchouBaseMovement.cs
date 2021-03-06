@@ -25,6 +25,9 @@ public class MouchouBaseMovement : MonoBehaviour
     [HideInInspector] public bool isMoving = false;
     [HideInInspector] public bool canMove = true;
 
+    public GameObject renderer;
+    public Animator anim;
+
     [Space]
     public bool lineVertical = false;
     public bool square = false;
@@ -56,6 +59,7 @@ public class MouchouBaseMovement : MonoBehaviour
     public void UpdateMovement()
     {
         rb.velocity = (nextNode - currentNode) * stats.moveSpeed;
+        anim.SetBool("isMoving", true);
         isMoving = true;
     }
 
@@ -63,6 +67,7 @@ public class MouchouBaseMovement : MonoBehaviour
     {
         rb.velocity = new Vector3(0, 0, 0);
         currentNode = nextNode;
+        anim.SetBool("isMoving", false);
         isMoving = false;
     }
 
@@ -118,17 +123,21 @@ public class MouchouBaseMovement : MonoBehaviour
         {
             case MouchouDirection.Up:
                 nextNode = new Vector3(currentNode.x, currentNode.y, currentNode.z + 1);
+                renderer.transform.rotation = Quaternion.Euler(0,0,0);
                 break;
             case MouchouDirection.Right:
                 nextNode = new Vector3(currentNode.x + 1, currentNode.y, currentNode.z);
+                renderer.transform.rotation = Quaternion.Euler(0, 90, 0);
                 break;
             case MouchouDirection.Down:
                 nextNode = new Vector3(currentNode.x, currentNode.y, currentNode.z - 1);
+                renderer.transform.rotation = Quaternion.Euler(0, 180, 0);
                 break;
             case MouchouDirection.Left:
                 nextNode = new Vector3(currentNode.x - 1, currentNode.y, currentNode.z);
+                renderer.transform.rotation = Quaternion.Euler(0, 270, 0);
                 break;
-        }
+        }        
         return nextNode;
     }
 }
