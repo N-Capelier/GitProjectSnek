@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Enemy;
+using Wall;
 
 namespace Player.Attack
 {
@@ -16,6 +17,13 @@ namespace Player.Attack
             {
                 enemy.GetComponent<EnemyStats>().TakeDamage(PlayerManager.Instance.currentController.playerRunAttack.attackDamages);
             }
+            /*else if(enemy.gameObject.layer == LayerMask.NameToLayer("Wall"))
+            {
+                if(enemy.GetComponent<WallBehaviour>().isDestroyable == true)
+                {
+                    enemy.GetComponent<WallBehaviour>().GetDestroyed();
+                }
+            }*/
         }
     }
 }

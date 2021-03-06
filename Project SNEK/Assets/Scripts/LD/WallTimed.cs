@@ -16,7 +16,7 @@ public class WallTimed : WallBehaviour
         if(deadByTime == true)
         {
             StartCoroutine(DeathByTime(timeToDeath));
-            //trail.duration = timeToDeath;
+            //trail.main.duration = timeToDeath;
         }
         
     }
