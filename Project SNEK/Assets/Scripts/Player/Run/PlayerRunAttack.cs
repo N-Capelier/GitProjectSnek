@@ -105,6 +105,7 @@ namespace Player.Attack
             Destroy(attack);
             yield return new WaitForSeconds(attackCooldown * 0.4f);
             PlayerManager.Instance.currentController.canMove = true;
+            Destroy(slashFx);
             yield return new WaitForSeconds(attackCooldown * 0.6f);
             canAttack = true;
         }
