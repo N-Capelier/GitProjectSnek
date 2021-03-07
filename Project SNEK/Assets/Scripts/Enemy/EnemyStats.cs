@@ -16,6 +16,7 @@ namespace Enemy
         [Space]
         [SerializeField] [Range(0, 10)] float maxHp = 1;
         [HideInInspector] public float currentHp;
+        [SerializeField] GameObject deathFx;
 
         [Space]
         [HideInInspector] public Rigidbody rb = null;
@@ -68,7 +69,7 @@ namespace Enemy
 
         public void Death()
         {
-            //play Death Anim
+            Instantiate(deathFx, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
 

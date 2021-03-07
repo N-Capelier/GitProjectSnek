@@ -21,7 +21,7 @@ namespace Player.Controller
     {
         [HideInInspector] public PlayerRunAttack playerRunAttack;
 
-        public Vector3 startingNode = new Vector3(3, 0, 1);
+        public Vector3 startingNode = new Vector3(5, 0, 0);
         [HideInInspector] public PlayerDirection currentDirection;
         [HideInInspector] public PlayerDirection nextDirection;
 
