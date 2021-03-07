@@ -33,6 +33,8 @@ namespace GameManagement
 
         Clock tapTimer;
 
+        bool swiped = false;
+
         private void Start()
         {
             sqrDeadzone = Mathf.Pow(deadzone, 2);
@@ -103,6 +105,7 @@ namespace GameManagement
                     else
                         InputReceived?.Invoke(InputType.SwipeUp);
                 }
+                swiped = true;
                 startPos = currentPos = Vector2.zero;
             }
         }
@@ -117,16 +120,15 @@ namespace GameManagement
                     startPos = _touch.position;
                     tapTimer.SetTime(tapTimerDuration);
                 }
-                else if(_touch.phase == TouchPhase.Ended)
+                else if(_touch.phase == TouchPhase.Ended || _touch.phase == TouchPhase.Canceled)
                 {
                     startPos = currentPos = Vector2.zero;
                 }
 
                 if (startPos != Vector2.zero)
                 {
-                    if (Input.GetMouseButton(0))
                     if(_touch.phase == TouchPhase.Moved)
-                        currentPos = (Vector2)_touch.position - startPos;
+                        currentPos = _touch.position - startPos;
                 }
 
                 if (currentPos.sqrMagnitude > sqrDeadzone)
@@ -147,6 +149,7 @@ namespace GameManagement
                         else
                             InputReceived?.Invoke(InputType.SwipeUp);
                     }
+                    swiped = true;
                     startPos = currentPos = Vector2.zero;
                 }
             }
@@ -155,14 +158,22 @@ namespace GameManagement
         void OnTapTimerEnded()
         {
 #if UNITY_EDITOR || UNITY_STANDALONE
-            if(!Input.GetMouseButton(0))
+            if(!Input.GetMouseButton(0) && !swiped)
             {
                 InputReceived?.Invoke(InputType.Tap);
             }
+            else
+            {
+                swiped = false;
+            }
 #elif UNITY_ANDROID || UNITY_IOS
-            if(Input.touchCount < 0)
+            if(Input.touchCount <= 0  && !swiped)
             {
                 InputReceived?.Invoke(InputType.Tap);
+            }
+            else
+            {
+                swiped = false;
             }
 #endif
         }
