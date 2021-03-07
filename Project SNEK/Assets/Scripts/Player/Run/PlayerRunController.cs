@@ -17,7 +17,7 @@ namespace Player.Controller
 
         private void Start()
         {
-            animator = renderer.GetComponent<Animator>();
+            animator = objectRenderer.GetComponent<Animator>();
             currentNode = startingNode;
             currentDirection = PlayerDirection.Up;
             nextDirection = PlayerDirection.Up;
@@ -53,7 +53,7 @@ namespace Player.Controller
                 || currentDirection == PlayerDirection.Down && nextDirection == PlayerDirection.Left
                 || currentDirection == PlayerDirection.Left && nextDirection == PlayerDirection.Up)
             {
-                renderer.transform.Rotate(0, 90, 0);
+                objectRenderer.transform.Rotate(0, 90, 0);
                 animator.Play("Anim_PlayerRun_TurnR");
             }
             else if (currentDirection == PlayerDirection.Up && nextDirection == PlayerDirection.Left
@@ -61,7 +61,7 @@ namespace Player.Controller
                 || currentDirection == PlayerDirection.Down && nextDirection == PlayerDirection.Right
                 || currentDirection == PlayerDirection.Left && nextDirection == PlayerDirection.Down)
             {
-                renderer.transform.Rotate(0, -90, 0);
+                objectRenderer.transform.Rotate(0, -90, 0);
                 animator.Play("Anim_PlayerRun_TurnL");
             }
 

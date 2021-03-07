@@ -35,7 +35,7 @@ namespace Player.Controller
         public bool canMove = true;
         public Transform checkPoint;
 
-        public GameObject renderer;
+        public GameObject objectRenderer;
 
         public virtual void Awake()
         {
@@ -74,7 +74,7 @@ namespace Player.Controller
         IEnumerator DeathCoroutine()
         {
             //play defeat anim
-            renderer.GetComponent<Animator>().Play("Anim_PlayerRun_death");
+            objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_death");
             yield return new WaitForSeconds(1f);
             GameManagement.GameManager.Instance.gameState.Set(GameManagement.GameState.Hub, "Hub");
         }

@@ -21,8 +21,8 @@ namespace GameManagement
     /// </summary>
     public class InputHandler : MonoBehaviour
     {
-        public delegate void InputReveiver(InputType inputType);
-        public static event InputReveiver InputReceived;
+        public delegate void InputReceiver(InputType inputType);
+        public static event InputReceiver InputReceived;
 
         [SerializeField] [Range(0, 500)] float deadzone = 100f;
         [SerializeField] [Range(0, 1)] float tapTimerDuration = 0.1f;
@@ -42,11 +42,15 @@ namespace GameManagement
 
         private void Update()
         {
-            HandleTap();
-            HandleKeyboard();
+#if UNITY_STANDALONE || UNITY_EDITOR
+            HandleStandaloneMouseInput();
+            HandleStandaloneKeyboardInput();
+#elif UNITY_ANDROID || UNITY_IOS
+            HandleMobileTouchInput();
+#endif
         }
 
-        private void HandleKeyboard()
+        private void HandleStandaloneKeyboardInput()
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
                 InputReceived?.Invoke(InputType.SwipeUp);
@@ -56,9 +60,11 @@ namespace GameManagement
                 InputReceived?.Invoke(InputType.SwipeDown);
             if (Input.GetKeyDown(KeyCode.LeftArrow))
                 InputReceived?.Invoke(InputType.SwipeLeft);
+            if (Input.GetKeyDown(KeyCode.Space))
+                InputReceived?.Invoke(InputType.Tap);
         }
 
-        void HandleTap()
+        void HandleStandaloneMouseInput()
         {
             if (Input.GetMouseButtonDown(0)/* && (Input.touches.Length != 0 && Input.touches[0].phase == TouchPhase.Began)*/)
             {
@@ -101,12 +107,64 @@ namespace GameManagement
             }
         }
 
+        void HandleMobileTouchInput()
+        {
+            if(Input.touchCount > 0)
+            {
+                Touch _touch = Input.GetTouch(0);
+                if(_touch.phase == TouchPhase.Began)
+                {
+                    startPos = _touch.position;
+                    tapTimer.SetTime(tapTimerDuration);
+                }
+                else if(_touch.phase == TouchPhase.Ended)
+                {
+                    startPos = currentPos = Vector2.zero;
+                }
+
+                if (startPos != Vector2.zero)
+                {
+                    if (Input.GetMouseButton(0))
+                    if(_touch.phase == TouchPhase.Moved)
+                        currentPos = (Vector2)_touch.position - startPos;
+                }
+
+                if (currentPos.sqrMagnitude > sqrDeadzone)
+                {
+                    float x = currentPos.x;
+                    float y = currentPos.y;
+                    if (Mathf.Abs(x) > Mathf.Abs(y))
+                    {
+                        if (x < 0)
+                            InputReceived?.Invoke(InputType.SwipeLeft);
+                        else
+                            InputReceived?.Invoke(InputType.SwipeRight);
+                    }
+                    else
+                    {
+                        if (y < 0)
+                            InputReceived?.Invoke(InputType.SwipeDown);
+                        else
+                            InputReceived?.Invoke(InputType.SwipeUp);
+                    }
+                    startPos = currentPos = Vector2.zero;
+                }
+            }
+        }
+
         void OnTapTimerEnded()
         {
+#if UNITY_EDITOR || UNITY_STANDALONE
             if(!Input.GetMouseButton(0))
             {
                 InputReceived?.Invoke(InputType.Tap);
             }
+#elif UNITY_ANDROID || UNITY_IOS
+            if(Input.touchCount < 0)
+            {
+                InputReceived?.Invoke(InputType.Tap);
+            }
+#endif
         }
     }
 }
