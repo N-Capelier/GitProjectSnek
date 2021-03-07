@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using GameManagement;
 using Map;
 
@@ -23,6 +21,15 @@ namespace Player.Controller
             nextDirection = PlayerDirection.Up;
             nextNode = GetNextNode();
             InputHandler.InputReceived += HandleInput;
+        }
+
+        private void OnEnable()
+        {
+            currentDirection = PlayerDirection.Up;
+            nextDirection = PlayerDirection.Up;
+            objectRenderer.transform.rotation = Quaternion.Euler(0, 0, 0);
+            currentNode = respawnNode;
+            nextNode = GetNextNode();
         }
 
         private void Update()

@@ -8,7 +8,7 @@ namespace MainMenu
     {
         public void LaunchGame()
         {
-            GameManager.Instance.gameState.Set(GameState.Hub);
+            SceneManager.LoadScene("Hub");
         }
 
     }

@@ -22,8 +22,8 @@ namespace Enemy
         [HideInInspector] public Rigidbody rb = null;
         [Range(0, 5)] public int moveSpeed = 1;
 
-        [Space]
-        [SerializeField] [Range(0, 5)] int spiritLoot = 1;
+        //[Space]
+        //[SerializeField] [Range(0, 5)] int spiritLoot = 1;
 
         private void Awake()
         {

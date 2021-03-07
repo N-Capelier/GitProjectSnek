@@ -24,7 +24,7 @@ namespace GameManagement
         Animator animator;
         public GameState ActiveState { get; private set; } = GameState.MainMenu;
 
-        [SerializeField] GameState startingState = GameState.MainMenu;
+        [SerializeField] GameState startingState;
 
         private void Awake()
         {
@@ -32,14 +32,26 @@ namespace GameManagement
             Set(startingState);
         }
 
+
         public void Set(GameState newState, string levelName = "")
         {
-            if (ActiveState == newState)
-                return;
+            StartCoroutine(LoadAndWaitScene(newState, levelName));
+        }
 
-            if(levelName != "")
+        IEnumerator LoadAndWaitScene(GameState newState, string levelName)
+        {
+            if (ActiveState == newState)
+                yield return null;
+
+            if (levelName != "")
             {
                 SceneManager.LoadScene(levelName);
+                /*_newScene.allowSceneActivation = false;
+                while(_newScene.progress < 0.95f)
+                {
+                    yield return null;
+                }
+                _newScene.allowSceneActivation = true;*/
                 Set(newState);
             }
             else

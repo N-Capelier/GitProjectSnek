@@ -58,4 +58,9 @@ public class MouchouAnorexieBehaviour : MonoBehaviour
         yield return new WaitUntil(() => mBm.isMoving == true);
         mBm.canMove = true;
     }
+
+    private void OnDestroy()
+    {
+        stats.attackClock.ClockEnded -= OnShouldAttack;
+    }
 }

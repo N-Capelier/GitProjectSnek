@@ -29,12 +29,12 @@ namespace Rendering.Run
             animator = GetComponent<Animator>();
             rb = vcam.gameObject.GetComponent<Rigidbody>();
 
-            Set(startingState);
+            Set(startingState, true);
         }
 
-        public void Set(CamState newState)
+        public void Set(CamState newState, bool forceState = false)
         {
-            if(ActiveState != newState)
+            if(ActiveState != newState || forceState == true)
             {
                 animator.Play(newState.ToString());
                 ActiveState = newState;

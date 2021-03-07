@@ -44,4 +44,9 @@ public class GloutonBehaviour : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        stats.attackClock.ClockEnded -= OnShouldAttack;
+    }
+
 }

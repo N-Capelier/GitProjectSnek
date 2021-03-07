@@ -1,8 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Player.Attack;
+using Rendering.Run;
 
 namespace Player.Controller
 {
@@ -34,6 +34,7 @@ namespace Player.Controller
         int currentHP;
         public bool canMove = true;
         public Transform checkPoint;
+        public Vector3 respawnNode;
 
         public GameObject objectRenderer;
 
@@ -63,12 +64,16 @@ namespace Player.Controller
         IEnumerator RespawnCoroutine()
         {
             //play death anim
-
-            //yield return new WaitForSeconds(0.5f);
-            AsyncOperation _loadingScene = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+            objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_death");
+            yield return new WaitForSeconds(0.5f);
+            PlayerManager.Instance.gameObject.SetActive(false);
+            /*AsyncOperation _loadingScene = */SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            //yield return new WaitUntil(() => _loadingScene.isDone);
+            PlayerManager.Instance.gameObject.SetActive(true);
             transform.position = checkPoint.position;
-            yield return new WaitUntil(() => _loadingScene.isDone);
+            RunCamController.Instance.Set(CamState.PlayerScrolling, true);
             //play respawn anim
+
         }
 
         IEnumerator DeathCoroutine()

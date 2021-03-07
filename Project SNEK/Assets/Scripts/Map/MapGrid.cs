@@ -24,7 +24,7 @@ namespace Map
 
         private void Awake()
         {
-            CreateSingleton(true);
+            //CreateSingleton(true);
         }
 
         private void Start()

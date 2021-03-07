@@ -8,7 +8,7 @@ namespace Wall
     public class WallBehaviour : MonoBehaviour
     {
         [SerializeField] bool isDestroyable;
-        [SerializeField] GameObject renderer;
+        [SerializeField] GameObject objectRenderer;
         [SerializeField] ParticleSystem fx;
         private void OnTriggerEnter(Collider other)
         {
@@ -25,7 +25,7 @@ namespace Wall
         public IEnumerator GetDestroyed()
         {
             gameObject.GetComponent<BoxCollider>().enabled = false;
-            renderer.SetActive(false);
+            objectRenderer.SetActive(false);
             if(fx != null)
             {
                 fx.Play();

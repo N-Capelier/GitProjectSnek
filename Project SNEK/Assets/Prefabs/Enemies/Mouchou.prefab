@@ -295,7 +295,6 @@ MonoBehaviour:
   deathFx: {fileID: 3893877149857393849, guid: 776a358c2e98ba8409c4035d37f35e3f, type: 3}
   rb: {fileID: 0}
   moveSpeed: 1
-  spiritLoot: 1
 --- !u!54 &8965832297510806386
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -373,7 +372,7 @@ MonoBehaviour:
   nextNode: {x: 0, y: 0, z: 0}
   isMoving: 0
   canMove: 1
-  renderer: {fileID: 6480038375194020960}
+  objectRenderer: {fileID: 6480038375194020960}
   anim: {fileID: 8046605624421339157}
   lineVertical: 0
   square: 1
