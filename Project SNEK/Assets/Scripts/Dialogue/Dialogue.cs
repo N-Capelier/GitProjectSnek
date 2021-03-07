@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using AudioManagement;
 
 namespace DialogueManagement
 {
+    /// <summary>
+    /// Corentin
+    /// </summary>
     [CreateAssetMenu(fileName = "Dialogue", menuName = "Dialogue", order = 50)]
     public class Dialogue : ScriptableObject
     {

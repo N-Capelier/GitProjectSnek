@@ -1,21 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
 
 namespace AudioManagement
 {
-
+    /// <summary>
+    /// William
+    /// </summary>
     public class SoundsList : ScriptableObject
     {
-
         public Sound[] sounds;
-
     }
-
-
-
-
 }
-
-

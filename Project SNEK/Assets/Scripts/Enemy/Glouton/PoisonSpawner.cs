@@ -1,7 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Arthur
+/// </summary>
 public class PoisonSpawner : MonoBehaviour
 {
     public float timeToSpawn;

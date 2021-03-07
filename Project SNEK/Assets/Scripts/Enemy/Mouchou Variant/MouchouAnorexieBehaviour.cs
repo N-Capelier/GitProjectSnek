@@ -1,8 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Enemy;
 
+/// <summary>
+/// Arthur
+/// </summary>
 public class MouchouAnorexieBehaviour : MonoBehaviour
 {
     public MouchouBaseMovement mBm;

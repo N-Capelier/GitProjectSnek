@@ -2,6 +2,9 @@
 
 namespace GameManagement
 {
+    /// <summary>
+    /// Nico
+    /// </summary>
     public class StateLauncher : MonoBehaviour
     {
         [SerializeField] GameState gameState;

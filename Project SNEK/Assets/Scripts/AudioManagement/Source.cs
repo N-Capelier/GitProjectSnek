@@ -1,26 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
 
 namespace AudioManagement
 {
-
+    /// <summary>
+    /// William
+    /// </summary>
     [System.Serializable]
     public class Source
     {
-
         public AudioSource audioSource;
-
-
-
     }
-
-
-
-
-
-
 }
-
-

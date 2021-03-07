@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Wall;
 
@@ -10,7 +9,6 @@ public class WallTimed : WallBehaviour
     [Range(0, 5)] public float timeToDeath;
     public ParticleSystem trail;
 
-    // Start is called before the first frame update
     void Start()
     {
         if(deadByTime == true)

@@ -1,8 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Enemy;
 
+/// <summary>
+/// Arthur
+/// </summary>
 public class GloutonBehaviour : MonoBehaviour
 {
     EnemyStats stats;

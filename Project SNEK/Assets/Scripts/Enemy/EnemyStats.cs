@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Player;
 
 namespace Enemy
 {
+    /// <summary>
+    /// Arthur
+    /// </summary>
     public class EnemyStats : MonoBehaviour
     {
         [HideInInspector] public Clock attackClock;

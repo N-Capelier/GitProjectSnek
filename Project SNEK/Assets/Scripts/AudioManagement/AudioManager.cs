@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System;
 
 namespace AudioManagement
 {
-
     /// <summary>
     /// William Schmitt
     /// </summary>
@@ -49,12 +47,6 @@ namespace AudioManagement
             }
 
 
-
-        }
-
-
-        void Update()
-        {
 
         }
 
@@ -125,11 +117,7 @@ namespace AudioManagement
 
 
 
-
-
     }
 
 
 }
-
-

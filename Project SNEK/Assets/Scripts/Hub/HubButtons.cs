@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
-using GameManagement;
 using UnityEngine.SceneManagement;
 
 namespace Hub
 {
+    /// <summary>
+    /// Nico
+    /// </summary>
     public class HubButtons : MonoBehaviour
     {
 

@@ -1,11 +1,13 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using GameManagement;
 
 namespace DialogueManagement
 {
+    /// <summary>
+    /// Corentin
+    /// </summary>
     public class DialogueManager : Singleton<DialogueManager>
     {
 

@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Player.Controller;
-using System;
+﻿using UnityEngine;
 
 namespace GameManagement
 {

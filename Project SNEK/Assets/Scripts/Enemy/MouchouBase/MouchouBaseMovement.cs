@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Enemy;
 using Map;
 
@@ -12,6 +10,9 @@ public enum MouchouDirection
     Left
 }
 
+/// <summary>
+/// Arthur
+/// </summary>
 public class MouchouBaseMovement : MonoBehaviour
 {
     EnemyStats stats;

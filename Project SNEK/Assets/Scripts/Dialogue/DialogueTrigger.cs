@@ -1,8 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using DialogueManagement;
 
+/// <summary>
+/// Corentin
+/// </summary>
 public class DialogueTrigger : MonoBehaviour
 {
     public Dialogue dialogue;
