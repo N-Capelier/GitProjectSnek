@@ -27,7 +27,6 @@ namespace GameManagement.GameStates
             {
                 runMusic = AudioManager.Instance.PlayThisSoundEffect("LevelMusic");
                 runMusic.audioSource.loop = true;
-
             }
         }
 
@@ -45,7 +44,7 @@ namespace GameManagement.GameStates
             if (runMusic != null)
             {
                 runMusic.audioSource.Stop();
-
+                runMusic = null;
             }
 
         }

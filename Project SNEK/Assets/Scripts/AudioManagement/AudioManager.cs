@@ -42,7 +42,6 @@ namespace AudioManagement
 
                 source.audioSource = gameObject.AddComponent<AudioSource>();
 
-                Debug.Log("Coucou");
 
             }
 
