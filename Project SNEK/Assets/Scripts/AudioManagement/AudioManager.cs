@@ -18,8 +18,6 @@ namespace AudioManagement
         //Le tableau contenant les Audosources sur l'objet
         public Source[] sourcesAudio;
 
-        public Sound[] soundsListTemp;
-
         //La List qui gère tous les sons actuellement joués sur une audiosource de cet objet
         public List<Sound> sounds = new List<Sound>();
 
@@ -43,6 +41,8 @@ namespace AudioManagement
             {
 
                 source.audioSource = gameObject.AddComponent<AudioSource>();
+
+                Debug.Log("Coucou");
 
             }
 

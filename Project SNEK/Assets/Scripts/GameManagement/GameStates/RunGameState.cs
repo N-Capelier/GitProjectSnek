@@ -3,6 +3,7 @@ using Player;
 using Player.Controller;
 using Map;
 using Rendering.Run;
+using AudioManagement;
 
 namespace GameManagement.GameStates
 {
@@ -11,6 +12,9 @@ namespace GameManagement.GameStates
     /// </summary>
     public class RunGameState : StateMachineBehaviour
     {
+
+        public static Source runMusic;
+        
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
@@ -19,6 +23,12 @@ namespace GameManagement.GameStates
             PlayerManager.Instance.currentController.Init(0); //Add bonus HP from HUB
             PlayerManager.Instance.currentController.transform.position = MapGrid.Instance.GetWorldPos(4, 0);
             RunCamController.Instance.Set(CamState.PlayerScrolling);
+            if (runMusic == null)
+            {
+                runMusic = AudioManager.Instance.PlayThisSoundEffect("LevelMusic");
+                runMusic.audioSource.loop = true;
+
+            }
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -32,6 +42,12 @@ namespace GameManagement.GameStates
         {
             Destroy(PlayerManager.Instance.currentController.gameObject);
             Destroy(MapGrid.Instance.gameObject);
+            if (runMusic != null)
+            {
+                runMusic.audioSource.Stop();
+
+            }
+
         }
     }
 }
