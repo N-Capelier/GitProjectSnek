@@ -90,23 +90,31 @@ namespace Player.Controller
             {
                 case InputType.SwipeUp:
                     if (currentDirection != PlayerDirection.Down)
+                    {
                         PlayerChangedDirection?.Invoke();
                         nextDirection = PlayerDirection.Up;
+                    }
                     break;
                 case InputType.SwipeRight:
                     if (currentDirection != PlayerDirection.Left)
+                    {
                         PlayerChangedDirection?.Invoke();
-                    nextDirection = PlayerDirection.Right;
+                        nextDirection = PlayerDirection.Right;
+                    }
                     break;
                 case InputType.SwipeDown:
                     if (currentDirection != PlayerDirection.Up)
+                    {
                         PlayerChangedDirection?.Invoke();
-                    nextDirection = PlayerDirection.Down;
+                        nextDirection = PlayerDirection.Down;
+                    }
                     break;
                 case InputType.SwipeLeft:
                     if (currentDirection != PlayerDirection.Right)
+                    {
                         PlayerChangedDirection?.Invoke();
-                    nextDirection = PlayerDirection.Left;
+                        nextDirection = PlayerDirection.Left;
+                    }
                     break;
                 default:
                     break;
