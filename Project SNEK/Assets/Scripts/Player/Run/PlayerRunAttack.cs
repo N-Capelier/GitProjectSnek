@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using GameManagement;
+using Player.Controller;
 
 namespace Player.Attack
 {
@@ -14,6 +15,7 @@ namespace Player.Attack
         [HideInInspector] float rangeBonus = 1f;// A REFERENCER
         [HideInInspector] float rangeBonusOffSet = 1f;// A REFERENCER
         bool canAttack = true;
+        [SerializeField] [Range(0f, 1f)] float moveSpeedDuringAttack = 0.2f;
         Clock cooldownTimer;
         public GameObject attackCollision;
         [SerializeField] GameObject attackFx;
@@ -25,84 +27,97 @@ namespace Player.Attack
             cooldownTimer = new Clock();
             InputHandler.InputReceived += HandleInput;
             cooldownTimer.ClockEnded += OnCooldownEnded;
+            PlayerController.PlayerDead += OnDeath;
+            PlayerRunController.PlayerChangedDirection += OnChangeDirection;
         }
 
         private void OnDestroy()
         {
             cooldownTimer.ClockEnded -= OnCooldownEnded;
             InputHandler.InputReceived -= HandleInput;
+            PlayerController.PlayerDead -= OnDeath;
+            PlayerRunController.PlayerChangedDirection -= OnChangeDirection;
         }
+
+        Coroutine attackCoroutine;
 
         void HandleInput(InputType inputType)
         {
             if (inputType == InputType.Tap && canAttack)
-                StartCoroutine(Attack());
+                attackCoroutine = StartCoroutine(Attack());
         }
+
+        GameObject slashFx, attack;
+
         private IEnumerator Attack()
         {
 
-            PlayerManager.Instance.currentController.canMove = false;
+            //PlayerManager.Instance.currentController.canMove = false;
+            PlayerManager.Instance.currentController.moveSpeedModifier = moveSpeedDuringAttack;
+            PlayerManager.Instance.currentController.rb.velocity = PlayerManager.Instance.currentController.rb.velocity * PlayerManager.Instance.currentController.moveSpeedModifier;
             canAttack = false;
             //attack
 
             //Faire un switch à l'instantiation
             PlayerManager.Instance.currentController.objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_attack");
             yield return new WaitForSeconds(0.04f);
-            GameObject slashFx = Instantiate(attackFx, gameObject.transform.GetChild(0).gameObject.transform.position, Quaternion.identity);
+            slashFx = Instantiate(attackFx, gameObject.transform.GetChild(0).gameObject.transform.position, Quaternion.identity);
             slashFx.gameObject.transform.localScale = new Vector3(rangeBonus + 0.2f, 1, rangeBonus + 0.2f);
             switch (PlayerManager.Instance.currentController.currentDirection)
             {
-                case Controller.PlayerDirection.Up:
+                case PlayerDirection.Up:
                     slashFx.transform.Rotate(new Vector3(90, 0, 0));
-                    slashFx.transform.position += new Vector3(0,0,-fxOffSet);
-                    break;  
-                case Controller.PlayerDirection.Down:
+                    slashFx.transform.position += new Vector3(0, 0, -fxOffSet);
+                    break;
+                case PlayerDirection.Down:
                     slashFx.transform.Rotate(new Vector3(90, 0, 180));
-                    slashFx.transform.position += new Vector3(0,0,fxOffSet) ;
-                    break;       
-                case Controller.PlayerDirection.Left:
+                    slashFx.transform.position += new Vector3(0, 0, fxOffSet);
+                    break;
+                case PlayerDirection.Left:
                     slashFx.transform.Rotate(new Vector3(90, 0, 90));
-                    slashFx.transform.position += new Vector3(fxOffSet,0,0);
-                    break;  
-                case Controller.PlayerDirection.Right:
+                    slashFx.transform.position += new Vector3(fxOffSet, 0, 0);
+                    break;
+                case PlayerDirection.Right:
                     slashFx.transform.Rotate(new Vector3(90, 0, 270));
-                    slashFx.transform.position += new Vector3(-fxOffSet,0,0);
+                    slashFx.transform.position += new Vector3(-fxOffSet, 0, 0);
                     break;
             }
             yield return new WaitForSeconds(0.1f);
-            GameObject attack = Instantiate(attackCollision, transform.position, Quaternion.identity);
+            attack = Instantiate(attackCollision, transform.position, Quaternion.identity);
             switch (PlayerManager.Instance.currentController.currentDirection)
-                {
-                    // Ajouter un * par rapport à la range
-                    case Controller.PlayerDirection.Up:
-                        attack.transform.localScale = new Vector3(2.9f * rangeBonus, 1, 2 * rangeBonus);
-                        attack.transform.position = transform.position + new Vector3(0, 0, 0.5f * rangeBonus * rangeBonusOffSet);
-                        //attack.GetComponent<BoxCollider>().size = new Vector3(3 * rangeBonus, 1, 2 * rangeBonus);
-                        //attack.GetComponent<BoxCollider>().center = new Vector3(0, 0, 0.5f);
-                        break;
-                    case Controller.PlayerDirection.Down:
-                        attack.transform.localScale = new Vector3(2.9f * rangeBonus, 1, 2 * rangeBonus);
-                        attack.transform.position = transform.position + new Vector3(0, 0, -0.5f * rangeBonus * rangeBonusOffSet);
-                        //attack.GetComponent<BoxCollider>().size = new Vector3(3 * rangeBonus, 1, 2 * rangeBonus);
-                        //attack.GetComponent<BoxCollider>().center = new Vector3(0, 0, -0.5f);
-                        break;
-                    case Controller.PlayerDirection.Left:
-                        attack.transform.localScale = new Vector3(2 * rangeBonus, 1, 2.9f * rangeBonus);
-                        attack.transform.position = transform.position + new Vector3(-0.5f * rangeBonus * rangeBonusOffSet, 0, 0);
-                        //attack.GetComponent<BoxCollider>().size = new Vector3(2 * rangeBonus, 1, 3 * rangeBonus);
-                        //attack.GetComponent<BoxCollider>().center = new Vector3(-0.5f, 0, 0);
-                        break;
-                    case Controller.PlayerDirection.Right:
-                        attack.transform.localScale = new Vector3(2 * rangeBonus, 1, 2.9f * rangeBonus);
-                        attack.transform.position = transform.position + new Vector3(0.5f * rangeBonus * rangeBonusOffSet, 0, 0);
-                        //attack.GetComponent<BoxCollider>().size = new Vector3(2 * rangeBonus, 1, 3 * rangeBonus);
-                        //attack.GetComponent<BoxCollider>().center = new Vector3(0.5f, 0, 0);
-                        break;
-                }
+            {
+                // Ajouter un * par rapport à la range
+                case Controller.PlayerDirection.Up:
+                    attack.transform.localScale = new Vector3(2.9f * rangeBonus, 1, 2 * rangeBonus);
+                    attack.transform.position = transform.position + new Vector3(0, 0, 0.5f * rangeBonus * rangeBonusOffSet);
+                    //attack.GetComponent<BoxCollider>().size = new Vector3(3 * rangeBonus, 1, 2 * rangeBonus);
+                    //attack.GetComponent<BoxCollider>().center = new Vector3(0, 0, 0.5f);
+                    break;
+                case Controller.PlayerDirection.Down:
+                    attack.transform.localScale = new Vector3(2.9f * rangeBonus, 1, 2 * rangeBonus);
+                    attack.transform.position = transform.position + new Vector3(0, 0, -0.5f * rangeBonus * rangeBonusOffSet);
+                    //attack.GetComponent<BoxCollider>().size = new Vector3(3 * rangeBonus, 1, 2 * rangeBonus);
+                    //attack.GetComponent<BoxCollider>().center = new Vector3(0, 0, -0.5f);
+                    break;
+                case Controller.PlayerDirection.Left:
+                    attack.transform.localScale = new Vector3(2 * rangeBonus, 1, 2.9f * rangeBonus);
+                    attack.transform.position = transform.position + new Vector3(-0.5f * rangeBonus * rangeBonusOffSet, 0, 0);
+                    //attack.GetComponent<BoxCollider>().size = new Vector3(2 * rangeBonus, 1, 3 * rangeBonus);
+                    //attack.GetComponent<BoxCollider>().center = new Vector3(-0.5f, 0, 0);
+                    break;
+                case Controller.PlayerDirection.Right:
+                    attack.transform.localScale = new Vector3(2 * rangeBonus, 1, 2.9f * rangeBonus);
+                    attack.transform.position = transform.position + new Vector3(0.5f * rangeBonus * rangeBonusOffSet, 0, 0);
+                    //attack.GetComponent<BoxCollider>().size = new Vector3(2 * rangeBonus, 1, 3 * rangeBonus);
+                    //attack.GetComponent<BoxCollider>().center = new Vector3(0.5f, 0, 0);
+                    break;
+            }
             yield return new WaitForSeconds(0.05f);
             Destroy(attack);
             yield return new WaitForSeconds(attackCooldown * 0.4f);
-            PlayerManager.Instance.currentController.canMove = true;
+            //PlayerManager.Instance.currentController.canMove = true;
+            PlayerManager.Instance.currentController.moveSpeedModifier = 1f;
+            PlayerManager.Instance.currentController.rb.velocity = PlayerManager.Instance.currentController.rb.velocity * PlayerManager.Instance.currentController.moveSpeedModifier;
             Destroy(slashFx);
             yield return new WaitForSeconds(attackCooldown * 0.6f);
             canAttack = true;
@@ -110,6 +125,32 @@ namespace Player.Attack
         void OnCooldownEnded()
         {
             canAttack = true;
+        }
+
+        void OnChangeDirection()
+        {
+            if (attackCoroutine == null)
+                return;
+
+            StopCoroutine(attackCoroutine);
+
+            if (slashFx != null)
+                Destroy(slashFx);
+
+            if (attack != null)
+                Destroy(attack);
+
+            PlayerManager.Instance.currentController.moveSpeedModifier = 1f;
+            PlayerManager.Instance.currentController.rb.velocity = PlayerManager.Instance.currentController.rb.velocity * PlayerManager.Instance.currentController.moveSpeedModifier;
+
+            canAttack = true;
+        }
+
+        void OnDeath()
+        {
+            canAttack = true;
+            PlayerManager.Instance.currentController.canMove = true;
+            PlayerManager.Instance.currentController.moveSpeedModifier = 1f;
         }
     }
 }

@@ -21,6 +21,9 @@ namespace Player.Controller
     {
         [HideInInspector] public PlayerRunAttack playerRunAttack;
 
+        public delegate void PlayerDeath();
+        public static event PlayerDeath PlayerDead;
+
         public Vector3 startingNode = new Vector3(5, 0, 0);
         [HideInInspector] public PlayerDirection currentDirection;
         [HideInInspector] public PlayerDirection nextDirection;
@@ -28,11 +31,13 @@ namespace Player.Controller
         [Space]
         [HideInInspector] public Rigidbody rb = null;
         [Range(0, 4)] public float moveSpeed = 50;
+        [HideInInspector] public float moveSpeedModifier = 1f;
 
         [Space]
         [SerializeField] [Range(0, 10)] int baseHP = 4;
         int currentHP;
-        public bool canMove = true;
+        [HideInInspector] public bool canMove = true;
+        [HideInInspector] public bool isDead = false;
         public Transform checkPoint;
         public Vector3 respawnNode;
 
@@ -51,6 +56,8 @@ namespace Player.Controller
         public void Death()
         {
             currentHP--;
+            PlayerDead?.Invoke();
+            isDead = true;
             if(currentHP <= 0)
             {
                 StartCoroutine(DeathCoroutine());
@@ -65,13 +72,14 @@ namespace Player.Controller
         {
             //play death anim
             objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_death");
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1.5f);
             PlayerManager.Instance.gameObject.SetActive(false);
             /*AsyncOperation _loadingScene = */SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             //yield return new WaitUntil(() => _loadingScene.isDone);
             PlayerManager.Instance.gameObject.SetActive(true);
             transform.position = checkPoint.position;
             RunCamController.Instance.Set(CamState.PlayerScrolling, true);
+            isDead = false;
             //play respawn anim
 
         }
@@ -82,6 +90,7 @@ namespace Player.Controller
             objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_death");
             yield return new WaitForSeconds(1f);
             GameManagement.GameManager.Instance.gameState.Set(GameManagement.GameState.Hub, "Hub");
+            isDead = false;
         }
     }
 }

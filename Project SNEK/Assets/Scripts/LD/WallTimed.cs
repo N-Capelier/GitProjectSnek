@@ -2,6 +2,9 @@
 using UnityEngine;
 using Wall;
 
+/// <summary>
+/// Arthur
+/// </summary>
 public class WallTimed : WallBehaviour
 {
     public bool deadByTime;

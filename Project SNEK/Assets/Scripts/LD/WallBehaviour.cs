@@ -4,6 +4,9 @@ using Player;
 
 namespace Wall 
 {
+    /// <summary>
+    /// Corentin
+    /// </summary>
     public class WallBehaviour : MonoBehaviour
     {
         [SerializeField] bool isDestroyable;

@@ -73,6 +73,11 @@ namespace GameManagement
             else if (Input.GetMouseButtonUp(0)/* || Input.touches[0].phase == TouchPhase.Ended || Input.touches[0].phase == TouchPhase.Canceled*/)
             {
                 startPos = currentPos = Vector2.zero;
+                if (currentPos.sqrMagnitude > sqrDeadzone)
+                {
+                    InputReceived?.Invoke(InputType.Tap);
+                    swiped = true;
+                }
             }
 
             if(startPos != Vector2.zero)

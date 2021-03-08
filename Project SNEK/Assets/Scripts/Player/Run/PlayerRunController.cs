@@ -13,6 +13,9 @@ namespace Player.Controller
         Vector3 nextNode;
         Animator animator;
 
+        public delegate void PlayerChangingDirection();
+        public static event PlayerChangingDirection PlayerChangedDirection;
+
         private void Start()
         {
             animator = objectRenderer.GetComponent<Animator>();
@@ -45,8 +48,8 @@ namespace Player.Controller
 
         private void FixedUpdate()
         {
-            if (canMove == true)
-                rb.velocity = (nextNode - currentNode) * moveSpeed;
+            if (canMove == true && isDead == false)
+                rb.velocity = (nextNode - currentNode) * moveSpeed * moveSpeedModifier;
             else
             {
                 rb.velocity = Vector3.zero;
@@ -87,19 +90,23 @@ namespace Player.Controller
             {
                 case InputType.SwipeUp:
                     if (currentDirection != PlayerDirection.Down)
+                        PlayerChangedDirection?.Invoke();
                         nextDirection = PlayerDirection.Up;
                     break;
                 case InputType.SwipeRight:
                     if (currentDirection != PlayerDirection.Left)
-                        nextDirection = PlayerDirection.Right;
+                        PlayerChangedDirection?.Invoke();
+                    nextDirection = PlayerDirection.Right;
                     break;
                 case InputType.SwipeDown:
                     if (currentDirection != PlayerDirection.Up)
-                        nextDirection = PlayerDirection.Down;
+                        PlayerChangedDirection?.Invoke();
+                    nextDirection = PlayerDirection.Down;
                     break;
                 case InputType.SwipeLeft:
                     if (currentDirection != PlayerDirection.Right)
-                        nextDirection = PlayerDirection.Left;
+                        PlayerChangedDirection?.Invoke();
+                    nextDirection = PlayerDirection.Left;
                     break;
                 default:
                     break;

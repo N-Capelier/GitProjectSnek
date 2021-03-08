@@ -44,8 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5be603e4a1155894c9a36741b11475d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCooldown: 0.8
+  attackCooldown: 0.45
   attackDamages: 1
+  moveSpeedDuringAttack: 0.2
   attackCollision: {fileID: 1474487799469770015, guid: 64b3a1698ad789042ba44d55aa2888e6,
     type: 3}
   attackFx: {fileID: 7284365961558460690, guid: 77d57d151822e2b4ab598319d55b2a4e,
@@ -184,10 +185,13 @@ MonoBehaviour:
   currentDirection: 0
   nextDirection: 0
   rb: {fileID: 0}
-  moveSpeed: 2.4
+  moveSpeed: 2
+  moveSpeedModifier: 1
   baseHP: 4
   canMove: 1
+  isDead: 0
   checkPoint: {fileID: 0}
+  respawnNode: {x: 0, y: 0, z: 0}
   objectRenderer: {fileID: 2279007385441926584}
 --- !u!54 &4086522607183702087
 Rigidbody:
