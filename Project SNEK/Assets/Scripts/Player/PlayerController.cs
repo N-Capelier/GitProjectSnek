@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Player.Attack;
-using Rendering.Run;
+using Player.Spirits;
 
 namespace Player.Controller
 {
@@ -20,6 +20,7 @@ namespace Player.Controller
     public abstract class PlayerController : MonoBehaviour
     {
         [HideInInspector] public PlayerRunAttack playerRunAttack;
+        public SpiritManager playerRunSpirits;
 
         public delegate void PlayerDeath();
         public static event PlayerDeath PlayerDead;
