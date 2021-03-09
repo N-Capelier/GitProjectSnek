@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Player.Attack;
+using Player.Spirits;
 
 namespace Player.Controller
 {
@@ -20,6 +21,7 @@ namespace Player.Controller
     public abstract class PlayerController : MonoBehaviour
     {
         [HideInInspector] public PlayerRunAttack playerRunAttack;
+        public SpiritManager playerRunSpirits;
 
         public Vector3 startingNode = new Vector3(3, 0, 1);
         [HideInInspector] public PlayerDirection currentDirection;
