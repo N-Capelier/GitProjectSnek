@@ -1,12 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Enemy
 {
-    [CreateAssetMenu(fileName = "New Enemy Attack Pattern", menuName = "Enemy/Attack Pattern", order = 51)]
-    public class EnemyAttackPattern : ScriptableObject
+    
+    [System.Serializable]
+    public class EnemyAttackPattern
     {
-        public bool[,] attackPattern;
+        [System.Serializable]
+        public struct rowData
+        {
+            public bool[] row;
+        }
+
+        
+        public rowData[] rows = new rowData[7];
     }
 }

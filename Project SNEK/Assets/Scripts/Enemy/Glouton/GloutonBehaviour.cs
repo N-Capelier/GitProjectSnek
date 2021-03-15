@@ -18,8 +18,10 @@ namespace Enemy
 
         public bool random = false;
 
-        public EnemyAttackPattern attackPattern;
         [SerializeField] GameObject patternPos;
+
+        [Space]
+        public EnemyAttackPattern pattern;
 
         // Start is called before the first frame update
         void Start()
@@ -44,6 +46,7 @@ namespace Enemy
         }
 
 
+        
 
         void TargetCell()
         {
@@ -57,13 +60,13 @@ namespace Enemy
             }
             else
             {
-                for (int i = 0; i < attackPattern.attackPattern.GetLength(0); i++)
+                for (int i = 0; i < pattern.rows.Length; i++)
                 {
-                    for (int x = 0; x < attackPattern.attackPattern.GetLength(1); x++)
+                    for (int x = 0; x < pattern.rows.Length; x++)
                     {
-                        print(attackPattern.attackPattern[i, x]);
+                        //print(attackPattern.attackPattern[i, x]);
 
-                        if (attackPattern.attackPattern[i, x] == true)
+                        //if (pattern.ro == true)
                         {
                             Instantiate(targetMarker, (new Vector3((patternPos.transform.position.x + i), (patternPos.transform.position.y), (patternPos.transform.position.z - x))), Quaternion.identity);
                         }
