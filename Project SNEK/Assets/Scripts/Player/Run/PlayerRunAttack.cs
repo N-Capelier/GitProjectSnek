@@ -54,6 +54,10 @@ namespace Player.Attack
 
             //PlayerManager.Instance.currentController.canMove = false;
             PlayerManager.Instance.currentController.moveSpeedModifier = moveSpeedDuringAttack;
+            for (int i = 0; i < PlayerManager.Instance.currentController.playerRunSpirits.spiritChain.Count; i++)
+            {
+                PlayerManager.Instance.currentController.playerRunSpirits.spiritChain[i].UpdateSpeed();
+            }
             PlayerManager.Instance.currentController.rb.velocity = PlayerManager.Instance.currentController.rb.velocity * PlayerManager.Instance.currentController.moveSpeedModifier;
             canAttack = false;
             //attack
@@ -117,6 +121,10 @@ namespace Player.Attack
             yield return new WaitForSeconds(attackCooldown * 0.4f);
             //PlayerManager.Instance.currentController.canMove = true;
             PlayerManager.Instance.currentController.moveSpeedModifier = 1f;
+            for (int i = 0; i < PlayerManager.Instance.currentController.playerRunSpirits.spiritChain.Count; i++)
+            {
+                PlayerManager.Instance.currentController.playerRunSpirits.spiritChain[i].UpdateSpeed();
+            }
             PlayerManager.Instance.currentController.rb.velocity = PlayerManager.Instance.currentController.rb.velocity * PlayerManager.Instance.currentController.moveSpeedModifier;
             Destroy(slashFx);
             yield return new WaitForSeconds(attackCooldown * 0.6f);
@@ -141,6 +149,10 @@ namespace Player.Attack
                 Destroy(attack);
 
             PlayerManager.Instance.currentController.moveSpeedModifier = 1f;
+            for (int i = 0; i < PlayerManager.Instance.currentController.playerRunSpirits.spiritChain.Count; i++)
+            {
+                PlayerManager.Instance.currentController.playerRunSpirits.spiritChain[i].UpdateSpeed();
+            }
             PlayerManager.Instance.currentController.rb.velocity = PlayerManager.Instance.currentController.rb.velocity * PlayerManager.Instance.currentController.moveSpeedModifier;
 
             canAttack = true;
@@ -151,6 +163,10 @@ namespace Player.Attack
             canAttack = true;
             PlayerManager.Instance.currentController.canMove = true;
             PlayerManager.Instance.currentController.moveSpeedModifier = 1f;
+            for (int i = 0; i < PlayerManager.Instance.currentController.playerRunSpirits.spiritChain.Count; i++)
+            {
+                PlayerManager.Instance.currentController.playerRunSpirits.spiritChain[i].UpdateSpeed();
+            }
         }
     }
 }

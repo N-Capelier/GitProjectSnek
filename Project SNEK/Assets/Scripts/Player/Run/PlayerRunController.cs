@@ -42,8 +42,17 @@ namespace Player.Controller
                 (currentDirection == PlayerDirection.Down && transform.position.z <= MapGrid.Instance.GetWorldPos(0, (int)nextNode.z).z) ||
                 (currentDirection == PlayerDirection.Left && transform.position.x <= MapGrid.Instance.GetWorldPos((int)nextNode.x, 0).x))
             {
+                RoundPosition();
                 UpdateMovement();
             }
+        }
+        void RoundPosition()
+        {
+            transform.position = new Vector3(
+                Mathf.RoundToInt(transform.position.x),
+                transform.position.y,
+                Mathf.RoundToInt(transform.position.z)
+                );
         }
 
         private void FixedUpdate()
@@ -53,6 +62,10 @@ namespace Player.Controller
             else
             {
                 rb.velocity = Vector3.zero;
+                for (int i = 0; i < playerRunSpirits.spiritChain.Count; i++)
+                {
+                    playerRunSpirits.spiritChain[i].UpdateSpeed();
+                }
             }
         }
 
@@ -75,6 +88,8 @@ namespace Player.Controller
                 animator.Play("Anim_PlayerRun_TurnL");
             }
 
+            PlayerChangedDirection?.Invoke();
+
             currentDirection = nextDirection;
             currentNode = nextNode;
             nextNode = GetNextNode();
@@ -91,28 +106,24 @@ namespace Player.Controller
                 case InputType.SwipeUp:
                     if (currentDirection != PlayerDirection.Down)
                     {
-                        PlayerChangedDirection?.Invoke();
                         nextDirection = PlayerDirection.Up;
                     }
                     break;
                 case InputType.SwipeRight:
                     if (currentDirection != PlayerDirection.Left)
                     {
-                        PlayerChangedDirection?.Invoke();
                         nextDirection = PlayerDirection.Right;
                     }
                     break;
                 case InputType.SwipeDown:
                     if (currentDirection != PlayerDirection.Up)
                     {
-                        PlayerChangedDirection?.Invoke();
                         nextDirection = PlayerDirection.Down;
                     }
                     break;
                 case InputType.SwipeLeft:
                     if (currentDirection != PlayerDirection.Right)
                     {
-                        PlayerChangedDirection?.Invoke();
                         nextDirection = PlayerDirection.Left;
                     }
                     break;

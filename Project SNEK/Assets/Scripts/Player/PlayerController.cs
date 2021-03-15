@@ -79,6 +79,7 @@ namespace Player.Controller
             /*AsyncOperation _loadingScene = */SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             //yield return new WaitUntil(() => _loadingScene.isDone);
             PlayerManager.Instance.gameObject.SetActive(true);
+            PlayerManager.Instance.currentController.playerRunSpirits.ResetSpiritsPositions();
             transform.position = checkPoint.position;
             RunCamController.Instance.Set(CamState.PlayerScrolling, true);
             isDead = false;
