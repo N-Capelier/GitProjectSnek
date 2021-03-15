@@ -34,6 +34,7 @@ namespace Player.Controller
         [HideInInspector] public Rigidbody rb = null;
         [Range(0, 4)] public float moveSpeed = 50;
         [HideInInspector] public float moveSpeedModifier = 1f;
+        [HideInInspector] public bool isCastingSpell = false;
 
         [Space]
         [SerializeField] [Range(0, 10)] int baseHP = 4;

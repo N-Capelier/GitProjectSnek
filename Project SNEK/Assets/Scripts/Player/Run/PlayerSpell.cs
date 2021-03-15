@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using GameManagement;
+using System.Collections;
 
 namespace Player.Spells
 {
@@ -20,6 +21,12 @@ namespace Player.Spells
             InputHandler.InputReceived += HandleInput;
         }
 
+        private void OnDestroy()
+        {
+            spellCooldownTimer.ClockEnded -= OnCooldownEnded;
+            InputHandler.InputReceived -= HandleInput;
+        }
+
         void LaunchSpellCast(Controller.PlayerDirection spellDirection)
         {
             if(canAttack)
@@ -27,7 +34,7 @@ namespace Player.Spells
                 canAttack = false;
                 spellCooldownTimer.SetTime(spellCooldown);
 
-                SpellCast(spellDirection);
+                StartCoroutine(SpellCast(spellDirection));
             }
         }
 
@@ -69,6 +76,6 @@ namespace Player.Spells
             }
         }
 
-        public abstract void SpellCast(Controller.PlayerDirection spellDirection);
+        public abstract IEnumerator SpellCast(Controller.PlayerDirection spellDirection);
     }
 }

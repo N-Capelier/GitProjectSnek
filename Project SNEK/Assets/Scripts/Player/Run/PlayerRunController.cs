@@ -57,7 +57,7 @@ namespace Player.Controller
 
         private void FixedUpdate()
         {
-            if (canMove == true && isDead == false)
+            if (canMove == true && isDead == false && isCastingSpell == false)
                 rb.velocity = (nextNode - currentNode) * moveSpeed * moveSpeedModifier;
             else
             {
