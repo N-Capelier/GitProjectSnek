@@ -294,6 +294,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 176616866, guid: 26592478d375c1946967c3e46874f588, type: 3}
+      propertyPath: jaw
+      value: 
+      objectReference: {fileID: 923932084221371904, guid: 5e445865ffb517e409557394e4eacd66,
+        type: 3}
+    - target: {fileID: 176616866, guid: 26592478d375c1946967c3e46874f588, type: 3}
+      propertyPath: isEater
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 176616866, guid: 26592478d375c1946967c3e46874f588, type: 3}
+      propertyPath: isVomito
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854422785384465328, guid: 26592478d375c1946967c3e46874f588,
+        type: 3}
+      propertyPath: pattern
+      value: 
+      objectReference: {fileID: 11400000, guid: d75ddafb91927434d9a97abbf40088cb,
+        type: 2}
     - target: {fileID: 8279638549549940434, guid: 26592478d375c1946967c3e46874f588,
         type: 3}
       propertyPath: m_Name
@@ -302,6 +321,21 @@ PrefabInstance:
     - target: {fileID: 8279638549549940434, guid: 26592478d375c1946967c3e46874f588,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8279638549549940436, guid: 26592478d375c1946967c3e46874f588,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8279638549549940436, guid: 26592478d375c1946967c3e46874f588,
+        type: 3}
+      propertyPath: attackCooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8279638549549940436, guid: 26592478d375c1946967c3e46874f588,
+        type: 3}
+      propertyPath: movementCooldown
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8279638549549940437, guid: 26592478d375c1946967c3e46874f588,
@@ -396,9 +430,9 @@ MonoBehaviour:
   movementCooldown: 1
   maxHp: 2
   currentHp: 0
+  deathFx: {fileID: 0}
   rb: {fileID: 0}
   moveSpeed: 0
-  spiritLoot: 1
 --- !u!4 &665549065
 Transform:
   m_ObjectHideFlags: 0
@@ -412,6 +446,7 @@ Transform:
   m_Children:
   - {fileID: 1777196146}
   - {fileID: 712173547}
+  - {fileID: 2040854013}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -492,6 +527,9 @@ MonoBehaviour:
   targetNumber: 3
   targetMarker: {fileID: 6290763546214934805, guid: b39182895c50de04893ac59f76f00c33,
     type: 3}
+  random: 0
+  attackPattern: {fileID: 11400000, guid: 65b5bcf8707cf8642ac978614ac90975, type: 2}
+  patternPos: {fileID: 2040854012}
 --- !u!1001 &800190590
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1004,6 +1042,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c668b076263881243b760a4d0e7c5dc1, type: 3}
+--- !u!1 &2040854012
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2040854013}
+  m_Layer: 0
+  m_Name: PatternPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2040854013
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040854012}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 665549065}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7155960297268565124
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -16,6 +16,11 @@ namespace Enemy
 
         Vector3 targetPos;
 
+        public bool random = false;
+
+        public EnemyAttackPattern attackPattern;
+        [SerializeField] GameObject patternPos;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -38,13 +43,33 @@ namespace Enemy
 
         }
 
+
+
         void TargetCell()
         {
-            for (int i = 0; i < targetNumber; i++)
+            if(random == true)
             {
-                targetPos = new Vector3(transform.position.x - Random.Range(-3, 3), 0, transform.position.z - Random.Range(1, 5));
-                Instantiate(targetMarker, targetPos, Quaternion.identity);
+                for (int i = 0; i < targetNumber; i++)
+                {
+                    targetPos = new Vector3(transform.position.x - Random.Range(-3, 3), 0, transform.position.z - Random.Range(1, 5));
+                    Instantiate(targetMarker, targetPos, Quaternion.identity);
+                }
             }
+            else
+            {
+                for (int i = 0; i < attackPattern.attackPattern.GetLength(0); i++)
+                {
+                    for (int x = 0; x < attackPattern.attackPattern.GetLength(1); x++)
+                    {
+                        print(attackPattern.attackPattern[i, x]);
+
+                        if (attackPattern.attackPattern[i, x] == true)
+                        {
+                            Instantiate(targetMarker, (new Vector3((patternPos.transform.position.x + i), (patternPos.transform.position.y), (patternPos.transform.position.z - x))), Quaternion.identity);
+                        }
+                    }
+                }
+            }            
         }
 
         private void OnDestroy()

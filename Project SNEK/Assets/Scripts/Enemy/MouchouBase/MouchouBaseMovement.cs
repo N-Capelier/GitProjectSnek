@@ -30,9 +30,8 @@ namespace Enemy
         public GameObject objectRenderer;
         public Animator anim;
 
-        [Space]
-        public bool lineVertical = false;
-        public bool square = false;
+        [SerializeField] MouchouPattern pattern;
+        int patternIndex = 0;
 
 
         void Start()
@@ -65,6 +64,13 @@ namespace Enemy
             isMoving = true;
         }
 
+        public void UpdateMovementDash()
+        {
+            rb.velocity = (nextNode - currentNode) * (stats.moveSpeed * 2);
+            anim.SetBool("isMoving", true);
+            isMoving = true;
+        }
+
         void StopMove()
         {
             rb.velocity = new Vector3(0, 0, 0);
@@ -73,51 +79,26 @@ namespace Enemy
             isMoving = false;
         }
 
-        void OnShouldMove()
+        public void OnShouldMove()
         {
             if (canMove == true)
             {
-                if (lineVertical == true)
+                currentDirection = pattern.patternList[patternIndex];
+
+                if(patternIndex == pattern.patternList.Count - 1)
                 {
-                    LineVerticalPattern();
+                    patternIndex = 0;
+                }
+                else
+                {
+                    patternIndex ++;
                 }
 
-                if (square == true)
-                {
-                    SquarePattern();
-                }
+                GetNextNode();
+                UpdateMovement();
             }
         }
 
-        void LineVerticalPattern()
-        {
-            currentDirection = MouchouDirection.Down;
-            GetNextNode();
-            UpdateMovement();
-        }
-
-        void SquarePattern()
-        {
-
-            switch (currentDirection)
-            {
-                case MouchouDirection.Up:
-                    currentDirection = MouchouDirection.Right;
-                    break;
-                case MouchouDirection.Right:
-                    currentDirection = MouchouDirection.Down;
-                    break;
-                case MouchouDirection.Down:
-                    currentDirection = MouchouDirection.Left;
-                    break;
-                case MouchouDirection.Left:
-                    currentDirection = MouchouDirection.Up;
-                    break;
-            }
-
-            GetNextNode();
-            UpdateMovement();
-        }
 
         public Vector3 GetNextNode()
         {
