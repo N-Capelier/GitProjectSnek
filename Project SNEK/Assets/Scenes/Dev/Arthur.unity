@@ -294,15 +294,23 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 176616866, guid: 26592478d375c1946967c3e46874f588, type: 3}
+      propertyPath: jaw
+      value: 
+      objectReference: {fileID: 923932084221371904, guid: 5e445865ffb517e409557394e4eacd66,
+        type: 3}
+    - target: {fileID: 176616866, guid: 26592478d375c1946967c3e46874f588, type: 3}
+      propertyPath: isEater
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 176616866, guid: 26592478d375c1946967c3e46874f588, type: 3}
+      propertyPath: isVomito
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8279638549549940434, guid: 26592478d375c1946967c3e46874f588,
         type: 3}
       propertyPath: m_Name
       value: Mouchourexie
-      objectReference: {fileID: 0}
-    - target: {fileID: 8279638549549940434, guid: 26592478d375c1946967c3e46874f588,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8279638549549940437, guid: 26592478d375c1946967c3e46874f588,
         type: 3}
@@ -379,7 +387,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &665549064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,9 +404,9 @@ MonoBehaviour:
   movementCooldown: 1
   maxHp: 2
   currentHp: 0
+  deathFx: {fileID: 0}
   rb: {fileID: 0}
   moveSpeed: 0
-  spiritLoot: 1
 --- !u!4 &665549065
 Transform:
   m_ObjectHideFlags: 0
