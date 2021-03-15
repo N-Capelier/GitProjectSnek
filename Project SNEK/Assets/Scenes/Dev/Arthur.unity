@@ -301,16 +301,37 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 176616866, guid: 26592478d375c1946967c3e46874f588, type: 3}
       propertyPath: isEater
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 176616866, guid: 26592478d375c1946967c3e46874f588, type: 3}
       propertyPath: isVomito
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1854422785384465328, guid: 26592478d375c1946967c3e46874f588,
+        type: 3}
+      propertyPath: pattern
+      value: 
+      objectReference: {fileID: 11400000, guid: d75ddafb91927434d9a97abbf40088cb,
+        type: 2}
     - target: {fileID: 8279638549549940434, guid: 26592478d375c1946967c3e46874f588,
         type: 3}
       propertyPath: m_Name
       value: Mouchourexie
+      objectReference: {fileID: 0}
+    - target: {fileID: 8279638549549940436, guid: 26592478d375c1946967c3e46874f588,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8279638549549940436, guid: 26592478d375c1946967c3e46874f588,
+        type: 3}
+      propertyPath: attackCooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8279638549549940436, guid: 26592478d375c1946967c3e46874f588,
+        type: 3}
+      propertyPath: movementCooldown
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8279638549549940437, guid: 26592478d375c1946967c3e46874f588,
         type: 3}
