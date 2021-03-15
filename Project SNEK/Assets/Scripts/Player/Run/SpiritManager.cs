@@ -4,6 +4,9 @@ using Player.Controller;
 
 namespace Player.Spirits
 {
+    /// <summary>
+    /// Nico
+    /// </summary>
     public class SpiritManager : MonoBehaviour
     {
         [SerializeField] SpiritBehaviour spiritPrefab;
@@ -32,6 +35,20 @@ namespace Player.Spirits
             spiritChain[0].SetDirection(nextDir);
         }
 
+#if UNITY_EDITOR
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.Return))
+            {
+                AddSpirit();
+            }
+            else if(Input.GetKeyDown(KeyCode.Backspace))
+            {
+                ConsumeSpirits(3);
+            }
+        }
+#endif
+
         public void AddSpirit()
         {
             for (int i = 0; i < spiritChain.Count; i++)
@@ -42,6 +59,39 @@ namespace Player.Spirits
                     break;
                 }
             }
+        }
+
+        public int GetActiveSpirits()
+        {
+            int _count = 0;
+
+            for (int i = 0; i < spiritChain.Count; i++)
+            {
+                if (!spiritChain[i].objectRenderer.activeSelf)
+                    break;
+                _count++;
+            }
+
+            return _count;
+        }
+
+        public bool ConsumeSpirits(int _count)
+        {
+            if (GetActiveSpirits() < _count)
+            {
+                return false;
+            }
+            int _index = 0;
+
+            for (int i = 0; i < spiritChain.Count; i++)
+            {
+                if (!spiritChain[i].objectRenderer.activeSelf)
+                    break;
+                _index++;
+            }
+            print(_index);
+            CutChain(spiritChain[_index - _count]);
+            return true;
         }
 
         public void CutChain(SpiritBehaviour _spiritBehaviour)
@@ -62,12 +112,9 @@ namespace Player.Spirits
                 throw new System.Exception("Spirit not found in spirit chain!");
             }
 
-            int _range = spiritChain.Count;
-
-            for (int i = _index; i < _range; i++)
+            for (int i = _index; i < spiritChain.Count; i++)
             {
-                spiritChain[i].Death();
-                spiritChain.RemoveAt(i);
+                StartCoroutine(spiritChain[i].Death());
             }
         }
 

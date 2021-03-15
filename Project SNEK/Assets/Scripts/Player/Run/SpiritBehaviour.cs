@@ -7,7 +7,7 @@ namespace Player.Spirits
     public class SpiritBehaviour : MonoBehaviour
     {
         [SerializeField] Rigidbody rb;
-        public MeshRenderer objectRenderer;
+        public GameObject objectRenderer;
         PlayerDirection currentDir;
 
        [SerializeField] SpiritBehaviour nextSpirit;
@@ -82,7 +82,7 @@ namespace Player.Spirits
 
 
             yield return new WaitForSeconds(1f);
-            objectRenderer.gameObject.SetActive(false);
+            objectRenderer.SetActive(false);
         }
 
     }
