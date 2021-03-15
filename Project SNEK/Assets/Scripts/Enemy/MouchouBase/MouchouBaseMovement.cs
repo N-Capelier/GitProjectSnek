@@ -1,149 +1,151 @@
 ﻿using UnityEngine;
-using Enemy;
 using Map;
 
-public enum MouchouDirection
+namespace Enemy
 {
-    Up,
-    Right,
-    Down,
-    Left
-}
-
-/// <summary>
-/// Arthur
-/// </summary>
-public class MouchouBaseMovement : MonoBehaviour
-{
-    EnemyStats stats;
-    Rigidbody rb;
-
-    [HideInInspector] public MouchouDirection currentDirection;
-    //MouchouDirection nextDirection;
-
-    [HideInInspector] public Vector3 currentNode;
-    [HideInInspector] public Vector3 nextNode;
-    [HideInInspector] public bool isMoving = false;
-    [HideInInspector] public bool canMove = true;
-
-    public GameObject objectRenderer;
-    public Animator anim;
-
-    [Space]
-    public bool lineVertical = false;
-    public bool square = false;
-
-
-    void Start()
+    public enum MouchouDirection
     {
-        stats = GetComponentInParent<EnemyStats>();
-        rb = GetComponentInParent<Rigidbody>();
-
-        stats.movementClock.ClockEnded += OnShouldMove;
-
-        currentNode = stats.gameObject.transform.position;
-        currentDirection = MouchouDirection.Down;
+        Up,
+        Right,
+        Down,
+        Left
     }
 
-
-    void Update()
+    /// <summary>
+    /// Arthur
+    /// </summary>
+    public class MouchouBaseMovement : MonoBehaviour
     {
-        if ((currentDirection == MouchouDirection.Up && transform.position.z >= MapGrid.Instance.GetWorldPos(0, (int)nextNode.z).z) ||
-            (currentDirection == MouchouDirection.Right && transform.position.x >= MapGrid.Instance.GetWorldPos((int)nextNode.x, 0).x) ||
-            (currentDirection == MouchouDirection.Down && transform.position.z <= MapGrid.Instance.GetWorldPos(0, (int)nextNode.z).z) ||
-            (currentDirection == MouchouDirection.Left && transform.position.x <= MapGrid.Instance.GetWorldPos((int)nextNode.x, 0).x))
+        EnemyStats stats;
+        Rigidbody rb;
+
+        [HideInInspector] public MouchouDirection currentDirection;
+        //MouchouDirection nextDirection;
+
+        [HideInInspector] public Vector3 currentNode;
+        [HideInInspector] public Vector3 nextNode;
+        [HideInInspector] public bool isMoving = false;
+        [HideInInspector] public bool canMove = true;
+
+        public GameObject objectRenderer;
+        public Animator anim;
+
+        [Space]
+        public bool lineVertical = false;
+        public bool square = false;
+
+
+        void Start()
         {
-            StopMove();
+            stats = GetComponentInParent<EnemyStats>();
+            rb = GetComponentInParent<Rigidbody>();
+
+            stats.movementClock.ClockEnded += OnShouldMove;
+
+            currentNode = stats.gameObject.transform.position;
+            currentDirection = MouchouDirection.Down;
         }
-    }
 
-    public void UpdateMovement()
-    {
-        rb.velocity = (nextNode - currentNode) * stats.moveSpeed;
-        anim.SetBool("isMoving", true);
-        isMoving = true;
-    }
 
-    void StopMove()
-    {
-        rb.velocity = new Vector3(0, 0, 0);
-        currentNode = nextNode;
-        anim.SetBool("isMoving", false);
-        isMoving = false;
-    }
-
-    void OnShouldMove()
-    {
-        if (canMove == true)
+        void Update()
         {
-            if (lineVertical == true)
+            if ((currentDirection == MouchouDirection.Up && transform.position.z >= MapGrid.Instance.GetWorldPos(0, (int)nextNode.z).z) ||
+                (currentDirection == MouchouDirection.Right && transform.position.x >= MapGrid.Instance.GetWorldPos((int)nextNode.x, 0).x) ||
+                (currentDirection == MouchouDirection.Down && transform.position.z <= MapGrid.Instance.GetWorldPos(0, (int)nextNode.z).z) ||
+                (currentDirection == MouchouDirection.Left && transform.position.x <= MapGrid.Instance.GetWorldPos((int)nextNode.x, 0).x))
             {
-                LineVerticalPattern();
-            }
-
-            if (square == true)
-            {
-                SquarePattern();
+                StopMove();
             }
         }
-    }
 
-    void LineVerticalPattern()
-    {
-        currentDirection = MouchouDirection.Down;
-        GetNextNode();
-        UpdateMovement();
-    }
-
-    void SquarePattern()
-    {
-
-        switch (currentDirection)
+        public void UpdateMovement()
         {
-            case MouchouDirection.Up:
-                currentDirection = MouchouDirection.Right;
-                break;
-            case MouchouDirection.Right:
-                currentDirection = MouchouDirection.Down;
-                break;
-            case MouchouDirection.Down:
-                currentDirection = MouchouDirection.Left;
-                break;
-            case MouchouDirection.Left:
-                currentDirection = MouchouDirection.Up;
-                break;
+            rb.velocity = (nextNode - currentNode) * stats.moveSpeed;
+            anim.SetBool("isMoving", true);
+            isMoving = true;
         }
 
-        GetNextNode();
-        UpdateMovement();
-    }
-
-    public Vector3 GetNextNode()
-    {
-        switch (currentDirection)
+        void StopMove()
         {
-            case MouchouDirection.Up:
-                nextNode = new Vector3(currentNode.x, currentNode.y, currentNode.z + 1);
-                objectRenderer.transform.rotation = Quaternion.Euler(0,0,0);
-                break;
-            case MouchouDirection.Right:
-                nextNode = new Vector3(currentNode.x + 1, currentNode.y, currentNode.z);
-                objectRenderer.transform.rotation = Quaternion.Euler(0, 90, 0);
-                break;
-            case MouchouDirection.Down:
-                nextNode = new Vector3(currentNode.x, currentNode.y, currentNode.z - 1);
-                objectRenderer.transform.rotation = Quaternion.Euler(0, 180, 0);
-                break;
-            case MouchouDirection.Left:
-                nextNode = new Vector3(currentNode.x - 1, currentNode.y, currentNode.z);
-                objectRenderer.transform.rotation = Quaternion.Euler(0, 270, 0);
-                break;
+            rb.velocity = new Vector3(0, 0, 0);
+            currentNode = nextNode;
+            anim.SetBool("isMoving", false);
+            isMoving = false;
         }
-        return nextNode;
-    }
 
-    private void OnDestroy()
-    {
-        stats.movementClock.ClockEnded -= OnShouldMove;
+        void OnShouldMove()
+        {
+            if (canMove == true)
+            {
+                if (lineVertical == true)
+                {
+                    LineVerticalPattern();
+                }
+
+                if (square == true)
+                {
+                    SquarePattern();
+                }
+            }
+        }
+
+        void LineVerticalPattern()
+        {
+            currentDirection = MouchouDirection.Down;
+            GetNextNode();
+            UpdateMovement();
+        }
+
+        void SquarePattern()
+        {
+
+            switch (currentDirection)
+            {
+                case MouchouDirection.Up:
+                    currentDirection = MouchouDirection.Right;
+                    break;
+                case MouchouDirection.Right:
+                    currentDirection = MouchouDirection.Down;
+                    break;
+                case MouchouDirection.Down:
+                    currentDirection = MouchouDirection.Left;
+                    break;
+                case MouchouDirection.Left:
+                    currentDirection = MouchouDirection.Up;
+                    break;
+            }
+
+            GetNextNode();
+            UpdateMovement();
+        }
+
+        public Vector3 GetNextNode()
+        {
+            switch (currentDirection)
+            {
+                case MouchouDirection.Up:
+                    nextNode = new Vector3(currentNode.x, currentNode.y, currentNode.z + 1);
+                    objectRenderer.transform.rotation = Quaternion.Euler(0, 0, 0);
+                    break;
+                case MouchouDirection.Right:
+                    nextNode = new Vector3(currentNode.x + 1, currentNode.y, currentNode.z);
+                    objectRenderer.transform.rotation = Quaternion.Euler(0, 90, 0);
+                    break;
+                case MouchouDirection.Down:
+                    nextNode = new Vector3(currentNode.x, currentNode.y, currentNode.z - 1);
+                    objectRenderer.transform.rotation = Quaternion.Euler(0, 180, 0);
+                    break;
+                case MouchouDirection.Left:
+                    nextNode = new Vector3(currentNode.x - 1, currentNode.y, currentNode.z);
+                    objectRenderer.transform.rotation = Quaternion.Euler(0, 270, 0);
+                    break;
+            }
+            return nextNode;
+        }
+
+        private void OnDestroy()
+        {
+            stats.movementClock.ClockEnded -= OnShouldMove;
+        }
     }
 }

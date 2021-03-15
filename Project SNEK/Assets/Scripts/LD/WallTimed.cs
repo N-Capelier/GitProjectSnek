@@ -1,30 +1,32 @@
 ﻿using System.Collections;
 using UnityEngine;
-using Wall;
 
-/// <summary>
-/// Arthur
-/// </summary>
-public class WallTimed : WallBehaviour
+namespace Wall
 {
-    public bool deadByTime;
-
-    [Range(0, 5)] public float timeToDeath;
-    public ParticleSystem trail;
-
-    void Start()
+    /// <summary>
+    /// Arthur
+    /// </summary>
+    public class WallTimed : WallBehaviour
     {
-        if(deadByTime == true)
+        public bool deadByTime;
+
+        [Range(0, 5)] public float timeToDeath;
+        public ParticleSystem trail;
+
+        void Start()
         {
-            StartCoroutine(DeathByTime(timeToDeath));
-            //trail.main.duration = timeToDeath;
-        }
-        
-    }
+            if (deadByTime == true)
+            {
+                StartCoroutine(DeathByTime(timeToDeath));
+                //trail.main.duration = timeToDeath;
+            }
 
-    IEnumerator DeathByTime(float time)
-    {
-        yield return new WaitForSeconds(time + 1);
-        Destroy(gameObject);
+        }
+
+        IEnumerator DeathByTime(float time)
+        {
+            yield return new WaitForSeconds(time + 1);
+            Destroy(gameObject);
+        }
     }
 }
