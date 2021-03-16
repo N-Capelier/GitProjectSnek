@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6854461945692587765}
   - component: {fileID: 7597966458849664258}
   - component: {fileID: 2474614166719138291}
+  - component: {fileID: 3215019747188708207}
   m_Layer: 0
   m_Name: Cauldron
   m_TagString: Untagged
@@ -90,7 +91,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6679387328982727670}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -109,7 +110,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 1
 --- !u!114 &2474614166719138291
 MonoBehaviour:
@@ -123,3 +124,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3281350c9541bc438bf0dce7e5b8682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  absorbRadius: 2
+  capCollider: {fileID: 3215019747188708207}
+  boxCollider: {fileID: 6854461945692587765}
+--- !u!136 &3215019747188708207
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6679387328982727670}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  m_Radius: 2
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 217557202930617304}
   - component: {fileID: 4085788974367190051}
+  - component: {fileID: 5902801032247857658}
   m_Layer: 0
   m_Name: Violet
   m_TagString: Untagged
@@ -52,6 +53,19 @@ MonoBehaviour:
   poisonDuration: 4
   Random1: 5
   Random2: 3
+--- !u!65 &5902801032247857658
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609678282111767821}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4807995631115035483
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,10 +134,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 217557202930617304}
     m_Modifications:
+    - target: {fileID: 8897820320132083488, guid: 506e796b782cc444fa4bfb890ac234f9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8897820320206549714, guid: 506e796b782cc444fa4bfb890ac234f9,
         type: 3}
       propertyPath: m_Name
       value: PoisonFx
+      objectReference: {fileID: 0}
+    - target: {fileID: 8897820320206549714, guid: 506e796b782cc444fa4bfb890ac234f9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8897820320206549724, guid: 506e796b782cc444fa4bfb890ac234f9,
         type: 3}
@@ -260,6 +284,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Render
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f30b2a7e84838ea4f9d09c1912dae62b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f30b2a7e84838ea4f9d09c1912dae62b, type: 3}

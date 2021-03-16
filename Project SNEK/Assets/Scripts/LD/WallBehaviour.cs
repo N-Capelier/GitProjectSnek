@@ -9,7 +9,7 @@ namespace Wall
     /// </summary>
     public class WallBehaviour : MonoBehaviour
     {
-        [SerializeField] bool isDestroyable;
+        [SerializeField] public bool isDestroyable;
         [SerializeField] GameObject objectRenderer;
         [SerializeField] ParticleSystem fx;
         private void OnTriggerEnter(Collider other)
