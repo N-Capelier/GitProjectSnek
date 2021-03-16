@@ -12,11 +12,11 @@ public class CustomArrayDisplay : PropertyDrawer
         EditorGUI.PrefixLabel(position, label);
         Rect newposition = position;
         newposition.y += 18f;
-        SerializedProperty data = property.FindPropertyRelative("rows");
+        SerializedProperty data = property.FindPropertyRelative("row");
 
         for (int i = 0; i < 7; i++)
         {
-            SerializedProperty row = data.GetArrayElementAtIndex(i).FindPropertyRelative("row");
+            SerializedProperty row = data.GetArrayElementAtIndex(i).FindPropertyRelative("column");
 
             newposition.height = 18f;
 

@@ -7,13 +7,13 @@ namespace Enemy
     [System.Serializable]
     public class EnemyAttackPattern
     {
-        [System.Serializable]
-        public struct rowData
-        {
-            public bool[] row;
-        }
+        public RowData[] row = new RowData[7];
 
-        
-        public rowData[] rows = new rowData[7];
+
+        [System.Serializable]
+        public struct RowData
+        {
+            public bool[] column;
+        }
     }
 }

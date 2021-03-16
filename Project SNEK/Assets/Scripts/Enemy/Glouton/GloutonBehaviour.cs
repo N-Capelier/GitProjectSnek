@@ -60,15 +60,16 @@ namespace Enemy
             }
             else
             {
-                for (int i = 0; i < pattern.rows.Length; i++)
+                for (int x = 0; x < pattern.row.Length; x++)
                 {
-                    for (int x = 0; x < pattern.rows.Length; x++)
+                    for (int y = 0; y < pattern.row[x].column.Length; y++)
                     {
                         //print(attackPattern.attackPattern[i, x]);
+                        //print(pattern.row[x].column[y]);
 
-                        //if (pattern.ro == true)
+                        if (pattern.row[x].column[y] == true)
                         {
-                            Instantiate(targetMarker, (new Vector3((patternPos.transform.position.x + i), (patternPos.transform.position.y), (patternPos.transform.position.z - x))), Quaternion.identity);
+                            Instantiate(targetMarker, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x))), Quaternion.identity);
                         }
                     }
                 }
