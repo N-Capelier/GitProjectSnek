@@ -14,18 +14,21 @@ public class CustomArrayDisplay : PropertyDrawer
         newposition.y += 18f;
         SerializedProperty data = property.FindPropertyRelative("row");
 
-        for (int i = 0; i < 7; i++)
+        if (data.arraySize != 9)
+            data.arraySize = 9;
+
+        for (int i = 0; i < 9; i++)
         {
             SerializedProperty row = data.GetArrayElementAtIndex(i).FindPropertyRelative("column");
 
             newposition.height = 18f;
 
-            if (row.arraySize != 7)
-                row.arraySize = 7;
+            if (row.arraySize != 9)
+                row.arraySize = 9;
 
-            newposition.width = position.width / 7;
+            newposition.width = position.width / 9;
 
-            for (int x = 0; x < 7; x++)
+            for (int x = 0; x < 9; x++)
             {
                 EditorGUI.PropertyField(newposition, row.GetArrayElementAtIndex(x), GUIContent.none);
                 newposition.x += newposition.width;

@@ -64,9 +64,6 @@ namespace Enemy
                 {
                     for (int y = 0; y < pattern.row[x].column.Length; y++)
                     {
-                        //print(attackPattern.attackPattern[i, x]);
-                        //print(pattern.row[x].column[y]);
-
                         if (pattern.row[x].column[y] == true)
                         {
                             Instantiate(targetMarker, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x))), Quaternion.identity);

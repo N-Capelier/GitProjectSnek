@@ -7,7 +7,7 @@ namespace Enemy
     [System.Serializable]
     public class EnemyAttackPattern
     {
-        public RowData[] row = new RowData[7];
+        public RowData[] row = new RowData[9];
 
 
         [System.Serializable]
