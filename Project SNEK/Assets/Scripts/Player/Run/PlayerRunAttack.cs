@@ -51,14 +51,10 @@ namespace Player.Attack
 
         private IEnumerator Attack()
         {
-
             //PlayerManager.Instance.currentController.canMove = false;
-            PlayerManager.Instance.currentController.moveSpeedModifier = moveSpeedDuringAttack;
-            for (int i = 0; i < PlayerManager.Instance.currentController.playerRunSpirits.spiritChain.Count; i++)
-            {
-                PlayerManager.Instance.currentController.playerRunSpirits.spiritChain[i].UpdateSpeed();
-            }
-            PlayerManager.Instance.currentController.rb.velocity = PlayerManager.Instance.currentController.rb.velocity * PlayerManager.Instance.currentController.moveSpeedModifier;
+            PlayerManager.Instance.currentController.attackMoveSpeedModifier = moveSpeedDuringAttack;
+            //PlayerManager.Instance.currentController.playerRunSpirits.UpdateSpiritsVelocity();
+            PlayerManager.Instance.currentController.rb.velocity = PlayerManager.Instance.currentController.rb.velocity * PlayerManager.Instance.currentController.attackMoveSpeedModifier;
             canAttack = false;
             //attack
 
@@ -120,13 +116,11 @@ namespace Player.Attack
             Destroy(attack);
             yield return new WaitForSeconds(attackCooldown * 0.4f);
             //PlayerManager.Instance.currentController.canMove = true;
-            PlayerManager.Instance.currentController.moveSpeedModifier = 1f;
-            for (int i = 0; i < PlayerManager.Instance.currentController.playerRunSpirits.spiritChain.Count; i++)
-            {
-                PlayerManager.Instance.currentController.playerRunSpirits.spiritChain[i].UpdateSpeed();
-            }
-            PlayerManager.Instance.currentController.rb.velocity = PlayerManager.Instance.currentController.rb.velocity * PlayerManager.Instance.currentController.moveSpeedModifier;
+            PlayerManager.Instance.currentController.attackMoveSpeedModifier = 1f;
+            //PlayerManager.Instance.currentController.playerRunSpirits.UpdateSpiritsVelocity();
+            PlayerManager.Instance.currentController.rb.velocity = PlayerManager.Instance.currentController.rb.velocity * PlayerManager.Instance.currentController.attackMoveSpeedModifier;
             Destroy(slashFx);
+
             yield return new WaitForSeconds(attackCooldown * 0.6f);
             canAttack = true;
         }
@@ -148,12 +142,9 @@ namespace Player.Attack
             if (attack != null)
                 Destroy(attack);
 
-            PlayerManager.Instance.currentController.moveSpeedModifier = 1f;
-            for (int i = 0; i < PlayerManager.Instance.currentController.playerRunSpirits.spiritChain.Count; i++)
-            {
-                PlayerManager.Instance.currentController.playerRunSpirits.spiritChain[i].UpdateSpeed();
-            }
-            PlayerManager.Instance.currentController.rb.velocity = PlayerManager.Instance.currentController.rb.velocity * PlayerManager.Instance.currentController.moveSpeedModifier;
+            PlayerManager.Instance.currentController.attackMoveSpeedModifier = 1f;
+            //PlayerManager.Instance.currentController.playerRunSpirits.UpdateSpiritsVelocity();
+            PlayerManager.Instance.currentController.rb.velocity = PlayerManager.Instance.currentController.rb.velocity * PlayerManager.Instance.currentController.attackMoveSpeedModifier;
 
             canAttack = true;
         }
@@ -161,12 +152,8 @@ namespace Player.Attack
         void OnDeath()
         {
             canAttack = true;
-            PlayerManager.Instance.currentController.canMove = true;
-            PlayerManager.Instance.currentController.moveSpeedModifier = 1f;
-            for (int i = 0; i < PlayerManager.Instance.currentController.playerRunSpirits.spiritChain.Count; i++)
-            {
-                PlayerManager.Instance.currentController.playerRunSpirits.spiritChain[i].UpdateSpeed();
-            }
+            PlayerManager.Instance.currentController.attackMoveSpeedModifier = 1f;
+            //PlayerManager.Instance.currentController.playerRunSpirits.UpdateSpiritsVelocity();
         }
     }
 }

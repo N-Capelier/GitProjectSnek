@@ -19,7 +19,7 @@ namespace Player.Spells
             {
                 yield break;
             }
-            PlayerManager.Instance.currentController.isCastingSpell = true;
+            PlayerManager.Instance.currentController.spellMoveSpeedModifier = 0.01f;
             yield return new WaitForSeconds(animCooldown);
             GameObject cauldron = Instantiate(bomb, transform.position, Quaternion.identity);
             switch (spellDirection)
@@ -37,8 +37,7 @@ namespace Player.Spells
                     cauldron.GetComponent<Rigidbody>().velocity = new Vector3(throwSpeed, 0, 0);
                     break;
             }
-            PlayerManager.Instance.currentController.isCastingSpell = false;
-
+            PlayerManager.Instance.currentController.spellMoveSpeedModifier = 1f;
         }
     }
 }

@@ -42,30 +42,20 @@ namespace Player.Controller
                 (currentDirection == PlayerDirection.Down && transform.position.z <= MapGrid.Instance.GetWorldPos(0, (int)nextNode.z).z) ||
                 (currentDirection == PlayerDirection.Left && transform.position.x <= MapGrid.Instance.GetWorldPos((int)nextNode.x, 0).x))
             {
-                RoundPosition();
+                SnapPosition();
                 UpdateMovement();
             }
-        }
-        void RoundPosition()
-        {
-            transform.position = new Vector3(
-                Mathf.RoundToInt(transform.position.x),
-                transform.position.y,
-                Mathf.RoundToInt(transform.position.z)
-                );
         }
 
         private void FixedUpdate()
         {
-            if (canMove == true && isDead == false && isCastingSpell == false)
-                rb.velocity = (nextNode - currentNode) * moveSpeed * moveSpeedModifier;
+            if (isDead == false)
+            {
+                rb.velocity = (nextNode - currentNode) * moveSpeed * attackMoveSpeedModifier * spellMoveSpeedModifier;
+            }
             else
             {
                 rb.velocity = Vector3.zero;
-                for (int i = 0; i < playerRunSpirits.spiritChain.Count; i++)
-                {
-                    playerRunSpirits.spiritChain[i].UpdateSpeed();
-                }
             }
         }
 

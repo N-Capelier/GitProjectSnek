@@ -33,13 +33,12 @@ namespace Player.Controller
         [Space]
         [HideInInspector] public Rigidbody rb = null;
         [Range(0, 4)] public float moveSpeed = 50;
-        [HideInInspector] public float moveSpeedModifier = 1f;
-        [HideInInspector] public bool isCastingSpell = false;
+        [HideInInspector] public float attackMoveSpeedModifier = 1f;
+        [HideInInspector] public float spellMoveSpeedModifier = 1f;
 
         [Space]
         [SerializeField] [Range(0, 10)] int baseHP = 4;
         int currentHP;
-        [HideInInspector] public bool canMove = true;
         [HideInInspector] public bool isDead = false;
         public Transform checkPoint;
         public Vector3 respawnNode;
@@ -69,6 +68,15 @@ namespace Player.Controller
             {
                 StartCoroutine(RespawnCoroutine());
             }
+        }
+
+        public void SnapPosition()
+        {
+            transform.position = new Vector3(
+                Mathf.RoundToInt(transform.position.x),
+                transform.position.y,
+                Mathf.RoundToInt(transform.position.z)
+                );
         }
 
         IEnumerator RespawnCoroutine()
