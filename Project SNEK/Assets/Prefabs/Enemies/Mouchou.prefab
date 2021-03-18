@@ -252,6 +252,7 @@ GameObject:
   - component: {fileID: 8965832297510806389}
   - component: {fileID: 8965832297510806386}
   - component: {fileID: 667536246195059152}
+  - component: {fileID: -5079953103345784742}
   m_Layer: 11
   m_Name: Mouchou
   m_TagString: Untagged
@@ -324,6 +325,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.4
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-5079953103345784742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8965832297510806387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f936889224bae2429f728392abf48d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8965832298396089470
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,5 +387,4 @@ MonoBehaviour:
   canMove: 1
   objectRenderer: {fileID: 6480038375194020960}
   anim: {fileID: 8046605624421339157}
-  lineVertical: 0
-  square: 1
+  pattern: {fileID: 0}

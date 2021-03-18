@@ -10,11 +10,12 @@ namespace Player.Spells
     /// </summary>
     public class PoppyBomb : MonoBehaviour
     {
-        [SerializeField] float absorbRadius;
+        [SerializeField] float absorbSpeed;
         bool hasStarted = false;
         Rigidbody rb;
         public CapsuleCollider capCollider;
         public BoxCollider boxCollider;
+        List<GameObject> grabbedObjects = new List<GameObject>();
         void Start()
         {
             rb = gameObject.GetComponent<Rigidbody>();
@@ -34,20 +35,13 @@ namespace Player.Spells
 
         private void OnTriggerStay(Collider other)
         {
-                if (hasStarted == true)
+            if (hasStarted == true)
             {
-                if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+                if (!grabbedObjects.Contains(other.gameObject))
                 {
-                    other.gameObject.SetActive(false);
-                }
-                else if (other.gameObject.GetComponent<WallBehaviour>() != null)
-                {
-                    if(other.gameObject.GetComponent<WallBehaviour>().isDestroyable == true)
-                    other.gameObject.SetActive(false);
-                }
-                else if (other.gameObject.GetComponent<VioletBehaviour>() != null)
-                {
-                    other.gameObject.SetActive(false);
+                    grabbedObjects.Add(other.gameObject);
+                    if (other.gameObject.GetComponent<EntityGrabber>())
+                        StartCoroutine(other.gameObject.GetComponent<EntityGrabber>().MoveTowardBomb(transform.position, absorbSpeed));
                 }
             }
 
