@@ -30,7 +30,7 @@ namespace Plates
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController"))
+            if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController") || other.gameObject.layer == LayerMask.NameToLayer("SpiritChain"))
             {
                 if (!playerOrChainWeight)
                     playerOrChainWeight = true;
@@ -41,7 +41,7 @@ namespace Plates
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController"))
+            if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController") || other.gameObject.layer == LayerMask.NameToLayer("SpiritChain"))
             {
                 if (!playerOrChainWeight)
                     CheckDeactivation();
