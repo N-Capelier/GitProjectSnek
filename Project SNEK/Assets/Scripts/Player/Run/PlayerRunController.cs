@@ -11,7 +11,7 @@ namespace Player.Controller
     {
         Vector3 currentNode;
         Vector3 nextNode;
-        Animator animator;
+        
 
         public delegate void PlayerChangingDirection();
         public static event PlayerChangingDirection PlayerChangedDirection;

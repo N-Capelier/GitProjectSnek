@@ -8,19 +8,12 @@ namespace Player.Attack
     /// </summary>
     public class PlayerAttackCollision : MonoBehaviour
     {
-        private void OnTriggerEnter(Collider enemy)
+        public void OnTriggerEnter(Collider enemy)
         {
             if (enemy.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 enemy.GetComponent<EnemyStats>().TakeDamage(PlayerManager.Instance.currentController.playerRunAttack.attackDamages);
             }
-            /*else if(enemy.gameObject.layer == LayerMask.NameToLayer("Wall"))
-            {
-                if(enemy.GetComponent<WallBehaviour>().isDestroyable == true)
-                {
-                    enemy.GetComponent<WallBehaviour>().GetDestroyed();
-                }
-            }*/
         }
     }
 }

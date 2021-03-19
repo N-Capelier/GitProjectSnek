@@ -44,6 +44,7 @@ namespace Player.Controller
         public Vector3 respawnNode;
 
         public GameObject objectRenderer;
+        [HideInInspector] public Animator animator;
 
         public virtual void Awake()
         {
