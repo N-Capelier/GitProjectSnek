@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Player.Controller;
+﻿using UnityEngine;
+using Player;
 
 namespace Enemy
 {
+    /// <summary>
+    /// Arthur
+    /// </summary>
     public class EnemyStats : MonoBehaviour
     {
         [HideInInspector] public Clock attackClock;
@@ -16,13 +17,14 @@ namespace Enemy
         [Space]
         [SerializeField] [Range(0, 10)] float maxHp = 1;
         [HideInInspector] public float currentHp;
+        [SerializeField] GameObject deathFx;
 
         [Space]
         [HideInInspector] public Rigidbody rb = null;
         [Range(0, 5)] public int moveSpeed = 1;
 
-        [Space]
-        [SerializeField] [Range(0, 5)] int spiritLoot = 1;
+        //[Space]
+        //[SerializeField] [Range(0, 5)] int spiritLoot = 1;
 
         private void Awake()
         {
@@ -68,7 +70,7 @@ namespace Enemy
 
         public void Death()
         {
-            //play Death Anim
+            Instantiate(deathFx, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
 
@@ -78,6 +80,15 @@ namespace Enemy
             attackClock.ClockEnded -= onTimerAttackEnd;
             movementClock.ClockEnded -= onTimerMovementEnd;
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController"))
+            {
+                PlayerManager.Instance.currentController.Death();
+            }
+        }
+
     }    
 }
 

@@ -1,8 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using GameManagement;
-using System;
+using Player.Controller;
 
 namespace Player.Attack
 {
@@ -12,16 +11,15 @@ namespace Player.Attack
     public class PlayerRunAttack : MonoBehaviour
     {
         [SerializeField] [Range(0f, 100f)] float attackCooldown = 1f;
-        [SerializeField] [Range(0f, 1f)] float comboCooldown = 0.05f;
         [SerializeField] [Range(0, 100)] public float attackDamages = 10; // A REFERENCER
-
-        [HideInInspector] int combo = 3; // A REFERENCER
-        [HideInInspector] int comboMeter = 1;
-        [HideInInspector] float rangeBonus = 1.40f;// A REFERENCER
-        [HideInInspector] float rangeBonusOffSet = 1.2f;
+        [HideInInspector] float rangeBonus = 1f;// A REFERENCER
+        [HideInInspector] float rangeBonusOffSet = 1f;// A REFERENCER
         bool canAttack = true;
+        [SerializeField] [Range(0f, 1f)] float moveSpeedDuringAttack = 0.2f;
         Clock cooldownTimer;
         public GameObject attackCollision;
+        [SerializeField] GameObject attackFx;
+        [SerializeField] float fxOffSet = 0.15f;
 
         private void Start()
         {
@@ -29,78 +27,133 @@ namespace Player.Attack
             cooldownTimer = new Clock();
             InputHandler.InputReceived += HandleInput;
             cooldownTimer.ClockEnded += OnCooldownEnded;
+            PlayerController.PlayerDead += OnDeath;
+            PlayerRunController.PlayerChangedDirection += OnChangeDirection;
         }
 
         private void OnDestroy()
         {
             cooldownTimer.ClockEnded -= OnCooldownEnded;
             InputHandler.InputReceived -= HandleInput;
+            PlayerController.PlayerDead -= OnDeath;
+            PlayerRunController.PlayerChangedDirection -= OnChangeDirection;
         }
+
+        Coroutine attackCoroutine;
 
         void HandleInput(InputType inputType)
         {
-            if (inputType == InputType.Tap && canAttack && comboMeter > 0)
-                StartCoroutine(Attack());
+            if (inputType == InputType.Tap && canAttack)
+                attackCoroutine = StartCoroutine(Attack());
         }
+
+        GameObject slashFx, attack;
+
         private IEnumerator Attack()
         {
-
-            PlayerManager.Instance.currentController.canMove = false;
-            if (combo > 0)
-                cooldownTimer.SetTime(attackCooldown);
-            else if (combo <= 0)
-            {
-                canAttack = false;
-                cooldownTimer.SetTime(comboCooldown);
-            }
+            //PlayerManager.Instance.currentController.canMove = false;
+            PlayerManager.Instance.currentController.attackMoveSpeedModifier = moveSpeedDuringAttack;
+            //PlayerManager.Instance.currentController.playerRunSpirits.UpdateSpiritsVelocity();
+            PlayerManager.Instance.currentController.rb.velocity = PlayerManager.Instance.currentController.rb.velocity * PlayerManager.Instance.currentController.attackMoveSpeedModifier;
+            canAttack = false;
             //attack
-            GameObject attack = Instantiate(attackCollision, transform.position, Quaternion.identity);
-            //Play Attack animation
 
-            if (comboMeter > 0)
+            //Faire un switch à l'instantiation
+            PlayerManager.Instance.currentController.objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_attack");
+            yield return new WaitForSeconds(0.04f);
+            slashFx = Instantiate(attackFx, gameObject.transform.GetChild(0).gameObject.transform.position, Quaternion.identity);
+            slashFx.gameObject.transform.localScale = new Vector3(rangeBonus + 0.2f, 1, rangeBonus + 0.2f);
+            switch (PlayerManager.Instance.currentController.currentDirection)
             {
-                switch (PlayerManager.Instance.currentController.currentDirection)
-                {
-                    // Ajouter un * par rapport à la range
-                    case Controller.PlayerDirection.Up:
-                        attack.transform.localScale = new Vector3(3 * rangeBonus, 1, 2 * rangeBonus);
-                        attack.transform.position = transform.position + new Vector3(0, 0, 0.5f * rangeBonus * rangeBonusOffSet);
-                        //attack.GetComponent<BoxCollider>().size = new Vector3(3 * rangeBonus, 1, 2 * rangeBonus);
-                        //attack.GetComponent<BoxCollider>().center = new Vector3(0, 0, 0.5f);
-                        break;
-                    case Controller.PlayerDirection.Down:
-                        attack.transform.localScale = new Vector3(3 * rangeBonus, 1, 2 * rangeBonus);
-                        attack.transform.position = transform.position + new Vector3(0, 0, -0.5f * rangeBonus * rangeBonusOffSet);
-                        //attack.GetComponent<BoxCollider>().size = new Vector3(3 * rangeBonus, 1, 2 * rangeBonus);
-                        //attack.GetComponent<BoxCollider>().center = new Vector3(0, 0, -0.5f);
-                        break;
-                    case Controller.PlayerDirection.Left:
-                        attack.transform.localScale = new Vector3(2 * rangeBonus, 1, 3 * rangeBonus);
-                        attack.transform.position = transform.position + new Vector3(-0.5f * rangeBonus * rangeBonusOffSet, 0, 0);
-                        //attack.GetComponent<BoxCollider>().size = new Vector3(2 * rangeBonus, 1, 3 * rangeBonus);
-                        //attack.GetComponent<BoxCollider>().center = new Vector3(-0.5f, 0, 0);
-                        break;
-                    case Controller.PlayerDirection.Right:
-                        attack.transform.localScale = new Vector3(2 * rangeBonus, 1, 3 * rangeBonus);
-                        attack.transform.position = transform.position + new Vector3(0.5f * rangeBonus * rangeBonusOffSet, 0, 0);
-                        //attack.GetComponent<BoxCollider>().size = new Vector3(2 * rangeBonus, 1, 3 * rangeBonus);
-                        //attack.GetComponent<BoxCollider>().center = new Vector3(0.5f, 0, 0);
-                        break;
-                }
-
-                comboMeter -= 1;
-                Debug.Log("Combo equal " + comboMeter);
-
+                case PlayerDirection.Up:
+                    slashFx.transform.Rotate(new Vector3(90, 0, 0));
+                    slashFx.transform.position += new Vector3(0, 0, -fxOffSet);
+                    break;
+                case PlayerDirection.Down:
+                    slashFx.transform.Rotate(new Vector3(90, 0, 180));
+                    slashFx.transform.position += new Vector3(0, 0, fxOffSet);
+                    break;
+                case PlayerDirection.Left:
+                    slashFx.transform.Rotate(new Vector3(90, 0, 90));
+                    slashFx.transform.position += new Vector3(fxOffSet, 0, 0);
+                    break;
+                case PlayerDirection.Right:
+                    slashFx.transform.Rotate(new Vector3(90, 0, 270));
+                    slashFx.transform.position += new Vector3(-fxOffSet, 0, 0);
+                    break;
+            }
+            yield return new WaitForSeconds(0.1f);
+            attack = Instantiate(attackCollision, transform.position, Quaternion.identity);
+            switch (PlayerManager.Instance.currentController.currentDirection)
+            {
+                // Ajouter un * par rapport à la range
+                case Controller.PlayerDirection.Up:
+                    attack.transform.localScale = new Vector3(2.9f * rangeBonus, 1, 2 * rangeBonus);
+                    attack.transform.position = transform.position + new Vector3(0, 0, 0.5f * rangeBonus * rangeBonusOffSet);
+                    //attack.GetComponent<BoxCollider>().size = new Vector3(3 * rangeBonus, 1, 2 * rangeBonus);
+                    //attack.GetComponent<BoxCollider>().center = new Vector3(0, 0, 0.5f);
+                    break;
+                case Controller.PlayerDirection.Down:
+                    attack.transform.localScale = new Vector3(2.9f * rangeBonus, 1, 2 * rangeBonus);
+                    attack.transform.position = transform.position + new Vector3(0, 0, -0.5f * rangeBonus * rangeBonusOffSet);
+                    //attack.GetComponent<BoxCollider>().size = new Vector3(3 * rangeBonus, 1, 2 * rangeBonus);
+                    //attack.GetComponent<BoxCollider>().center = new Vector3(0, 0, -0.5f);
+                    break;
+                case Controller.PlayerDirection.Left:
+                    attack.transform.localScale = new Vector3(2 * rangeBonus, 1, 2.9f * rangeBonus);
+                    attack.transform.position = transform.position + new Vector3(-0.5f * rangeBonus * rangeBonusOffSet, 0, 0);
+                    //attack.GetComponent<BoxCollider>().size = new Vector3(2 * rangeBonus, 1, 3 * rangeBonus);
+                    //attack.GetComponent<BoxCollider>().center = new Vector3(-0.5f, 0, 0);
+                    break;
+                case Controller.PlayerDirection.Right:
+                    attack.transform.localScale = new Vector3(2 * rangeBonus, 1, 2.9f * rangeBonus);
+                    attack.transform.position = transform.position + new Vector3(0.5f * rangeBonus * rangeBonusOffSet, 0, 0);
+                    //attack.GetComponent<BoxCollider>().size = new Vector3(2 * rangeBonus, 1, 3 * rangeBonus);
+                    //attack.GetComponent<BoxCollider>().center = new Vector3(0.5f, 0, 0);
+                    break;
             }
             yield return new WaitForSeconds(0.05f);
             Destroy(attack);
-            yield return new WaitForSeconds(0.4f);
-            comboMeter = combo;
-            PlayerManager.Instance.currentController.canMove = true;
+            yield return new WaitForSeconds(attackCooldown * 0.4f);
+            //PlayerManager.Instance.currentController.canMove = true;
+            PlayerManager.Instance.currentController.attackMoveSpeedModifier = 1f;
+            //PlayerManager.Instance.currentController.playerRunSpirits.UpdateSpiritsVelocity();
+            PlayerManager.Instance.currentController.rb.velocity = PlayerManager.Instance.currentController.rb.velocity * PlayerManager.Instance.currentController.attackMoveSpeedModifier;
+            Destroy(slashFx);
+
+            yield return new WaitForSeconds(attackCooldown * 0.6f);
+            canAttack = true;
         }
         void OnCooldownEnded()
         {
             canAttack = true;
+        }
+
+        void OnChangeDirection()
+        {
+            if (attackCoroutine == null)
+                return;
+
+            StopCoroutine(attackCoroutine);
+
+            if (slashFx != null)
+                Destroy(slashFx);
+
+            if (attack != null)
+                Destroy(attack);
+
+            PlayerManager.Instance.currentController.attackMoveSpeedModifier = 1f;
+            //PlayerManager.Instance.currentController.playerRunSpirits.UpdateSpiritsVelocity();
+            PlayerManager.Instance.currentController.rb.velocity = PlayerManager.Instance.currentController.rb.velocity * PlayerManager.Instance.currentController.attackMoveSpeedModifier;
+
+            canAttack = true;
+        }
+
+        void OnDeath()
+        {
+            canAttack = true;
+            PlayerManager.Instance.currentController.attackMoveSpeedModifier = 1f;
+            //PlayerManager.Instance.currentController.playerRunSpirits.UpdateSpiritsVelocity();
         }
     }
 }

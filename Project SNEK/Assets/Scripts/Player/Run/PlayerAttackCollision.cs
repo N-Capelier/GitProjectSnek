@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Enemy;
 
 namespace Player.Attack
@@ -10,7 +8,7 @@ namespace Player.Attack
     /// </summary>
     public class PlayerAttackCollision : MonoBehaviour
     {
-        private void OnTriggerEnter(Collider enemy)
+        public void OnTriggerEnter(Collider enemy)
         {
             if (enemy.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {

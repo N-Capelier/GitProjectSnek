@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Map
 {
@@ -24,7 +22,7 @@ namespace Map
 
         private void Awake()
         {
-            CreateSingleton(true);
+            //CreateSingleton(true);
         }
 
         private void Start()

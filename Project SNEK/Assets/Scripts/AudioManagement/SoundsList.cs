@@ -1,21 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
 
 namespace AudioManagement
 {
-
+    /// <summary>
+    /// William
+    /// </summary>
+    [CreateAssetMenu(fileName = "SoundList", menuName = "SoundList", order = 50)]   
     public class SoundsList : ScriptableObject
     {
-
         public Sound[] sounds;
-
     }
-
-
-
-
 }
-
-

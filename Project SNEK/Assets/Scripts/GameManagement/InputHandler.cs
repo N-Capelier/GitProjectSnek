@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Player.Controller;
-using System;
+﻿using UnityEngine;
 
 namespace GameManagement
 {
@@ -13,7 +9,8 @@ namespace GameManagement
         SwipeUp,
         SwipeRight,
         SwipeDown,
-        SwipeLeft
+        SwipeLeft,
+        Hold
     }
 
     /// <summary>
@@ -21,32 +18,44 @@ namespace GameManagement
     /// </summary>
     public class InputHandler : MonoBehaviour
     {
-        public delegate void InputReveiver(InputType inputType);
-        public static event InputReveiver InputReceived;
+        public delegate void InputReceiver(InputType inputType);
+        public static event InputReceiver InputReceived;
 
         [SerializeField] [Range(0, 500)] float deadzone = 100f;
         [SerializeField] [Range(0, 1)] float tapTimerDuration = 0.1f;
+        [SerializeField] [Range(0f, 5f)] float holdTimerDuration = 2f;
         float sqrDeadzone;
 
         Vector2 startPos;
         Vector2 currentPos;
 
         Clock tapTimer;
+        Clock holdTimer;
+
+        bool swiped = false;
+        bool holding = false;
+        bool holded = false;
 
         private void Start()
         {
             sqrDeadzone = Mathf.Pow(deadzone, 2);
             tapTimer = new Clock();
+            holdTimer = new Clock();
             tapTimer.ClockEnded += OnTapTimerEnded;
+            holdTimer.ClockEnded += OnHoldTimerEnded;
         }
 
         private void Update()
         {
-            HandleTap();
-            HandleKeyboard();
+#if UNITY_STANDALONE || UNITY_EDITOR
+            HandleStandaloneMouseInput();
+            HandleStandaloneKeyboardInput();
+#elif UNITY_ANDROID || UNITY_IOS
+            HandleMobileTouchInput();
+#endif
         }
 
-        private void HandleKeyboard()
+        private void HandleStandaloneKeyboardInput()
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
                 InputReceived?.Invoke(InputType.SwipeUp);
@@ -56,22 +65,39 @@ namespace GameManagement
                 InputReceived?.Invoke(InputType.SwipeDown);
             if (Input.GetKeyDown(KeyCode.LeftArrow))
                 InputReceived?.Invoke(InputType.SwipeLeft);
+            if (Input.GetKeyDown(KeyCode.Space))
+                InputReceived?.Invoke(InputType.Tap);
+            if (Input.GetKeyDown(KeyCode.LeftAlt))
+                InputReceived?.Invoke(InputType.Hold);
         }
 
-        void HandleTap()
+        void HandleStandaloneMouseInput()
         {
             if (Input.GetMouseButtonDown(0)/* && (Input.touches.Length != 0 && Input.touches[0].phase == TouchPhase.Began)*/)
             {
                 //tapTimer.StopWithoutEvent();
                 startPos = Input.mousePosition; // startPos = Input.touches[0].position - startPos;
+                holding = true;
+                holdTimer.SetTime(holdTimerDuration);
                 tapTimer.SetTime(tapTimerDuration);
             }
             else if (Input.GetMouseButtonUp(0)/* || Input.touches[0].phase == TouchPhase.Ended || Input.touches[0].phase == TouchPhase.Canceled*/)
             {
+                holding = false;
+                if(holded)
+                {
+                    holded = false;
+                    InputReceived?.Invoke(InputType.Hold);
+                }
+                else if (currentPos.sqrMagnitude < sqrDeadzone)
+                {
+                    InputReceived?.Invoke(InputType.Tap);
+                }
                 startPos = currentPos = Vector2.zero;
+
             }
 
-            if(startPos != Vector2.zero)
+            if (startPos != Vector2.zero)
             {
                 if (Input.GetMouseButton(0))
                     currentPos = (Vector2)Input.mousePosition - startPos;
@@ -97,15 +123,97 @@ namespace GameManagement
                     else
                         InputReceived?.Invoke(InputType.SwipeUp);
                 }
+                swiped = true;
                 startPos = currentPos = Vector2.zero;
+            }
+        }
+
+        void HandleMobileTouchInput()
+        {
+            if(Input.touchCount > 0)
+            {
+                Touch _touch = Input.GetTouch(0);
+                if(_touch.phase == TouchPhase.Began)
+                {
+                    startPos = _touch.position;
+                    holding = true;
+                    tapTimer.SetTime(tapTimerDuration);
+                    holdTimer.SetTime(holdTimerDuration);
+                }
+                else if(_touch.phase == TouchPhase.Ended || _touch.phase == TouchPhase.Canceled)
+                {
+                    holding = false;
+                    if(holded)
+                    {
+                        holded = false;
+                        InputReceived?.Invoke(InputType.Hold);
+                    }
+                    else if(currentPos.sqrMagnitude < sqrDeadzone)
+                    {
+                        InputReceived?.Invoke(InputType.Tap);
+                    }
+                    startPos = currentPos = Vector2.zero;
+                }
+
+                if (startPos != Vector2.zero)
+                {
+                    if(_touch.phase == TouchPhase.Moved)
+                        currentPos = _touch.position - startPos;
+                }
+
+                if (currentPos.sqrMagnitude > sqrDeadzone)
+                {
+                    float x = currentPos.x;
+                    float y = currentPos.y;
+                    if (Mathf.Abs(x) > Mathf.Abs(y))
+                    {
+                        if (x < 0)
+                            InputReceived?.Invoke(InputType.SwipeLeft);
+                        else
+                            InputReceived?.Invoke(InputType.SwipeRight);
+                    }
+                    else
+                    {
+                        if (y < 0)
+                            InputReceived?.Invoke(InputType.SwipeDown);
+                        else
+                            InputReceived?.Invoke(InputType.SwipeUp);
+                    }
+                    swiped = true;
+                    startPos = currentPos = Vector2.zero;
+                }
             }
         }
 
         void OnTapTimerEnded()
         {
-            if(!Input.GetMouseButton(0))
+#if UNITY_EDITOR || UNITY_STANDALONE
+            if(!Input.GetMouseButton(0) && !swiped)
             {
                 InputReceived?.Invoke(InputType.Tap);
+            }
+            else
+            {
+                swiped = false;
+            }
+#elif UNITY_ANDROID || UNITY_IOS
+            if(Input.touchCount <= 0  && !swiped)
+            {
+                InputReceived?.Invoke(InputType.Tap);
+            }
+            else
+            {
+                swiped = false;
+            }
+#endif
+        }
+
+        void OnHoldTimerEnded()
+        {
+            if(holding)
+            {
+                holding = false;
+                holded = true;
             }
         }
     }

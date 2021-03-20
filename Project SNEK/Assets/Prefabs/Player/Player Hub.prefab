@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2763056703562795334}
   m_Layer: 8
   m_Name: Player Hub
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,10 +43,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 334fc7d3e09c2b94e8c34d054bc239bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerRunAttack: {fileID: 0}
   startingNode: {x: 3, y: 0, z: 1}
   currentDirection: 0
   nextDirection: 0
   rb: {fileID: 0}
   moveSpeed: 100
   baseHP: 4
+  canMove: 1
   checkPoint: {fileID: 0}
+  objectRenderer: {fileID: 0}

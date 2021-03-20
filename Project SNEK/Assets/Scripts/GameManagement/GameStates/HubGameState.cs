@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Player;
 using Player.Controller;
-using UnityEngine.SceneManagement;
 
 namespace GameManagement.GameStates
 {

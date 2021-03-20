@@ -1,36 +1,45 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Enemy;
 
-public class MouchouAnorexieBehaviour : MonoBehaviour
+namespace Enemy
 {
-    public MouchouBaseMovement mBm;
-    EnemyStats stats;
-
-    public GameObject vomito;
-
-
-    // Start is called before the first frame update
-    void Start()
+    /// <summary>
+    /// Arthur
+    /// </summary>
+    public class MouchouAnorexieBehaviour : MonoBehaviour
     {
-        stats = GetComponentInParent<EnemyStats>();
+        public MouchouBaseMovement mBm;
+        EnemyStats stats;
 
-        stats.attackClock.ClockEnded += OnShouldAttack;
+       public GameObject vomito;
+
+
+        // Start is called before the first frame update
+        void Start()
+        {
+            stats = GetComponentInParent<EnemyStats>();
+
+            stats.attackClock.ClockEnded += OnShouldAttack;
+        }
+
+        void OnShouldAttack()
+        {
+            mBm.OnShouldMove();
+            mBm.canMove = false;
+            StartCoroutine(SpitBehaviour());
+        }
+
+        IEnumerator SpitBehaviour()
+        {
+            Instantiate(vomito, mBm.currentNode, Quaternion.identity);
+            yield return new WaitUntil(() => mBm.isMoving == true);
+            mBm.canMove = true;
+        }
+
+        private void OnDestroy()
+        {
+            stats.attackClock.ClockEnded -= OnShouldAttack;
+        }
     }
 
-    void OnShouldAttack()
-    {
-        mBm.canMove = false;
-        StartCoroutine(SpitBehaviour());
-    }
-
-    IEnumerator SpitBehaviour ()
-    {
-        mBm.GetNextNode();
-        mBm.UpdateMovement();
-        Instantiate(vomito, mBm.currentNode, Quaternion.identity);
-        yield return new WaitUntil(() => mBm.isMoving ==  true);
-        mBm.canMove = true;
-    }
 }
