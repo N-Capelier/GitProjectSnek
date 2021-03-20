@@ -19,7 +19,7 @@ namespace Player.Spells
         List<GameObject> grabbedObjects = new List<GameObject>();
         public GameObject explosionBox;
         public Animator animator;
-        public ParticleSystem absorbFx, explosionFx;
+        public ParticleSystem absorbFx, explosionFx, deathFx;
         void Start()
         {
             rb = gameObject.GetComponent<Rigidbody>();
@@ -46,7 +46,7 @@ namespace Player.Spells
                 {
                     grabbedObjects.Add(other.gameObject);
                     if (other.gameObject.GetComponent<EntityGrabber>())
-                        StartCoroutine(other.gameObject.GetComponent<EntityGrabber>().MoveTowardBomb(transform.position, absorbSpeed));
+                        StartCoroutine(other.gameObject.GetComponent<EntityGrabber>().MoveTowardBomb(transform.position, absorbSpeed, deathFx));
                 }
         }
 

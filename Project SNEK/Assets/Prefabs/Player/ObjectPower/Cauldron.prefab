@@ -30,7 +30,7 @@ Transform:
   - {fileID: 8549520996932892213}
   m_Father: {fileID: 3089680345301164923}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 51.1197, y: 0, z: 0}
 --- !u!1 &1836465310651798022
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,9 +393,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3281350c9541bc438bf0dce7e5b8682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  absorbSpeed: 5
+  absorbSpeed: 8
   timeBeforeIgnition: 3
-  timeBeforeStart: 0.7
+  timeBeforeStart: 0.4583
   capCollider: {fileID: 3215019747188708207}
   boxCollider: {fileID: 6854461945692587765}
   igniterCollider: {fileID: 3940018195408423467}
@@ -404,6 +404,7 @@ MonoBehaviour:
   animator: {fileID: 6540516482567489006}
   absorbFx: {fileID: 5488587510395371076}
   explosionFx: {fileID: 3245501578174461599}
+  deathFx: {fileID: 3893877149857393855, guid: 776a358c2e98ba8409c4035d37f35e3f, type: 3}
 --- !u!136 &3215019747188708207
 CapsuleCollider:
   m_ObjectHideFlags: 0
