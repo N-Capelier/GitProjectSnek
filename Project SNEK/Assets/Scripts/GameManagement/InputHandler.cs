@@ -9,7 +9,8 @@ namespace GameManagement
         SwipeUp,
         SwipeRight,
         SwipeDown,
-        SwipeLeft
+        SwipeLeft,
+        Hold
     }
 
     /// <summary>
@@ -22,20 +23,26 @@ namespace GameManagement
 
         [SerializeField] [Range(0, 500)] float deadzone = 100f;
         [SerializeField] [Range(0, 1)] float tapTimerDuration = 0.1f;
+        [SerializeField] [Range(0f, 5f)] float holdTimerDuration = 2f;
         float sqrDeadzone;
 
         Vector2 startPos;
         Vector2 currentPos;
 
         Clock tapTimer;
+        Clock holdTimer;
 
         bool swiped = false;
+        bool holding = false;
+        bool holded = false;
 
         private void Start()
         {
             sqrDeadzone = Mathf.Pow(deadzone, 2);
             tapTimer = new Clock();
+            holdTimer = new Clock();
             tapTimer.ClockEnded += OnTapTimerEnded;
+            holdTimer.ClockEnded += OnHoldTimerEnded;
         }
 
         private void Update()
@@ -60,6 +67,8 @@ namespace GameManagement
                 InputReceived?.Invoke(InputType.SwipeLeft);
             if (Input.GetKeyDown(KeyCode.Space))
                 InputReceived?.Invoke(InputType.Tap);
+            if (Input.GetKeyDown(KeyCode.LeftAlt))
+                InputReceived?.Invoke(InputType.Hold);
         }
 
         void HandleStandaloneMouseInput()
@@ -68,19 +77,27 @@ namespace GameManagement
             {
                 //tapTimer.StopWithoutEvent();
                 startPos = Input.mousePosition; // startPos = Input.touches[0].position - startPos;
+                holding = true;
+                holdTimer.SetTime(holdTimerDuration);
                 tapTimer.SetTime(tapTimerDuration);
             }
             else if (Input.GetMouseButtonUp(0)/* || Input.touches[0].phase == TouchPhase.Ended || Input.touches[0].phase == TouchPhase.Canceled*/)
             {
-                startPos = currentPos = Vector2.zero;
-                if (currentPos.sqrMagnitude > sqrDeadzone)
+                holding = false;
+                if(holded)
+                {
+                    holded = false;
+                    InputReceived?.Invoke(InputType.Hold);
+                }
+                else if (currentPos.sqrMagnitude < sqrDeadzone)
                 {
                     InputReceived?.Invoke(InputType.Tap);
-                    swiped = true;
                 }
+                startPos = currentPos = Vector2.zero;
+
             }
 
-            if(startPos != Vector2.zero)
+            if (startPos != Vector2.zero)
             {
                 if (Input.GetMouseButton(0))
                     currentPos = (Vector2)Input.mousePosition - startPos;
@@ -119,10 +136,22 @@ namespace GameManagement
                 if(_touch.phase == TouchPhase.Began)
                 {
                     startPos = _touch.position;
+                    holding = true;
                     tapTimer.SetTime(tapTimerDuration);
+                    holdTimer.SetTime(holdTimerDuration);
                 }
                 else if(_touch.phase == TouchPhase.Ended || _touch.phase == TouchPhase.Canceled)
                 {
+                    holding = false;
+                    if(holded)
+                    {
+                        holded = false;
+                        InputReceived?.Invoke(InputType.Hold);
+                    }
+                    else if(currentPos.sqrMagnitude < sqrDeadzone)
+                    {
+                        InputReceived?.Invoke(InputType.Tap);
+                    }
                     startPos = currentPos = Vector2.zero;
                 }
 
@@ -177,6 +206,15 @@ namespace GameManagement
                 swiped = false;
             }
 #endif
+        }
+
+        void OnHoldTimerEnded()
+        {
+            if(holding)
+            {
+                holding = false;
+                holded = true;
+            }
         }
     }
 }
