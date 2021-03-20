@@ -12,9 +12,9 @@ namespace Player.Technique
         [SerializeField] [Range(0, 10)] float techniqueCooldown = 4;
 
         Clock techniqueCooldonwTimer;
-        bool canDoTechnique = true;
+        public bool canDoTechnique = true;
 
-        private void Start()
+        public void Start()
         {
             techniqueCooldonwTimer = new Clock();
             techniqueCooldonwTimer.ClockEnded += OnCooldownEnded;
@@ -51,16 +51,16 @@ namespace Player.Technique
             switch (PlayerManager.Instance.currentController.currentDirection)
             {
                 case Controller.PlayerDirection.Left:
-                    TechniqueCast(Controller.PlayerDirection.Left);
+                    LaunchTechnique(Controller.PlayerDirection.Left);
                     break;
                 case Controller.PlayerDirection.Up:
-                    TechniqueCast(Controller.PlayerDirection.Up);
+                    LaunchTechnique(Controller.PlayerDirection.Up);
                     break;
                 case Controller.PlayerDirection.Right:
-                    TechniqueCast(Controller.PlayerDirection.Right);
+                    LaunchTechnique(Controller.PlayerDirection.Right);
                     break;
                 case Controller.PlayerDirection.Down:
-                    TechniqueCast(Controller.PlayerDirection.Down);
+                    LaunchTechnique(Controller.PlayerDirection.Down);
                     break;
             }
         }

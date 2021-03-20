@@ -12,8 +12,8 @@ namespace Player.Attack
     {
         [SerializeField] [Range(0f, 100f)] float attackCooldown = 1f;
         [SerializeField] [Range(0, 100)] public float attackDamages = 10; // A REFERENCER
-        [HideInInspector] float rangeBonus = 1f;// A REFERENCER
-        [HideInInspector] float rangeBonusOffSet = 1f;// A REFERENCER
+        [HideInInspector] public float rangeBonus = 1f;// A REFERENCER
+        [HideInInspector] public float rangeBonusOffSet = 1f;// A REFERENCER
         bool canAttack = true;
         [SerializeField] [Range(0f, 1f)] float moveSpeedDuringAttack = 0.2f;
         Clock cooldownTimer;
