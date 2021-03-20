@@ -37,7 +37,7 @@ namespace Enemy
 
         private void FixedUpdate()
         {
-            if(projectile != null)
+            if (projectile != null)
             {
                 projectile.transform.position = new Vector3(projectile.transform.position.x, projectile.transform.position.y + 0.5f, projectile.transform.position.z);
             }
@@ -60,7 +60,7 @@ namespace Enemy
         }
 
 
-        
+
 
         void TargetCell()
         {
@@ -87,7 +87,7 @@ namespace Enemy
             }
             else if (doublePattern == true)
             {
-                if(patternRotation == 0)
+                if (patternRotation == 0)
                 {
                     for (int x = 0; x < pattern.row.Length; x++)
                     {

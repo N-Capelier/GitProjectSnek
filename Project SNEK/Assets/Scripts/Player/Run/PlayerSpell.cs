@@ -29,7 +29,7 @@ namespace Player.Spells
 
         void LaunchSpellCast(Controller.PlayerDirection spellDirection)
         {
-            if(canAttack)
+            if (canAttack)
             {
                 canAttack = false;
                 spellCooldownTimer.SetTime(spellCooldown);
@@ -48,7 +48,7 @@ namespace Player.Spells
             switch (inputType)
             {
                 case InputType.SwipeUp:
-                    if(PlayerManager.Instance.currentController.currentDirection == Controller.PlayerDirection.Down)
+                    if (PlayerManager.Instance.currentController.currentDirection == Controller.PlayerDirection.Down)
                     {
                         LaunchSpellCast(Controller.PlayerDirection.Down);
                     }

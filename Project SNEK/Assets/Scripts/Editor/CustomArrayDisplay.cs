@@ -36,7 +36,7 @@ public class CustomArrayDisplay : PropertyDrawer
 
             newposition.x = position.x;
             newposition.y += 18f;
-        }       
+        }
     }
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
