@@ -19,9 +19,10 @@ namespace Plates
         private void OnTriggerEnter(Collider other)
         {
             if(other.gameObject.layer == LayerMask.NameToLayer("PlayerController") 
-                && PlayerManager.Instance.currentController.playerRunSpirits.spiritChain.Count >= numSpiritsRequired)
+                && PlayerManager.Instance.currentController.playerRunSpirits.ConsumeSpirits(numSpiritsRequired))
             {
                 CheckActivation();
+                enabled = false;
             } 
         }
 

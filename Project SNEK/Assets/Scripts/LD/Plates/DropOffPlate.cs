@@ -10,7 +10,7 @@ namespace Plates
 	{
 		#region Variables
 		bool hasSpirit;
-		GameObject droppedSpirit;
+		[SerializeField] GameObject droppedSpirit;
 		#endregion
 
 		// Start is called before the first frame update
@@ -21,24 +21,40 @@ namespace Plates
 
         private void OnTriggerEnter(Collider other)
         {
-			if(other.gameObject.layer == LayerMask.NameToLayer("PlayerController") && !hasSpirit)
+			if(other.gameObject.layer == LayerMask.NameToLayer("PlayerController"))
             {
-				CheckActivation();
-				TakeSpirit();
+                if (!hasSpirit)
+                {
+                    if (PlayerManager.Instance.currentController.playerRunSpirits.ConsumeSpirits(1))
+                    {
+						CheckActivation();
+						SetSpirit(true);
+					}
+				}
+                else
+                {
+					CheckDeactivation();
+					SetSpirit(false);
+					PlayerManager.Instance.currentController.playerRunSpirits.AddSpirit();
+				}
             }
 
 		}
 
-        private void TakeSpirit()
+        private void SetSpirit(bool _setHasSpirit)
         {
-			hasSpirit = true;
-			//Spawn and/or move sprit object
+			hasSpirit = _setHasSpirit;
+			droppedSpirit.SetActive(_setHasSpirit);
         }
 
         private void OnDisable()
         {
-			droppedSpirit = null;
-        }
+            if (hasSpirit)
+            {
+				droppedSpirit.SetActive(false);
+				PlayerManager.Instance.currentController.playerRunSpirits.AddSpirit();
+			}
+		}
     }
 }
 
