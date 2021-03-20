@@ -66,7 +66,7 @@ namespace Enemy
 
         public void UpdateMovementDash()
         {
-            rb.velocity = (nextNode - currentNode) * (stats.moveSpeed * 3);
+            rb.velocity = (nextNode - currentNode) * (stats.moveSpeed * 2);
             anim.SetBool("isMoving", true);
             isMoving = true;
         }
