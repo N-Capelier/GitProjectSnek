@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 560053312}
   - component: {fileID: 560053311}
   - component: {fileID: 560053310}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 8327456844958953279}
   - component: {fileID: 8327456844958953265}
   - component: {fileID: 8327456844958953264}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Collision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,6 +151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45a7358bc5698c24da49a3ee7d961679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDestroyable: 0
+  objectRenderer: {fileID: 0}
+  fx: {fileID: 0}
 --- !u!1 &8327456845903756120
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,8 +163,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8327456845903756121}
-  m_Layer: 0
-  m_Name: Rock
+  m_Layer: 10
+  m_Name: Rock1X1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -195,7 +198,7 @@ GameObject:
   - component: {fileID: 8548531146649817554}
   - component: {fileID: 4687579105995251319}
   - component: {fileID: 7415554011420633789}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Render
   m_TagString: Untagged
   m_Icon: {fileID: 0}

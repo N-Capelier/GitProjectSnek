@@ -20,6 +20,14 @@ namespace Player.Spirits
             PlayerRunController.PlayerChangedDirection += OnPlayerChangingDirection;
         }
 
+        //public void UpdateSpiritsVelocity()
+        //{
+        //    foreach(SpiritBehaviour _spirit in spiritChain)
+        //    {
+        //        _spirit.UpdateSpeed();
+        //    }
+        //}
+
         public void ResetSpiritsPositions()
         {
             for (int i = 0; i < spiritChain.Count; i++)
@@ -89,7 +97,6 @@ namespace Player.Spirits
                     break;
                 _index++;
             }
-            print(_index);
             CutChain(spiritChain[_index - _count]);
             return true;
         }
