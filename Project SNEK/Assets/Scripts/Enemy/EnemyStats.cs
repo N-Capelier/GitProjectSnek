@@ -15,7 +15,7 @@ namespace Enemy
         [SerializeField] [Range(0f, 10f)] float movementCooldown = 2f;
 
         [Space]
-        [SerializeField] [Range(0, 10)] float maxHp = 1;
+        [SerializeField] float maxHp = 1;
         [HideInInspector] public float currentHp;
         [SerializeField] GameObject deathFx;
 
@@ -58,6 +58,7 @@ namespace Enemy
 
         public void TakeDamage(float damage)
         {
+            Debug.Log("Took" + damage + "damage");
             currentHp -= damage;
 
             if (currentHp > 0)

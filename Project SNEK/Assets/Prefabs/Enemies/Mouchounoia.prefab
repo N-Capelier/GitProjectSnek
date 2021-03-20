@@ -18,8 +18,6 @@ MonoBehaviour:
   mat:
   - {fileID: 2100000, guid: ffa1b2f5f4593ae4685cf927081bc9f6, type: 2}
   - {fileID: 2100000, guid: 42126e57eb1063243859327b18549b5e, type: 2}
-  mFilter: {fileID: 6306441015311638868}
-  mRender: {fileID: 6306441015311638867}
   mBm: {fileID: 4386486687726719936}
   poof: {fileID: 236643949321061222, guid: 52449fd3c79b58f468eadb0f5922931b, type: 3}
   renderGo: {fileID: 8215773918679859633}
@@ -44,7 +42,7 @@ PrefabInstance:
     - target: {fileID: 8965832297510806387, guid: c668b076263881243b760a4d0e7c5dc1,
         type: 3}
       propertyPath: m_Name
-      value: Mouchou
+      value: Mouchounoia
       objectReference: {fileID: 0}
     - target: {fileID: 8965832297510806387, guid: c668b076263881243b760a4d0e7c5dc1,
         type: 3}
@@ -106,23 +104,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8965832297510806389, guid: c668b076263881243b760a4d0e7c5dc1,
+        type: 3}
+      propertyPath: maxHp
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c668b076263881243b760a4d0e7c5dc1, type: 3}
 --- !u!1 &8215773918679859633 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6480038375194020960, guid: c668b076263881243b760a4d0e7c5dc1,
-    type: 3}
-  m_PrefabInstance: {fileID: 3164326605690752465}
-  m_PrefabAsset: {fileID: 0}
---- !u!33 &6306441015311638868 stripped
-MeshFilter:
-  m_CorrespondingSourceObject: {fileID: 8965832296944462981, guid: c668b076263881243b760a4d0e7c5dc1,
-    type: 3}
-  m_PrefabInstance: {fileID: 3164326605690752465}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &6306441015311638867 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 8965832296944462978, guid: c668b076263881243b760a4d0e7c5dc1,
     type: 3}
   m_PrefabInstance: {fileID: 3164326605690752465}
   m_PrefabAsset: {fileID: 0}
