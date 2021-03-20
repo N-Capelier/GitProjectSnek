@@ -41,7 +41,7 @@ namespace Plates
 			}
         }
 
-		protected virtual void DoOpenWay()
+		private void DoOpenWay()
         {
 			foreach (GameObject blockadeElement in blockadeElements)
 			{
