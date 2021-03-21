@@ -14,12 +14,7 @@ namespace Player.Technique
         GameObject shield;
         BubbleShieldBehaviour shieldBehaviour;
         [SerializeField] float shieldLifetime;
-        bool canDoSkill = true;
 
-        public void Start()
-        {
-            canDoSkill = true;
-        }
         public override IEnumerator TechniqueCast(Controller.PlayerDirection techniqueDirection)
         {
                 PlayerManager.Instance.currentController.animator.Play("Anim_PlayerRun_Shield");
@@ -33,7 +28,7 @@ namespace Player.Technique
                 yield return new WaitForSeconds(shieldLifetime);
                 if (shield != null)
                 {
-                    shieldBehaviour.DestroyShield();
+                    StartCoroutine(shieldBehaviour.DestroyShield());
                 }           
         }
 
