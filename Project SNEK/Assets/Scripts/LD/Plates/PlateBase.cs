@@ -7,7 +7,7 @@ namespace Plates
 	public abstract class PlateBase : MonoBehaviour
 	{
 		#region Variables
-		[SerializeField] protected Opener opener;
+		public Opener opener;
 		#endregion
 		
 		protected void CheckActivation()

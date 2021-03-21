@@ -9,10 +9,10 @@ namespace Plates
         #region Variables
         bool playerOrChainWeight;
         #endregion
-        private void Awake()
-        {
-            opener.GetPlate(this);
-        }
+        //private void Awake()
+        //{
+        //    opener.GetPlate(this);
+        //}
 
         private void Start()
         {

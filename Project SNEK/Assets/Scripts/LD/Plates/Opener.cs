@@ -9,9 +9,10 @@ namespace Plates
 	{
 		#region Variables
 		[SerializeField] GameObject blockadeGroup;
-        public List<GameObject> blockadeElements;
+        [SerializeField] List<GameObject> blockadeElements = new List<GameObject>();
 
-		List<PlateBase> plates = new List<PlateBase>();
+		[SerializeField] GameObject plateGroup;
+		[SerializeField] List<PlateBase> plates = new List<PlateBase>();
 		public int plateActivationCount;
 		int numPlatesToActivate;
 		#endregion
@@ -19,19 +20,26 @@ namespace Plates
 		// Start is called before the first frame update
 		void Start()
 		{
-            //for (int i = 0; i < blockadeGroup.transform.childCount; i++)
-            //{
-            //    blockadeElements.Add(blockadeGroup.transform.GetChild(i).gameObject);
-            //}
+			int i;
+			for (i = 0; i < blockadeGroup.transform.childCount; i++)
+            {
+                blockadeElements.Add(blockadeGroup.transform.GetChild(i).gameObject);
+            }
+
+            for (i = 0; i < plateGroup.transform.childCount; i++)
+            {
+				plates.Add(plateGroup.transform.GetChild(i).gameObject.GetComponent<PlateBase>());
+				plates[i].opener = this;
+            }
 
             plateActivationCount = 0;
 			numPlatesToActivate = plates.Count;
 		}
 
-		public void GetPlate(PlateBase plate)
-		{
-			plates.Add(plate);
-		}
+		//public void GetPlate(PlateBase plate)
+		//{
+		//	plates.Add(plate);
+		//}
 
 		public void CheckOpening()
         {

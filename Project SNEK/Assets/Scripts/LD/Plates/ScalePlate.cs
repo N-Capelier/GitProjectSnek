@@ -11,10 +11,10 @@ namespace Plates
         [SerializeField] int numSpiritsRequired;
         #endregion
        
-        private void Awake()
-        {
-            opener.GetPlate(this);
-        }
+        //private void Awake()
+        //{
+        //    opener.GetPlate(this);
+        //}
 
         private void OnTriggerEnter(Collider other)
         {
