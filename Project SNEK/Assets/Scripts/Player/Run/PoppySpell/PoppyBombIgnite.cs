@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Player.Spells
 {
+    /// <summary>
+    /// Coco
+    /// </summary>
     public class PoppyBombIgnite : MonoBehaviour
     {
         private void OnTriggerEnter(Collider other)

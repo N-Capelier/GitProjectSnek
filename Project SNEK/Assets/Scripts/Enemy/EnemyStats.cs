@@ -58,7 +58,6 @@ namespace Enemy
 
         public void TakeDamage(float damage)
         {
-            Debug.Log("Took" + damage + "damage");
             currentHp -= damage;
 
             if (currentHp > 0)

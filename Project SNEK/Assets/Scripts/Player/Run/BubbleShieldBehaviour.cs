@@ -5,6 +5,9 @@ using Enemy;
 
 namespace Player.Technique
 {
+    /// <summary>
+    /// Coco
+    /// </summary>
     public class BubbleShieldBehaviour : MonoBehaviour
     {
         [SerializeField]float coolDownBtwHit, damage;
