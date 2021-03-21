@@ -9,9 +9,9 @@ namespace Plates
 	{
 		#region Variables
 		[SerializeField] GameObject blockadeGroup;
-		List<GameObject> blockadeElements;
+        public List<GameObject> blockadeElements;
 
-		List<PlateBase> plates;
+		List<PlateBase> plates = new List<PlateBase>();
 		public int plateActivationCount;
 		int numPlatesToActivate;
 		#endregion
@@ -19,12 +19,12 @@ namespace Plates
 		// Start is called before the first frame update
 		void Start()
 		{
-            for (int i = 0; i < blockadeGroup.transform.childCount; i++)
-            {
-				blockadeElements.Add(blockadeGroup.transform.GetChild(i).gameObject);
-			}
+            //for (int i = 0; i < blockadeGroup.transform.childCount; i++)
+            //{
+            //    blockadeElements.Add(blockadeGroup.transform.GetChild(i).gameObject);
+            //}
 
-			plateActivationCount = 0;
+            plateActivationCount = 0;
 			numPlatesToActivate = plates.Count;
 		}
 
@@ -45,7 +45,7 @@ namespace Plates
         {
 			foreach (GameObject blockadeElement in blockadeElements)
 			{
-				blockadeElement.gameObject.SetActive(false);
+				blockadeElement.SetActive(false);
 			}
 
 			foreach (PlateBase plate in plates)
