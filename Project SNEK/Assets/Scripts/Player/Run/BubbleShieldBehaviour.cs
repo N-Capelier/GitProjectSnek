@@ -5,13 +5,16 @@ using Enemy;
 
 namespace Player.Technique
 {
+    /// <summary>
+    /// Coco
+    /// </summary>
     public class BubbleShieldBehaviour : MonoBehaviour
     {
         [SerializeField]float coolDownBtwHit, damage;
         public int count;
         bool canHit = true;
         public BubbleShieldTechnique shieldTechnique;
-        public ParticleSystem shieldFx;
+        public ParticleSystem shieldFx, shieldDeathFx;
 
         private void Start()
         {
@@ -47,6 +50,7 @@ namespace Player.Technique
         public IEnumerator DestroyShield()
         {
             shieldFx.Stop();
+            Instantiate(shieldDeathFx, transform.position, Quaternion.identity);
             yield return new WaitForSeconds(0.2f);
             Destroy(gameObject);
         }
