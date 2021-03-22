@@ -16,7 +16,7 @@ namespace Plates
 		// Start is called before the first frame update
 		void Start()
 		{
-			hasSpirit = false;
+			SetSpirit(false);
 		}
 
         private void OnTriggerEnter(Collider other)
