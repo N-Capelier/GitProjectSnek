@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using Player.Attack;
 using Player.Spirits;
 using Rendering.Run;
+using AudioManagement;
 
 namespace Player.Controller
 {
@@ -84,6 +85,7 @@ namespace Player.Controller
         {
             //play death anim
             objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_death");
+            AudioManager.Instance.PlaySoundEffect("PlayerHit");
             yield return new WaitForSeconds(1.5f);
             PlayerManager.Instance.gameObject.SetActive(false);
             /*AsyncOperation _loadingScene = */SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -101,6 +103,7 @@ namespace Player.Controller
         {
             //play defeat anim
             objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_death");
+            AudioManager.Instance.PlaySoundEffect("PlayerHit");
             yield return new WaitForSeconds(1f);
             GameManagement.GameManager.Instance.gameState.Set(GameManagement.GameState.Hub, "Hub");
             isDead = false;

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Enemy;
+using AudioManagement;
 
 namespace Player.Attack
 {
@@ -13,7 +14,8 @@ namespace Player.Attack
             if (enemy.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 enemy.GetComponent<EnemyStats>().TakeDamage(PlayerManager.Instance.currentController.playerRunAttack.attackDamages);
-            }
+                AudioManager.Instance.PlaySoundEffect("PlayerSwordImpact");
+            }            
         }
     }
 }

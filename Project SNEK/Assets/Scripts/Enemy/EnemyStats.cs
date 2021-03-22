@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Player;
+using AudioManagement;
 
 namespace Enemy
 {

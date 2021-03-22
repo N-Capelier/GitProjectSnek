@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Player;
+using AudioManagement;
 
 namespace Wall 
 {
@@ -31,6 +32,7 @@ namespace Wall
             if(fx != null)
             {
                 fx.Play();
+                AudioManager.Instance.PlaySoundEffect("LevelDestroyDefault");
                 yield return new WaitForSeconds(fx.main.duration);
             }
             Destroy(gameObject);
