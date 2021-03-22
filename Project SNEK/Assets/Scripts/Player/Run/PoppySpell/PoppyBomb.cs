@@ -20,6 +20,7 @@ namespace Player.Spells
         public GameObject explosionBox;
         public Animator animator;
         public ParticleSystem absorbFx, explosionFx, deathFx;
+
         void Start()
         {
             rb = gameObject.GetComponent<Rigidbody>();
@@ -35,8 +36,6 @@ namespace Player.Spells
                 {
                     StartCoroutine(Absorb(timeBeforeStart + 0.245f, true));
                 }
-
-
         }
 
         private void OnTriggerStay(Collider other)

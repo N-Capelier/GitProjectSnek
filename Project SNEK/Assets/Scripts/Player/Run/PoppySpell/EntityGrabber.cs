@@ -14,12 +14,15 @@ namespace Player.Spells
         {
             float progress = 0;
             float offset = 1.3f;
-            gameObject.GetComponent<Collider>().enabled = false;
+            if(GetComponent<Collider>())
+            {
+                gameObject.GetComponent<Collider>().enabled = false;
+            }
             while (Vector3.Distance(transform.position, bombPosition + Vector3.up * offset) >= 0.2f)
             {
                 Vector3 direction = (bombPosition + Vector3.up * offset) - transform.position;
-                progress += Time.deltaTime;
-                transform.position += direction * Time.fixedDeltaTime * absorbSpeed * progress;
+                progress += Time.fixedDeltaTime;
+                transform.position += direction * absorbSpeed * progress;
                 transform.Rotate(0, 30, 0);
                 yield return new WaitForFixedUpdate();
             }
