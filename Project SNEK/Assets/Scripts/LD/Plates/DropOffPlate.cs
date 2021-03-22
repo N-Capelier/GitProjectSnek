@@ -54,7 +54,7 @@ namespace Plates
 
 		public override IEnumerator DisablePlate()
         {
-			yield return new WaitForSeconds(0.5f);
+			yield return new WaitForSeconds(1f);
 			if (hasSpirit)
 			{
 				droppedSpirit.SetActive(false);
