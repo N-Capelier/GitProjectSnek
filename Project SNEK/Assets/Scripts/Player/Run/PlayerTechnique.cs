@@ -12,9 +12,9 @@ namespace Player.Technique
         [SerializeField] [Range(0, 10)] float techniqueCooldown = 4;
 
         Clock techniqueCooldonwTimer;
-        bool canDoTechnique = true;
+        public bool canDoTechnique = true;
 
-        private void Start()
+        public void Start()
         {
             techniqueCooldonwTimer = new Clock();
             techniqueCooldonwTimer.ClockEnded += OnCooldownEnded;
