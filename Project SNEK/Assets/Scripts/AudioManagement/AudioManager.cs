@@ -49,6 +49,11 @@ namespace AudioManagement
 
         }
 
+        private void Update()
+        {
+            UdpdateList();
+        }
+
 
         //Fontion pour jouer un son simplement.
         public void PlaySoundEffect(string soundName)
@@ -114,7 +119,17 @@ namespace AudioManagement
 
         }
 
-
+        //On update la list en retirant tous les sons qui ne se jouent plus.
+        private void UdpdateList()
+        {
+            for (int i = 0; i < sounds.Count; i++)
+            {
+                if (sounds[i].source.isPlaying == false)
+                {
+                    sounds.RemoveAt(i);
+                }
+            }
+        }
 
     }
 
