@@ -20,6 +20,12 @@ namespace Plates
         {
 			opener.plateActivationCount--;
         }
+
+		public virtual IEnumerator DisablePlate() 
+		{
+			enabled = false;
+			yield break;
+		}
 	}
 }
 
