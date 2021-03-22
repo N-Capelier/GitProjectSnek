@@ -33,7 +33,7 @@ namespace Player.Technique
             Destroy(attack);
             yield return new WaitForSeconds(0.01f);
             Attack(0.75f);
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.5f);
             Destroy(attack);
             PlayerManager.Instance.currentController.attackMoveSpeedModifier = 1f;
             PlayerManager.Instance.currentController.rb.velocity = PlayerManager.Instance.currentController.rb.velocity * PlayerManager.Instance.currentController.attackMoveSpeedModifier;
