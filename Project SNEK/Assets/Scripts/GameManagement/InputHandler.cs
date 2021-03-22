@@ -124,7 +124,6 @@ namespace GameManagement
                         InputReceived?.Invoke(InputType.SwipeUp);
                 }
                 swiped = true;
-                startPos = currentPos = Vector2.zero;
             }
         }
 
@@ -180,7 +179,6 @@ namespace GameManagement
                             InputReceived?.Invoke(InputType.SwipeUp);
                     }
                     swiped = true;
-                    startPos = currentPos = Vector2.zero;
                 }
             }
         }

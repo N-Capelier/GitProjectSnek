@@ -46,7 +46,7 @@ namespace Player.Technique
             PlayerManager.Instance.currentController.objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_attack");
             attack = Instantiate(comboOne, transform.position, Quaternion.identity);
             attack.GetComponent<ComboCollision>().damageModifier = modifier;
-            print("Attack " + modifier);
+
             switch (PlayerManager.Instance.currentController.currentDirection)
             {
                 // Ajouter un * par rapport à la range
