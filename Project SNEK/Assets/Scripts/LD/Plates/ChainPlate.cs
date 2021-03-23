@@ -23,7 +23,7 @@ namespace Plates
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.gameObject.layer == LayerMask.NameToLayer("PlayerController") || other.gameObject.layer == LayerMask.NameToLayer("SpiritChain"))
+            if(other.gameObject.layer == LayerMask.NameToLayer("PlayerController") || other.gameObject.layer == LayerMask.NameToLayer("Spirit"))
             {
                 if (!hasWeight)
                 {
@@ -38,7 +38,7 @@ namespace Plates
 
         //private void OnTriggerStay(Collider other)
         //{
-        //    if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController") || other.gameObject.layer == LayerMask.NameToLayer("SpiritChain"))
+        //    if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController") || other.gameObject.layer == LayerMask.NameToLayer("Spirit"))
         //    {
         //        if (!playerOrChainWeight)
         //            playerOrChainWeight = true;
@@ -47,7 +47,7 @@ namespace Plates
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController") || other.gameObject.layer == LayerMask.NameToLayer("SpiritChain"))
+            if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController") || other.gameObject.layer == LayerMask.NameToLayer("Spirit"))
             {
                 playerOrChainWeight--;
 
