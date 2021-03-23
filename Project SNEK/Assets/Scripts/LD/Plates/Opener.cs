@@ -58,7 +58,7 @@ namespace Plates
 
 			foreach (PlateBase plate in plates)
             {
-				plate.enabled = false;
+				StartCoroutine(plate.DisablePlate());
             }
 		}
     }

@@ -7,7 +7,8 @@ namespace Plates
 	public class ChainPlate : PlateBase
 	{
         #region Variables
-        bool playerOrChainWeight;
+        int playerOrChainWeight;
+        bool hasWeight;
         #endregion
         //private void Awake()
         //{
@@ -16,35 +17,46 @@ namespace Plates
 
         private void Start()
         {
-            playerOrChainWeight = false;
+            playerOrChainWeight = 0;
+            hasWeight = false;
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.gameObject.layer == LayerMask.NameToLayer("PlayerController"))
+            if(other.gameObject.layer == LayerMask.NameToLayer("PlayerController") || other.gameObject.layer == LayerMask.NameToLayer("SpiritChain"))
             {
-                CheckActivation();
-                playerOrChainWeight = true;
+                if (!hasWeight)
+                {
+                    print("weight >= 1");
+                    CheckActivation();
+                    hasWeight = true;
+                }
+                
+                playerOrChainWeight++;
             }
         }
 
-        private void OnTriggerStay(Collider other)
-        {
-            if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController") || other.gameObject.layer == LayerMask.NameToLayer("SpiritChain"))
-            {
-                if (!playerOrChainWeight)
-                    playerOrChainWeight = true;
-            }
-            else
-                playerOrChainWeight = false;
-        }
+        //private void OnTriggerStay(Collider other)
+        //{
+        //    if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController") || other.gameObject.layer == LayerMask.NameToLayer("SpiritChain"))
+        //    {
+        //        if (!playerOrChainWeight)
+        //            playerOrChainWeight = true;
+        //    }
+        //}
 
         private void OnTriggerExit(Collider other)
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController") || other.gameObject.layer == LayerMask.NameToLayer("SpiritChain"))
             {
-                if (!playerOrChainWeight)
+                playerOrChainWeight--;
+
+                if(playerOrChainWeight == 0)
+                {
+                    print("weight = 0");
                     CheckDeactivation();
+                    hasWeight = false;
+                }
             }
         }
     }
