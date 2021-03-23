@@ -46,15 +46,19 @@ namespace Player.Spirits
             {
                 case PlayerDirection.Up:
                     rb.velocity = Vector3.forward * _speedModifier;
+                    objectRenderer.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
                     break;
                 case PlayerDirection.Right:
                     rb.velocity = Vector3.right * _speedModifier;
+                    objectRenderer.transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
                     break;
                 case PlayerDirection.Down:
                     rb.velocity = Vector3.back * _speedModifier;
+                    objectRenderer.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
                     break;
                 case PlayerDirection.Left:
                     rb.velocity = Vector3.left * _speedModifier;
+                    objectRenderer.transform.rotation = Quaternion.Euler(new Vector3(0, 270, 0));
                     break;
                 default:
                     break;

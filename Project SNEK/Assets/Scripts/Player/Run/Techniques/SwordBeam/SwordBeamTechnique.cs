@@ -18,8 +18,8 @@ namespace Player.Technique
 
             
                 PlayerManager.Instance.currentController.spellMoveSpeedModifier = 0.01f;
-                yield return new WaitForSeconds(0.5f);
-                PlayerManager.Instance.currentController.spellMoveSpeedModifier = 1f;
+                PlayerManager.Instance.currentController.animator.Play("Anim_PlayerRun_SwordBeam");
+                yield return new WaitForSeconds(0.5f); // Timing partie 1
                 beam = Instantiate(beamPrefab, transform.position, Quaternion.identity);
                 switch (techniqueDirection)
                 {
@@ -36,7 +36,9 @@ namespace Player.Technique
                         beam.GetComponent<Rigidbody>().velocity = Vector3.left* beamSpeed;
                         break;
                 }
-                yield return new WaitForSeconds(beamLifeTime);
+            yield return new WaitForSeconds(0.416f); // Timing partie 2
+            PlayerManager.Instance.currentController.spellMoveSpeedModifier = 1f;
+            yield return new WaitForSeconds(beamLifeTime - 0.416f);
                 if(beam != null)
                 {
                     beam.GetComponent<Rigidbody>().velocity = Vector3.zero;
