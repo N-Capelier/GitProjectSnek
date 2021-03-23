@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Rendering.Hub;
+using Hub.Interaction;
 
 namespace Player.Controller
 {
@@ -12,17 +13,23 @@ namespace Player.Controller
     public class PlayerHubController : PlayerController
     {
 
-        [SerializeField] NavMeshAgent agent;
-        [SerializeField] Transform target;
+        public NavMeshAgent agent;
+        public Transform target;
+
+        [HideInInspector] public byte actions = 0;
 
         public override void Awake()
         {
             target = HubCamTargetController.Instance.transform;
+            InteractionManager.Instance.playerController = this;
         }
 
         private void FixedUpdate()
         {
-            agent.destination = target.position;
+            if(actions == 0)
+            {
+                agent.destination = target.position;
+            }
         }
 
     }
