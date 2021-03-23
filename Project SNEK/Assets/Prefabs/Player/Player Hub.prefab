@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3710864810228045367}
   - component: {fileID: 3598193072901763070}
   - component: {fileID: 7618534061290654003}
+  - component: {fileID: 4459275178618179776}
   m_Layer: 8
   m_Name: Mesh
   m_TagString: Untagged
@@ -93,6 +94,28 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!195 &4459275178618179776
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5349950740522812273}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &6704500026171749987
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,6 +176,8 @@ MonoBehaviour:
   respawnNode: {x: 0, y: 0, z: 0}
   objectRenderer: {fileID: 0}
   animator: {fileID: 0}
+  agent: {fileID: 4459275178618179776}
+  target: {fileID: 0}
 --- !u!54 &3361387238276527668
 Rigidbody:
   m_ObjectHideFlags: 0

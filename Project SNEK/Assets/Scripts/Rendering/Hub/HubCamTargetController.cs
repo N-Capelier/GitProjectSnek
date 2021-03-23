@@ -1,97 +1,76 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Rendering.Hub
 {
-    public class HubCamTargetController : MonoBehaviour
+    /// <summary>
+    /// Nico
+    /// </summary>
+    public class HubCamTargetController : Singleton<HubCamTargetController>
     {
-        [HideInInspector] public int actions = 0;
+        [SerializeField] [Range(0f, 500f)] float cameraSpeed = 20f;
 
-        [SerializeField] Camera cam;
-        Plane ground;
+        [SerializeField] Rigidbody rb;
 
-        Vector3 currentPos = new Vector3();
-
-#if UNITY_STANDALONE || UNITY_EDITOR
-        Touch standaloneTouch = new Touch();
-#endif
-
-        private void Start()
+        private void FixedUpdate()
         {
-            standaloneTouch.position = cam.ScreenToWorldPoint(Input.mousePosition);
-        }
-
-        public void Update()
-        {
-            if (actions > 0)
-            {
-                currentPos = Vector3.zero;
-                return;
-            }
-
 #if UNITY_STANDALONE || UNITY_EDITOR
             HandleStandaloneInputs();
 #elif UNITY_ANDROID || UNITY_IOS
-            HandleMobileInputs();
+            HandleMobileTouchInputs();
 #endif
         }
 
+        Vector3 lastPos = new Vector2();
+        Vector3 currentPos = new Vector2();
+
         private void HandleStandaloneInputs()
         {
-            standaloneTouch.deltaPosition = standaloneTouch.position;
-            Vector2 _screenPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-            standaloneTouch.position = cam.ScreenToWorldPoint(_screenPosition);
-
-            if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
+            lastPos = currentPos;
+            if(Input.GetMouseButton(0))
             {
-                ground.SetNormalAndPosition(transform.up, transform.position);
-                print($"pos: {standaloneTouch.position} | posDelta: {standaloneTouch.deltaPosition}");
-                if(standaloneTouch.deltaPosition != standaloneTouch.position)
+                currentPos = Input.mousePosition;
+
+                if(currentPos != lastPos && lastPos != Vector3.zero)
                 {
-                    standaloneTouch.phase = TouchPhase.Moved;
-                    currentPos = GetGroundPositionDelta(standaloneTouch);
+                    float _dist = Mathf.Abs(lastPos.magnitude - currentPos.magnitude);
+                    Vector3 _moveDir = new Vector3(lastPos.x - currentPos.x, 0, lastPos.y - currentPos.y);
+                    rb.velocity = _moveDir.normalized * Time.fixedDeltaTime * cameraSpeed * _dist * 0.1f;
                 }
                 else
                 {
-                    standaloneTouch.phase = TouchPhase.Stationary;
+                    rb.velocity = Vector3.zero;
                 }
             }
-
-            if (Input.GetMouseButtonUp(0))
+            else
             {
-                cam.transform.Translate(currentPos, Space.World);
+                rb.velocity = Vector3.zero;
+                currentPos = lastPos = Vector3.zero;
             }
         }
 
-        private void HandleMobileInputs()
+        private void HandleMobileTouchInputs()
         {
+            lastPos = currentPos;
             if (Input.touchCount > 0)
             {
-                ground.SetNormalAndPosition(transform.up, transform.position);
+                currentPos = Input.GetTouch(0).position;
 
-                currentPos = GetGroundPositionDelta(Input.GetTouch(0));
-
-                if (Input.GetTouch(0).phase == TouchPhase.Moved)
+                if (currentPos != lastPos && lastPos != Vector3.zero)
                 {
-                    cam.transform.Translate(currentPos, Space.World);
+                    float _dist = Mathf.Abs(lastPos.magnitude - currentPos.magnitude);
+                    Vector3 _moveDir = new Vector3(lastPos.x - currentPos.x, 0, lastPos.y - currentPos.y);
+                    rb.velocity = _moveDir.normalized * Time.fixedDeltaTime * cameraSpeed * _dist * 0.1f;
+                }
+                else
+                {
+                    rb.velocity = Vector3.zero;
                 }
             }
-        }
-
-        Vector3 GetGroundPositionDelta(Touch _touch)
-        {
-            if (_touch.phase != TouchPhase.Moved)
-                return Vector3.zero;
-
-            Ray _lastRay = cam.ScreenPointToRay(_touch.position - _touch.deltaPosition);
-            Ray _currentRay = cam.ScreenPointToRay(_touch.position);
-
-            if (ground.Raycast(_lastRay, out float _lastDistance) && ground.Raycast(_currentRay, out float _currentDistance))
-                return _lastRay.GetPoint(_lastDistance) - _currentRay.GetPoint(_currentDistance);
-
-            return Vector3.zero;
+            else
+            {
+                rb.velocity = Vector3.zero;
+                currentPos = lastPos = Vector3.zero;
+            }
         }
     }
 }
