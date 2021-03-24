@@ -32,12 +32,12 @@ namespace DialogueManagement
             InputHandler.InputReceived += OnTap;
         }
 
-        public void StartDialogue(Dialogue dialogue)
+        public IEnumerator StartDialogue(Dialogue dialogue)
         {
             if (isRunningDialogue)
             {
                 Debug.LogError("Cannot start a dialogue when it's already running!");
-                return;
+                yield break;
             }
             currentDialogue = dialogue;
             isRunningDialogue = true;
