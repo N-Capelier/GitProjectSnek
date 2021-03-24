@@ -9,6 +9,7 @@ namespace GameManagement
     {
         [Header("References")]
         public StateMachine gameState = null;
+        public InputHandler inputHandler = null;
 
         private void Awake()
         {

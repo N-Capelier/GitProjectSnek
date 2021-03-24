@@ -16,6 +16,7 @@ namespace Player.Attack
         [HideInInspector] public float rangeBonus = 1f;// A REFERENCER
         [HideInInspector] public float rangeBonusOffSet = 1f;// A REFERENCER
         bool canAttack = true;
+        [HideInInspector] public bool isAttacking = false;
         [SerializeField] [Range(0f, 1f)] float moveSpeedDuringAttack = 0.2f;
         Clock cooldownTimer;
         public GameObject attackCollision;
@@ -57,6 +58,7 @@ namespace Player.Attack
             //PlayerManager.Instance.currentController.playerRunSpirits.UpdateSpiritsVelocity();
             PlayerManager.Instance.currentController.rb.velocity = PlayerManager.Instance.currentController.rb.velocity * PlayerManager.Instance.currentController.attackMoveSpeedModifier;
             canAttack = false;
+            isAttacking = true;
             //attack
 
             //Faire un switch à l'instantiation
@@ -117,6 +119,7 @@ namespace Player.Attack
             yield return new WaitForSeconds(0.05f);
             Destroy(attack);
             yield return new WaitForSeconds(attackCooldown * 0.4f);
+            isAttacking = false;
             //PlayerManager.Instance.currentController.canMove = true;
             PlayerManager.Instance.currentController.attackMoveSpeedModifier = 1f;
             //PlayerManager.Instance.currentController.playerRunSpirits.UpdateSpiritsVelocity();

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Player;
 
 namespace GameManagement
 {
@@ -20,6 +21,8 @@ namespace GameManagement
     {
         public delegate void InputReceiver(InputType inputType);
         public static event InputReceiver InputReceived;
+        public delegate void HoldInputReceiver();
+        public static event HoldInputReceiver HoldInputReceived;
 
         [SerializeField] [Range(0, 500)] float deadzone = 100f;
         [SerializeField] [Range(0, 1)] float tapTimerDuration = 0.1f;
@@ -33,7 +36,7 @@ namespace GameManagement
         Clock holdTimer;
 
         bool swiped = false;
-        bool holding = false;
+        public bool holding = false;
         bool holded = false;
 
         private void Start()
@@ -77,7 +80,14 @@ namespace GameManagement
             {
                 //tapTimer.StopWithoutEvent();
                 startPos = Input.mousePosition; // startPos = Input.touches[0].position - startPos;
-                holding = true;
+                if(GameManager.Instance.gameState.ActiveState == GameState.Run)
+                {
+                    if(PlayerManager.Instance.currentController.playerRunAttack.isAttacking == false) 
+                    {
+                        holding = true;
+                        HoldInputReceived?.Invoke();
+                    }
+                }
                 holdTimer.SetTime(holdTimerDuration);
                 tapTimer.SetTime(tapTimerDuration);
             }
@@ -135,7 +145,14 @@ namespace GameManagement
                 if(_touch.phase == TouchPhase.Began)
                 {
                     startPos = _touch.position;
-                    holding = true;
+                    if (GameManager.Instance.gameState.ActiveState == GameState.Run)
+                    {
+                        if (PlayerManager.Instance.currentController.playerRunAttack.isAttacking == false)
+                        {
+                            holding = true;
+                            HoldInputReceived?.Invoke();
+                        }
+                    }
                     tapTimer.SetTime(tapTimerDuration);
                     holdTimer.SetTime(holdTimerDuration);
                 }

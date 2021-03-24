@@ -25,6 +25,7 @@ namespace Player.Controller
             nextDirection = PlayerDirection.Up;
             nextNode = GetNextNode();
             InputHandler.InputReceived += HandleInput;
+            InputHandler.HoldInputReceived += OnHold;
         }
 
         private void OnEnable()
@@ -36,8 +37,15 @@ namespace Player.Controller
             nextNode = GetNextNode();
         }
 
+        private void OnDestroy()
+        {
+            InputHandler.InputReceived -= HandleInput;
+            InputHandler.HoldInputReceived -= OnHold;
+        }
+
         private void Update()
         {
+
             if ((currentDirection == PlayerDirection.Up && transform.position.z >= MapGrid.Instance.GetWorldPos(0, (int)nextNode.z).z) ||
                 (currentDirection == PlayerDirection.Right && transform.position.x >= MapGrid.Instance.GetWorldPos((int)nextNode.x, 0).x) ||
                 (currentDirection == PlayerDirection.Down && transform.position.z <= MapGrid.Instance.GetWorldPos(0, (int)nextNode.z).z) ||
@@ -125,6 +133,10 @@ namespace Player.Controller
             }
         }
 
+        void OnHold()
+        {
+            PlayerManager.Instance.currentController.animator.Play("Anim_PlayerRun_runCHARGE");
+        }
         /// <summary>
         /// find next targeted node on the grid
         /// </summary>

@@ -47,7 +47,6 @@ namespace Player.Technique
         {
             if (inputType != InputType.Hold)
                 return;
-
             switch (PlayerManager.Instance.currentController.currentDirection)
             {
                 case Controller.PlayerDirection.Left:
