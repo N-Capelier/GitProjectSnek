@@ -36,7 +36,7 @@ namespace GameManagement
         Clock holdTimer;
 
         bool swiped = false;
-        public bool holding = false;
+        [HideInInspector] public bool holding = false;
         bool holded = false;
 
         private void Start()
