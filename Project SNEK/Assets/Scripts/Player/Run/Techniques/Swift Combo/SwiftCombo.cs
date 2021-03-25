@@ -23,18 +23,21 @@ namespace Player.Technique
         }
 
         public override IEnumerator TechniqueCast(PlayerDirection techniqueDirection)
-        {                    
+        {
+            PlayerManager.Instance.currentController.objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_SwiftCombo");
+            yield return new WaitForSeconds(0.1f);
             Attack(1);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.33f);
             Destroy(attack);
             yield return new WaitForSeconds(0.01f);
             Attack(0.75f);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.33f);
             Destroy(attack);
             yield return new WaitForSeconds(0.01f);
             Attack(0.75f);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.4f);
             Destroy(attack);
+            yield return new WaitForSeconds(0.02f);
             PlayerManager.Instance.currentController.attackMoveSpeedModifier = 1f;
             PlayerManager.Instance.currentController.rb.velocity = PlayerManager.Instance.currentController.rb.velocity * PlayerManager.Instance.currentController.attackMoveSpeedModifier;
         }
@@ -42,8 +45,7 @@ namespace Player.Technique
         void Attack(float modifier)
         {
             PlayerManager.Instance.currentController.attackMoveSpeedModifier = moveSpeedDuringAttack;
-            PlayerManager.Instance.currentController.rb.velocity = PlayerManager.Instance.currentController.rb.velocity * PlayerManager.Instance.currentController.attackMoveSpeedModifier;
-            PlayerManager.Instance.currentController.objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_attack");
+            PlayerManager.Instance.currentController.rb.velocity = PlayerManager.Instance.currentController.rb.velocity * PlayerManager.Instance.currentController.attackMoveSpeedModifier;            
             attack = Instantiate(comboOne, transform.position, Quaternion.identity);
             attack.GetComponent<ComboCollision>().damageModifier = modifier;
 
