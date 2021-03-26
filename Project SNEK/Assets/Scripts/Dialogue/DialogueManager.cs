@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using GameManagement;
+using Hub.Interaction;
 
 namespace DialogueManagement
 {
@@ -101,12 +102,17 @@ namespace DialogueManagement
                 }
             }
         }
+
         void EndDialogue()
         {
             currentDialogue = null;
             isRunningDialogue = false;
             isTapped = false;
             canvas.SetActive(false);
+            if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
+            {
+                InteractionManager.Instance.EndInteraction();
+            }
         }
 
     }

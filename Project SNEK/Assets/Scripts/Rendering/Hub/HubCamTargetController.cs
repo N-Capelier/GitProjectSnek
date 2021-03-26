@@ -7,12 +7,17 @@ namespace Rendering.Hub
     /// </summary>
     public class HubCamTargetController : Singleton<HubCamTargetController>
     {
-        [SerializeField] [Range(0f, 500f)] float cameraSpeed = 20f;
+        [SerializeField] [Range(0f, 1000f)] float cameraSpeed = 20f;
 
         [SerializeField] Rigidbody rb;
 
+        [HideInInspector] public byte actions = 0;
+
         private void FixedUpdate()
         {
+            if (actions > 0)
+                return;
+
 #if UNITY_STANDALONE || UNITY_EDITOR
             HandleStandaloneInputs();
 #elif UNITY_ANDROID || UNITY_IOS
