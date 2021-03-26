@@ -14,8 +14,7 @@ namespace Player.Controller
     {
 
         public NavMeshAgent agent;
-        public Transform target;
-        public GameObject renderer;
+        [HideInInspector] public Transform target;
 
         [HideInInspector] public byte actions = 0;
 
@@ -30,7 +29,7 @@ namespace Player.Controller
             if(actions == 0)
             {
                 agent.destination = target.position;
-                animator.SetFloat("Distance", Vector3.Distance(agent.destination, renderer.transform.position));
+                animator.SetFloat("Distance", Vector3.Distance(agent.destination, objectRenderer.transform.position));
             }
         }
 

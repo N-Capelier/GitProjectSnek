@@ -19,7 +19,7 @@ namespace Player.Technique
 
         PlayerRunAttack pc;
 
-        private void Start()
+        new private void Start()
         {
             base.Start();
             pc = PlayerManager.Instance.currentController.playerRunAttack;
