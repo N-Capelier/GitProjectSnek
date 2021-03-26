@@ -10,6 +10,6 @@ public class DialogueTrigger : MonoBehaviour
 
     public void TriggerDialogue()
     {
-        DialogueManager.Instance.StartDialogue(dialogue);
+        StartCoroutine(DialogueManager.Instance.StartDialogue(dialogue));
     }
 }

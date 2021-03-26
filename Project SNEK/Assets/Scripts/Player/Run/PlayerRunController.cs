@@ -2,6 +2,7 @@
 using GameManagement;
 using Map;
 using AudioManagement;
+using System.Collections;
 
 namespace Player.Controller
 {
@@ -25,6 +26,7 @@ namespace Player.Controller
             nextDirection = PlayerDirection.Up;
             nextNode = GetNextNode();
             InputHandler.InputReceived += HandleInput;
+            InputHandler.HoldInputReceived += OnHold;
         }
 
         private void OnEnable()
@@ -36,8 +38,15 @@ namespace Player.Controller
             nextNode = GetNextNode();
         }
 
+        private void OnDestroy()
+        {
+            InputHandler.InputReceived -= HandleInput;
+            InputHandler.HoldInputReceived -= OnHold;
+        }
+
         private void Update()
         {
+
             if ((currentDirection == PlayerDirection.Up && transform.position.z >= MapGrid.Instance.GetWorldPos(0, (int)nextNode.z).z) ||
                 (currentDirection == PlayerDirection.Right && transform.position.x >= MapGrid.Instance.GetWorldPos((int)nextNode.x, 0).x) ||
                 (currentDirection == PlayerDirection.Down && transform.position.z <= MapGrid.Instance.GetWorldPos(0, (int)nextNode.z).z) ||
@@ -94,6 +103,12 @@ namespace Player.Controller
         /// <param name="inputType"></param>
         void HandleInput(InputType inputType)
         {
+            if(fadeToHoldCoroutine != null)
+            {
+                StopCoroutine(fadeToHoldCoroutine);
+            }
+            PlayerManager.Instance.currentController.animator.SetLayerWeight(1, 0f);
+
             switch (inputType)
             {
                 case InputType.SwipeUp:
@@ -124,6 +139,30 @@ namespace Player.Controller
                     break;
             }
         }
+
+        void OnHold()
+        {
+            PlayerManager.Instance.currentController.animator.Play("Anim_PlayerRun_runCHARGE");
+            fadeToHoldCoroutine = StartCoroutine(FadeToHold());
+        }
+
+        [SerializeField] float holdFadeSpeed = 1f;
+        Coroutine fadeToHoldCoroutine;
+
+        IEnumerator FadeToHold()
+        {
+            while(PlayerManager.Instance.currentController.animator.GetLayerWeight(1) < 1)
+            {
+                float _weight = PlayerManager.Instance.currentController.animator.GetLayerWeight(1);
+                _weight += holdFadeSpeed * Time.deltaTime;
+                _weight = Mathf.Clamp(_weight, 0, 1);
+
+                PlayerManager.Instance.currentController.animator.SetLayerWeight(1, _weight);
+                yield return new WaitForEndOfFrame();
+            }
+            yield break;
+        }
+
 
         /// <summary>
         /// find next targeted node on the grid
