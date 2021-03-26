@@ -8,7 +8,7 @@ namespace Hub.Interaction
         [SerializeField] Dialogue dialogue;
         protected override void Interact()
         {
-            StartCoroutine(DialogueManager.Instance.StartDialogue(dialogue));
+            StartCoroutine(DialogueManager.Instance.StartDialogue(dialogue, animator));
         }
     }
 }

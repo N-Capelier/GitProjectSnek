@@ -21,6 +21,7 @@ namespace DialogueManagement
         bool isTapped;
         float charDelay;
         int sentenceIndex;
+        Animator animator;
 
         private void Awake()
         {
@@ -32,7 +33,7 @@ namespace DialogueManagement
             InputHandler.InputReceived += OnTap;
         }
 
-        public IEnumerator StartDialogue(Dialogue dialogue)
+        public IEnumerator StartDialogue(Dialogue dialogue, Animator animator = null)
         {
             if (isRunningDialogue)
             {
@@ -43,6 +44,7 @@ namespace DialogueManagement
             isRunningDialogue = true;
             isTapped = false;
             sentenceIndex = 0;
+            this.animator = animator;
             canvas.SetActive(true);
             //Mouvement de caméra
             StartCoroutine(WriteNextLine());
@@ -59,6 +61,14 @@ namespace DialogueManagement
             else
             {
                 nameText.text = currentDialogue.sentences[sentenceIndex].character.ToString();
+                if(animator != null && currentDialogue.sentences[sentenceIndex].anim != "")
+                {
+                    animator.Play(currentDialogue.sentences[sentenceIndex].anim);
+                }
+                else if(animator != null)
+                {
+                    animator.SetLayerWeight(animator.GetLayerIndex("Talk"), 1);
+                }
             }
             // Joue le SFX
             if (currentDialogue.sentences[sentenceIndex].activateButtons)
@@ -75,8 +85,22 @@ namespace DialogueManagement
                 dialogueText.text += letter;
                 yield return new WaitForSeconds(charDelay);
             }
+            
+            if(currentDialogue.sentences[sentenceIndex].character == Character.Poppy
+                || currentDialogue.sentences[sentenceIndex].character == Character.Bergamot
+                || currentDialogue.sentences[sentenceIndex].character == Character.Thistle)
+            {
+                animator.Play($"Anim_{currentDialogue.sentences[sentenceIndex].character}_idle");
+            }
+
+            if (animator != null)
+            {
+                animator.SetLayerWeight(animator.GetLayerIndex("Talk"), 0);
+            }
+
             sentenceIndex++;
             isSpeaking = false;
+            isTapped = false;
         }
 
         void OnTap(InputType input)
@@ -106,6 +130,7 @@ namespace DialogueManagement
         void EndDialogue()
         {
             currentDialogue = null;
+            animator = null;
             isRunningDialogue = false;
             isTapped = false;
             canvas.SetActive(false);

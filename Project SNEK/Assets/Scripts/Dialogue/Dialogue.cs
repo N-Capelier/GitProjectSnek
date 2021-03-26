@@ -19,6 +19,7 @@ namespace DialogueManagement
     public struct Sentence
     {
         public Character character;
+        public string anim;
         [TextArea(3, 10)]
         public string sentence;
         public Sound voiceLine;
