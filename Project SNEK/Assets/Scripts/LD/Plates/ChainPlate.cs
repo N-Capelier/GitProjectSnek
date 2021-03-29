@@ -49,7 +49,8 @@ namespace Plates
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController") || other.gameObject.layer == LayerMask.NameToLayer("Spirit"))
             {
-                playerOrChainWeight--;
+                //playerOrChainWeight--;
+                StartCoroutine(DecrementWeightWithDelay());
 
                 if(playerOrChainWeight == 0)
                 {
@@ -58,6 +59,12 @@ namespace Plates
                     hasWeight = false;
                 }
             }
+        }
+
+        IEnumerator DecrementWeightWithDelay()
+        {
+            yield return new WaitForSeconds(0.5f);
+            playerOrChainWeight--;
         }
     }
 }
