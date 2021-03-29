@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using GameManagement;
 using Hub.Interaction;
 
@@ -12,9 +13,11 @@ namespace DialogueManagement
     public class DialogueManager : Singleton<DialogueManager>
     {
 
-        [SerializeField] Text nameText;
-        [SerializeField] Text dialogueText;
+        [SerializeField] TextMeshProUGUI nameText;
+        [SerializeField] TextMeshProUGUI dialogueText;
+        [SerializeField] Image dialogueArrow;
         [SerializeField] GameObject canvas;
+        [SerializeField] GameObject DialogueBox;
         Dialogue currentDialogue;
         bool isRunningDialogue;
         bool isSpeaking;
@@ -23,13 +26,16 @@ namespace DialogueManagement
         int sentenceIndex;
         Animator animator;
 
+        [SerializeField] float dialogBoxOffset;
+
         private void Awake()
         {
             CreateSingleton(true);
         }
         private void Start()
         {
-            canvas.SetActive(false);
+            DialogueBox.transform.localPosition = new Vector3(0, -Screen.height * dialogBoxOffset);
+            //canvas.SetActive(false);
             InputHandler.InputReceived += OnTap;
         }
 
@@ -45,7 +51,8 @@ namespace DialogueManagement
             isTapped = false;
             sentenceIndex = 0;
             this.animator = animator;
-            canvas.SetActive(true);
+            //canvas.SetActive(true);
+            OpenDialogueBox();
             //Mouvement de caméra
             StartCoroutine(WriteNextLine());
         }
@@ -70,6 +77,7 @@ namespace DialogueManagement
                     animator.SetLayerWeight(animator.GetLayerIndex("Talk"), 1);
                 }
             }
+            NextLineFeedback();
             // Joue le SFX
             if (currentDialogue.sentences[sentenceIndex].activateButtons)
             {
@@ -85,6 +93,7 @@ namespace DialogueManagement
                 dialogueText.text += letter;
                 yield return new WaitForSeconds(charDelay);
             }
+            NextLineFeedback();
             
             if(currentDialogue.sentences[sentenceIndex].character == Character.Poppy
                 || currentDialogue.sentences[sentenceIndex].character == Character.Bergamot
@@ -133,13 +142,37 @@ namespace DialogueManagement
             animator = null;
             isRunningDialogue = false;
             isTapped = false;
-            canvas.SetActive(false);
+            CloseDialogueBox();
+            //canvas.SetActive(false);
             if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
             {
                 InteractionManager.Instance.EndInteraction();
             }
         }
 
+        public void OpenDialogueBox()
+        {
+            float dialogYPos = Screen.height * -0.1f;
+            DialogueBox.transform.LeanMoveLocalY(dialogYPos, 0.5f);
+        }
+
+        public void CloseDialogueBox()
+        {
+            float dialogYPos = -Screen.height * dialogBoxOffset;
+            DialogueBox.transform.LeanMoveLocalY(dialogYPos, 0.5f);
+        }
+
+        public void NextLineFeedback()
+        {
+            if(dialogueArrow.transform.localScale == Vector3.zero)
+            {
+                dialogueArrow.transform.LeanScale(Vector3.one,0.2f);
+            }
+            else
+            {
+                dialogueArrow.transform.LeanScale(Vector3.zero, 0f);
+            }
+        }
     }
 }
 
