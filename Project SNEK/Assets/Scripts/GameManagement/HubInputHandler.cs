@@ -9,16 +9,6 @@ namespace GameManagement
     {
         [SerializeField] Camera hubCamera;
 
-        private void Start()
-        {
-            //InputHandler.InputReceived += OnTap;
-        }
-
-        private void OnDestroy()
-        {
-            //InputHandler.InputReceived -= OnTap;
-        }
-
         private void Update()
         {
             OnTap();
@@ -26,9 +16,7 @@ namespace GameManagement
 
         void OnTap(/*InputType _input*/)
         {
-            //if(_input == InputType.Tap)
-            //{
-                RaycastHit hit;
+            RaycastHit hit;
 
             if(Input.GetMouseButtonDown(0))
             {
@@ -42,7 +30,6 @@ namespace GameManagement
                     }
                 }
             }
-            //}
         }
     }
 }

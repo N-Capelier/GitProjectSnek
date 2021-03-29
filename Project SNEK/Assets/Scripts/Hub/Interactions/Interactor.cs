@@ -8,8 +8,10 @@ namespace Hub.Interaction
     {
         [SerializeField] Transform cameraTargetTransform;
         [SerializeField] Transform playerTargetTransform;
+        [SerializeField] protected Animator animator;
 
         [SerializeField] [Range(0f, 360f)] float orientation = 0f;
+        //[SerializeField] float rotationSpeed = 0.1f;
 
         public IEnumerator BeginInteraction()
         {
@@ -24,12 +26,33 @@ namespace Hub.Interaction
                 yield return null;
             }
 
-            InteractionManager.Instance.playerController.agent.transform.Rotate(new Vector3(0, orientation, 0));
+            InteractionManager.Instance.playerController.agent.transform.rotation = Quaternion.Euler(new Vector3(0, orientation, 0));
+
+            //while (Mathf.Abs(InteractionManager.Instance.playerController.agent.transform.rotation.y - orientation) > 0)
+            //{
+            //    InteractionManager.Instance.playerController.agent.transform.rotation = Quaternion.Lerp(InteractionManager.Instance.playerController.agent.transform.rotation, Quaternion.Euler(0, orientation, 0), rotationSpeed * Time.time);
+            //    yield return new WaitForFixedUpdate();
+            //}
+            //InteractionManager.Instance.playerController.agent.transform.rotation = Quaternion.Euler(0, orientation, 0);
+            //yield return null;
+
+            //float timeElapsed = Time.time;
+            //while (Mathf.Abs(InteractionManager.Instance.playerController.agent.transform.rotation.y - orientation) > 0.01f)
+            //{
+            //    InteractionManager.Instance.playerController.agent.transform.eulerAngles =
+            //        Vector3.Lerp(
+            //            InteractionManager.Instance.playerController.agent.transform.rotation.eulerAngles,
+            //            new Vector3(0, orientation, 0),
+            //            timeElapsed);
+            //    timeElapsed += Time.deltaTime;
+            //    yield return new WaitForEndOfFrame();
+            //}
 
             Interact();
         }
 
-        protected abstract void Interact();
 
+
+        protected abstract void Interact();
     }
 }
