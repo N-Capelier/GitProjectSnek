@@ -7,7 +7,7 @@ namespace Rendering.Run
     {
         FreeScrolling,
         PlayerScrolling,
-        Boss
+        Fixed
     }
 
     /// <summary>
