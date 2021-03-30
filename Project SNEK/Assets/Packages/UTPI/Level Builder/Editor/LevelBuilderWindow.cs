@@ -137,10 +137,15 @@ namespace Tools.LevelEdition
             {
                 if(levelPreset.levelElements[index].importColor.Equals(_pixelColor))
                 {
-                    GameObject element = Instantiate(levelPreset.levelElements[index].element,
-                        new Vector3(_x * MapGrid.Instance.cellSize, 0, _y * MapGrid.Instance.cellSize),
-                        Quaternion.identity, parentObject.transform);
-                    element.name = $"[{_x}|{_y}] {levelPreset.levelElements[index].element.name}";
+                    GameObject _levelElement = (GameObject)PrefabUtility.InstantiatePrefab(levelPreset.levelElements[index].element);
+                    _levelElement.name = $"[{_x}|{_y}] {levelPreset.levelElements[index].element.name}";
+                    _levelElement.transform.parent = parentObject.transform;
+                    _levelElement.transform.position = new Vector3(_x * MapGrid.Instance.cellSize, 0, _y * MapGrid.Instance.cellSize);
+
+                    //GameObject element = Instantiate(levelPreset.levelElements[index].element,
+                    //    new Vector3(_x * MapGrid.Instance.cellSize, 0, _y * MapGrid.Instance.cellSize),
+                    //    Quaternion.identity, parentObject.transform);
+                    //element.name = $"[{_x}|{_y}] {levelPreset.levelElements[index].element.name}";
                 }
             }
         }
