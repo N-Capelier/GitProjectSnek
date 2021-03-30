@@ -19,7 +19,7 @@ namespace Enemy
         {
             stats = GetComponentInParent<EnemyStats>();
 
-            stats.attackClock.ClockEnded += OnShouldAttack;
+            stats.attackClock.ClockEnded += OnShouldAttack;           
         }
 
         void OnShouldAttack()

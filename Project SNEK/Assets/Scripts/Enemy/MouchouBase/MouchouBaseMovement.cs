@@ -41,8 +41,9 @@ namespace Enemy
 
             stats.movementClock.ClockEnded += OnShouldMove;
 
-            currentNode = stats.gameObject.transform.position;
+            currentNode = MapGrid.Instance.GetWorldPos((int)stats.gameObject.transform.position.x, (int)stats.gameObject.transform.position.z);
             currentDirection = MouchouDirection.Down;
+            OnShouldMove();
         }
 
 
