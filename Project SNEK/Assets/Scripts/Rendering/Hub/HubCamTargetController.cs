@@ -86,7 +86,7 @@ namespace Rendering.Hub
         private void HandleMobileTouchInputs()
         {
             lastPos = currentPos;
-            if (Input.touchCount > 0)
+            if (Input.touchCount == 1)
             {
                 currentPos = Input.GetTouch(0).position;
 

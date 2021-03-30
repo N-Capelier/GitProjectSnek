@@ -15,6 +15,9 @@ namespace Hub.Interaction
 
         public IEnumerator BeginInteraction()
         {
+            if (InteractionManager.Instance.camTarget.actions != 0)
+                yield break;
+
             InteractionManager.Instance.camTarget.actions++;
             InteractionManager.Instance.camTarget.transform.position = cameraTargetTransform.position;
 
