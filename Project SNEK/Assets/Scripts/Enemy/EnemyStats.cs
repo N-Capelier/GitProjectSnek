@@ -96,6 +96,7 @@ namespace Enemy
 
         public void Death()
         {
+            PlayerManager.Instance.currentController.playerRunSpirits.AddSpirit();
             Instantiate(deathFx, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
