@@ -250,6 +250,7 @@ MonoBehaviour:
   checkPoint: {fileID: 0}
   respawnNode: {x: 0, y: 0, z: 0}
   objectRenderer: {fileID: 2279007385441926584}
+  deathFx: {fileID: 7151187943005086603, guid: dd0215882c7ac2e4da6adacb2666fabf, type: 3}
   animator: {fileID: 0}
   holdFadeSpeed: 1
 --- !u!54 &4086522607183702087
@@ -1366,7 +1367,7 @@ PrefabInstance:
     - target: {fileID: 831756616574768418, guid: 626141cb8c01e71498fdacacce68e058,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5649360406668274239, guid: 626141cb8c01e71498fdacacce68e058,
         type: 3}
@@ -1548,7 +1549,7 @@ PrefabInstance:
     - target: {fileID: 3224949344023248133, guid: 0c8fc1d7330891840802da41b809f64a,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5662795608731709900, guid: 0c8fc1d7330891840802da41b809f64a,
         type: 3}

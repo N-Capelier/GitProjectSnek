@@ -50,8 +50,9 @@ namespace Player.Technique
         public IEnumerator DestroyShield()
         {
             shieldFx.Stop();
+            gameObject.GetComponent<Collider>().enabled = false;
             Instantiate(shieldDeathFx, transform.position, Quaternion.identity);
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.3f);
             Destroy(gameObject);
         }
     }
