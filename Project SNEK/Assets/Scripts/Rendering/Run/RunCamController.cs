@@ -7,7 +7,8 @@ namespace Rendering.Run
     {
         FreeScrolling,
         PlayerScrolling,
-        Fixed
+        Fixed,
+        SemiScrolling
     }
 
     /// <summary>
@@ -21,6 +22,7 @@ namespace Rendering.Run
         [SerializeField] CamState startingState;
         [Range(0f, 2f)] public float scrollSpeed;
         [HideInInspector] public Rigidbody rb;
+        public GameObject deathZone;
 
         private void Awake()
         {
