@@ -33,7 +33,7 @@ namespace Player.Controller
 
         [Space]
         [HideInInspector] public Rigidbody rb = null;
-        [Range(0, 4)] public float moveSpeed = 50;
+        [Range(0, 400)] public float moveSpeed = 50;
         [HideInInspector] public float attackMoveSpeedModifier = 1f;
         [HideInInspector] public float spellMoveSpeedModifier = 1f;
 

@@ -13,6 +13,12 @@ namespace Rendering.Hub
 
         [HideInInspector] public byte actions = 0;
 
+        float leftConfiner = -13.95685f;
+        float rightConfiner = 11.03282f;
+        float topConfiner = 13.97992f;
+        float bottomConfiner = -11.68559f;
+
+
         private void FixedUpdate()
         {
             if (actions > 0)
@@ -23,6 +29,30 @@ namespace Rendering.Hub
 #elif UNITY_ANDROID || UNITY_IOS
             HandleMobileTouchInputs();
 #endif
+        }
+
+        private void Update()
+        {
+            if (transform.position.x < leftConfiner)
+            {
+                rb.velocity = Vector3.zero;
+                transform.position = new Vector3(leftConfiner, transform.position.y, transform.position.z);
+            }
+            else if (transform.position.x > rightConfiner)
+            {
+                rb.velocity = Vector3.zero;
+                transform.position = new Vector3(rightConfiner, transform.position.y, transform.position.z);
+            }
+            else if (transform.position.z < bottomConfiner)
+            {
+                rb.velocity = Vector3.zero;
+                transform.position = new Vector3(transform.position.x, transform.position.y, bottomConfiner);
+            }
+            else if (transform.position.z > topConfiner)
+            {
+                rb.velocity = Vector3.zero;
+                transform.position = new Vector3(transform.position.x, transform.position.y, topConfiner);
+            }
         }
 
         Vector3 lastPos = new Vector2();

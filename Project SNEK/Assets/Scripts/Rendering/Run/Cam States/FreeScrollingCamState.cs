@@ -34,10 +34,10 @@ namespace Rendering.Run
             {
                 Destroy(deathZone);
             }
-            else
-            {
-                throw new System.Exception("An error occured when tried to leave FreeScrollingCam state: deathZone not instantiated");
-            }
+            //else
+            //{
+            //    throw new System.Exception("An error occured when tried to leave FreeScrollingCam state: deathZone not instantiated");
+            //}
         }
     }
 }
