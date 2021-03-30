@@ -22,7 +22,7 @@ namespace GameManagement.GameStates
             PlayerManager.Instance.currentController = _newController.GetComponent<PlayerController>();
             PlayerManager.Instance.currentController.Init(0); //Add bonus HP from HUB
             PlayerManager.Instance.currentController.transform.position = MapGrid.Instance.GetWorldPos(4, 0);
-            RunCamController.Instance.Set(CamState.PlayerScrolling);
+            RunCamController.Instance.Set(CamState.SemiScrolling);
             if (runMusic == null)
             {
                 runMusic = AudioManager.Instance.PlayThisSoundEffect("LevelMusic");
