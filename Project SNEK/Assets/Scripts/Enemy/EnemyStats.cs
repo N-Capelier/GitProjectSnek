@@ -42,11 +42,11 @@ namespace Enemy
         }
 
         void Start()
-        {    
-            attackClock.ClockEnded += onTimerAttackEnd;  
+        {
+            attackClock.ClockEnded += onTimerAttackEnd;
             movementClock.ClockEnded += onTimerMovementEnd;
-        }               
-        
+        }
+
         #region Clock Methods
 
 
@@ -56,7 +56,7 @@ namespace Enemy
         }
 
         void onTimerMovementEnd()
-        { 
+        {
             movementClock.SetTime(movementCooldown);
         }
 
@@ -75,22 +75,22 @@ namespace Enemy
                 Death();
         }
 
-        IEnumerator HitFeedback() 
+        IEnumerator HitFeedback()
         {
-            if(enemyRenderer != null)
+            if (enemyRenderer != null)
             {
                 defaultMat = enemyRenderer.material;
                 enemyRenderer.material = hitMaterial;
             }
-            else if(skinnedRenderer != null)
+            else if (skinnedRenderer != null)
             {
                 defaultMat = skinnedRenderer.material;
                 skinnedRenderer.material = hitMaterial;
             }
             yield return new WaitForSeconds(0.1f);
-            if(enemyRenderer != null)
+            if (enemyRenderer != null)
                 enemyRenderer.material = defaultMat;
-            else if(skinnedRenderer != null)
+            else if (skinnedRenderer != null)
                 skinnedRenderer.material = defaultMat;
         }
 
@@ -115,6 +115,6 @@ namespace Enemy
             }
         }
 
-    }    
+    }
 }
 

@@ -14,16 +14,16 @@ namespace Boss
         public GameObject targetMarkerLong;
         public GameObject patternPos;
         public GameObject targetFeedback;
-        Transform targetPos;
+        //Transform targetPos;
 
         Clock bombClock;
 
-        int patternOrder = 0;
+        //int patternOrder = 0;
         int patternCount = 0;
         [SerializeField] float timeToBomb;
         public float speed = 3;
         bool bombOver = false;
-        bool canBeHit = false;
+        //bool canBeHit = false;
         bool canDoPattern = true;
 
         [Space]
@@ -61,7 +61,7 @@ namespace Boss
         IEnumerator PatternBomb()
         {
 
-            canBeHit = false;
+            //canBeHit = false;
             targetFeedback.SetActive(true);
             targetFeedback.transform.localPosition = new Vector3(0, 0.3f, -1.5f); 
             timeToBomb = Random.Range(4, 8);
