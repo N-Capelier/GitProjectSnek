@@ -78,7 +78,9 @@ namespace DialogueManagement
                     animator.SetLayerWeight(animator.GetLayerIndex("Talk"), 1);
                 }
             }
+
             NextLineFeedback();
+
             // Joue le SFX
             if (currentDialogue.sentences[sentenceIndex].activateButtons)
             {
@@ -94,6 +96,7 @@ namespace DialogueManagement
                 dialogueText.text += letter;
                 yield return new WaitForSeconds(charDelay);
             }
+
             NextLineFeedback();
             
             if(currentDialogue.sentences[sentenceIndex].character == Character.Poppy
@@ -144,10 +147,6 @@ namespace DialogueManagement
             isRunningDialogue = false;
             isTapped = false;
             CloseDialogueBox();
-            if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
-            {
-                InteractionManager.Instance.EndInteraction();
-            }
         }
 
         public void OpenDialogueBox()
@@ -160,6 +159,10 @@ namespace DialogueManagement
         {
             float dialogYPos = -Screen.height * dialogBoxOffset;
             DialogueBox.transform.LeanMoveLocalY(dialogYPos, 0.5f);
+            if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
+            {
+                InteractionManager.Instance.EndInteraction();
+            }
         }
 
         public void OpenSkillTree()
@@ -170,7 +173,10 @@ namespace DialogueManagement
         public void CloseSkillTree()
         {
             SkillTreeBox.transform.LeanScale(Vector3.zero, 0.3f);
-            InteractionManager.Instance.EndInteraction();
+            if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
+            {
+                InteractionManager.Instance.EndInteraction();
+            }
         }
 
         public void OpenLevelAccess()
@@ -182,6 +188,10 @@ namespace DialogueManagement
         {
             LevelAccessBox.transform.LeanScale(Vector3.zero, 0.2f);
             InteractionManager.Instance.EndInteraction();
+            if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
+            {
+                InteractionManager.Instance.EndInteraction();
+            }
         }
 
         public void OpenBox(GameObject box)
@@ -193,6 +203,7 @@ namespace DialogueManagement
         {
             box.LeanScale(Vector3.zero, 0.2f);
         }
+
         public void NextLineFeedback()
         {
             if(dialogueArrow.transform.localScale == Vector3.zero)

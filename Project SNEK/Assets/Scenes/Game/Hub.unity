@@ -72251,7 +72251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bc9a6f14f3e3ae439f806533c7e0530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraSpeed: 500
+  cameraSpeed: 275
   rb: {fileID: 1627270796}
   actions: 0
 --- !u!54 &1627270796
@@ -73828,6 +73828,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1781648474}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1794427988
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1794427989}
+  m_Layer: 0
+  m_Name: Marker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1794427989
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794427988}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.5002033, y: -8.441368, z: 8.158418}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1812087268
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75351,6 +75381,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2106091397}
     m_Modifications:
+    - target: {fileID: 1247957757, guid: e9648568d7ef77548813ec7a6f73b16b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.91
+      objectReference: {fileID: 0}
     - target: {fileID: 2371450969527733344, guid: e9648568d7ef77548813ec7a6f73b16b,
         type: 3}
       propertyPath: m_Name
@@ -75943,6 +75977,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1771420540}
     m_Modifications:
+    - target: {fileID: 352774374108165017, guid: 2cfd9ee5c40677549880f36f205e5c3e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.75
+      objectReference: {fileID: 0}
     - target: {fileID: 352774374483000921, guid: 2cfd9ee5c40677549880f36f205e5c3e,
         type: 3}
       propertyPath: m_Name
@@ -76086,6 +76125,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1771420540}
     m_Modifications:
+    - target: {fileID: 7240529333507846757, guid: b491ee12bf6fe70498ab724d88c9f05b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.75
+      objectReference: {fileID: 0}
     - target: {fileID: 7240529333683453848, guid: b491ee12bf6fe70498ab724d88c9f05b,
         type: 3}
       propertyPath: m_RootOrder
@@ -76427,6 +76471,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PoppyHub
+      objectReference: {fileID: 0}
+    - target: {fileID: 5699807947596502949, guid: bb1172ee930733b489d98f82cef1a795,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb1172ee930733b489d98f82cef1a795, type: 3}

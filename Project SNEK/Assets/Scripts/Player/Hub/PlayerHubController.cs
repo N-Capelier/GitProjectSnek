@@ -13,7 +13,8 @@ namespace Player.Controller
     public class PlayerHubController : PlayerController
     {
         float baseMoveSpeed;
-        float mach20MoveSpeed;
+        float baseAngularSpeed;
+        float baseAcceleration;
 
         float distanceFromDestination;
 
@@ -22,50 +23,49 @@ namespace Player.Controller
 
         [HideInInspector] public byte actions = 0;
 
-        void Start()
+        IEnumerator Start()
         {
             baseMoveSpeed = agent.speed;
-            mach20MoveSpeed = baseMoveSpeed * 50f;
-            StartCoroutine(GetElements());
-        }
+            baseAngularSpeed = agent.angularSpeed;
+            baseAcceleration = agent.acceleration;
 
-        private void FixedUpdate()
-        {
-            distanceFromDestination = Vector3.Distance(agent.destination, objectRenderer.transform.position);
-            Debug.Log("distance: " + distanceFromDestination);
-
-            //if (distanceFromDestination > 12f)
-            //{
-            //    agent.speed = mach20MoveSpeed;
-            //}
-            //else
-            //{
-            //    agent.speed = baseMoveSpeed;
-            //}
-
-            if(actions == 0)
-            {
-                agent.destination = target.position;
-                animator.SetFloat("Distance", distanceFromDestination);
-            }
-        }
-        //private void OnBecameVisible()
-        //{
-        //    agent.speed = baseMoveSpeed;
-        //}
-
-        //private void OnBecameInvisible()
-        //{
-        //    agent.speed = mach20MoveSpeed;
-        //}
-
-        IEnumerator GetElements()
-        {
             actions++;
             yield return new WaitForSeconds(0.1f);
             target = HubCamTargetController.Instance.transform;
             InteractionManager.Instance.playerController = this;
             actions--;
+        }
+
+        private void FixedUpdate()
+        {
+            distanceFromDestination = Vector3.Distance(agent.destination, objectRenderer.transform.position);
+
+            switch (distanceFromDestination)
+            {
+                case float value when (value <= 12):
+                    agent.speed = baseMoveSpeed;
+                    agent.angularSpeed = baseAngularSpeed;
+                    agent.acceleration = baseAcceleration;
+                    break;
+                case float value when (value < 14f):
+                    agent.speed = baseMoveSpeed;
+                    agent.angularSpeed = baseAngularSpeed;
+                    agent.acceleration = baseAcceleration * 60f;
+                    break;
+                case float value when (value >= 14f):
+                    agent.speed = baseMoveSpeed * 10f;
+                    agent.angularSpeed = baseAngularSpeed * 10f;
+                    agent.acceleration = baseAcceleration * 60f;
+                    break;
+                default:
+                    throw new System.Exception("WTF bro you've created a negative distance, you are a beast!");
+            }
+
+            if (actions == 0)
+            {
+                agent.destination = target.position;
+                animator.SetFloat("Distance", distanceFromDestination);
+            }
         }
     }
 }
