@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Player;
 
 namespace AudioManagement
 {
@@ -28,7 +29,8 @@ namespace AudioManagement
         [Range(0f, 1f)]
         public float SoundEffectsVolume = 0.9f;
 
-
+        //Une variable public pour centraliser la distance a laquelle on joue les sons.
+        public float minimumSoundPlayDistance;
 
 
 
@@ -130,6 +132,81 @@ namespace AudioManagement
                 }
             }
         }
+
+        //Fonction alternative qui joue le son uniquement si la distance au joueur de l'objet est suffisement petite. Cette version de la fonction utilise la variable de distace globale.
+        public Source PlayThisSoundEffect(string soundName, Transform here)
+        {
+
+            if (Vector3.Distance(here.position, PlayerManager.Instance.currentController.transform.position) <= minimumSoundPlayDistance)
+            {
+                //On cherche le son que l'on va jouer dans la liste de son.
+                Sound s = Array.Find(soundsList.sounds, Sound => Sound.name == soundName);
+
+                //Variable locale pour stocker la référence a l'aurisource.
+                Source sourceTemp = null;
+
+                //Ensuite, on cherche la première source qui n'est pas entrain de jouer un son et le fait jouer le son.
+                foreach (var source in sourcesAudio)
+                {
+
+                    if (source.audioSource.isPlaying == false)
+                    {
+
+                        source.audioSource.clip = s.clip;
+                        source.audioSource.volume = s.volume * SoundEffectsVolume;
+
+                        source.audioSource.Play();
+
+                        sourceTemp = source;
+
+                        break;
+                    }
+
+
+                }
+                return sourceTemp;
+            }
+
+            return null;
+        }
+
+        //Fonction alternative qui joue le son uniquement si la distance au joueur de l'objet est suffisement petite. Cette version de la fonction permet d'entrer manuellement la distance.
+        public Source PlayThisSoundEffect(string soundName, Transform here, float distance)
+        {
+
+            if (Vector3.Distance(here.position, PlayerManager.Instance.currentController.transform.position) <= distance)
+            {
+                //On cherche le son que l'on va jouer dans la liste de son.
+                Sound s = Array.Find(soundsList.sounds, Sound => Sound.name == soundName);
+
+                //Variable locale pour stocker la référence a l'aurisource.
+                Source sourceTemp = null;
+
+                //Ensuite, on cherche la première source qui n'est pas entrain de jouer un son et le fait jouer le son.
+                foreach (var source in sourcesAudio)
+                {
+
+                    if (source.audioSource.isPlaying == false)
+                    {
+
+                        source.audioSource.clip = s.clip;
+                        source.audioSource.volume = s.volume * SoundEffectsVolume;
+
+                        source.audioSource.Play();
+
+                        sourceTemp = source;
+
+                        break;
+                    }
+
+
+                }
+                return sourceTemp;
+            }
+
+            return null; 
+        }
+
 
     }
 
