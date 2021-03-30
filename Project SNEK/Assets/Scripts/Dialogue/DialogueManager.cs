@@ -17,7 +17,7 @@ namespace DialogueManagement
         [SerializeField] TextMeshProUGUI dialogueText;
         [SerializeField] Image dialogueArrow;
         [SerializeField] GameObject canvas;
-        [SerializeField] GameObject DialogueBox;
+        [SerializeField] GameObject DialogueBox,SkillTreeBox, LevelAccessBox;
         Dialogue currentDialogue;
         bool isRunningDialogue;
         bool isSpeaking;
@@ -35,6 +35,8 @@ namespace DialogueManagement
         private void Start()
         {
             DialogueBox.transform.localPosition = new Vector3(0, -Screen.height * dialogBoxOffset);
+            SkillTreeBox.transform.localScale = Vector3.zero;
+            LevelAccessBox.transform.localScale = Vector3.zero;
             //canvas.SetActive(false);
             InputHandler.InputReceived += OnTap;
         }
@@ -51,7 +53,6 @@ namespace DialogueManagement
             isTapped = false;
             sentenceIndex = 0;
             this.animator = animator;
-            //canvas.SetActive(true);
             OpenDialogueBox();
             //Mouvement de caméra
             StartCoroutine(WriteNextLine());
@@ -143,7 +144,6 @@ namespace DialogueManagement
             isRunningDialogue = false;
             isTapped = false;
             CloseDialogueBox();
-            //canvas.SetActive(false);
             if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
             {
                 InteractionManager.Instance.EndInteraction();
@@ -152,7 +152,7 @@ namespace DialogueManagement
 
         public void OpenDialogueBox()
         {
-            float dialogYPos = Screen.height * -0.1f;
+            float dialogYPos = Screen.height * -0.05f;
             DialogueBox.transform.LeanMoveLocalY(dialogYPos, 0.5f);
         }
 
@@ -162,6 +162,37 @@ namespace DialogueManagement
             DialogueBox.transform.LeanMoveLocalY(dialogYPos, 0.5f);
         }
 
+        public void OpenSkillTree()
+        {
+            SkillTreeBox.transform.LeanScale(Vector3.one,0.3f);
+        }
+
+        public void CloseSkillTree()
+        {
+            SkillTreeBox.transform.LeanScale(Vector3.zero, 0.3f);
+            InteractionManager.Instance.EndInteraction();
+        }
+
+        public void OpenLevelAccess()
+        {
+            LevelAccessBox.transform.LeanScale(Vector3.one, 0.2f);
+        }
+
+        public void CloseLevelAcces()
+        {
+            LevelAccessBox.transform.LeanScale(Vector3.zero, 0.2f);
+            InteractionManager.Instance.EndInteraction();
+        }
+
+        public void OpenBox(GameObject box)
+        {
+            box.LeanScale(Vector3.one, 0.2f);
+        }
+
+        public void CloseBox(GameObject box)
+        {
+            box.LeanScale(Vector3.zero, 0.2f);
+        }
         public void NextLineFeedback()
         {
             if(dialogueArrow.transform.localScale == Vector3.zero)
