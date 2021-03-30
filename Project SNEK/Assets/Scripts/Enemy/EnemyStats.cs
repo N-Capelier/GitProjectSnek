@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Player;
 using AudioManagement;
+using System.Collections;
 
 namespace Enemy
 {
@@ -18,7 +19,11 @@ namespace Enemy
         [Space]
         [SerializeField] float maxHp = 1;
         [HideInInspector] public float currentHp;
-        [SerializeField] GameObject deathFx;
+        [SerializeField] GameObject deathFx, hitFx;
+        [SerializeField] MeshRenderer enemyRenderer;
+        [SerializeField] SkinnedMeshRenderer skinnedRenderer;
+        Material defaultMat;
+        [SerializeField] Material hitMaterial;
 
         [Space]
         [HideInInspector] public Rigidbody rb = null;
@@ -63,10 +68,30 @@ namespace Enemy
 
             if (currentHp > 0)
             {
-                //Play Hit Anim
+                StartCoroutine(HitFeedback());
+                Instantiate(hitFx, transform.position, Quaternion.identity);
             }
             else
                 Death();
+        }
+
+        IEnumerator HitFeedback() 
+        {
+            if(enemyRenderer != null)
+            {
+                defaultMat = enemyRenderer.material;
+                enemyRenderer.material = hitMaterial;
+            }
+            else if(skinnedRenderer != null)
+            {
+                defaultMat = skinnedRenderer.material;
+                skinnedRenderer.material = hitMaterial;
+            }
+            yield return new WaitForSeconds(0.1f);
+            if(enemyRenderer != null)
+                enemyRenderer.material = defaultMat;
+            else if(skinnedRenderer != null)
+                skinnedRenderer.material = defaultMat;
         }
 
         public void Death()

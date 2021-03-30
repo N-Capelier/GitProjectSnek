@@ -45,6 +45,7 @@ namespace Player.Controller
         public Vector3 respawnNode;
 
         public GameObject objectRenderer;
+        public GameObject deathFx;
         public Animator animator;
 
         public virtual void Awake()
@@ -84,6 +85,7 @@ namespace Player.Controller
         IEnumerator RespawnCoroutine()
         {
             //play death anim
+            Instantiate(deathFx, transform.position, Quaternion.identity);
             objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_death");
             AudioManager.Instance.PlaySoundEffect("PlayerHit");
             yield return new WaitForSeconds(1.5f);
@@ -102,6 +104,7 @@ namespace Player.Controller
         IEnumerator DeathCoroutine()
         {
             //play defeat anim
+            Instantiate(deathFx, transform.position, Quaternion.identity);
             objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_death");
             AudioManager.Instance.PlaySoundEffect("PlayerHit");
             yield return new WaitForSeconds(1f);

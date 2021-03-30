@@ -84,9 +84,11 @@ namespace Player.Spells
             igniterCollider.enabled = false;
             capCollider.enabled = false;
             Destroy(absorbFx.gameObject);
-            animator.Play("Anim_Kettle_Explosion");
+            animator.Play("Anim_Object_KettleExplosion");
+            yield return new WaitForSeconds(0.75f);
             explosionFx.Play();
             transform.GetChild(1).gameObject.SetActive(false);
+            transform.GetChild(2).gameObject.SetActive(false);
             GameObject explosion = Instantiate(explosionBox, transform.position, Quaternion.identity);
             yield return new WaitForSeconds(0.5f);
             Destroy(explosion);

@@ -102,6 +102,10 @@ MonoBehaviour:
   maxHp: 20
   currentHp: 0
   deathFx: {fileID: 3893877149857393849, guid: 776a358c2e98ba8409c4035d37f35e3f, type: 3}
+  hitFx: {fileID: 6257973856633588798, guid: a67ab8f2a3beb4247b452f06c2c19818, type: 3}
+  enemyRenderer: {fileID: 0}
+  skinnedRenderer: {fileID: 6115407764129770242}
+  hitMaterial: {fileID: 2100000, guid: 49bd8cf0807c6c3408ac07b5ba52741e, type: 2}
   rb: {fileID: 0}
   moveSpeed: 0
 --- !u!54 &7529173753719780613
@@ -350,6 +354,12 @@ GameObject:
 --- !u!4 &8067713703015556097 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f4f9f4541e78dec4cbbc5279e6f26a80,
+    type: 3}
+  m_PrefabInstance: {fileID: 7529173753531876330}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &6115407764129770242 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -4854118063707477784, guid: f4f9f4541e78dec4cbbc5279e6f26a80,
     type: 3}
   m_PrefabInstance: {fileID: 7529173753531876330}
   m_PrefabAsset: {fileID: 0}
