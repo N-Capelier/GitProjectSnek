@@ -11,7 +11,7 @@ namespace Player.Spells
     /// </summary>
     public class PoppySpell : PlayerSpell
     {
-        public GameObject bomb;
+        public GameObject bomb, kettleRenderer;
         public float animCooldown, throwSpeed, offset;
         public override IEnumerator SpellCast(PlayerDirection spellDirection)
         {
@@ -25,16 +25,16 @@ namespace Player.Spells
             switch (spellDirection)
             {
                 case PlayerDirection.Up:
-                    cauldron.transform.GetChild(1).gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                    cauldron.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
                     break;
                 case PlayerDirection.Down:
-                    cauldron.transform.GetChild(1).gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                    cauldron.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
                     break;
                 case PlayerDirection.Left:
-                    cauldron.transform.GetChild(1).gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 270, 0));
+                    cauldron.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 270, 0));
                     break;
                 case PlayerDirection.Right:
-                    cauldron.transform.GetChild(1).gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
+                    cauldron.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
                     break;
             }
             yield return new WaitForSeconds(0.245f); // Must be equal to 0.245f
