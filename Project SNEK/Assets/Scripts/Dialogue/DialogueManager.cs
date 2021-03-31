@@ -15,7 +15,7 @@ namespace DialogueManagement
 
         [SerializeField] TextMeshProUGUI nameText;
         [SerializeField] TextMeshProUGUI dialogueText;
-        [SerializeField] Image dialogueArrow;
+        [SerializeField] Image dialogueArrow, fadeBackground;
         [SerializeField] GameObject canvas;
         [SerializeField] GameObject DialogueBox,SkillTreeBox, LevelAccessBox;
         Dialogue currentDialogue;
@@ -167,11 +167,13 @@ namespace DialogueManagement
 
         public void OpenSkillTree()
         {
+            ActivateFadeBackground();
             SkillTreeBox.transform.LeanScale(Vector3.one,0.3f);
         }
 
         public void CloseSkillTree()
         {
+            DeactivateFadeBackground();
             SkillTreeBox.transform.LeanScale(Vector3.zero, 0.3f);
             if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
             {
@@ -181,13 +183,14 @@ namespace DialogueManagement
 
         public void OpenLevelAccess()
         {
+            ActivateFadeBackground();
             LevelAccessBox.transform.LeanScale(Vector3.one, 0.2f);
         }
 
         public void CloseLevelAcces()
         {
+            DeactivateFadeBackground();
             LevelAccessBox.transform.LeanScale(Vector3.zero, 0.2f);
-            InteractionManager.Instance.EndInteraction();
             if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
             {
                 InteractionManager.Instance.EndInteraction();
@@ -202,6 +205,16 @@ namespace DialogueManagement
         public void CloseBox(GameObject box)
         {
             box.LeanScale(Vector3.zero, 0.2f);
+        }
+
+        public void ActivateFadeBackground()
+        {
+            fadeBackground.enabled = true;
+        }
+
+        public void DeactivateFadeBackground()
+        {
+            fadeBackground.enabled = false;
         }
 
         public void NextLineFeedback()
