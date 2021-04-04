@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 using Player.Attack;
 using Player.Spirits;
 using Rendering.Run;
@@ -47,6 +48,9 @@ namespace Player.Controller
         public GameObject objectRenderer;
         public GameObject deathFx;
         public Animator animator;
+
+        [SerializeField] GameObject hpUi;
+        [SerializeField] TextMeshProUGUI hpText;
 
         public virtual void Awake()
         {
@@ -97,6 +101,7 @@ namespace Player.Controller
             transform.position = checkPoint.position;
             RunCamController.Instance.Set(CamState.PlayerScrolling, true);
             isDead = false;
+            StartCoroutine(DisplayHp());
             //play respawn anim
 
         }
@@ -110,6 +115,15 @@ namespace Player.Controller
             yield return new WaitForSeconds(1f);
             GameManagement.GameManager.Instance.gameState.Set(GameManagement.GameState.Hub, "Hub");
             isDead = false;
+        }
+
+        IEnumerator DisplayHp()
+        {
+            hpUi.transform.LeanScale(Vector3.one, 0.3f);
+            hpText.text = currentHP.ToString();
+            yield return new WaitForSeconds(2f);
+            hpUi.transform.LeanScale(Vector3.zero, 0.1f);
+
         }
     }
 }
