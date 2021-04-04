@@ -18,6 +18,8 @@ namespace Player.Controller
         public delegate void PlayerChangingDirection();
         public static event PlayerChangingDirection PlayerChangedDirection;
 
+        public GameObject techniqueFx;
+
         private void Start()
         {
             animator = objectRenderer.GetComponent<Animator>();
@@ -160,7 +162,8 @@ namespace Player.Controller
                 PlayerManager.Instance.currentController.animator.SetLayerWeight(1, _weight);
                 yield return new WaitForEndOfFrame();
             }
-            yield break;
+            techniqueFx.GetComponent<ParticleSystem>().Play();
+            yield break;            
         }
 
 
