@@ -53,8 +53,8 @@ namespace Player.Controller
                     agent.acceleration = baseAcceleration * 60f;
                     break;
                 case float value when (value >= 14f):
-                    agent.speed = baseMoveSpeed * 10f;
-                    agent.angularSpeed = baseAngularSpeed * 10f;
+                    agent.speed = baseMoveSpeed * 6f;
+                    agent.angularSpeed = baseAngularSpeed * 6f;
                     agent.acceleration = baseAcceleration * 60f;
                     break;
                 default:

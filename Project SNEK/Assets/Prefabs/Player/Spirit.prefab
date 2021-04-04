@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8884366066764182600}
-  - component: {fileID: 8404070010631220650}
   - component: {fileID: 4445532014965824870}
+  - component: {fileID: 8404070010631220650}
   m_Layer: 13
   m_Name: Spirit
   m_TagString: Untagged
@@ -33,6 +33,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4445532014965824870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3918676401501032799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6c13649de8a57145a55f6e7fcd9b9f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 8404070010631220650}
+  objectRenderer: {fileID: 4114073114683907801}
+  animator: {fileID: 5163178086888373406}
+  nextSpirit: {fileID: 0}
 --- !u!54 &8404070010631220650
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -49,21 +65,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 1
---- !u!114 &4445532014965824870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3918676401501032799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6c13649de8a57145a55f6e7fcd9b9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 8404070010631220650}
-  objectRenderer: {fileID: 4114073114683907801}
-  nextSpirit: {fileID: 0}
 --- !u!1 &4114073114683907801
 GameObject:
   m_ObjectHideFlags: 0

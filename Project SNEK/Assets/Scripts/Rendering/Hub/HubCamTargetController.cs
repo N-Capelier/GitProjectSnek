@@ -8,6 +8,7 @@ namespace Rendering.Hub
     public class HubCamTargetController : Singleton<HubCamTargetController>
     {
         [SerializeField] [Range(0f, 1000f)] float cameraSpeed = 20f;
+        [SerializeField] [Range(1f, 10f)] float horizontalSpeedModifier = 2f;
 
         [SerializeField] Rigidbody rb;
 
@@ -68,8 +69,9 @@ namespace Rendering.Hub
                 if(currentPos != lastPos && lastPos != Vector3.zero)
                 {
                     float _dist = Mathf.Abs(lastPos.magnitude - currentPos.magnitude);
-                    Vector3 _moveDir = new Vector3(lastPos.x - currentPos.x, 0, lastPos.y - currentPos.y);
-                    rb.velocity = _moveDir.normalized * Time.fixedDeltaTime * cameraSpeed * _dist * 0.1f;
+                    Vector3 _moveDir = new Vector3(lastPos.x - currentPos.x, 0, lastPos.y - currentPos.y).normalized;
+                    _moveDir = new Vector3(_moveDir.x * horizontalSpeedModifier, _moveDir.y, _moveDir.z);
+                    rb.velocity = _moveDir * Time.fixedDeltaTime * cameraSpeed * _dist * 0.1f;
                 }
                 else
                 {

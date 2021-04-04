@@ -9,8 +9,9 @@ namespace Player.Spirits
         [SerializeField] Rigidbody rb;
         public GameObject objectRenderer;
         PlayerDirection currentDir;
+        [SerializeField] Animator animator;
 
-       [SerializeField] SpiritBehaviour nextSpirit;
+        [SerializeField] SpiritBehaviour nextSpirit;
 
         private void Start()
         {
@@ -87,7 +88,7 @@ namespace Player.Spirits
         public IEnumerator Death()
         {
             //Play death anim
-            
+
             //Prevenir Nico quand on change la durée
             yield return new WaitForSeconds(1f);
             objectRenderer.SetActive(false);
