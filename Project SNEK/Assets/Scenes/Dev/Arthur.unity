@@ -188,43 +188,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8698579666212168705, guid: 7db965e1f2dd9d5439f487294485423a,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: be36b9ba4559bdb4f9b8ddb2f3f7e3d2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7db965e1f2dd9d5439f487294485423a, type: 3}
---- !u!1 &208938475
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 208938476}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &208938476
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 208938475}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 608581872}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &235229476
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,58 +282,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &608581870 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8031613304906138026, guid: 7db965e1f2dd9d5439f487294485423a,
-    type: 3}
-  m_PrefabInstance: {fileID: 130303944}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &608581871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 608581870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83a293024feb5fb4c8ec5b84d7f4b1ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouchou: {fileID: 8279638549549940434, guid: 26592478d375c1946967c3e46874f588, type: 3}
-  targetMarker: {fileID: 6290763546214934805, guid: b39182895c50de04893ac59f76f00c33,
-    type: 3}
-  targetMarkerLong: {fileID: 2205359310551806112, guid: 6d60be62d5066da48b970ea24d928d94,
-    type: 3}
-  patternPos: {fileID: 208938475}
-  pattern:
-    row:
-    - column: 000001000000010000
-    - column: 000001000000010000
-    - column: 000001010101010000
-    - column: 000000000000000000
-    - column: 000000000000000000
-    - column: 000000000000000000
-    - column: 000000000000000000
-    - column: 000000000000000000
-    - column: 000000000000000000
-  labyrinth:
-    row:
-    - column: 000000010101000000
-    - column: 000000000101000000
-    - column: 000000000101000000
-    - column: 000101010101000000
-    - column: 000101010101000000
-    - column: 000101000000000000
-    - column: 000101010101010000
-    - column: 000101010101010000
-    - column: 000000000001010000
---- !u!4 &608581872 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8031613304906138029, guid: 7db965e1f2dd9d5439f487294485423a,
-    type: 3}
-  m_PrefabInstance: {fileID: 130303944}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &743072264
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10784,6 +10697,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 118600328355578848, guid: 18334a4e0c5ade649b759cba7ca5e1ec,
+        type: 3}
+      propertyPath: startingState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4038936144866316188, guid: 18334a4e0c5ade649b759cba7ca5e1ec,
         type: 3}
       propertyPath: m_Name
@@ -11136,6 +11054,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RunCam Controller
       objectReference: {fileID: 0}
+    - target: {fileID: 4801665362650951140, guid: 1fcaf01ca1ef8eb499becf4b967a2127,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.375
+      objectReference: {fileID: 0}
     - target: {fileID: 6085007838338155285, guid: 1fcaf01ca1ef8eb499becf4b967a2127,
         type: 3}
       propertyPath: startingState
@@ -11292,7 +11215,12 @@ PrefabInstance:
     - target: {fileID: 8511547965542543829, guid: 60f042812707f4b40ac9a3153a6bb65f,
         type: 3}
       propertyPath: gameState
-      value: 5
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8511547965542543829, guid: 60f042812707f4b40ac9a3153a6bb65f,
+        type: 3}
+      propertyPath: forceState
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9129282097385698128, guid: 60f042812707f4b40ac9a3153a6bb65f,
         type: 3}
