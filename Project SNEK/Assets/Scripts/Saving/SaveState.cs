@@ -8,6 +8,12 @@ namespace Saving
     {
 
 
-
+        /// <summary>
+        /// 0 is null,
+        /// 1 is Swift,
+        /// 2 is Beam,
+        /// 3 is Shield
+        /// </summary>
+        public int equipedTechnic = 0;
     }
 }
