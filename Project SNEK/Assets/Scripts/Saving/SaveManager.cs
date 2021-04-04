@@ -23,13 +23,15 @@ namespace Saving
         {
             if(PlayerPrefs.HasKey("save"))
             {
-                state = Serializer.Deserialize<SaveState>(PlayerPrefs.GetString("save"));
+                //Activate when stable
+                //state = Serializer.Deserialize<SaveState>(PlayerPrefs.GetString("save"));
+                state = new SaveState();
             }
             else
             {
                 Debug.Log("Creating save");
                 state = new SaveState();
-                Save();
+                //Save();
             }
         }
     }
