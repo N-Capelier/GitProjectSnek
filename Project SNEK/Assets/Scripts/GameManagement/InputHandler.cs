@@ -26,7 +26,7 @@ namespace GameManagement
 
         [SerializeField] [Range(0, 500)] float deadzone = 100f;
         [SerializeField] [Range(0, 1)] float tapTimerDuration = 0.1f;
-        [SerializeField] [Range(0f, 5f)] float holdTimerDuration = 2f;
+        [SerializeField] [Range(0f, 5f)] float holdTimerDuration = 0.6f;
         float sqrDeadzone;
 
         Vector2 startPos;

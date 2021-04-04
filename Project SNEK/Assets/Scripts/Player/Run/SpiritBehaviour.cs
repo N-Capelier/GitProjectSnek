@@ -87,8 +87,8 @@ namespace Player.Spirits
         public IEnumerator Death()
         {
             //Play death anim
-
-
+            
+            //Prevenir Nico quand on change la durée
             yield return new WaitForSeconds(1f);
             objectRenderer.SetActive(false);
         }

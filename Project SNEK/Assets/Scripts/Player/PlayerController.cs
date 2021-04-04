@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Player.Attack;
@@ -89,11 +90,16 @@ namespace Player.Controller
             objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_death");
             AudioManager.Instance.PlaySoundEffect("PlayerHit");
             yield return new WaitForSeconds(1.5f);
-            PlayerManager.Instance.gameObject.SetActive(false);
-            /*AsyncOperation _loadingScene = */SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            PlayerManager.Instance.gameObject.SetActive(false);            
+            /*AsyncOperation _loadingScene = */
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             //yield return new WaitUntil(() => _loadingScene.isDone);
             PlayerManager.Instance.gameObject.SetActive(true);
             PlayerManager.Instance.currentController.playerRunSpirits.ResetSpiritsPositions();
+            for (int i = 0; i < PlayerManager.Instance.currentController.playerRunSpirits.spiritChain.Count; i++)
+            {
+                PlayerManager.Instance.currentController.playerRunSpirits.spiritChain[i].objectRenderer.SetActive(false);
+            }
             transform.position = checkPoint.position;
             RunCamController.Instance.Set(CamState.PlayerScrolling, true);
             isDead = false;
