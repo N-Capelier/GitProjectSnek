@@ -1,5 +1,17 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4422049635511813316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3797734115914040471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f936889224bae2429f728392abf48d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7931194014289652183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18,18 +30,6 @@ MonoBehaviour:
   deadByTime: 1
   timeToDeath: 5
   trail: {fileID: 3531285954011937215}
---- !u!114 &-4422049635511813316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3797734115914040471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f936889224bae2429f728392abf48d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &890541290801514550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -102,6 +102,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: poisonTrail
       objectReference: {fileID: 0}
+    - target: {fileID: 4420972739058200975, guid: 873ebc127df771a4894bea3255316b03,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 873ebc127df771a4894bea3255316b03, type: 3}
 --- !u!198 &3531285954011937215 stripped
@@ -121,6 +126,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Vomi
+      objectReference: {fileID: 0}
+    - target: {fileID: 911706925449186138, guid: e01d7d008b5940242a36d45cd2abfbb0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 911706925449186139, guid: e01d7d008b5940242a36d45cd2abfbb0,
         type: 3}

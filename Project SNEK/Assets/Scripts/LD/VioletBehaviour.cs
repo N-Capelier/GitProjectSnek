@@ -20,10 +20,11 @@ public class VioletBehaviour : MonoBehaviour
         poisonFx.Play();
         yield return new WaitForSeconds(SpawnTime);
         poisonSmoke.SetActive(true);
+        poisonSmoke.GetComponent<Collider>().enabled = true;
         poisonFx.Stop();
-        yield return new WaitForSeconds(poisonDuration - 0.5f);
-        poisonSmoke.gameObject.transform.GetComponentInChildren<ParticleSystem>().Stop();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(poisonDuration);
+        poisonSmoke.GetComponent<Collider>().enabled = false;
+        yield return new WaitForSeconds(1f);
         poisonSmoke.SetActive(false);
         StartCoroutine(RecoverPoison(Random.Range(Random1,Random2)));
     }

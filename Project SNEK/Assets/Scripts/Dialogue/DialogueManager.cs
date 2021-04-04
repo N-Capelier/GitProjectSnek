@@ -17,7 +17,7 @@ namespace DialogueManagement
         [SerializeField] TextMeshProUGUI dialogueText;
         [SerializeField] Image dialogueArrow, fadeBackground;
         [SerializeField] GameObject canvas;
-        [SerializeField] GameObject DialogueBox,SkillTreeBox, LevelAccessBox;
+        [SerializeField] GameObject DialogueBox,SkillTreeBox, LevelAccessBox,LetterBox;
         Dialogue currentDialogue;
         bool isRunningDialogue;
         bool isSpeaking;
@@ -37,6 +37,7 @@ namespace DialogueManagement
             DialogueBox.transform.localPosition = new Vector3(0, -Screen.height * dialogBoxOffset);
             SkillTreeBox.transform.localScale = Vector3.zero;
             LevelAccessBox.transform.localScale = Vector3.zero;
+            LetterBox.transform.localScale = Vector3.zero;
             //canvas.SetActive(false);
             InputHandler.InputReceived += OnTap;
         }
@@ -195,6 +196,22 @@ namespace DialogueManagement
             {
                 InteractionManager.Instance.EndInteraction();
             }
+        }
+
+        public void OpenLetterBox()
+        {
+            ActivateFadeBackground();
+            LetterBox.transform.LeanScale(Vector3.one, 0.2f);
+        }
+
+        public void CloseLetterBox()
+        {
+                DeactivateFadeBackground();
+                LetterBox.transform.LeanScale(Vector3.zero, 0.2f);
+                if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
+                {
+                    InteractionManager.Instance.EndInteraction();
+                }
         }
 
         public void OpenBox(GameObject box)

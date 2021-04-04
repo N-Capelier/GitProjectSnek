@@ -25,7 +25,9 @@ namespace Wall
 
         IEnumerator DeathByTime(float time)
         {
-            yield return new WaitForSeconds(time + 1);
+            yield return new WaitForSeconds(time);
+            gameObject.GetComponent<Collider>().enabled = false;
+            yield return new WaitForSeconds(2);
             Destroy(gameObject);
         }
     }

@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 8273527212505076261}
   - component: {fileID: 6599001624096640853}
   - component: {fileID: 571960703023224847}
-  m_Layer: 10
+  m_Layer: 16
   m_Name: VioletPoison
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,12 +170,12 @@ PrefabInstance:
     - target: {fileID: 5459239460560298895, guid: d15923e23a6908743aaad115cfb18159,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.267
       objectReference: {fileID: 0}
     - target: {fileID: 5459239460560298895, guid: d15923e23a6908743aaad115cfb18159,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5459239460560298895, guid: d15923e23a6908743aaad115cfb18159,
         type: 3}
@@ -246,7 +246,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f30b2a7e84838ea4f9d09c1912dae62b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f30b2a7e84838ea4f9d09c1912dae62b,
         type: 3}
@@ -321,17 +321,37 @@ PrefabInstance:
     - target: {fileID: 4420972739058200969, guid: 873ebc127df771a4894bea3255316b03,
         type: 3}
       propertyPath: looping
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4420972739058200969, guid: 873ebc127df771a4894bea3255316b03,
         type: 3}
       propertyPath: lengthInSec
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4420972739058200969, guid: 873ebc127df771a4894bea3255316b03,
         type: 3}
       propertyPath: moveWithTransform
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4420972739058200969, guid: 873ebc127df771a4894bea3255316b03,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.atime1
+      value: 52428
+      objectReference: {fileID: 0}
+    - target: {fileID: 4420972739058200969, guid: 873ebc127df771a4894bea3255316b03,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.ctime0
+      value: 52428
+      objectReference: {fileID: 0}
+    - target: {fileID: 4420972739058200969, guid: 873ebc127df771a4894bea3255316b03,
+        type: 3}
+      propertyPath: InitialModule.startColor.minGradient.atime1
+      value: 52428
+      objectReference: {fileID: 0}
+    - target: {fileID: 4420972739058200969, guid: 873ebc127df771a4894bea3255316b03,
+        type: 3}
+      propertyPath: InitialModule.startColor.minGradient.ctime0
+      value: 52428
       objectReference: {fileID: 0}
     - target: {fileID: 4420972739058200970, guid: 873ebc127df771a4894bea3255316b03,
         type: 3}
@@ -346,12 +366,12 @@ PrefabInstance:
     - target: {fileID: 4420972739058200970, guid: 873ebc127df771a4894bea3255316b03,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.404
       objectReference: {fileID: 0}
     - target: {fileID: 4420972739058200970, guid: 873ebc127df771a4894bea3255316b03,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4420972739058200970, guid: 873ebc127df771a4894bea3255316b03,
         type: 3}
@@ -396,7 +416,7 @@ PrefabInstance:
     - target: {fileID: 4420972739058200975, guid: 873ebc127df771a4894bea3255316b03,
         type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 873ebc127df771a4894bea3255316b03, type: 3}
