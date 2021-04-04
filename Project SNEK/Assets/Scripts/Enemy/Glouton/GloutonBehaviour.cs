@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Enemy
@@ -27,6 +28,8 @@ namespace Enemy
         public EnemyAttackPattern pattern;
         public EnemyAttackPattern pattern2;
         int patternRotation = 0;
+
+        List<GameObject> incomingBombs;
 
         // Start is called before the first frame update
         void Start()
@@ -60,16 +63,19 @@ namespace Enemy
         }
 
 
-
+        GameObject marker;
 
         void TargetCell()
         {
+            incomingBombs = new List<GameObject>();
+
             if (random == true)
             {
                 for (int i = 0; i < targetNumber; i++)
                 {
                     targetPos = new Vector3(transform.position.x - Random.Range(-3, 3), 0, transform.position.z - Random.Range(1, 5));
-                    Instantiate(targetMarker, targetPos, Quaternion.identity);
+                    marker = Instantiate(targetMarker, targetPos, Quaternion.identity);
+                    incomingBombs.Add(marker);
                 }
             }
             else if (doublePattern == false)
@@ -80,7 +86,8 @@ namespace Enemy
                     {
                         if (pattern.row[x].column[y] == true)
                         {
-                            Instantiate(targetMarker, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x))), Quaternion.identity);
+                            marker = Instantiate(targetMarker, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x))), Quaternion.identity);
+                            incomingBombs.Add(marker);
                         }
                     }
                 }
@@ -95,7 +102,8 @@ namespace Enemy
                         {
                             if (pattern.row[x].column[y] == true)
                             {
-                                Instantiate(targetMarker, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x))), Quaternion.identity);
+                                marker = Instantiate(targetMarker, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x))), Quaternion.identity);
+                                incomingBombs.Add(marker);
                             }
                         }
                     }
@@ -109,7 +117,8 @@ namespace Enemy
                         {
                             if (pattern2.row[x].column[y] == true)
                             {
-                                Instantiate(targetMarker, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x))), Quaternion.identity);
+                                marker = Instantiate(targetMarker, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x))), Quaternion.identity);
+                                incomingBombs.Add(marker);
                             }
                         }
                     }
@@ -121,6 +130,10 @@ namespace Enemy
         private void OnDestroy()
         {
             stats.attackClock.ClockEnded -= OnShouldAttack;
+            for (int i = 0; i < incomingBombs.Count; i++)
+            {
+                Destroy(incomingBombs[i]);
+            }
         }
 
     }
