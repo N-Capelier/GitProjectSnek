@@ -21,7 +21,7 @@ namespace GameManagement.GameStates
             GameObject _newController = Instantiate(PlayerManager.Instance.runPlayer, PlayerManager.Instance.transform);
             PlayerManager.Instance.currentController = _newController.GetComponent<PlayerController>();
             PlayerManager.Instance.currentController.Init(0); //Add bonus HP from HUB
-            PlayerManager.Instance.currentController.transform.position = MapGrid.Instance.GetWorldPos(4, 0);
+            PlayerManager.Instance.currentController.transform.position = MapGrid.Instance.GetWorldPos(5, 0);
             RunCamController.Instance.Set(CamState.PlayerScrolling);
             if (runMusic == null)
             {
