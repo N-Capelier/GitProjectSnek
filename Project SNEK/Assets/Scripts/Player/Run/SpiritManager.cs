@@ -37,10 +37,10 @@ namespace Player.Spirits
             }
         }
 
-        void OnPlayerChangingDirection()
+        void OnPlayerChangingDirection(PlayerDirection _dir)
         {
-            nextDir = PlayerManager.Instance.currentController.currentDirection;
-            spiritChain[0].SetDirection(nextDir);
+            Debug.Log("Player changed cell");
+            spiritChain[0].SetDirection(_dir);
         }
 
 #if UNITY_EDITOR
