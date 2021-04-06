@@ -14,14 +14,17 @@ namespace Boss
         public GameObject targetMarkerLong;
         public GameObject patternPos;
         public GameObject targetFeedback;
-        //Transform targetPos;
+        public GameObject cam;
+        [SerializeField] float camDistance;
 
         Clock bombClock;
+        Rigidbody rb;
 
         //int patternOrder = 0;
         int patternCount = 0;
         [SerializeField] float timeToBomb;
         public float speed = 3;
+        float moveSpeed = 3;
         bool bombOver = false;
         //bool canBeHit = false;
         bool canDoPattern = true;
@@ -33,9 +36,21 @@ namespace Boss
 
         [SerializeField] Vector3 targetVec;
 
+
+        private void Start()
+        {
+            rb = GetComponent<Rigidbody>();
+        }
+
         // Update is called once per frame
         void Update()
         {
+            if((gameObject.transform.position.z - cam.transform.position.z) < camDistance)
+            {
+                rb.velocity = new Vector3(0, 0, moveSpeed);
+            }
+
+            gameObject.transform.position = new Vector3(4, 0, cam.transform.position.z + camDistance);
             
             if (canDoPattern)
             {
@@ -67,16 +82,16 @@ namespace Boss
             timeToBomb = Random.Range(4, 8);
             bombClock = new Clock(timeToBomb);
             bombClock.ClockEnded += EndTimeBomb;
-            Vector3 pos1 = new Vector3(targetFeedback.transform.position.x -2, targetFeedback.transform.position.y, targetFeedback.transform.position.z);
-            Vector3 pos2 = new Vector3(targetFeedback.transform.position.x + 2, targetFeedback.transform.position.y, targetFeedback.transform.position.z);
-            targetFeedback.transform.position = new Vector3(Random.Range(pos1.x, pos2.x), targetFeedback.transform.position.y, targetFeedback.transform.position.z);
+            Vector3 pos1 = new Vector3(targetFeedback.transform.localPosition.x - 2, targetFeedback.transform.localPosition.y, gameObject.transform.localPosition.z -13);
+            Vector3 pos2 = new Vector3(targetFeedback.transform.localPosition.x + 2, targetFeedback.transform.localPosition.y, gameObject.transform.localPosition.z -13);
+            targetFeedback.transform.localPosition = new Vector3(Random.Range(pos1.x, pos2.x), targetFeedback.transform.localPosition.y, gameObject.transform.localPosition.z -13);
 
             while (bombOver == false)
             {                
-                targetFeedback.transform.position = Vector3.Lerp(pos1, pos2, (Mathf.Sin(Time.time * speed) +1) /2);                
+                targetFeedback.transform.localPosition = Vector3.Lerp(pos1, pos2, (Mathf.Sin(Time.time * speed) +1) /2);                
                 yield return new WaitForEndOfFrame();
             }
-            targetVec = new Vector3(targetFeedback.transform.position.x, targetFeedback.transform.position.y, targetFeedback.transform.position.z);
+            targetVec = new Vector3(targetFeedback.transform.position.x, targetFeedback.transform.position.y, gameObject.transform.position.z);
             yield return new WaitForSeconds(1f);
             TargetCell();            
             targetFeedback.SetActive(false);            
@@ -100,7 +115,7 @@ namespace Boss
                 {
                     if (pattern.row[x].column[y] == true)
                     {
-                        Instantiate(targetMarker, (new Vector3(targetVec.x + y, targetVec.y, targetVec.z - x)), Quaternion.identity);
+                        Instantiate(targetMarker, (new Vector3(targetVec.x + y, targetVec.y, targetVec.z - x)), Quaternion.identity, gameObject.transform);
                     }
                 }
             }
@@ -115,7 +130,7 @@ namespace Boss
                 {
                     if (labyrinth.row[x].column[y] == false)
                     {
-                        Instantiate(targetMarkerLong, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x))), Quaternion.identity);
+                        Instantiate(targetMarkerLong, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x))), Quaternion.identity, gameObject.transform);
                     }
                 }
             }
