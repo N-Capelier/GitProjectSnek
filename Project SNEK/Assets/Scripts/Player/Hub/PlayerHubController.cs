@@ -63,8 +63,11 @@ namespace Player.Controller
 
             if (actions == 0)
             {
-                agent.destination = target.position;
-                animator.SetFloat("Distance", distanceFromDestination);
+                if(agent != null && target != null)
+                {
+                    agent.destination = target.position;
+                    animator.SetFloat("Distance", distanceFromDestination);
+                }
             }
         }
     }

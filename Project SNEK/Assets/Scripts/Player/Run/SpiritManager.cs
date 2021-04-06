@@ -39,7 +39,6 @@ namespace Player.Spirits
 
         void OnPlayerChangingDirection(PlayerDirection _dir)
         {
-            Debug.Log("Player changed cell");
             spiritChain[0].SetDirection(_dir);
         }
 
