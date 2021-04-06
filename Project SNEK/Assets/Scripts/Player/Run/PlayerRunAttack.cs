@@ -134,7 +134,7 @@ namespace Player.Attack
             canAttack = true;
         }
 
-        void OnChangeDirection()
+        void OnChangeDirection(PlayerDirection _dir)
         {
             if (attackCoroutine == null)
                 return;

@@ -15,7 +15,7 @@ namespace Player.Controller
         Vector3 nextNode;
         
 
-        public delegate void PlayerChangingDirection();
+        public delegate void PlayerChangingDirection(PlayerDirection direction);
         public static event PlayerChangingDirection PlayerChangedDirection;
 
         public GameObject techniqueFx;
@@ -92,7 +92,7 @@ namespace Player.Controller
                 AudioManager.Instance.PlaySoundEffect("PlayerSwipe01");
             }
 
-            PlayerChangedDirection?.Invoke();
+            PlayerChangedDirection?.Invoke(currentDirection);
 
             currentDirection = nextDirection;
             currentNode = nextNode;
