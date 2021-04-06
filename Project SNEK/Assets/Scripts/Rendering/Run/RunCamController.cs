@@ -19,10 +19,11 @@ namespace Rendering.Run
         public CinemachineVirtualCamera vcam;
         Animator animator;
         public CamState ActiveState { get; private set; }
-        [SerializeField] CamState startingState;
+        [SerializeField] CamState stateAutoApply;
         [Range(0f, 2f)] public float scrollSpeed;
         [HideInInspector] public Rigidbody rb;
         public GameObject deathZone;
+        [SerializeField] bool applyState;
 
         private void Awake()
         {
@@ -31,7 +32,7 @@ namespace Rendering.Run
             animator = GetComponent<Animator>();
             rb = vcam.gameObject.GetComponent<Rigidbody>();
 
-            Set(startingState, true);
+            //Set(startingState, true);
         }
 
         public void Set(CamState newState, bool forceState = false)
@@ -42,5 +43,18 @@ namespace Rendering.Run
                 ActiveState = newState;
             }
         }
+
+#if UNITY_EDITOR
+
+        private void Update()
+        {
+            if (applyState)
+            {
+                applyState = false;
+                Set(stateAutoApply);
+            }
+        }
+
+#endif
     }
 }
