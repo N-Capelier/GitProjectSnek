@@ -23,14 +23,25 @@ namespace Boss
         Clock bombClock;
         Rigidbody rb;
 
+        [SerializeField] float maxHp;
+        float currentHp;
+
         //int patternOrder = 0;
         int patternCount = 0;
-        [SerializeField] float timeToBomb;
+        float timeToBomb;
         public float speed = 3;
         float moveSpeed = 2.5f;
         bool bombOver = false;
         [SerializeField] bool canBeHit = false;
         bool canDoPattern = true;
+
+        [Space]
+        [SerializeField] MeshRenderer bodyRenderer;
+        [SerializeField] MeshRenderer handOneRenderer;
+        [SerializeField] MeshRenderer handTwoRenderer;
+        Material defaultMatBody;
+        Material defaultMatHands;
+        [SerializeField] Material hitMaterial;
 
         [Space]
         public EnemyAttackPattern pattern;
@@ -44,17 +55,18 @@ namespace Boss
         private void Start()
         {
             rb = GetComponent<Rigidbody>();
+            incomingBombs = new List<GameObject>();
         }
 
         // Update is called once per frame
         void Update()
         {
-            //UpdateMovement();
+            UpdateMovement();
             
-            if(shieldPos.transform.childCount <= 0 && canBeHit == false)
+            if(shieldPos.transform.childCount == 0 && canBeHit == false)
             {
                 canBeHit = true;
-                StopAllCoroutines();
+                StopPatterns();
                 StartCoroutine(Stun());
             }
 
@@ -81,11 +93,10 @@ namespace Boss
         
         IEnumerator PatternBomb()
         {
-
-            //canBeHit = false;
             targetFeedback.SetActive(true);
             targetFeedback.transform.localPosition = new Vector3(0, 0.3f, -1.5f); 
             timeToBomb = Random.Range(4, 8);
+            bombOver = false;
             bombClock = new Clock(timeToBomb);
             bombClock.ClockEnded += EndTimeBomb;
             Vector3 pos1 = new Vector3(targetFeedback.transform.localPosition.x - 2, targetFeedback.transform.localPosition.y, gameObject.transform.localPosition.z -13);
@@ -97,6 +108,7 @@ namespace Boss
                 targetFeedback.transform.localPosition = Vector3.Lerp(pos1, pos2, (Mathf.Sin(Time.time * speed) +1) /2);                
                 yield return new WaitForEndOfFrame();
             }
+
             targetVec = new Vector3(targetFeedback.transform.position.x, targetFeedback.transform.position.y, gameObject.transform.position.z);
             yield return new WaitForSeconds(1f);
             TargetCell();            
@@ -113,18 +125,20 @@ namespace Boss
             canDoPattern = true;
         }
 
+        GameObject marker;
+
         void TargetCell()
         {
             incomingBombs = new List<GameObject>();
-
+            
             for (int x = 0; x < pattern.row.Length; x++)
             {
                 for (int y = 0; y < pattern.row[x].column.Length; y++)
                 {
                     if (pattern.row[x].column[y] == true)
                     {
-                        Instantiate(targetMarker, (new Vector3(targetVec.x + y, targetVec.y, targetVec.z - x)), Quaternion.identity, gameObject.transform);
-                        incomingBombs.Add(targetMarker);
+                        marker = Instantiate(targetMarker, (new Vector3(targetVec.x + y, targetVec.y, targetVec.z - x -1)), Quaternion.identity, gameObject.transform);
+                        incomingBombs.Add(marker);
                     }
                 }
             }
@@ -141,8 +155,8 @@ namespace Boss
                 {
                     if (labyrinth.row[x].column[y] == false)
                     {
-                        Instantiate(targetMarkerLong, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x))), Quaternion.identity, gameObject.transform);
-                        incomingBombs.Add(targetMarkerLong);
+                        marker = Instantiate(targetMarkerLong, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x))), Quaternion.identity, gameObject.transform);
+                        incomingBombs.Add(marker);
                     }
                 }
             }
@@ -164,9 +178,10 @@ namespace Boss
 
         IEnumerator Stun()
         {            
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(7);
             Instantiate(shield, shieldPos.transform.position, Quaternion.identity, shieldPos.transform);
             canBeHit = false;
+            canDoPattern = true;
         }
 
         void EndTimeBomb()
@@ -181,10 +196,12 @@ namespace Boss
                 if ((gameObject.transform.position.z - cam.transform.position.z) < camDistance)
                 {
                     rb.velocity = new Vector3(0, 0, moveSpeed);
+                    return;
                 }
                 else
                 {
                     rb.velocity = new Vector3(0, 0, 0);
+                    return;
                 }
             }
             else
@@ -194,12 +211,43 @@ namespace Boss
         void StopPatterns()
         {
             StopAllCoroutines();            
-            targetFeedback.gameObject.SetActive(false);            
+            targetFeedback.SetActive(false);
+            patternCount = 0;
 
-            for (int i = 0; i < incomingBombs.Count; i++)
+            if(incomingBombs.Count > 0)
             {
-                Destroy(incomingBombs[i]);
+                for (int i = 0; i < incomingBombs.Count; i++)
+                {
+                    Destroy(incomingBombs[i]);
+                }
+            }           
+        }
+
+        public void TakeDamage(float damage)
+        {
+            currentHp -= damage;
+
+            if (currentHp > 0)
+            {
+                StartCoroutine(HitFeedback());
+                //Instantiate(hitFx, transform.position, Quaternion.identity);
             }
+        }
+
+        IEnumerator HitFeedback()
+        {
+            defaultMatBody = bodyRenderer.material;
+            defaultMatHands = handOneRenderer.material;
+
+            bodyRenderer.material = hitMaterial;
+            handOneRenderer.material = hitMaterial;
+            handTwoRenderer.material = hitMaterial;
+
+            yield return new WaitForSeconds(0.1f);
+
+            bodyRenderer.material = defaultMatBody;
+            handOneRenderer.material = defaultMatHands;
+            handTwoRenderer.material = defaultMatHands;
         }
     }
 }
