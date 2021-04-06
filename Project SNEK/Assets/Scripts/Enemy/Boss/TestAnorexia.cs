@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Enemy;
+using Player.Spells;
 using Map;
 
 namespace Boss
@@ -15,6 +16,8 @@ namespace Boss
         public GameObject patternPos;
         public GameObject targetFeedback;
         public GameObject cam;
+        public GameObject shield;
+        public GameObject shieldPos;
         [SerializeField] float camDistance;
 
         Clock bombClock;
@@ -24,15 +27,16 @@ namespace Boss
         int patternCount = 0;
         [SerializeField] float timeToBomb;
         public float speed = 3;
-        float moveSpeed = 3;
+        float moveSpeed = 2.5f;
         bool bombOver = false;
-        //bool canBeHit = false;
+        [SerializeField] bool canBeHit = false;
         bool canDoPattern = true;
 
         [Space]
         public EnemyAttackPattern pattern;
         [Space]
         public EnemyAttackPattern labyrinth;
+        List<GameObject> incomingBombs;
 
         [SerializeField] Vector3 targetVec;
 
@@ -45,14 +49,16 @@ namespace Boss
         // Update is called once per frame
         void Update()
         {
-            if((gameObject.transform.position.z - cam.transform.position.z) < camDistance)
+            //UpdateMovement();
+            
+            if(shieldPos.transform.childCount <= 0 && canBeHit == false)
             {
-                rb.velocity = new Vector3(0, 0, moveSpeed);
+                canBeHit = true;
+                StopAllCoroutines();
+                StartCoroutine(Stun());
             }
 
-            gameObject.transform.position = new Vector3(4, 0, cam.transform.position.z + camDistance);
-            
-            if (canDoPattern)
+            if (canDoPattern && canBeHit == false)
             {
                 switch (patternCount)
                 {
@@ -109,6 +115,8 @@ namespace Boss
 
         void TargetCell()
         {
+            incomingBombs = new List<GameObject>();
+
             for (int x = 0; x < pattern.row.Length; x++)
             {
                 for (int y = 0; y < pattern.row[x].column.Length; y++)
@@ -116,6 +124,7 @@ namespace Boss
                     if (pattern.row[x].column[y] == true)
                     {
                         Instantiate(targetMarker, (new Vector3(targetVec.x + y, targetVec.y, targetVec.z - x)), Quaternion.identity, gameObject.transform);
+                        incomingBombs.Add(targetMarker);
                     }
                 }
             }
@@ -124,6 +133,8 @@ namespace Boss
 
         void TargetCellLabyrinth()
         {
+            incomingBombs = new List<GameObject>();
+
             for (int x = 0; x < labyrinth.row.Length; x++)
             {
                 for (int y = 0; y < labyrinth.row[x].column.Length; y++)
@@ -131,6 +142,7 @@ namespace Boss
                     if (labyrinth.row[x].column[y] == false)
                     {
                         Instantiate(targetMarkerLong, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x))), Quaternion.identity, gameObject.transform);
+                        incomingBombs.Add(targetMarkerLong);
                     }
                 }
             }
@@ -141,16 +153,53 @@ namespace Boss
         {
             yield return new WaitForSeconds(1f);
             Instantiate(mouchou, new Vector3(transform.position.x + Random.Range(-3, 3), transform.position.y, transform.position.z -1), Quaternion.identity);
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(2f);
             Instantiate(mouchou, new Vector3(transform.position.x + Random.Range(-3, 3), transform.position.y, transform.position.z -1), Quaternion.identity);
-            yield return new WaitForSeconds(4);
+            yield return new WaitForSeconds(2f);
+            Instantiate(mouchou, new Vector3(transform.position.x + Random.Range(-3, 3), transform.position.y, transform.position.z - 1), Quaternion.identity);
+            yield return new WaitForSeconds(2);
             patternCount = 0;
             canDoPattern = true;
+        }
+
+        IEnumerator Stun()
+        {            
+            yield return new WaitForSeconds(5);
+            Instantiate(shield, shieldPos.transform.position, Quaternion.identity, shieldPos.transform);
+            canBeHit = false;
         }
 
         void EndTimeBomb()
         {
             bombOver = true;
+        }
+
+        void UpdateMovement()
+        {
+            if (canBeHit == false)
+            {
+                if ((gameObject.transform.position.z - cam.transform.position.z) < camDistance)
+                {
+                    rb.velocity = new Vector3(0, 0, moveSpeed);
+                }
+                else
+                {
+                    rb.velocity = new Vector3(0, 0, 0);
+                }
+            }
+            else
+                rb.velocity = new Vector3(0, 0, 0);
+        }
+
+        void StopPatterns()
+        {
+            StopAllCoroutines();            
+            targetFeedback.gameObject.SetActive(false);            
+
+            for (int i = 0; i < incomingBombs.Count; i++)
+            {
+                Destroy(incomingBombs[i]);
+            }
         }
     }
 }
