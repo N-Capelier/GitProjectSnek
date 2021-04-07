@@ -22,7 +22,8 @@ namespace DialogueManagement
         bool isRunningDialogue;
         bool isSpeaking;
         bool isTapped;
-        float charDelay;
+        //float charDelay;
+        bool skipSentence = false;
         int sentenceIndex;
         Animator animator;
 
@@ -62,7 +63,7 @@ namespace DialogueManagement
         IEnumerator WriteNextLine()
         {
             isSpeaking = true;
-            charDelay = 0.05f;
+            //charDelay = 0.05f; //////
             if(currentDialogue.sentences[sentenceIndex].character == Character.Object)
             {
                 nameText.text = "";
@@ -92,10 +93,19 @@ namespace DialogueManagement
                 //Cacher l'ui des boutons
             }
             dialogueText.text = "";
+            skipSentence = false;
             foreach (char letter in currentDialogue.sentences[sentenceIndex].sentence.ToCharArray())
             {
                 dialogueText.text += letter;
-                yield return new WaitForSeconds(charDelay);
+                if(!skipSentence)
+                {
+                    yield return new WaitForSeconds(0.05f);
+                }
+                else
+                {
+                    dialogueText.text = currentDialogue.sentences[sentenceIndex].sentence;
+                    break;
+                }
             }
 
             NextLineFeedback();
@@ -128,7 +138,8 @@ namespace DialogueManagement
             {
                 if (isSpeaking)
                 {
-                    charDelay = 0f;
+                    //charDelay = 0f; //////
+                    skipSentence = true;
                 }
                 else if(sentenceIndex < currentDialogue.sentences.Length)
                 {
