@@ -8,6 +8,10 @@ namespace Saving
     {
         public int heartCoinAmount = 0;
 
+        public int bonusHealth = 0;
+        public int bonusRange = 0;
+        public int bonusPower = 0;
+
         /// <summary>
         /// 0 is null,
         /// 1 is Swift,
