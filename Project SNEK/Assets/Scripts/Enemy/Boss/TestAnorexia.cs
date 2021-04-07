@@ -22,6 +22,7 @@ namespace Boss
 
         Clock bombClock;
         Rigidbody rb;
+        Animator animator;
 
         [SerializeField] float maxHp;
         float currentHp;
@@ -36,9 +37,8 @@ namespace Boss
         bool canDoPattern = true;
 
         [Space]
-        [SerializeField] MeshRenderer bodyRenderer;
-        [SerializeField] MeshRenderer handOneRenderer;
-        [SerializeField] MeshRenderer handTwoRenderer;
+        [SerializeField] SkinnedMeshRenderer bodyRenderer;
+        [SerializeField] SkinnedMeshRenderer handsRenderer;
         Material defaultMatBody;
         Material defaultMatHands;
         [SerializeField] Material hitMaterial;
@@ -55,7 +55,9 @@ namespace Boss
         private void Start()
         {
             rb = GetComponent<Rigidbody>();
+            animator = GetComponent<Animator>();
             incomingBombs = new List<GameObject>();
+            currentHp = maxHp;            
         }
 
         // Update is called once per frame
@@ -93,6 +95,8 @@ namespace Boss
         
         IEnumerator PatternBomb()
         {
+            animator.SetInteger("animPatternCount", 1);
+            animator.SetBool("animIsAttacking", true);
             targetFeedback.SetActive(true);
             targetFeedback.transform.localPosition = new Vector3(0, 0.3f, -1.5f); 
             timeToBomb = Random.Range(4, 8);
@@ -109,6 +113,7 @@ namespace Boss
                 yield return new WaitForEndOfFrame();
             }
 
+            animator.SetBool("animIsAttacking", false);
             targetVec = new Vector3(targetFeedback.transform.position.x, targetFeedback.transform.position.y, gameObject.transform.position.z);
             yield return new WaitForSeconds(1f);
             TargetCell();            
@@ -120,8 +125,12 @@ namespace Boss
 
         IEnumerator PatternLabyrinth()
         {
+            animator.SetInteger("animPatternCount", 2);
+            animator.SetBool("animIsAttacking", true);
+            yield return new WaitForSeconds(0.5f);
             TargetCellLabyrinth();
-            yield return new WaitForSeconds(10);
+            animator.SetBool("animIsAttacking", false);
+            yield return new WaitForSeconds(9.5f);            
             canDoPattern = true;
         }
 
@@ -165,21 +174,31 @@ namespace Boss
 
         IEnumerator SpawnMouchou()
         {
+            animator.SetBool("animIsAttacking", true);
+            animator.SetInteger("animPatternCount", 3);
             yield return new WaitForSeconds(1f);
             Instantiate(mouchou, new Vector3(transform.position.x + Random.Range(-3, 3), transform.position.y, transform.position.z -1), Quaternion.identity);
             yield return new WaitForSeconds(2f);
+            animator.SetBool("animIsAttacking", false);
             Instantiate(mouchou, new Vector3(transform.position.x + Random.Range(-3, 3), transform.position.y, transform.position.z -1), Quaternion.identity);
             yield return new WaitForSeconds(2f);
-            Instantiate(mouchou, new Vector3(transform.position.x + Random.Range(-3, 3), transform.position.y, transform.position.z - 1), Quaternion.identity);
+            Instantiate(mouchou, new Vector3(transform.position.x + Random.Range(-3, 3), transform.position.y, transform.position.z - 1), Quaternion.identity);            
             yield return new WaitForSeconds(2);
+            
             patternCount = 0;
             canDoPattern = true;
         }
 
         IEnumerator Stun()
-        {            
+        {
+            animator.Play("BossAno_StunIn");
+            animator.SetBool("animIsStuned", true);
             yield return new WaitForSeconds(7);
             Instantiate(shield, shieldPos.transform.position, Quaternion.identity, shieldPos.transform);
+            animator.SetBool("animIsStuned", false);
+            animator.SetInteger("animPatternCount", 0);
+            animator.SetBool("animIsAttacking", false);
+
             canBeHit = false;
             canDoPattern = true;
         }
@@ -226,6 +245,7 @@ namespace Boss
         public void TakeDamage(float damage)
         {
             currentHp -= damage;
+            print(currentHp);
 
             if (currentHp > 0)
             {
@@ -237,17 +257,15 @@ namespace Boss
         IEnumerator HitFeedback()
         {
             defaultMatBody = bodyRenderer.material;
-            defaultMatHands = handOneRenderer.material;
+            defaultMatHands = handsRenderer.material;
 
             bodyRenderer.material = hitMaterial;
-            handOneRenderer.material = hitMaterial;
-            handTwoRenderer.material = hitMaterial;
+            handsRenderer.material = hitMaterial;
 
             yield return new WaitForSeconds(0.1f);
 
             bodyRenderer.material = defaultMatBody;
-            handOneRenderer.material = defaultMatHands;
-            handTwoRenderer.material = defaultMatHands;
+            handsRenderer.material = defaultMatHands;
         }
     }
 }
