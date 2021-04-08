@@ -30,7 +30,7 @@ namespace Boss
         //int patternOrder = 0;
         int patternCount = 0;
         float timeToBomb;
-        public float speed = 3;
+        public float feedbackPosSpeed;
         float moveSpeed = 2.5f;
         bool bombOver = false;
         [SerializeField] bool canBeHit = false;
@@ -79,6 +79,7 @@ namespace Boss
                     case 0:
                         canDoPattern = false;
                         StartCoroutine(PatternBomb());
+                        //StartCoroutine(SpawnMouchou());
                         return;
                     case 1:
                         canDoPattern = false;
@@ -99,7 +100,7 @@ namespace Boss
             animator.SetBool("animIsAttacking", true);
             targetFeedback.SetActive(true);
             targetFeedback.transform.localPosition = new Vector3(0, 0.3f, -1.5f); 
-            timeToBomb = Random.Range(4, 8);
+            timeToBomb = Random.Range(2, 4);
             bombOver = false;
             bombClock = new Clock(timeToBomb);
             bombClock.ClockEnded += EndTimeBomb;
@@ -109,16 +110,17 @@ namespace Boss
 
             while (bombOver == false)
             {                
-                targetFeedback.transform.localPosition = Vector3.Lerp(pos1, pos2, (Mathf.Sin(Time.time * speed) +1) /2);                
+                targetFeedback.transform.localPosition = Vector3.Lerp(pos1, pos2, (Mathf.Sin(Time.time * feedbackPosSpeed) +1) /2);                
                 yield return new WaitForEndOfFrame();
-            }
-
-            animator.SetBool("animIsAttacking", false);
+            }            
             targetVec = new Vector3(targetFeedback.transform.position.x, targetFeedback.transform.position.y, gameObject.transform.position.z);
-            yield return new WaitForSeconds(1f);
-            TargetCell();            
-            targetFeedback.SetActive(false);            
-            yield return new WaitForSeconds(10);
+            yield return new WaitForSeconds(0.2f);
+            StartCoroutine(TargetCell());
+            yield return new WaitForSeconds(0.2f);
+            targetFeedback.SetActive(false);
+            yield return new WaitForSeconds(2f);
+            animator.SetBool("animIsAttacking", false);                      
+            yield return new WaitForSeconds(5);
             bombOver = false;
             canDoPattern = true;
         }
@@ -127,16 +129,17 @@ namespace Boss
         {
             animator.SetInteger("animPatternCount", 2);
             animator.SetBool("animIsAttacking", true);
-            yield return new WaitForSeconds(0.5f);
-            TargetCellLabyrinth();
+            yield return new WaitForSeconds(0.1f);
             animator.SetBool("animIsAttacking", false);
-            yield return new WaitForSeconds(9.5f);            
+            yield return new WaitForSeconds(2f);
+            TargetCellLabyrinth();
+            yield return new WaitForSeconds(10f);            
             canDoPattern = true;
         }
 
         GameObject marker;
 
-        void TargetCell()
+        IEnumerator TargetCell()
         {
             incomingBombs = new List<GameObject>();
             
@@ -148,6 +151,7 @@ namespace Boss
                     {
                         marker = Instantiate(targetMarker, (new Vector3(targetVec.x + y, targetVec.y, targetVec.z - x -1)), Quaternion.identity, gameObject.transform);
                         incomingBombs.Add(marker);
+                        yield return new WaitForSeconds(0.1f);
                     }
                 }
             }
@@ -176,12 +180,12 @@ namespace Boss
         {
             animator.SetBool("animIsAttacking", true);
             animator.SetInteger("animPatternCount", 3);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(3f);
             Instantiate(mouchou, new Vector3(transform.position.x + Random.Range(-3, 3), transform.position.y, transform.position.z -1), Quaternion.identity);
-            yield return new WaitForSeconds(2f);
             animator.SetBool("animIsAttacking", false);
+            yield return new WaitForSeconds(2.5f);            
             Instantiate(mouchou, new Vector3(transform.position.x + Random.Range(-3, 3), transform.position.y, transform.position.z -1), Quaternion.identity);
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(2.5f);
             Instantiate(mouchou, new Vector3(transform.position.x + Random.Range(-3, 3), transform.position.y, transform.position.z - 1), Quaternion.identity);            
             yield return new WaitForSeconds(2);
             
@@ -194,12 +198,31 @@ namespace Boss
             animator.Play("BossAno_StunIn");
             animator.SetBool("animIsStuned", true);
             yield return new WaitForSeconds(7);
-            Instantiate(shield, shieldPos.transform.position, Quaternion.identity, shieldPos.transform);
+            if(shieldPos.transform.childCount == 0)
+            {
+                StunReset();
+            }            
+        }
+
+        GameObject shieldo;
+        void StunReset()
+        {
             animator.SetBool("animIsStuned", false);
             animator.SetInteger("animPatternCount", 0);
             animator.SetBool("animIsAttacking", false);
-
+            shieldo = Instantiate(shield, shieldPos.transform.position, Quaternion.identity, shieldPos.transform);
+            shieldo.SetActive(false);
+            moveSpeed = moveSpeed * 3;
             canBeHit = false;
+            StartCoroutine(InstantiateShield());            
+        }
+
+        IEnumerator InstantiateShield()
+        {
+            yield return new WaitForSeconds(1.7f);
+            shieldo.SetActive(true);            
+            moveSpeed = moveSpeed / 3;
+            yield return new WaitForSeconds(3);
             canDoPattern = true;
         }
 
@@ -250,7 +273,12 @@ namespace Boss
             if (currentHp > 0)
             {
                 StartCoroutine(HitFeedback());
+                StunReset();
                 //Instantiate(hitFx, transform.position, Quaternion.identity);
+            }
+            else if (currentHp <= 0)
+            {
+                animator.Play("BossAno_StunDeath");
             }
         }
 
