@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DialogueManagement;
+using Hub.UI;
 
 namespace Hub.Interaction
 {
@@ -9,7 +10,7 @@ namespace Hub.Interaction
     {
         protected override void Interact()
         {
-            DialogueManager.Instance.OpenLevelAccess();
+            HubUiManager.Instance.OpenLevelAccess();
         }
     }
 }
