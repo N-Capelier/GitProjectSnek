@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using GameManagement;
 using Hub.Interaction;
+using Cinematic;
 
 namespace DialogueManagement
 {
@@ -52,6 +53,7 @@ namespace DialogueManagement
                 Debug.LogError("Cannot start a dialogue when it's already running!");
                 yield break;
             }
+     
             currentDialogue = dialogue;
             isRunningDialogue = true;
             isTapped = false;
@@ -146,11 +148,22 @@ namespace DialogueManagement
 
         void EndDialogue()
         {
+
+            if(GameManager.Instance.gameState.ActiveState == GameState.Hub && CutsceneManager.Instance.mainDirector.playableAsset != null)
+            {
+                InteractionManager.Instance.camTarget.actions--;
+                InteractionManager.Instance.playerController.actions--;
+            }
+            if (currentDialogue.endCutscene)
+            {
+                CutsceneManager.Instance.EndCustscene();
+            }
             currentDialogue = null;
             animator = null;
             isRunningDialogue = false;
             isTapped = false;
             CloseDialogueBox();
+
         }
 
         public void OpenDialogueBox()

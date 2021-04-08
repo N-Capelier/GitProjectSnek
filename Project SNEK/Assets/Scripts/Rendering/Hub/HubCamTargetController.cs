@@ -24,6 +24,7 @@ namespace Rendering.Hub
         {
             if (actions > 0)
                 return;
+            Debug.Log(actions);
 
 #if UNITY_STANDALONE || UNITY_EDITOR
             HandleStandaloneInputs();

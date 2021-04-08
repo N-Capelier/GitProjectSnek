@@ -15,6 +15,11 @@ namespace Hub.UI
 
         [SerializeField] GameObject SkillTreeBox, LevelAccessBox, LetterBox;
         [SerializeField] Image fadeBackground;
+
+        private void Awake()
+        {
+            CreateSingleton(true);
+        }
         void Start()
         {
             SkillTreeBox.transform.localScale = Vector3.zero;

@@ -3,25 +3,59 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Timeline;
 using UnityEngine.Playables;
+using UnityEngine.Rendering.Universal;
+using Hub.Interaction;
+using GameManagement;
+using Player;
 
-public class CutsceneManager : MonoBehaviour
+namespace Cinematic
 {
-    [SerializeField] List<TimelineAsset> cutscenes = new List<TimelineAsset>();
-    [SerializeField] PlayableDirector mainDirector;
-    
-    void Start()
+    public class CutsceneManager : Singleton<CutsceneManager>
     {
-        PlayCutscene(0);
+        [SerializeField] List<TimelineAsset> cutscenes = new List<TimelineAsset>();
+        public PlayableDirector mainDirector;
+        [SerializeField] GameObject playableCamera;
+        [SerializeField] GameObject[] playableActors;
+
+
+        private void Awake()
+        {
+            CreateSingleton(true);
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                PlayCutscene(0);
+            }
+        }
+
+        public void PlayCutscene(int index)
+        {
+            if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
+            {
+                InteractionManager.Instance.camTarget.actions++;
+                InteractionManager.Instance.playerController.actions++;
+            }
+            PlayerManager.Instance.currentController.objectRenderer.SetActive(false);
+            mainDirector.playableAsset = cutscenes[index];
+            mainDirector.Play();
+
+
+        }
+
+        public void EndCustscene()
+        {
+            mainDirector.Stop();
+            mainDirector.playableAsset = null;
+            playableCamera.SetActive(false);
+            foreach(GameObject actor in playableActors)
+            {
+                actor.SetActive(false);
+            }
+            PlayerManager.Instance.currentController.objectRenderer.SetActive(true);
+        }
     }
 
-    void PlayCutscene(int index)
-    {
-        mainDirector.playableAsset = cutscenes[index];
-        mainDirector.Play();
-    }
-
-    void EndCustscene(int index)
-    {
-        mainDirector.Stop();
-    }
 }
