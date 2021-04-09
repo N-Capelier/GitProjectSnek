@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Enemy;
 using AudioManagement;
+using Boss;
 
 namespace Player.Attack
 {
@@ -15,7 +16,13 @@ namespace Player.Attack
             {
                 enemy.GetComponent<EnemyStats>().TakeDamage(PlayerManager.Instance.currentController.playerRunAttack.attackDamages);
                 AudioManager.Instance.PlaySoundEffect("PlayerSwordImpact");
-            }            
+            }
+
+            if (enemy.gameObject.layer == LayerMask.NameToLayer("Boss"))
+            {
+                enemy.GetComponent<TestAnorexia>().TakeDamage(PlayerManager.Instance.currentController.playerRunAttack.attackDamages);
+                AudioManager.Instance.PlaySoundEffect("PlayerSwordImpact");
+            }
         }
     }
 }
