@@ -18,6 +18,8 @@ namespace Player.Controller
         public delegate void PlayerChangingDirection(PlayerDirection direction);
         public static event PlayerChangingDirection PlayerChangedDirection;
 
+        float inputSpeed = 1f;
+
         public GameObject techniqueFx;
 
         private void Start()
@@ -54,6 +56,7 @@ namespace Player.Controller
                 (currentDirection == PlayerDirection.Down && transform.position.z <= MapGrid.Instance.GetWorldPos(0, (int)nextNode.z).z) ||
                 (currentDirection == PlayerDirection.Left && transform.position.x <= MapGrid.Instance.GetWorldPos((int)nextNode.x, 0).x))
             {
+                inputSpeed = 1f;
                 SnapPosition();
                 UpdateMovement();
             }
@@ -63,7 +66,7 @@ namespace Player.Controller
         {
             if (isDead == false)
             {
-                rb.velocity = (nextNode - currentNode) * moveSpeed * attackMoveSpeedModifier * spellMoveSpeedModifier;
+                rb.velocity = (nextNode - currentNode) * moveSpeed * attackMoveSpeedModifier * spellMoveSpeedModifier * inputSpeed;
             }
             else
             {
@@ -99,6 +102,8 @@ namespace Player.Controller
             nextNode = GetNextNode();
         }
 
+        float bonusInputSpeed = 1.75f;
+
         /// <summary>
         /// Get new direction on user input
         /// </summary>
@@ -114,26 +119,33 @@ namespace Player.Controller
             switch (inputType)
             {
                 case InputType.SwipeUp:
-                    if (currentDirection != PlayerDirection.Down)
+                    if (currentDirection != PlayerDirection.Down && currentDirection != PlayerDirection.Up)
                     {
                         nextDirection = PlayerDirection.Up;
+                        inputSpeed = bonusInputSpeed;
                     }
                     break;
                 case InputType.SwipeRight:
-                    if (currentDirection != PlayerDirection.Left)
+                    if (currentDirection != PlayerDirection.Left && currentDirection != PlayerDirection.Right)
                     {
                         nextDirection = PlayerDirection.Right;
+                        inputSpeed = bonusInputSpeed;
+
                     }
                     break;
                 case InputType.SwipeDown:
-                    if (currentDirection != PlayerDirection.Up)
+                    if (currentDirection != PlayerDirection.Up && currentDirection != PlayerDirection.Down)
                     {
                         nextDirection = PlayerDirection.Down;
+                        inputSpeed = bonusInputSpeed;
+
                     }
                     break;
                 case InputType.SwipeLeft:
-                    if (currentDirection != PlayerDirection.Right)
+                    if (currentDirection != PlayerDirection.Right && currentDirection != PlayerDirection.Left)
                     {
+                        inputSpeed = bonusInputSpeed;
+
                         nextDirection = PlayerDirection.Left;
                     }
                     break;
