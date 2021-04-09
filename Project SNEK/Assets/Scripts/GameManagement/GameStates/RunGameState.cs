@@ -4,6 +4,7 @@ using Player.Controller;
 using Map;
 using Rendering.Run;
 using AudioManagement;
+using Saving;
 
 namespace GameManagement.GameStates
 {
@@ -20,7 +21,8 @@ namespace GameManagement.GameStates
         {
             GameObject _newController = Instantiate(PlayerManager.Instance.runPlayer, PlayerManager.Instance.transform);
             PlayerManager.Instance.currentController = _newController.GetComponent<PlayerController>();
-            PlayerManager.Instance.currentController.Init(0); //Add bonus HP from HUB
+            PlayerManager.Instance.currentController
+                .Init(SaveManager.Instance.state.bonusHealth, SaveManager.Instance.state.bonusRange, SaveManager.Instance.state.bonusPower);
             PlayerManager.Instance.currentController.transform.position = MapGrid.Instance.GetWorldPos(5, 0);
             RunCamController.Instance.Set(CamState.PlayerScrolling);
             if (runMusic == null)
