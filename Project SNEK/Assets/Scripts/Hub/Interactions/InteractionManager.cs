@@ -11,6 +11,7 @@ namespace Hub.Interaction
     {
         public HubCamTargetController camTarget;
         public PlayerHubController playerController;
+        public bool isInteracting;
 
         private void Awake()
         {
@@ -19,9 +20,12 @@ namespace Hub.Interaction
 
         public virtual void EndInteraction()
         {
+            if (!isInteracting)
+                return;
             camTarget.transform.position = playerController.agent.transform.position;
             camTarget.actions--;
             playerController.actions--;
+            isInteracting = false;
         }
     }
 }

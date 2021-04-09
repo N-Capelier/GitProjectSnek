@@ -11,8 +11,10 @@ namespace DialogueManagement
     {
         public bool getCoin;
         public short coinAmount;
+        public bool endCutscene;
         [Space]
         public Sentence[] sentences;
+
 
     }
     [System.Serializable]

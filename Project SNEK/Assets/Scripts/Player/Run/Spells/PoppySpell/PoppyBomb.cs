@@ -34,7 +34,7 @@ namespace Player.Spells
             if (hasStarted == false)
                 if (other.gameObject.layer == LayerMask.NameToLayer("Wall") || other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
                 {
-                    StartCoroutine(Absorb(timeBeforeStart + 0.245f, true));
+                    StartCoroutine(Absorb(true));
                 }
         }
 
@@ -53,10 +53,10 @@ namespace Player.Spells
         {
             yield return new WaitForSeconds(timeBeforeStart + 0.245f);
             if(hasStarted == false)      
-                StartCoroutine(Absorb(0, false));
+                StartCoroutine(Absorb(false));
         }
 
-        IEnumerator Absorb(float offset, bool hitWall)
+        IEnumerator Absorb(bool hitWall)
         {
             rb.velocity = Vector3.zero;
             transform.position = new Vector3(
@@ -65,10 +65,9 @@ namespace Player.Spells
             Mathf.RoundToInt(transform.position.z));
             if (hitWall == true)
                 transform.Rotate(new Vector3(0, 180, 0));
-            yield return new WaitForSeconds(offset);
             hasStarted = true;
             boxCollider.enabled = false;
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.3f);
             absorbFx.Play();
             animator.Play("Anim_Kettle_Absorb");
             capCollider.enabled = true;
@@ -89,9 +88,7 @@ namespace Player.Spells
             explosionFx.Play();
             transform.GetChild(1).gameObject.SetActive(false);
             transform.GetChild(2).gameObject.SetActive(false);
-            GameObject explosion = Instantiate(explosionBox, transform.position, Quaternion.identity);
             yield return new WaitForSeconds(0.5f);
-            Destroy(explosion);
             Destroy(gameObject);
         }
     }

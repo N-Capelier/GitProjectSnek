@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using GameManagement;
 using Hub.Interaction;
+using Cinematic;
 
 namespace DialogueManagement
 {
@@ -15,17 +16,16 @@ namespace DialogueManagement
 
         [SerializeField] TextMeshProUGUI nameText;
         [SerializeField] TextMeshProUGUI dialogueText;
-        [SerializeField] Image dialogueArrow, fadeBackground;
-        [SerializeField] GameObject canvas;
-        [SerializeField] GameObject DialogueBox,SkillTreeBox, LevelAccessBox,LetterBox;
+        [SerializeField] Image dialogueArrow;
+        [SerializeField] GameObject DialogueBox;
         Dialogue currentDialogue;
         bool isRunningDialogue;
         bool isSpeaking;
         bool isTapped;
-        //float charDelay;
+        bool isCutSceneDialogue;
         bool skipSentence = false;
         int sentenceIndex;
-        Animator animator;
+        Animator animator, cinematicAnimator;
 
         [SerializeField] float dialogBoxOffset;
 
@@ -36,13 +36,16 @@ namespace DialogueManagement
         private void Start()
         {
             DialogueBox.transform.localPosition = new Vector3(0, -Screen.height * dialogBoxOffset);
-            SkillTreeBox.transform.localScale = Vector3.zero;
-            LevelAccessBox.transform.localScale = Vector3.zero;
-            LetterBox.transform.localScale = Vector3.zero;
-            //canvas.SetActive(false);
             InputHandler.InputReceived += OnTap;
         }
-
+        public void SetCinematicDialogueAnimator(Animator animator)
+        {
+            cinematicAnimator = animator;
+        }
+        public void StartDialogueInCinematic(Dialogue dialogue)
+        {
+            StartCoroutine(StartDialogue(dialogue,cinematicAnimator));
+        }
         public IEnumerator StartDialogue(Dialogue dialogue, Animator animator = null)
         {
             if (isRunningDialogue)
@@ -50,6 +53,7 @@ namespace DialogueManagement
                 Debug.LogError("Cannot start a dialogue when it's already running!");
                 yield break;
             }
+     
             currentDialogue = dialogue;
             isRunningDialogue = true;
             isTapped = false;
@@ -154,11 +158,22 @@ namespace DialogueManagement
 
         void EndDialogue()
         {
+
+            if(GameManager.Instance.gameState.ActiveState == GameState.Hub && CutsceneManager.Instance.mainDirector.playableAsset != null)
+            {
+                InteractionManager.Instance.camTarget.actions--;
+                InteractionManager.Instance.playerController.actions--;
+            }
+            if (currentDialogue.endCutscene)
+            {
+                CutsceneManager.Instance.EndCustscene();
+            }
             currentDialogue = null;
             animator = null;
             isRunningDialogue = false;
             isTapped = false;
             CloseDialogueBox();
+
         }
 
         public void OpenDialogueBox()
@@ -177,74 +192,6 @@ namespace DialogueManagement
             }
         }
 
-        public void OpenSkillTree()
-        {
-            ActivateFadeBackground();
-            SkillTreeBox.transform.LeanScale(Vector3.one,0.3f);
-        }
-
-        public void CloseSkillTree()
-        {
-            DeactivateFadeBackground();
-            SkillTreeBox.transform.LeanScale(Vector3.zero, 0.3f);
-            if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
-            {
-                InteractionManager.Instance.EndInteraction();
-            }
-        }
-
-        public void OpenLevelAccess()
-        {
-            ActivateFadeBackground();
-            LevelAccessBox.transform.LeanScale(Vector3.one, 0.2f);
-        }
-
-        public void CloseLevelAcces()
-        {
-            DeactivateFadeBackground();
-            LevelAccessBox.transform.LeanScale(Vector3.zero, 0.2f);
-            if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
-            {
-                InteractionManager.Instance.EndInteraction();
-            }
-        }
-
-        public void OpenLetterBox()
-        {
-            ActivateFadeBackground();
-            LetterBox.transform.LeanScale(Vector3.one, 0.2f);
-        }
-
-        public void CloseLetterBox()
-        {
-                DeactivateFadeBackground();
-                LetterBox.transform.LeanScale(Vector3.zero, 0.2f);
-                if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
-                {
-                    InteractionManager.Instance.EndInteraction();
-                }
-        }
-
-        public void OpenBox(GameObject box)
-        {
-            box.LeanScale(Vector3.one, 0.2f);
-        }
-
-        public void CloseBox(GameObject box)
-        {
-            box.LeanScale(Vector3.zero, 0.2f);
-        }
-
-        public void ActivateFadeBackground()
-        {
-            fadeBackground.enabled = true;
-        }
-
-        public void DeactivateFadeBackground()
-        {
-            fadeBackground.enabled = false;
-        }
-
         public void NextLineFeedback()
         {
             if(dialogueArrow.transform.localScale == Vector3.zero)
@@ -255,6 +202,16 @@ namespace DialogueManagement
             {
                 dialogueArrow.transform.LeanScale(Vector3.zero, 0f);
             }
+        }
+
+        public void ChangeGameMode()
+        {
+
+        }
+
+        public void LaunchCutscene()
+        {
+
         }
     }
 }

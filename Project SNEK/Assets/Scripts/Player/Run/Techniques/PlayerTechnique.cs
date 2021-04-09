@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using GameManagement;
+using Player.Controller;
 
 namespace Player.Technique
 {
