@@ -21,6 +21,7 @@ namespace Plates
             if(other.gameObject.layer == LayerMask.NameToLayer("PlayerController") 
                 && PlayerManager.Instance.currentController.playerRunSpirits.ConsumeSpirits(numSpiritsRequired))
             {
+                GetComponent<Animator>().Play("animScalePlateON");
                 CheckActivation();
                 enabled = false;
             } 

@@ -45,20 +45,24 @@ namespace Plates
         {
             if(plateActivationCount == numPlatesToActivate)
             {
-				DoOpenWay();
+				StartCoroutine(DoOpenWay());
 			}
         }
 
-		private void DoOpenWay()
+		private IEnumerator DoOpenWay()
         {
 			foreach (GameObject blockadeElement in blockadeElements)
 			{
-				blockadeElement.SetActive(false);
+				blockadeElement.GetComponent<Animator>().Play("animPlateBloc");
+				blockadeElement.GetComponentInChildren<BoxCollider>().enabled = false;
 			}
+			yield return new WaitForSeconds(0.9f);
 
 			foreach (PlateBase plate in plates)
             {
 				StartCoroutine(plate.DisablePlate());
+				plate.GetComponent<Collider>().enabled = false;
+				plate.GetComponent<Animator>().Play("animPlateON");
             }
 		}
     }
