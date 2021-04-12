@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Enemy;
+using Player;
 using Player.Spells;
 using Map;
 
@@ -90,7 +91,15 @@ namespace Boss
                         StartCoroutine(SpawnMouchou());
                         return;
                 }
-            }            
+            }
+            
+            if(PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits() == 3)
+            {
+                StopAllCoroutines();
+                canDoPattern = false;
+                StartCoroutine(ComeClose());
+            }
+
         }
 
         
@@ -193,6 +202,14 @@ namespace Boss
             canDoPattern = true;
         }
 
+        IEnumerator ComeClose()
+        {
+            camDistance = 10;
+            yield return new WaitForSeconds(7f);
+            patternCount = 0;
+            canDoPattern = true;
+        }
+
         IEnumerator Stun()
         {
             animator.Play("BossAno_StunIn");
@@ -212,6 +229,7 @@ namespace Boss
             animator.SetBool("animIsAttacking", false);
             shieldo = Instantiate(shield, shieldPos.transform.position, Quaternion.identity, shieldPos.transform);
             shieldo.SetActive(false);
+            camDistance = 13;
             moveSpeed = moveSpeed * 3;
             canBeHit = false;
             StartCoroutine(InstantiateShield());            
@@ -225,6 +243,8 @@ namespace Boss
             yield return new WaitForSeconds(3);
             canDoPattern = true;
         }
+
+
 
         void EndTimeBomb()
         {
