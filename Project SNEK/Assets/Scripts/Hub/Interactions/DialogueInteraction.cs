@@ -3,9 +3,10 @@ using DialogueManagement;
 
 namespace Hub.Interaction
 {
-    public class ExampleInteration : Interactor
+    public class DialogueInteraction : Interactor
     {
-        [SerializeField] Dialogue dialogue;
+        public Dialogue dialogue;
+
         protected override void Interact()
         {
             StartCoroutine(DialogueManager.Instance.StartDialogue(dialogue, animator));
