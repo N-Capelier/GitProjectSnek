@@ -64,7 +64,7 @@ namespace DialogueManagement
 
             if (currentDialogue.isCutScene)
             {
-                CutsceneManager.Instance.PauseCutscene();
+                StartCoroutine(CutsceneManager.Instance.PauseCutscene());
             }
 
             this.animator = animator;
@@ -170,7 +170,6 @@ namespace DialogueManagement
 
             if(GameManager.Instance.gameState.ActiveState == GameState.Hub/* && CutsceneManager.Instance.mainDirector.playableAsset != null*/)
             {
-                print("--");
                 InteractionManager.Instance.camTarget.actions--;
                 InteractionManager.Instance.playerController.actions--;
             }

@@ -16,7 +16,7 @@ namespace Cinematic
         public PlayableDirector mainDirector;
         [SerializeField] GameObject playableCamera;
         [SerializeField] GameObject[] playableActors;
-
+        Vector3[] actorsPositions;
 
         private void Awake()
         {
@@ -29,8 +29,6 @@ namespace Cinematic
             {
                 PlayCutscene(0);
             }
-            if (Input.GetKeyDown(KeyCode.P))
-                Debug.Log(InteractionManager.Instance.camTarget.actions);
         }
 
         public void PlayCutscene(int index)
@@ -63,16 +61,36 @@ namespace Cinematic
             PlayerManager.Instance.currentController.objectRenderer.SetActive(true);
         }
 
-        public void PauseCutscene()
+        public IEnumerator PauseCutscene()
         {
             //mainDirector.playableGraph.GetRootPlayable(0).SetSpeed(0);
+
+            //actorsPositions = new Vector3[playableActors.Length];
+
+            //for (int i = 0; i < actorsPositions.Length; i++)
+            //{
+            //    actorsPositions[i] = playableActors[i].transform.position;
+            //}
+
+            //yield return new WaitForEndOfFrame();
+
             mainDirector.Pause();
+            //mainDirector.playableGraph.Stop();
+
+            //yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(0.5f);
+
+            //for (int i = 0; i < actorsPositions.Length; i++)
+            //{
+            //    playableActors[i].transform.position = actorsPositions[i];
+            //}
         }
 
         public void ResumeCutscene()
         {
             //mainDirector.playableGraph.GetRootPlayable(0).SetSpeed(1);
             mainDirector.Resume();
+            //mainDirector.playableGraph.Play();
         }
     }
 
