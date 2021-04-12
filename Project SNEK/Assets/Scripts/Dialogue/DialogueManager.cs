@@ -5,6 +5,7 @@ using TMPro;
 using GameManagement;
 using Hub.Interaction;
 using Cinematic;
+using Saving;
 
 namespace DialogueManagement
 {
@@ -177,6 +178,39 @@ namespace DialogueManagement
             {
                 CutsceneManager.Instance.ResumeCutscene();
             }
+
+            if(currentDialogue.bergamotNewState > 0)
+            {
+                if(currentDialogue.bergamotMinimumState >= SaveManager.Instance.state.bergamotState
+                    && currentDialogue.poppyMinimumState >= SaveManager.Instance.state.poppyState
+                    && currentDialogue.thistleMinimumState >= SaveManager.Instance.state.thistleState)
+                {
+                    SaveManager.Instance.state.bergamotState = currentDialogue.bergamotNewState;
+                    if(GameManager.Instance.gameState.ActiveState == GameState.Hub)
+                    {
+                        NPCManager.Instance.RefreshNPCs();
+                    }
+                }
+            }
+            if (currentDialogue.poppyNewState > 0)
+            {
+                if (currentDialogue.bergamotMinimumState >= SaveManager.Instance.state.bergamotState
+                    && currentDialogue.poppyMinimumState >= SaveManager.Instance.state.poppyState
+                    && currentDialogue.thistleMinimumState >= SaveManager.Instance.state.thistleState)
+                {
+                    SaveManager.Instance.state.poppyState = currentDialogue.poppyNewState;
+                }
+            }
+            if (currentDialogue.thistleNewState > 0)
+            {
+                if (currentDialogue.bergamotMinimumState >= SaveManager.Instance.state.bergamotState
+                    && currentDialogue.poppyMinimumState >= SaveManager.Instance.state.poppyState
+                    && currentDialogue.thistleMinimumState >= SaveManager.Instance.state.thistleState)
+                {
+                    SaveManager.Instance.state.thistleState = currentDialogue.thistleNewState;
+                }
+            }
+
             currentDialogue = null;
             animator = null;
             isRunningDialogue = false;

@@ -2,9 +2,9 @@
 {
     public class SaveState
     {
-        public int bergamotState = 1;
-        public int poppyState = 1;
-        public int thistleState = 1;
+        public float bergamotState = 1f;
+        public float poppyState = 1f;
+        public float thistleState = 1f;
 
         public int heartCoinAmount = 0;
 

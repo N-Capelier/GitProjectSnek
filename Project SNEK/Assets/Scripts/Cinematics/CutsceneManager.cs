@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Timeline;
 using UnityEngine.Playables;
-using UnityEngine.Rendering.Universal;
 using Hub.Interaction;
 using GameManagement;
 using Player;
@@ -12,26 +11,18 @@ namespace Cinematic
 {
     public class CutsceneManager : Singleton<CutsceneManager>
     {
-        [SerializeField] List<TimelineAsset> cutscenes = new List<TimelineAsset>();
+        //[SerializeField] List<TimelineAsset> cutscenes = new List<TimelineAsset>();
         public PlayableDirector mainDirector;
         [SerializeField] GameObject playableCamera;
         [SerializeField] GameObject[] playableActors;
-        Vector3[] actorsPositions;
+        //Vector3[] actorsPositions;
 
         private void Awake()
         {
             CreateSingleton(true);
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                PlayCutscene(0);
-            }
-        }
-
-        public void PlayCutscene(int index)
+        public void PlayCutscene(TimelineAsset _cutscene)
         {
             if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
             {
@@ -39,7 +30,7 @@ namespace Cinematic
                 InteractionManager.Instance.playerController.actions++;
             }
             PlayerManager.Instance.currentController.objectRenderer.SetActive(false);
-            mainDirector.playableAsset = cutscenes[index];
+            mainDirector.playableAsset = _cutscene;
             mainDirector.Play();
 
 
