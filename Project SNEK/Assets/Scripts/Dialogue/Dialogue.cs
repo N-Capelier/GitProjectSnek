@@ -11,7 +11,7 @@ namespace DialogueManagement
     {
         public bool getCoin;
         public short coinAmount;
-        public bool endCutscene;
+        public bool isCutScene;
         [Space]
         public Sentence[] sentences;
 

@@ -53,11 +53,20 @@ namespace DialogueManagement
                 Debug.LogError("Cannot start a dialogue when it's already running!");
                 yield break;
             }
-     
+
+            InteractionManager.Instance.camTarget.actions++;
+            InteractionManager.Instance.playerController.actions++;
+
             currentDialogue = dialogue;
             isRunningDialogue = true;
             isTapped = false;
             sentenceIndex = 0;
+
+            if (currentDialogue.isCutScene)
+            {
+                CutsceneManager.Instance.PauseCutscene();
+            }
+
             this.animator = animator;
             OpenDialogueBox();
             //Mouvement de caméra
@@ -159,14 +168,15 @@ namespace DialogueManagement
         void EndDialogue()
         {
 
-            if(GameManager.Instance.gameState.ActiveState == GameState.Hub && CutsceneManager.Instance.mainDirector.playableAsset != null)
+            if(GameManager.Instance.gameState.ActiveState == GameState.Hub/* && CutsceneManager.Instance.mainDirector.playableAsset != null*/)
             {
+                print("--");
                 InteractionManager.Instance.camTarget.actions--;
                 InteractionManager.Instance.playerController.actions--;
             }
-            if (currentDialogue.endCutscene)
+            if (currentDialogue.isCutScene)
             {
-                CutsceneManager.Instance.EndCustscene();
+                CutsceneManager.Instance.ResumeCutscene();
             }
             currentDialogue = null;
             animator = null;

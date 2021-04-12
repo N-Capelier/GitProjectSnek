@@ -56,8 +56,6 @@ namespace Hub.Interaction
             Interact();
         }
 
-
-
         protected abstract void Interact();
     }
 }

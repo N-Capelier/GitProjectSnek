@@ -29,6 +29,8 @@ namespace Cinematic
             {
                 PlayCutscene(0);
             }
+            if (Input.GetKeyDown(KeyCode.P))
+                Debug.Log(InteractionManager.Instance.camTarget.actions);
         }
 
         public void PlayCutscene(int index)
@@ -54,7 +56,23 @@ namespace Cinematic
             {
                 actor.SetActive(false);
             }
+
+            InteractionManager.Instance.camTarget.actions--;
+            InteractionManager.Instance.playerController.actions--;
+
             PlayerManager.Instance.currentController.objectRenderer.SetActive(true);
+        }
+
+        public void PauseCutscene()
+        {
+            //mainDirector.playableGraph.GetRootPlayable(0).SetSpeed(0);
+            mainDirector.Pause();
+        }
+
+        public void ResumeCutscene()
+        {
+            //mainDirector.playableGraph.GetRootPlayable(0).SetSpeed(1);
+            mainDirector.Resume();
         }
     }
 
