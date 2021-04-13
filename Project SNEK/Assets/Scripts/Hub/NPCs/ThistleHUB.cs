@@ -19,15 +19,13 @@ namespace Saving
         [SerializeField] Dialogue dialogue4;
         [SerializeField] Transform waypoint4;
 
-        private void Start()
-        {
-            Refresh();
-        }
-
         public override void Refresh()
         {
             switch (SaveManager.Instance.state.thistleState)
             {
+                default:
+                    Debug.LogError("No save state for ThistleHub!");
+                    break;
                 //Chapitre Tutoriel
                 case 1f:
                     SetTransform(waypointOutOfVillage);

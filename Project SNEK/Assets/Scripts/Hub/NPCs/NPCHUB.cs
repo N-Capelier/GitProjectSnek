@@ -8,8 +8,31 @@ namespace Saving
 {
     public abstract class NPCHUB : MonoBehaviour
     {
-        protected bool started = false;
+        public bool started = false;
         [SerializeField] DialogueInteraction dialogueInteraction;
+        Clock startTimer;
+        float startDelay = 0.5f;
+
+        public virtual void Start()
+        {
+            startTimer = new Clock(startDelay);
+            startTimer.ClockEnded += OnStartDelayPassed;
+        }
+
+        void OnStartDelayPassed()
+        {
+            Refresh();
+        }
+
+        private void OnDestroy()
+        {
+            startTimer.ClockEnded -= OnStartDelayPassed;
+        }
+
+        public void SetStarted()
+        {
+            started = true;
+        }
 
         protected void SetDialogue(Dialogue _dialogue)
         {
@@ -18,6 +41,9 @@ namespace Saving
 
         protected void PlayCutscene(TimelineAsset _cutscene)
         {
+            if (started)
+                return;
+            SetStarted();
             CutsceneManager.Instance.PlayCutscene(_cutscene);
             NPCManager.Instance.RefreshNPCs();
         }
