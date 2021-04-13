@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 5699807947489057368}
   - component: {fileID: 3633837726275924444}
   - component: {fileID: 5699807947489057370}
+  - component: {fileID: 1804341654265897754}
   - component: {fileID: 2487864682264637749}
   m_Layer: 0
   m_Name: PoppyHub
@@ -192,6 +193,29 @@ MonoBehaviour:
   animator: {fileID: 8848081022269550151}
   orientation: 0
   dialogue: {fileID: 11400000, guid: 41db846fffaab44408154c18d1ab56c4, type: 2}
+--- !u!114 &1804341654265897754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5699807947489057381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ea68462083673c4aa38ee7e409142d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueInteraction: {fileID: 5699807947489057370}
+  dialogue1: {fileID: 0}
+  waypoint1: {fileID: 0}
+  dialogue2: {fileID: 0}
+  dialogue3: {fileID: 0}
+  dialogue4: {fileID: 0}
+  dialogue5: {fileID: 0}
+  dialogue6: {fileID: 0}
+  dialogue7: {fileID: 0}
+  dialogue8: {fileID: 0}
+  dialogue9: {fileID: 0}
 --- !u!208 &2487864682264637749
 NavMeshObstacle:
   m_ObjectHideFlags: 0

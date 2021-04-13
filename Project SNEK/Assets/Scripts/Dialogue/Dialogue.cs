@@ -11,10 +11,20 @@ namespace DialogueManagement
     {
         public bool getCoin;
         public short coinAmount;
-        public bool endCutscene;
+        public bool isCutScene;
+        [Space]
+        [Tooltip("Leave to 0 if no change")]
+        public float bergamotNewState;
+        [Tooltip("Leave to 0 if no change")]
+        public float poppyNewState;
+        [Tooltip("Leave to 0 if no change")]
+        public float thistleNewState;
+        [Space]
+        public float bergamotMinimumState;
+        public float poppyMinimumState;
+        public float thistleMinimumState;
         [Space]
         public Sentence[] sentences;
-
 
     }
     [System.Serializable]

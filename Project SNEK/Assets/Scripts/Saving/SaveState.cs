@@ -1,11 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Saving
+﻿namespace Saving
 {
     public class SaveState
     {
+        public float bergamotState = 1f;
+        public float poppyState = 1f;
+        public float thistleState = 1f;
+
         public int heartCoinAmount = 0;
 
         public int bonusHealth = 0;
