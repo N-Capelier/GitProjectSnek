@@ -29,15 +29,13 @@ namespace Saving
         [Space]
         [SerializeField] Dialogue dialogue9;
 
-        private void Start()
-        {
-            Refresh();
-        }
-
         public override void Refresh()
         {
             switch (SaveManager.Instance.state.poppyState)
             {
+                default:
+                    Debug.LogError("No save state for PoppyHub!");
+                    break;
                 //Chapitre Tutoriel
                 case 1f:
                     SetDialogue(dialogue1);

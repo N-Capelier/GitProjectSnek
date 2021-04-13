@@ -37,15 +37,13 @@ namespace Saving
         [SerializeField] Dialogue dialogue12;
         [SerializeField] Transform waypoint12;
 
-        private void Start()
-        {
-            Refresh();
-        }
-
         public override void Refresh()
         {
             switch (SaveManager.Instance.state.bergamotState)
             {
+                default:
+                    Debug.LogError("No save state for BergamotHub!");
+                    break;
                 //Chapitre Tutoriel
                 case 1f:
                     //dialogueInteraction.dialogue = tuto1;
