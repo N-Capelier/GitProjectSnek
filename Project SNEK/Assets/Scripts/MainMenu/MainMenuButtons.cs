@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using Saving;
 
 namespace MainMenu
 {
@@ -10,7 +11,14 @@ namespace MainMenu
     {
         public void LaunchGame()
         {
-            SceneManager.LoadScene("Hub");
+            if(SaveManager.Instance.state.bergamotState > 1)
+            {
+                SceneManager.LoadScene("Hub");
+            }
+            else
+            {
+                SceneManager.LoadScene("TutorialIntro");
+            }
         }
     }
 }

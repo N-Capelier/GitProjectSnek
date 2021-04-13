@@ -1,13 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Saving
 {
+    /// <summary>
+    /// Nico
+    /// </summary>
     public class SaveManager : Singleton<SaveManager>
     {
         public SaveState state;
 
+#if UNITY_EDITOR
+
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.R))
+            {
+                Debug.Log("Reseting save");
+                state = new SaveState();
+                Save();
+            }
+        }
+
+#endif
         private void Awake()
         {
             CreateSingleton(true);
@@ -23,15 +37,15 @@ namespace Saving
         {
             if(PlayerPrefs.HasKey("save"))
             {
-                //Activate when stable
-                //state = Serializer.Deserialize<SaveState>(PlayerPrefs.GetString("save"));
-                state = new SaveState();
+                //Switch when unstable
+                state = Serializer.Deserialize<SaveState>(PlayerPrefs.GetString("save"));
+                //state = new SaveState();
             }
             else
             {
                 Debug.Log("Creating save");
                 state = new SaveState();
-                //Save();
+                Save(); //Deactivate when unstable
             }
         }
     }

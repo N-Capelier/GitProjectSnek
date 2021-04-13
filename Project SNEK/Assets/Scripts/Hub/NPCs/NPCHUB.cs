@@ -8,7 +8,7 @@ namespace Saving
 {
     public abstract class NPCHUB : MonoBehaviour
     {
-        public bool started = false;
+        [HideInInspector] public bool started = false;
         [SerializeField] DialogueInteraction dialogueInteraction;
         Clock startTimer;
         float startDelay = .5f;

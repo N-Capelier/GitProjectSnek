@@ -29,11 +29,12 @@ namespace Cinematic
                 InteractionManager.Instance.camTarget.actions++;
                 InteractionManager.Instance.playerController.actions++;
             }
-            PlayerManager.Instance.currentController.objectRenderer.SetActive(false);
+            if(GameManager.Instance.gameState.ActiveState != GameState.Cinematic)
+            {
+                PlayerManager.Instance.currentController.objectRenderer.SetActive(false);
+            }
             mainDirector.playableAsset = _cutscene;
             mainDirector.Play();
-
-
         }
 
         public void EndCustscene()
@@ -45,11 +46,13 @@ namespace Cinematic
             {
                 actor.SetActive(false);
             }
+            if (GameManager.Instance.gameState.ActiveState != GameState.Cinematic)
+            {
+                InteractionManager.Instance.camTarget.actions--;
+                InteractionManager.Instance.playerController.actions--;
 
-            InteractionManager.Instance.camTarget.actions--;
-            InteractionManager.Instance.playerController.actions--;
-
-            PlayerManager.Instance.currentController.objectRenderer.SetActive(true);
+                PlayerManager.Instance.currentController.objectRenderer.SetActive(true);
+            }
         }
 
         public IEnumerator PauseCutscene()

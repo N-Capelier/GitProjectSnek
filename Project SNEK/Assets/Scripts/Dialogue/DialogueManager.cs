@@ -32,7 +32,7 @@ namespace DialogueManagement
 
         private void Awake()
         {
-            CreateSingleton(true);
+            CreateSingleton();
         }
         private void Start()
         {
@@ -55,8 +55,11 @@ namespace DialogueManagement
                 yield break;
             }
 
-            InteractionManager.Instance.camTarget.actions++;
-            InteractionManager.Instance.playerController.actions++;
+            if(GameManager.Instance.gameState.ActiveState != GameState.Cinematic)
+            {
+                InteractionManager.Instance.camTarget.actions++;
+                InteractionManager.Instance.playerController.actions++;
+            }
 
             currentDialogue = dialogue;
             isRunningDialogue = true;
