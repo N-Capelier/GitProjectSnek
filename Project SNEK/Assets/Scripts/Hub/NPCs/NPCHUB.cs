@@ -11,7 +11,7 @@ namespace Saving
         public bool started = false;
         [SerializeField] DialogueInteraction dialogueInteraction;
         Clock startTimer;
-        float startDelay = 0.5f;
+        float startDelay = .5f;
 
         public virtual void Start()
         {

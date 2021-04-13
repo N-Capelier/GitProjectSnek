@@ -19,7 +19,7 @@ namespace Cinematic
 
         private void Awake()
         {
-            CreateSingleton(true);
+            CreateSingleton();
         }
 
         public void PlayCutscene(TimelineAsset _cutscene)

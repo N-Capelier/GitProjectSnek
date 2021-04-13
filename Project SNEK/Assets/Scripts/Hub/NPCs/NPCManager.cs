@@ -13,9 +13,9 @@
             thistle.Refresh();
         }
 
-        public void SetStartedNPCs()
-        {
+        //public void SetStartedNPCs()
+        //{
 
-        }
+        //}
     }
 }
