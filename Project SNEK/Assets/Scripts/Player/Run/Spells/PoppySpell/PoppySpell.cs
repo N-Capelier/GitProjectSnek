@@ -15,7 +15,7 @@ namespace Player.Spells
         public float animCooldown, throwSpeed, offset;
         public override IEnumerator SpellCast(PlayerDirection spellDirection)
         {
-            if (!PlayerManager.Instance.currentController.playerRunSpirits.ConsumeSpirits(3))
+            if (PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits() < 3)
             {
                 yield break;
             }
