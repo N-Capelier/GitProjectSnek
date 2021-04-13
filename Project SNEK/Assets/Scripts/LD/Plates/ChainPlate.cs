@@ -32,13 +32,13 @@ namespace Plates
                 if(done == false)
                 animator.Play("animPlateON");
 
-                if (other.gameObject.layer == LayerMask.NameToLayer("Spirit"))
-                    print("sprit in");
+                //if (other.gameObject.layer == LayerMask.NameToLayer("Spirit"))
+                //    print("sprit in");
 
                 if (!hasWeight)
                 {
 
-                    print("weight >= 1");
+                    //print("weight >= 1");
                     CheckActivation();
                     hasWeight = true;
                 }
@@ -61,15 +61,15 @@ namespace Plates
             if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController") || other.gameObject.layer == LayerMask.NameToLayer("Spirit"))
             {
                 animator.Play("animPlateOFF");
-                if (other.gameObject.layer == LayerMask.NameToLayer("Spirit"))
-                    print("sprit out");
+                //if (other.gameObject.layer == LayerMask.NameToLayer("Spirit"))
+                //    print("sprit out");
 
                 playerOrChainWeight--;
                 //StartCoroutine(DecrementWeightWithDelay());
 
                 if (playerOrChainWeight == 0)
                 {
-                    print("weight = 0");
+                    //print("weight = 0");
                     CheckDeactivation();
                     hasWeight = false;
                 }

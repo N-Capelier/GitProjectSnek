@@ -23,21 +23,21 @@ namespace Plates
         {
 			if(other.gameObject.layer == LayerMask.NameToLayer("PlayerController"))
             {
-				print(1);
-				print(other.gameObject.name);
+				//print(1);
+				//print(other.gameObject.name);
 				if (!hasSpirit)
                 {
-					print(2);
+					//print(2);
 					if (PlayerManager.Instance.currentController.playerRunSpirits.ConsumeSpirits(1))
                     {
-						print(3);
+						//print(3);
 						SetSpirit(true);
 						CheckActivation();
 					}
 				}
                 else
                 {
-					print(4);
+					//print(4);
 					CheckDeactivation();
 					SetSpirit(false);
 					PlayerManager.Instance.currentController.playerRunSpirits.AddSpirit();
@@ -60,7 +60,7 @@ namespace Plates
 				droppedSpirit.SetActive(false);
 				PlayerManager.Instance.currentController.playerRunSpirits.AddSpirit();
 			}
-			print("je rends");
+			//print("je rends");
 			StartCoroutine(base.DisablePlate());
 		}
         
