@@ -93,13 +93,15 @@ namespace Boss
                 }
             }
             
-            if(PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits() == 3)
+            if(PlayerManager.Instance.currentController != null)
             {
-                StopAllCoroutines();
-                canDoPattern = false;
-                StartCoroutine(ComeClose());
-            }
-
+                if (PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits() == 3)
+                {
+                    StopAllCoroutines();
+                    canDoPattern = false;
+                    StartCoroutine(ComeClose());
+                }
+            }          
         }
 
         
