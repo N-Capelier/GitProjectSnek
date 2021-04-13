@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   getCoin: 0
   coinAmount: 0
+  endCutscene: 0
   sentences:
   - character: 1
+    anim: Anim_Poppy_Emote_Cheer
     sentence: Oh hey there! Who are you, friend?
     voiceLine:
       name: 
@@ -24,6 +26,7 @@ MonoBehaviour:
       volume: 0
     activateButtons: 0
   - character: 1
+    anim: Anim_Poppy_Emote_Hungry
     sentence: Anael? What a lovely name! Mine is Poppy. I was doing my daily jogging
       as you can see. It's important to stay in shape!
     voiceLine:
@@ -33,6 +36,7 @@ MonoBehaviour:
       volume: 0
     activateButtons: 0
   - character: 1
+    anim: 
     sentence: 'I''m glad to meet you friend! I hope we''ll get to know each other
       better. I''m the best cook in town and a super motivational sports coach! '
     voiceLine:
