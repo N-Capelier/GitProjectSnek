@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Player;
 using Map;
 
@@ -21,11 +19,6 @@ namespace Enemy
         [Space]
         float distanceToPlayer;
         Vector2 directionToPlayer;
-
-        private void Start()
-        {
-            
-        }
 
         private void Update()
         {
