@@ -12,6 +12,7 @@ namespace Plates
         #endregion
         public ParticleSystem onEnterParticle;
         public Animator animator;
+        [HideInInspector] public bool done = false;
         //private void Awake()
         //{
         //    opener.GetPlate(this);
@@ -28,6 +29,7 @@ namespace Plates
             if(other.gameObject.layer == LayerMask.NameToLayer("PlayerController") || other.gameObject.layer == LayerMask.NameToLayer("Spirit"))
             {
                 Instantiate(onEnterParticle, transform.position + Vector3.up * 0.25f, Quaternion.identity);
+                if(done == false)
                 animator.Play("animPlateON");
 
                 if (other.gameObject.layer == LayerMask.NameToLayer("Spirit"))

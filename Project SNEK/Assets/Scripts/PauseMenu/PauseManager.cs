@@ -21,14 +21,16 @@ namespace PauseManagement
 
         public void OpenPauseMenu()
         {
-            Time.timeScale = 0f;
             background.SetActive(true);
-            pauseMenu.LeanScale(Vector3.one, 0.2f);
-            menuAccessButton.LeanScale(Vector3.zero, 0.2f);
+            pauseMenu.LeanScale(Vector3.one, 0.2f).setIgnoreTimeScale(true);
+            menuAccessButton.LeanScale(Vector3.zero, 0.2f).setIgnoreTimeScale(true);
+            Time.timeScale = 0f;
+
         }
 
         public void ClosePauseMenu()
         {
+            Time.timeScale = 1f;
             pauseMenu.LeanScale(Vector3.zero, 0.2f);
             menuAccessButton.LeanScale(Vector3.one, 0.2f);
             background.SetActive(false);
