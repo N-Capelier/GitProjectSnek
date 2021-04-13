@@ -50,20 +50,25 @@ namespace Plates
         }
 
 		private IEnumerator DoOpenWay()
-        {
+		{
+
 			foreach (GameObject blockadeElement in blockadeElements)
 			{
 				blockadeElement.GetComponent<Animator>().Play("animPlateBloc");
 				blockadeElement.GetComponentInChildren<BoxCollider>().enabled = false;
 			}
-			yield return new WaitForSeconds(0.9f);
 
 			foreach (PlateBase plate in plates)
             {
 				StartCoroutine(plate.DisablePlate());
+				if(plate.GetComponent<ChainPlate>() != null)
+                {
+					plate.GetComponent<ChainPlate>().done = true;
+				}
 				plate.GetComponent<Collider>().enabled = false;
 				plate.GetComponent<Animator>().Play("animPlateON");
             }
+			yield return null;
 		}
     }
 }
