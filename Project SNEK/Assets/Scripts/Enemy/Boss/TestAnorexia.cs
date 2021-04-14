@@ -36,6 +36,7 @@ namespace Boss
         bool bombOver = false;
         [SerializeField] bool canBeHit = false;
         bool canDoPattern = true;
+        bool isTaunt = false;
 
         [Space]
         [SerializeField] SkinnedMeshRenderer bodyRenderer;
@@ -95,10 +96,12 @@ namespace Boss
             
             if(PlayerManager.Instance.currentController != null)
             {
-                if (PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits() == 3)
-                {
+                if (PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits() == 3 && isTaunt == false)
+                {                    
+                    animator.SetBool("animIsAttacking", false);
                     StopAllCoroutines();
                     canDoPattern = false;
+                    isTaunt = true;
                     StartCoroutine(ComeClose());
                 }
             }          
@@ -206,10 +209,18 @@ namespace Boss
 
         IEnumerator ComeClose()
         {
+            animator.Play("BossAno_TauntIn");
+            animator.SetBool("animIsTaunt", true);
             camDistance = 10;
             yield return new WaitForSeconds(7f);
+            animator.SetBool("animIsTaunt", false);
+            yield return new WaitForSeconds(0.5f);
+            playerSpirits = PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits();
+            PlayerManager.Instance.currentController.playerRunSpirits.ConsumeSpirits(playerSpirits);
+            yield return new WaitForSeconds(4f);
             patternCount = 0;
             canDoPattern = true;
+            isTaunt = false;
         }
 
         IEnumerator Stun()
@@ -237,13 +248,18 @@ namespace Boss
             StartCoroutine(InstantiateShield());            
         }
 
+        int playerSpirits;
         IEnumerator InstantiateShield()
         {
             yield return new WaitForSeconds(1.7f);
             shieldo.SetActive(true);            
             moveSpeed = moveSpeed / 3;
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(1f);
+            playerSpirits = PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits();
+            PlayerManager.Instance.currentController.playerRunSpirits.ConsumeSpirits(playerSpirits);
+            yield return new WaitForSeconds(3f);
             canDoPattern = true;
+            isTaunt = false;
         }
 
 
