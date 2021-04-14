@@ -214,9 +214,12 @@ namespace Boss
             camDistance = 10;
             yield return new WaitForSeconds(7f);
             animator.SetBool("animIsTaunt", false);
+            camDistance = 13;
+            moveSpeed = moveSpeed * 3;
             yield return new WaitForSeconds(0.5f);
             playerSpirits = PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits();
             PlayerManager.Instance.currentController.playerRunSpirits.ConsumeSpirits(playerSpirits);
+            moveSpeed = moveSpeed / 3;
             yield return new WaitForSeconds(4f);
             patternCount = 0;
             canDoPattern = true;
