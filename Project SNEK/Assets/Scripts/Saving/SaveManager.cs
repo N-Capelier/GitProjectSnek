@@ -9,7 +9,7 @@ namespace Saving
     {
         public SaveState state;
 
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
 
         private void Update()
         {
@@ -21,11 +21,12 @@ namespace Saving
             }
         }
 
-#endif
+//#endif
         private void Awake()
         {
             CreateSingleton(true);
             Load();
+            print("Loaded save");
         }
 
         public void Save()
