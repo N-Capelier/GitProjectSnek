@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -88343,6 +88343,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Save Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 2035445905679158205, guid: cf67f6bbac5870e46813201003f1e4c5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4948270155249557898, guid: cf67f6bbac5870e46813201003f1e4c5,
         type: 3}
       propertyPath: m_RootOrder
@@ -95499,11 +95504,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4853415423799512236, guid: 60bdfbb1c58dfaf40adf1c8b638fd35b,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -4.299988
-      objectReference: {fileID: 0}
     - target: {fileID: 4853415423817980653, guid: 60bdfbb1c58dfaf40adf1c8b638fd35b,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -95579,15 +95579,20 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4853415423894441274, guid: 60bdfbb1c58dfaf40adf1c8b638fd35b,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 461.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853415423894441275, guid: 60bdfbb1c58dfaf40adf1c8b638fd35b,
+        type: 3}
+      propertyPath: m_text
+      value: Reset power ups
+      objectReference: {fileID: 0}
     - target: {fileID: 4853415424011209268, guid: 60bdfbb1c58dfaf40adf1c8b638fd35b,
         type: 3}
       propertyPath: m_Name
       value: HubUIManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 4853415424011209268, guid: 60bdfbb1c58dfaf40adf1c8b638fd35b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4853415424011209271, guid: 60bdfbb1c58dfaf40adf1c8b638fd35b,
         type: 3}
@@ -95744,6 +95749,16 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4853415424846871912, guid: 60bdfbb1c58dfaf40adf1c8b638fd35b,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 398.8802
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853415424846871912, guid: 60bdfbb1c58dfaf40adf1c8b638fd35b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 47.939907
+      objectReference: {fileID: 0}
     - target: {fileID: 4853415424903275870, guid: 60bdfbb1c58dfaf40adf1c8b638fd35b,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -95803,11 +95818,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4853415425288166713, guid: 60bdfbb1c58dfaf40adf1c8b638fd35b,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -18
       objectReference: {fileID: 0}
     - target: {fileID: 4853415425467986258, guid: 60bdfbb1c58dfaf40adf1c8b638fd35b,
         type: 3}

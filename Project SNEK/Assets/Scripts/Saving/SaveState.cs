@@ -6,7 +6,7 @@
         public float poppyState = 1f;
         public float thistleState = 1f;
 
-        public int heartCoinAmount = 0;
+        public int heartCoinAmount = 6;
 
         public int bonusHealth = 0;
         public int bonusRange = 0;

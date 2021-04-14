@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using GameManagement;
+using Saving;
 using Hub.Interaction;
+using TMPro;
 
 namespace Hub.UI
 {
@@ -12,24 +12,154 @@ namespace Hub.UI
     /// </summary>
     public class HubUiManager : Singleton<HubUiManager>
     {
+        enum BonusStat
+        {
+            Health,
+            Range,
+            Power
+        }
 
         [SerializeField] GameObject SkillTreeBox, LevelAccessBox, LetterBox;
         [SerializeField] Image fadeBackground;
+        [SerializeField] TextMeshProUGUI hearthCoins;
+        [SerializeField] TextMeshProUGUI equipedTechnicText; //temp
+        [SerializeField] TextMeshProUGUI upgradeText;
+        [SerializeField] GameObject confirmationBox;
+
+        int cost;
+        BonusStat statToUpgrade;
 
         private void Awake()
         {
-            CreateSingleton(true);
+            CreateSingleton();
         }
         void Start()
         {
             SkillTreeBox.transform.localScale = Vector3.zero;
             LevelAccessBox.transform.localScale = Vector3.zero;
             LetterBox.transform.localScale = Vector3.zero;
+            EquipTechnic(SaveManager.Instance.state.equipedTechnic);
+            DrawHeartCoins();
+        }
+
+        public void PowerUphealth()
+        {
+            if(SaveManager.Instance.state.heartCoinAmount >= SaveManager.Instance.state.bonusHealth + 1)
+            {
+                cost = SaveManager.Instance.state.bonusHealth + 1;
+                statToUpgrade = BonusStat.Health;
+                OpenBox(confirmationBox);
+                //SaveManager.Instance.state.heartCoinAmount -= SaveManager.Instance.state.bonusHealth + 1;
+                //SaveManager.Instance.state.bonusHealth += 1;
+                //DrawHeartCoins();
+            }
+        }
+
+        public void PowerUpRange()
+        {
+            if (SaveManager.Instance.state.heartCoinAmount >= SaveManager.Instance.state.bonusRange + 1)
+            {
+                cost = SaveManager.Instance.state.bonusRange + 1;
+                statToUpgrade = BonusStat.Range;
+                OpenBox(confirmationBox);
+                //SaveManager.Instance.state.heartCoinAmount -= SaveManager.Instance.state.bonusRange + 1;
+                //SaveManager.Instance.state.bonusRange += 1;
+                //DrawHeartCoins();
+            }
+        }
+
+        public void PowerUpPower()
+        {
+            if (SaveManager.Instance.state.heartCoinAmount >= SaveManager.Instance.state.bonusPower + 1)
+            {
+                cost = SaveManager.Instance.state.bonusPower + 1;
+                statToUpgrade = BonusStat.Power;
+                OpenBox(confirmationBox);
+                //SaveManager.Instance.state.heartCoinAmount -= SaveManager.Instance.state.bonusPower + 1;
+                //SaveManager.Instance.state.bonusPower += 1;
+                //DrawHeartCoins();
+            }
+        }
+
+        public void ApplyPowerUp()
+        {
+            SaveManager.Instance.state.heartCoinAmount -= cost;
+
+            switch (statToUpgrade)
+            {
+                case BonusStat.Health:
+                    SaveManager.Instance.state.bonusHealth += 1;
+                    break;
+                case BonusStat.Range:
+                    SaveManager.Instance.state.bonusRange += 1;
+                    break;
+                case BonusStat.Power:
+                    SaveManager.Instance.state.bonusPower += 1;
+                    break;
+            }
+            DrawHeartCoins();
+            CloseBox(confirmationBox);
+        }
+
+        public void ResetPowerUps()
+        {
+            SaveManager.Instance.state.heartCoinAmount += SaveManager.Instance.state.bonusHealth + SaveManager.Instance.state.bonusRange + SaveManager.Instance.state.bonusPower;
+
+            if(SaveManager.Instance.state.bonusHealth > 0)
+            {
+                for (int i = 0; i < SaveManager.Instance.state.bonusHealth; i++)
+                {
+                    SaveManager.Instance.state.heartCoinAmount += i;
+                }
+            }
+            if (SaveManager.Instance.state.bonusRange > 0)
+            {
+                for (int i = 0; i < SaveManager.Instance.state.bonusRange; i++)
+                {
+                    SaveManager.Instance.state.heartCoinAmount += i;
+                }
+            }
+            if (SaveManager.Instance.state.bonusPower > 0)
+            {
+                for (int i = 0; i < SaveManager.Instance.state.bonusPower; i++)
+                {
+                    SaveManager.Instance.state.heartCoinAmount += i;
+                }
+            }
+
+            SaveManager.Instance.state.bonusHealth = SaveManager.Instance.state.bonusRange = SaveManager.Instance.state.bonusPower = 0;
+            DrawHeartCoins();
+        }
+
+        public void EquipTechnic(int _index)
+        {
+            SaveManager.Instance.state.equipedTechnic = _index;
+            switch(_index)
+            {
+                case 0:
+                    equipedTechnicText.text = "No technic equiped!";
+                    break;
+                case 1:
+                    equipedTechnicText.text = "Equiped technic: Swift combo.";
+                    break;
+                case 2:
+                    equipedTechnicText.text = "Equiped technic: Sword beam.";
+                    break;
+                case 3:
+                    equipedTechnicText.text = "Equiped technic: Bubble shield.";
+                    break;
+            }
+        }
+
+        public void DrawHeartCoins()
+        {
+            hearthCoins.text = $"x{SaveManager.Instance.state.heartCoinAmount}";
         }
 
         public void OpenBox(GameObject box)
         {
             box.LeanScale(Vector3.one, 0.2f);
+            upgradeText.text = $"Pay {cost} heart coins to upgrade this skill?";
         }
 
         public void CloseBox(GameObject box)
