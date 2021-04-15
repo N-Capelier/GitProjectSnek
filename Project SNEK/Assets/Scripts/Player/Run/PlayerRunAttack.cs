@@ -11,6 +11,7 @@ namespace Player.Attack
     /// </summary>
     public class PlayerRunAttack : MonoBehaviour
     {
+        [Header("Base Attack")]
         [SerializeField] [Range(0f, 100f)] float attackCooldown = 1f;
         [Range(0, 100)] public float attackDamages = 10; // A REFERENCER
         [HideInInspector] public float rangeBonus = 1f;// A REFERENCER
@@ -22,6 +23,13 @@ namespace Player.Attack
         public GameObject attackCollision;
         [SerializeField] GameObject attackFx;
         [SerializeField] float fxOffSet = 0.15f;
+        [Space(20)]
+        [Header("Beam Attack")]
+        [SerializeField] [Range(0f, 100f)] float beamCooldown = 1f;
+        [SerializeField] float beamSpeed;
+        public GameObject beamPrefab;
+        GameObject beam;
+        bool beamIsUp = true;
 
         private void Start()
         {
@@ -124,6 +132,10 @@ namespace Player.Attack
                     //attack.GetComponent<BoxCollider>().center = new Vector3(0.5f, 0, 0);
                     break;
             }
+            if(PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits() >= 5 && beamIsUp == true)
+            {
+                StartCoroutine(BeamAttack());
+            }
             yield return new WaitForSeconds(0.05f);
             Destroy(attack);
             yield return new WaitForSeconds(attackCooldown * 0.4f);
@@ -136,6 +148,33 @@ namespace Player.Attack
 
             yield return new WaitForSeconds(attackCooldown * 0.6f);
             canAttack = true;
+        }
+
+        IEnumerator BeamAttack()
+        {
+            beamIsUp = false;
+            beam = Instantiate(beamPrefab, transform.position, Quaternion.identity);
+            switch (PlayerManager.Instance.currentController.currentDirection)
+            {
+                case Controller.PlayerDirection.Up:
+                    beam.GetComponent<Rigidbody>().velocity = Vector3.forward * beamSpeed;
+                    beam.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                    break;
+                case Controller.PlayerDirection.Down:
+                    beam.GetComponent<Rigidbody>().velocity = Vector3.back * beamSpeed;
+                    beam.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                    break;
+                case Controller.PlayerDirection.Right:
+                    beam.GetComponent<Rigidbody>().velocity = Vector3.right * beamSpeed;
+                    beam.transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
+                    break;
+                case Controller.PlayerDirection.Left:
+                    beam.GetComponent<Rigidbody>().velocity = Vector3.left * beamSpeed;
+                    beam.transform.rotation = Quaternion.Euler(new Vector3(0, 270, 0));
+                    break;
+            }
+            yield return new WaitForSeconds(beamCooldown);
+            beamIsUp = true;
         }
         void OnCooldownEnded()
         {

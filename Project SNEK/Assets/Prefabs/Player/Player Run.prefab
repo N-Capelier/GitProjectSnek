@@ -55,6 +55,10 @@ MonoBehaviour:
   attackFx: {fileID: 7284365961558460690, guid: 77d57d151822e2b4ab598319d55b2a4e,
     type: 3}
   fxOffSet: 0.15
+  beamCooldown: 2
+  beamSpeed: 12
+  beamPrefab: {fileID: 6005119767245964493, guid: a29c1bc61e852554f9653859063654b3,
+    type: 3}
 --- !u!1 &1224053304424344346
 GameObject:
   m_ObjectHideFlags: 0
@@ -2605,7 +2609,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: MaskGrid
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4235164333949277096, guid: c02a2033f9fef354ab52448630c4a408, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c02a2033f9fef354ab52448630c4a408, type: 3}
 --- !u!4 &5140031688079509275 stripped
 Transform:
