@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using SaveDuringPlay;
 using Saving;
 
 
@@ -27,11 +26,11 @@ public class PickUpObject : MonoBehaviour
             //Add iD to save system
             Depop();
         }
+    }
 
-        void Depop()
-        {
-            //Instantiate Fx
-            Destroy(gameObject);
-        }
+    void Depop()
+    {
+        //Instantiate Fx
+        Destroy(gameObject);
     }
 }
