@@ -14,10 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   getCoin: 0
   coinAmount: 0
+  isCutScene: 0
+  bergamotNewState: 0
+  poppyNewState: 0
+  thistleNewState: 0
+  bergamotMinimumState: 0
+  poppyMinimumState: 0
+  thistleMinimumState: 0
   sentences:
   - character: 3
-    sentence: I'm glad you met them! It wasn't that bad wasn't it? They're really
-      nice persons.
+    anim: 
+    sentence: "Poppy is probably still running somewhere. It shouldn\u2019t be harder
+      to find than before. Thistle\u2026 I don\u2019t know, depends on her reaction.\n"
     voiceLine:
       name: 
       clip: {fileID: 0}
@@ -25,52 +33,9 @@ MonoBehaviour:
       volume: 0
     activateButtons: 0
   - character: 3
-    sentence: Mmh, listen Anael, it's a bit awkward to say but... I'd like to ask
-      you a favor.
-    voiceLine:
-      name: 
-      clip: {fileID: 0}
-      source: {fileID: 0}
-      volume: 0
-    activateButtons: 0
-  - character: 3
-    sentence: The forest has been rather dangerous for a while now, and Poppy and
-      Thistle are scared by the monsters.
-    voiceLine:
-      name: 
-      clip: {fileID: 0}
-      source: {fileID: 0}
-      volume: 0
-    activateButtons: 0
-  - character: 3
-    sentence: 'But... Since you have a sword and all... I was thinking that maybe
-      you could help them. '
-    voiceLine:
-      name: 
-      clip: {fileID: 0}
-      source: {fileID: 0}
-      volume: 0
-    activateButtons: 0
-  - character: 3
-    sentence: I know it's a lot to ask, haha! No worries if you're afraid too, I
-      totally get that.
-    voiceLine:
-      name: 
-      clip: {fileID: 0}
-      source: {fileID: 0}
-      volume: 0
-    activateButtons: 0
-  - character: 3
-    sentence: You...You're accepting?
-    voiceLine:
-      name: 
-      clip: {fileID: 0}
-      source: {fileID: 0}
-      volume: 0
-    activateButtons: 0
-  - character: 3
-    sentence: Wonderful! Well... Just talk to one of them and help them through the
-      forest then. That'll be a start!
+    anim: 
+    sentence: "Don\u2019t be mad at Thistle for being so shy. It doesn\u2019t mean
+      that she doesn't like you. It's just how she is."
     voiceLine:
       name: 
       clip: {fileID: 0}

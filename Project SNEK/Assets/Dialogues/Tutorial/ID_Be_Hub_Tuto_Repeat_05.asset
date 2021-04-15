@@ -14,8 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   getCoin: 0
   coinAmount: 0
+  isCutScene: 0
+  bergamotNewState: 10
+  poppyNewState: 0
+  thistleNewState: 0
+  bergamotMinimumState: 0
+  poppyMinimumState: 0
+  thistleMinimumState: 0
   sentences:
   - character: 3
+    anim: 
     sentence: "To describe them in a few words\u2026 Poppy is very into cooking.
       She makes the best grilled fish you'll ever find. Thistle is more secretive
       but she has a beautiful minerals collection."
@@ -26,6 +34,7 @@ MonoBehaviour:
       volume: 0
     activateButtons: 0
   - character: 3
+    anim: 
     sentence: 'Don''t tell her I said that! I have no idea of why, but she''s being
       very shy about it. Though there''s no shame about it in my opinion! '
     voiceLine:

@@ -14,12 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   getCoin: 0
   coinAmount: 0
-  isCutScene: 1
+  isCutScene: 0
+  bergamotNewState: 3
+  poppyNewState: 0
+  thistleNewState: 0
+  bergamotMinimumState: 0
+  poppyMinimumState: 0
+  thistleMinimumState: 0
   sentences:
   - character: 3
-    anim: Anim_Bergamot_Emote_Approve
-    sentence: There we are! Welcome to Fall Garden, our nest in the forest. It's
-      not much but it's comfy!
+    anim: 
+    sentence: Make yourself at home! You have your own mailbox too.
     voiceLine:
       name: 
       clip: {fileID: 0}
@@ -27,9 +32,8 @@ MonoBehaviour:
       volume: 0
     activateButtons: 0
   - character: 3
-    anim: Anim_Bergamot_Emote_Haha
-    sentence: There's an empty little house where you can settle in for the time
-      of your stay.
+    anim: 
+    sentence: Oh Something is already there!
     voiceLine:
       name: 
       clip: {fileID: 0}

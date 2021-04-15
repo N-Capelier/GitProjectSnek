@@ -10,14 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
-  m_Name: ID_Be_Hub_Tuto_05
+  m_Name: ID_Be_Cut_Tuto_02
   m_EditorClassIdentifier: 
   getCoin: 0
   coinAmount: 0
+  isCutScene: 1
+  bergamotNewState: 2
+  poppyNewState: 0
+  thistleNewState: 0
+  bergamotMinimumState: 0
+  poppyMinimumState: 0
+  thistleMinimumState: 0
   sentences:
   - character: 3
-    sentence: "Poppy is probably still running somewhere. It shouldn\u2019t be harder
-      to find than before. Thistle\u2026 I don\u2019t know, depends on her reaction.\n"
+    anim: Anim_Bergamot_Emote_Approve
+    sentence: There we are! Welcome to Fall Garden, our nest in the forest. It's
+      not much but it's comfy!
     voiceLine:
       name: 
       clip: {fileID: 0}
@@ -25,8 +33,9 @@ MonoBehaviour:
       volume: 0
     activateButtons: 0
   - character: 3
-    sentence: "Don\u2019t be mad at Thistle for being so shy. It doesn\u2019t mean
-      that she doesn't like you. It's just how she is."
+    anim: Anim_Bergamot_Emote_Haha
+    sentence: There's an empty little house where you can settle in for the time
+      of your stay.
     voiceLine:
       name: 
       clip: {fileID: 0}

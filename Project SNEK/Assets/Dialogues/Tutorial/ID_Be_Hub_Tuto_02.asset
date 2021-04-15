@@ -14,9 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   getCoin: 0
   coinAmount: 0
+  isCutScene: 0
+  bergamotNewState: 5
+  poppyNewState: 1
+  thistleNewState: 1
+  bergamotMinimumState: 0
+  poppyMinimumState: 0
+  thistleMinimumState: 0
   sentences:
   - character: 3
-    sentence: Make yourself at home! You have your own mailbox too.
+    anim: 
+    sentence: Oooh, shiny! If you're agile with a sword, maybe you won't need me
+      anymore to make your way into the forest, haha!
     voiceLine:
       name: 
       clip: {fileID: 0}
@@ -24,7 +33,19 @@ MonoBehaviour:
       volume: 0
     activateButtons: 0
   - character: 3
-    sentence: Oh Something is already there!
+    anim: 
+    sentence: 'Let''s meet your new neighbours now. Their names are Poppy and Thistle.
+      You''ll probably find them walking around the village... '
+    voiceLine:
+      name: 
+      clip: {fileID: 0}
+      source: {fileID: 0}
+      volume: 0
+    activateButtons: 0
+  - character: 3
+    anim: 
+    sentence: Or maybe Thistle will be a bit harder to find haha. She's a bit shy
+      but she's a lovely person, trust me. Come and find me when you're done!
     voiceLine:
       name: 
       clip: {fileID: 0}
