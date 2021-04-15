@@ -33,6 +33,14 @@ namespace Player.Attack
             PlayerRunController.PlayerChangedDirection += OnChangeDirection;
         }
 
+        private void Update()
+        {
+            if(PlayerManager.Instance.currentController.isDead == true)
+            {
+                canAttack = false;
+            }
+        }
+
         private void OnDestroy()
         {
             cooldownTimer.ClockEnded -= OnCooldownEnded;
