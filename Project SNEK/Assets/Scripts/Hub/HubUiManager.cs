@@ -19,7 +19,7 @@ namespace Hub.UI
             Power
         }
 
-        [SerializeField] GameObject SkillTreeBox, LevelAccessBox, LetterBox;
+        [SerializeField] GameObject skillTreeBox, levelAccessBox, letterBox, demoScreen;
         [SerializeField] Image fadeBackground;
         [SerializeField] TextMeshProUGUI hearthCoins;
         [SerializeField] TextMeshProUGUI equipedTechnicText; //temp
@@ -33,13 +33,20 @@ namespace Hub.UI
         {
             CreateSingleton();
         }
+
         void Start()
         {
-            SkillTreeBox.transform.localScale = Vector3.zero;
-            LevelAccessBox.transform.localScale = Vector3.zero;
-            LetterBox.transform.localScale = Vector3.zero;
+            skillTreeBox.transform.localScale = Vector3.zero;
+            levelAccessBox.transform.localScale = Vector3.zero;
+            letterBox.transform.localScale = Vector3.zero;
+            demoScreen.transform.localScale = Vector3.zero;
             EquipTechnic(SaveManager.Instance.state.equipedTechnic);
             DrawHeartCoins();
+
+            if(SaveManager.Instance.state.isDemoFinished)
+            {
+                OpenBox(demoScreen);
+            }
         }
 
         public void PowerUphealth()
@@ -169,12 +176,12 @@ namespace Hub.UI
 
         public void OpenSkillTree()
         {
-            SkillTreeBox.transform.LeanScale(Vector3.one, 0.3f);
+            skillTreeBox.transform.LeanScale(Vector3.one, 0.3f);
         }
 
         public void CloseSkillTree()
         {
-            SkillTreeBox.transform.LeanScale(Vector3.zero, 0.3f);
+            skillTreeBox.transform.LeanScale(Vector3.zero, 0.3f);
             if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
             {
                 InteractionManager.Instance.EndInteraction();
@@ -183,12 +190,12 @@ namespace Hub.UI
 
         public void OpenLevelAccess()
         {
-            LevelAccessBox.transform.LeanScale(Vector3.one, 0.2f);
+            levelAccessBox.transform.LeanScale(Vector3.one, 0.2f);
         }
 
         public void CloseLevelAcces()
         {
-            LevelAccessBox.transform.LeanScale(Vector3.zero, 0.2f);
+            levelAccessBox.transform.LeanScale(Vector3.zero, 0.2f);
             if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
             {
                 InteractionManager.Instance.EndInteraction();
@@ -197,12 +204,12 @@ namespace Hub.UI
 
         public void OpenLetterBox()
         {
-            LetterBox.transform.LeanScale(Vector3.one, 0.2f);
+            letterBox.transform.LeanScale(Vector3.one, 0.2f);
         }
 
         public void CloseLetterBox()
         {
-            LetterBox.transform.LeanScale(Vector3.zero, 0.2f);
+            letterBox.transform.LeanScale(Vector3.zero, 0.2f);
             if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
             {
                 InteractionManager.Instance.EndInteraction();

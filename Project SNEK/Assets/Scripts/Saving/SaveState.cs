@@ -19,5 +19,8 @@
         /// 3 is Shield
         /// </summary>
         public int equipedTechnic = 0;
+
+
+        public bool isDemoFinished = false;
     }
 }

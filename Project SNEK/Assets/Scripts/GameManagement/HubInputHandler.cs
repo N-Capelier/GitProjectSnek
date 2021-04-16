@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Hub.Interaction;
+using Rendering.Hub;
 
 namespace GameManagement
 {
@@ -18,7 +17,7 @@ namespace GameManagement
         {
             RaycastHit hit;
 
-            if(Input.GetMouseButtonDown(0))
+            if(Input.GetMouseButtonUp(0) && HubCamTargetController.Instance.isMovingCamera == false)
             {
                 Ray ray = hubCamera.ScreenPointToRay(Input.mousePosition);
 
