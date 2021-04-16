@@ -6,12 +6,27 @@ public class TutorialBoxTEST : MonoBehaviour
 {
     public Animator animator;
     public string animName;
+    public GameObject UiText;
+    [SerializeField] bool isAnim;
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.layer == LayerMask.NameToLayer("PlayerController"))
         {
-            animator.Play(animName);
+            if (isAnim)
+            {
+                animator.Play(animName);
+            }
+            else
+            {
+                if(UiText.activeSelf == false)
+                UiText.SetActive(true);
+                else
+                {
+                    UiText.SetActive(false);
+                }
+            }
+
         }
     }
 }
