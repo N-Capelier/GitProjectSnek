@@ -1402,6 +1402,7 @@ GameObject:
   m_Component:
   - component: {fileID: 69622018}
   - component: {fileID: 69622019}
+  - component: {fileID: 69622020}
   m_Layer: 0
   m_Name: End Of Demo
   m_TagString: Untagged
@@ -1417,7 +1418,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 69622017}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.85, y: 0.72, z: 120.84}
+  m_LocalPosition: {x: 4.85, y: 0.72, z: 127.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2015713146}
@@ -1436,6 +1437,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 9, y: 3.44, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &69622020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69622017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fb952ff9c007ce47a8db7b1b15d585c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &73754627
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50426,7 +50439,7 @@ Transform:
   - {fileID: 1589228555}
   - {fileID: 124519409}
   m_Father: {fileID: 2015713146}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1722325586
 PrefabInstance:
