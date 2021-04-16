@@ -19,7 +19,7 @@ namespace Hub.UI
             Power
         }
 
-        [SerializeField] GameObject SkillTreeBox, LevelAccessBox, LetterBox;
+        [SerializeField] GameObject SkillTreeBox, LevelAccessBox, LetterBox, DemoScreen;
         [SerializeField] Image fadeBackground;
         [SerializeField] TextMeshProUGUI hearthCoins;
         [SerializeField] TextMeshProUGUI equipedTechnicText; //temp
@@ -38,6 +38,7 @@ namespace Hub.UI
             SkillTreeBox.transform.localScale = Vector3.zero;
             LevelAccessBox.transform.localScale = Vector3.zero;
             LetterBox.transform.localScale = Vector3.zero;
+            DemoScreen.transform.localScale = Vector3.zero;
             EquipTechnic(SaveManager.Instance.state.equipedTechnic);
             DrawHeartCoins();
         }
