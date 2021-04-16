@@ -45,34 +45,39 @@ namespace Player.Spells
 
         void HandleInput(InputType inputType)
         {
-            switch (inputType)
+            //switch (inputType)
+            //{
+            //    case InputType.SwipeUp:
+            //        if (PlayerManager.Instance.currentController.currentDirection == Controller.PlayerDirection.Down)
+            //        {
+            //            LaunchSpellCast(Controller.PlayerDirection.Down);
+            //        }
+            //        break;
+            //    case InputType.SwipeRight:
+            //        if (PlayerManager.Instance.currentController.currentDirection == Controller.PlayerDirection.Left)
+            //        {
+            //            LaunchSpellCast(Controller.PlayerDirection.Left);
+            //        }
+            //        break;
+            //    case InputType.SwipeDown:
+            //        if (PlayerManager.Instance.currentController.currentDirection == Controller.PlayerDirection.Up)
+            //        {
+            //            LaunchSpellCast(Controller.PlayerDirection.Up);
+            //        }
+            //        break;
+            //    case InputType.SwipeLeft:
+            //        if (PlayerManager.Instance.currentController.currentDirection == Controller.PlayerDirection.Right)
+            //        {
+            //            LaunchSpellCast(Controller.PlayerDirection.Right);
+            //        }
+            //        break;
+            //    default:
+            //        break;
+            //}
+
+            if(inputType == InputType.Hold)
             {
-                case InputType.SwipeUp:
-                    if (PlayerManager.Instance.currentController.currentDirection == Controller.PlayerDirection.Down)
-                    {
-                        LaunchSpellCast(Controller.PlayerDirection.Down);
-                    }
-                    break;
-                case InputType.SwipeRight:
-                    if (PlayerManager.Instance.currentController.currentDirection == Controller.PlayerDirection.Left)
-                    {
-                        LaunchSpellCast(Controller.PlayerDirection.Left);
-                    }
-                    break;
-                case InputType.SwipeDown:
-                    if (PlayerManager.Instance.currentController.currentDirection == Controller.PlayerDirection.Up)
-                    {
-                        LaunchSpellCast(Controller.PlayerDirection.Up);
-                    }
-                    break;
-                case InputType.SwipeLeft:
-                    if (PlayerManager.Instance.currentController.currentDirection == Controller.PlayerDirection.Right)
-                    {
-                        LaunchSpellCast(Controller.PlayerDirection.Right);
-                    }
-                    break;
-                default:
-                    break;
+                LaunchSpellCast(PlayerManager.Instance.currentController.currentDirection);
             }
         }
 

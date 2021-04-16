@@ -19,6 +19,12 @@ namespace Rendering.Hub
         float topConfiner = 13.97992f;
         float bottomConfiner = -11.68559f;
 
+        public bool isMovingCamera = false;
+
+        private void Start()
+        {
+            CreateSingleton();
+        }
 
         private void FixedUpdate()
         {
@@ -68,6 +74,8 @@ namespace Rendering.Hub
 
                 if(currentPos != lastPos && lastPos != Vector3.zero)
                 {
+                    isMovingCamera = true;
+
                     float _dist = Mathf.Abs(lastPos.magnitude - currentPos.magnitude);
                     Vector3 _moveDir = new Vector3(lastPos.x - currentPos.x, 0, lastPos.y - currentPos.y).normalized;
                     _moveDir = new Vector3(_moveDir.x * horizontalSpeedModifier, _moveDir.y, _moveDir.z);
@@ -75,11 +83,13 @@ namespace Rendering.Hub
                 }
                 else
                 {
+                    isMovingCamera = false;
                     rb.velocity = Vector3.zero;
                 }
             }
             else
             {
+                isMovingCamera = false;
                 rb.velocity = Vector3.zero;
                 currentPos = lastPos = Vector3.zero;
             }
@@ -95,8 +105,9 @@ namespace Rendering.Hub
                 if (currentPos != lastPos && lastPos != Vector3.zero)
                 {
                     float _dist = Mathf.Abs(lastPos.magnitude - currentPos.magnitude);
-                    Vector3 _moveDir = new Vector3(lastPos.x - currentPos.x, 0, lastPos.y - currentPos.y);
-                    rb.velocity = _moveDir.normalized * Time.fixedDeltaTime * cameraSpeed * _dist * 0.1f;
+                    Vector3 _moveDir = new Vector3(lastPos.x - currentPos.x, 0, lastPos.y - currentPos.y).normalized;
+                    _moveDir = new Vector3(_moveDir.x * horizontalSpeedModifier, _moveDir.y, _moveDir.z);
+                    rb.velocity = _moveDir * Time.fixedDeltaTime * cameraSpeed * _dist * 0.1f;
                 }
                 else
                 {

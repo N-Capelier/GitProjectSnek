@@ -24,6 +24,7 @@ namespace Cinematic
 
         public void PlayCutscene(TimelineAsset _cutscene)
         {
+            print("Playing cutscene: " + _cutscene.name);
             if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
             {
                 InteractionManager.Instance.camTarget.actions++;
