@@ -98,7 +98,6 @@ namespace Saving
                     break;
             }
             started = true;
-            print(SaveManager.Instance.state.bergamotState);
         }
     }
 }

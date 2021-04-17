@@ -13,12 +13,10 @@ namespace MainMenu
         {
             if(SaveManager.Instance.state.bergamotState > 1)
             {
-                print("Hub");
                 SceneManager.LoadScene("Hub");
             }
             else
             {
-                print("intro");
                 SceneManager.LoadScene("TutorialIntro");
             }
         }
