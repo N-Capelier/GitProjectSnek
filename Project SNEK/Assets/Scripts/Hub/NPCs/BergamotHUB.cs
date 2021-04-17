@@ -54,7 +54,7 @@ namespace Saving
                 case 2f:
                     PlayCutscene(cutscene2);
                     SetTransform(waypoint2);
-                    SaveManager.Instance.state.bergamotState = 3f;
+                    //SaveManager.Instance.state.bergamotState = 3f;
                     break;
                 case 3f:
                     SetDialogue(dialogue3);

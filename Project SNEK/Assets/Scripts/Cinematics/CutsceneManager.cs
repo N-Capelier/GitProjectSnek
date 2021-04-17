@@ -6,6 +6,7 @@ using UnityEngine.Playables;
 using Hub.Interaction;
 using GameManagement;
 using Player;
+using Saving;
 
 namespace Cinematic
 {
@@ -86,6 +87,12 @@ namespace Cinematic
             //mainDirector.playableGraph.GetRootPlayable(0).SetSpeed(1);
             mainDirector.Resume();
             //mainDirector.playableGraph.Play();
+        }
+
+        public void SetBergamotState(int newState)
+        {
+            SaveManager.Instance.state.bergamotState = newState;
+            NPCManager.Instance.RefreshNPCs();
         }
     }
 

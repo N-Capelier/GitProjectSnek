@@ -45,7 +45,7 @@ namespace Saving
                 return;
             SetStarted();
             CutsceneManager.Instance.PlayCutscene(_cutscene);
-            NPCManager.Instance.RefreshNPCs();
+            //NPCManager.Instance.RefreshNPCs();
         }
 
         protected void SetTransform(Transform _transform)
