@@ -5,14 +5,16 @@ using UnityEngine;
 public class TutorialToolTEST : MonoBehaviour
 {
     [SerializeField] GameObject tuto;
+    bool hasActivated;
     private void Start()
     {
         tuto.transform.localScale = Vector3.zero;
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController") && hasActivated == false)
         {
+            hasActivated = true;
             tuto.LeanScale(Vector3.one, 0.2f).setIgnoreTimeScale(true);
             Time.timeScale = 0f;
         }
