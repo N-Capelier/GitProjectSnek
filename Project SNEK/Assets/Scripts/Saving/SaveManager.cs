@@ -9,19 +9,6 @@ namespace Saving
     {
         public SaveState state;
 
-//#if UNITY_EDITOR
-
-        private void Update()
-        {
-            if(Input.GetKeyDown(KeyCode.R))
-            {
-                Debug.Log("Reseting save");
-                state = new SaveState();
-                Save();
-            }
-        }
-
-//#endif
         private void Awake()
         {
             CreateSingleton(true);

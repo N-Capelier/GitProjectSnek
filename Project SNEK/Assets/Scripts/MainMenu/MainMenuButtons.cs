@@ -20,5 +20,12 @@ namespace MainMenu
                 SceneManager.LoadScene("TutorialIntro");
             }
         }
+
+        public void ResetSave()
+        {
+            Debug.Log("Reseting Save");
+            SaveManager.Instance.state = new SaveState();
+            SaveManager.Instance.Save();
+        }
     }
 }
