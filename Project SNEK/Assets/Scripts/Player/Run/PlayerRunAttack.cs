@@ -16,7 +16,7 @@ namespace Player.Attack
         [Range(0, 100)] public float attackDamages = 10; // A REFERENCER
         [HideInInspector] public float rangeBonus = 1f;// A REFERENCER
         [HideInInspector] public float rangeBonusOffSet = 1f;// A REFERENCER
-        bool canAttack = true;
+        [HideInInspector] public bool canAttack = true;
         [HideInInspector] public bool isAttacking = false;
         [SerializeField] [Range(0f, 1f)] float moveSpeedDuringAttack = 0.2f;
         Clock cooldownTimer;
@@ -34,6 +34,7 @@ namespace Player.Attack
         private void Start()
         {
             PlayerManager.Instance.currentController.playerRunAttack = this;
+            canAttack = true;
             cooldownTimer = new Clock();
             InputHandler.InputReceived += HandleInput;
             cooldownTimer.ClockEnded += OnCooldownEnded;

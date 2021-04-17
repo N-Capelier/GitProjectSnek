@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using GameManagement;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 namespace Player.Spells
 {
@@ -29,6 +30,11 @@ namespace Player.Spells
 
         void LaunchSpellCast(Controller.PlayerDirection spellDirection)
         {
+            //////////////////////////////              TEMPORARY                                ////////////////////////////////////////
+            if (SceneManager.GetActiveScene().name != "Level1_3")
+                return;
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
             if (canAttack)
             {
                 canAttack = false;

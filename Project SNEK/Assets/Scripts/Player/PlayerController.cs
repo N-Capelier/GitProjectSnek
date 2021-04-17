@@ -68,10 +68,14 @@ namespace Player.Controller
 
         public void Death()
         {
-            currentHP--;
+            if (SceneManager.GetActiveScene().name != "TutorialMap")
+            {
+                currentHP--;
+            }
             PlayerDead?.Invoke();
             isDead = true;
-            if(currentHP <= 0)
+            playerRunAttack.canAttack = true;
+            if (currentHP <= 0)
             {
                 StartCoroutine(DeathCoroutine());
             }
