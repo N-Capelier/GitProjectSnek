@@ -19,12 +19,13 @@ namespace Hub.UI
             Power
         }
 
-        [SerializeField] GameObject skillTreeBox, levelAccessBox, letterBox, demoScreen;
+        [SerializeField] GameObject skillTreeBox, levelAccessBox, letterBox,letterScreen,demoScreen;
         [SerializeField] Image fadeBackground;
         [SerializeField] TextMeshProUGUI hearthCoins;
         [SerializeField] TextMeshProUGUI equipedTechnicText; //temp
         [SerializeField] TextMeshProUGUI upgradeText;
         [SerializeField] GameObject confirmationBox;
+        [SerializeField] TextMeshProUGUI fadeBack;
 
         int cost;
         BonusStat statToUpgrade;
@@ -37,9 +38,13 @@ namespace Hub.UI
         void Start()
         {
             skillTreeBox.transform.localScale = Vector3.zero;
+            skillTreeBox.gameObject.SetActive(false);
             levelAccessBox.transform.localScale = Vector3.zero;
+            levelAccessBox.gameObject.SetActive(false);
             letterBox.transform.localScale = Vector3.zero;
+            letterBox.gameObject.SetActive(false);
             demoScreen.transform.localScale = Vector3.zero;
+            demoScreen.gameObject.SetActive(false);
             EquipTechnic(SaveManager.Instance.state.equipedTechnic);
             DrawHeartCoins();
 
@@ -176,12 +181,13 @@ namespace Hub.UI
 
         public void OpenSkillTree()
         {
+            skillTreeBox.gameObject.SetActive(true);
             skillTreeBox.transform.LeanScale(Vector3.one, 0.3f);
         }
 
         public void CloseSkillTree()
         {
-            skillTreeBox.transform.LeanScale(Vector3.zero, 0.3f);
+            skillTreeBox.transform.LeanScale(Vector3.zero, 0.3f).setOnComplete(SetSkillTreeFalse);
             if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
             {
                 InteractionManager.Instance.EndInteraction();
@@ -190,12 +196,13 @@ namespace Hub.UI
 
         public void OpenLevelAccess()
         {
+            levelAccessBox.gameObject.SetActive(true);
             levelAccessBox.transform.LeanScale(Vector3.one, 0.2f);
         }
 
         public void CloseLevelAcces()
         {
-            levelAccessBox.transform.LeanScale(Vector3.zero, 0.2f);
+            levelAccessBox.transform.LeanScale(Vector3.zero, 0.2f).setOnComplete(SetLevelAccessFalse); 
             if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
             {
                 InteractionManager.Instance.EndInteraction();
@@ -209,7 +216,7 @@ namespace Hub.UI
 
         public void CloseLetterBox()
         {
-            letterBox.transform.LeanScale(Vector3.zero, 0.2f);
+            letterBox.transform.LeanScale(Vector3.zero, 0.2f).setOnComplete(SetLetterBoxFalse);
             if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
             {
                 InteractionManager.Instance.EndInteraction();
@@ -224,6 +231,24 @@ namespace Hub.UI
         public void DeactivateFadeBackground()
         {
             fadeBackground.enabled = false;
+        }
+
+        public void OpenLetter()
+        {
+            fadeBack.gameObject.LeanAlpha(1, 0.5f);
+        }
+
+        public void SetLetterBoxFalse()
+        {
+            letterBox.SetActive(false);
+        }        
+        public void SetLevelAccessFalse()
+        {
+            levelAccessBox.SetActive(false);
+        }
+        public void SetSkillTreeFalse()
+        {
+            skillTreeBox.SetActive(false);
         }
     }
 }
