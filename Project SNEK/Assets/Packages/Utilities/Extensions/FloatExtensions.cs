@@ -10,7 +10,7 @@ public static class FloatExtensions
     /// <param name="lower"></param>
     /// <param name="greater"></param>
     /// <returns></returns>
-    public static bool isBetween(this float value, float lower, float greater, ClusingType clusing)
+    public static bool IsBetween(this float value, float lower, float greater, ClusingType clusing)
     {
         switch(clusing)
         {

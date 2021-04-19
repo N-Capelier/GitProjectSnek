@@ -3,6 +3,7 @@ using Hub.Interaction;
 using DialogueManagement;
 using UnityEngine.Timeline;
 using Cinematic;
+using System.Collections;
 
 namespace Saving
 {
@@ -13,8 +14,9 @@ namespace Saving
         Clock startTimer;
         float startDelay = .5f;
 
-        public virtual void Start()
+        public virtual IEnumerator Start()
         {
+            yield return new WaitForSeconds(0.1f);
             startTimer = new Clock(startDelay);
             startTimer.ClockEnded += OnStartDelayPassed;
         }

@@ -21,6 +21,11 @@ namespace Saving
 
         public override void Refresh()
         {
+            if(SaveManager.Instance.state.thistleState > 1)
+            {
+                SaveManager.Instance.state.talkedOnceToThistle = true;
+            }
+
             switch (SaveManager.Instance.state.thistleState)
             {
                 default:
@@ -32,6 +37,7 @@ namespace Saving
                     break;
                 case 2f:
                     SetDialogue(dialogue2);
+                    started = false;
                     SetTransform(waypoint2);
                     break;
                 case 3f:

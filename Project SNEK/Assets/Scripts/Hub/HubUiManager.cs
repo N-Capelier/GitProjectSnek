@@ -211,6 +211,7 @@ namespace Hub.UI
 
         public void OpenLetterBox()
         {
+            letterBox.SetActive(true);
             letterBox.transform.LeanScale(Vector3.one, 0.2f);
         }
 

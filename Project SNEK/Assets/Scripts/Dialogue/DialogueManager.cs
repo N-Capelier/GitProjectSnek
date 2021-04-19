@@ -182,36 +182,97 @@ namespace DialogueManagement
                 CutsceneManager.Instance.ResumeCutscene();
             }
 
+            bool canChange = true;
+
             if(currentDialogue.bergamotNewState > 0)
             {
-                if(currentDialogue.bergamotMinimumState >= SaveManager.Instance.state.bergamotState
-                    && currentDialogue.poppyMinimumState >= SaveManager.Instance.state.poppyState
-                    && currentDialogue.thistleMinimumState >= SaveManager.Instance.state.thistleState)
+                canChange = true;
+                if(currentDialogue.bergamotMinimumState != 0 && currentDialogue.bergamotMinimumState <= SaveManager.Instance.state.bergamotState
+                    || currentDialogue.poppyMinimumState != 0 && currentDialogue.poppyMinimumState <= SaveManager.Instance.state.poppyState
+                    || currentDialogue.thistleMinimumState != 0 && currentDialogue.thistleMinimumState <= SaveManager.Instance.state.thistleState)
+                {
+                    canChange = false;
+                }
+
+                if(canChange)
                 {
                     SaveManager.Instance.state.bergamotState = currentDialogue.bergamotNewState;
-                    if(GameManager.Instance.gameState.ActiveState == GameState.Hub)
+                    if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
                     {
                         NPCManager.Instance.RefreshNPCs();
                     }
                 }
+
+                //if(currentDialogue.bergamotMinimumState >= SaveManager.Instance.state.bergamotState
+                //    && currentDialogue.poppyMinimumState >= SaveManager.Instance.state.poppyState
+                //    && currentDialogue.thistleMinimumState >= SaveManager.Instance.state.thistleState)
+                //{
+                //    SaveManager.Instance.state.bergamotState = currentDialogue.bergamotNewState;
+                //    if(GameManager.Instance.gameState.ActiveState == GameState.Hub)
+                //    {
+                //        NPCManager.Instance.RefreshNPCs();
+                //    }
+                //}
             }
             if (currentDialogue.poppyNewState > 0)
             {
-                if (currentDialogue.bergamotMinimumState >= SaveManager.Instance.state.bergamotState
-                    && currentDialogue.poppyMinimumState >= SaveManager.Instance.state.poppyState
-                    && currentDialogue.thistleMinimumState >= SaveManager.Instance.state.thistleState)
+                canChange = true;
+                if (currentDialogue.bergamotMinimumState != 0 && currentDialogue.bergamotMinimumState <= SaveManager.Instance.state.bergamotState
+                    || currentDialogue.poppyMinimumState != 0 && currentDialogue.poppyMinimumState <= SaveManager.Instance.state.poppyState
+                    || currentDialogue.thistleMinimumState != 0 && currentDialogue.thistleMinimumState <= SaveManager.Instance.state.thistleState)
+                {
+                    canChange = false;
+                }
+
+                if (canChange)
                 {
                     SaveManager.Instance.state.poppyState = currentDialogue.poppyNewState;
+                    if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
+                    {
+                        NPCManager.Instance.RefreshNPCs();
+                    }
                 }
+
+                //if (currentDialogue.bergamotMinimumState >= SaveManager.Instance.state.bergamotState
+                //    && currentDialogue.poppyMinimumState >= SaveManager.Instance.state.poppyState
+                //    && currentDialogue.thistleMinimumState >= SaveManager.Instance.state.thistleState)
+                //{
+                //    SaveManager.Instance.state.poppyState = currentDialogue.poppyNewState;
+                //    if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
+                //    {
+                //        NPCManager.Instance.RefreshNPCs();
+                //    }
+                //}
             }
             if (currentDialogue.thistleNewState > 0)
             {
-                if (currentDialogue.bergamotMinimumState >= SaveManager.Instance.state.bergamotState
-                    && currentDialogue.poppyMinimumState >= SaveManager.Instance.state.poppyState
-                    && currentDialogue.thistleMinimumState >= SaveManager.Instance.state.thistleState)
+                canChange = true;
+                if (currentDialogue.bergamotMinimumState != 0 && currentDialogue.bergamotMinimumState <= SaveManager.Instance.state.bergamotState
+                    || currentDialogue.poppyMinimumState != 0 && currentDialogue.poppyMinimumState <= SaveManager.Instance.state.poppyState
+                    || currentDialogue.thistleMinimumState != 0 && currentDialogue.thistleMinimumState <= SaveManager.Instance.state.thistleState)
+                {
+                    canChange = false;
+                }
+
+                if (canChange)
                 {
                     SaveManager.Instance.state.thistleState = currentDialogue.thistleNewState;
+                    if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
+                    {
+                        NPCManager.Instance.RefreshNPCs();
+                    }
                 }
+
+                //if (currentDialogue.bergamotMinimumState >= SaveManager.Instance.state.bergamotState
+                //    && currentDialogue.poppyMinimumState >= SaveManager.Instance.state.poppyState
+                //    && currentDialogue.thistleMinimumState >= SaveManager.Instance.state.thistleState)
+                //{
+                //    SaveManager.Instance.state.thistleState = currentDialogue.thistleNewState;
+                //    if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
+                //    {
+                //        NPCManager.Instance.RefreshNPCs();
+                //    }
+                //}
             }
 
             currentDialogue = null;

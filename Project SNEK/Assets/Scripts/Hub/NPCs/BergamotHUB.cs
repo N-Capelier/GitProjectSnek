@@ -39,6 +39,11 @@ namespace Saving
 
         public override void Refresh()
         {
+            if(SaveManager.Instance.state.talkedOnceToPoppy && SaveManager.Instance.state.talkedOnceToThistle && SaveManager.Instance.state.bergamotState.IsBetween(5f, 10f, ClusingType.II))
+            {
+                SaveManager.Instance.state.bergamotState = 11f;
+            }
+
             switch (SaveManager.Instance.state.bergamotState)
             {
                 default:

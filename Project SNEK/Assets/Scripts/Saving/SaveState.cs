@@ -6,6 +6,9 @@
         public float poppyState = 1f;
         public float thistleState = 1f;
 
+        public bool talkedOnceToPoppy = false;
+        public bool talkedOnceToThistle = false;
+
         public int heartCoinAmount = 6;
 
         public int bonusHealth = 0;

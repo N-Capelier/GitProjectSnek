@@ -10,6 +10,6 @@
     public static bool isBetween(this int value, int lower, int greater, ClusingType clusing)
     {
         float temp = (float)value;
-        return temp.isBetween(lower, greater, clusing);
+        return temp.IsBetween(lower, greater, clusing);
     }
 }

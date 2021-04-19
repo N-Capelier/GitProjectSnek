@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -90558,6 +90558,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 725163438}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1446681430
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1446681431}
+  m_Layer: 0
+  m_Name: Poppy OUT
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1446681431
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446681430}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -29.57, y: 0, z: 1.36}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 761270441952131505}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1449704226
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -95149,13 +95179,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 761270440824221725, guid: 48bd77e26dbcd944a8b073fd5629f2e0,
+        type: 3}
+      propertyPath: m_Name
+      value: Thistle OUT
+      objectReference: {fileID: 0}
     - target: {fileID: 761270441460344656, guid: 48bd77e26dbcd944a8b073fd5629f2e0,
         type: 3}
       propertyPath: dialogue
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7588686927911454979, guid: 48bd77e26dbcd944a8b073fd5629f2e0,
+        type: 3}
+      propertyPath: waypoint1
+      value: 
+      objectReference: {fileID: 1446681431}
+    - target: {fileID: 7588686927911454979, guid: 48bd77e26dbcd944a8b073fd5629f2e0,
+        type: 3}
+      propertyPath: waypoint2
+      value: 
+      objectReference: {fileID: 761270441952131506}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48bd77e26dbcd944a8b073fd5629f2e0, type: 3}
+--- !u!4 &761270441952131505 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 761270439874655522, guid: 48bd77e26dbcd944a8b073fd5629f2e0,
+    type: 3}
+  m_PrefabInstance: {fileID: 761270441952131504}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &761270441952131506 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 761270440006037903, guid: 48bd77e26dbcd944a8b073fd5629f2e0,
+    type: 3}
+  m_PrefabInstance: {fileID: 761270441952131504}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1340347802044073787
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -95521,6 +95578,11 @@ PrefabInstance:
       propertyPath: demoScreen
       value: 
       objectReference: {fileID: 1031773446}
+    - target: {fileID: 4853415424011209270, guid: 60bdfbb1c58dfaf40adf1c8b638fd35b,
+        type: 3}
+      propertyPath: letterScreen
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4853415424011209270, guid: 60bdfbb1c58dfaf40adf1c8b638fd35b,
         type: 3}
       propertyPath: skillTreeBox

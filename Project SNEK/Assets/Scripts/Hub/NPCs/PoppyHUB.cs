@@ -14,6 +14,7 @@ namespace Saving
         [SerializeField] Transform waypoint1;
         [Space]
         [SerializeField] Dialogue dialogue2;
+        [SerializeField] Transform waypoint2;
         [Space]
         [SerializeField] Dialogue dialogue3;
         [Space]
@@ -29,8 +30,22 @@ namespace Saving
         [Space]
         [SerializeField] Dialogue dialogue9;
 
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.O))
+            {
+                Debug.Log($"b{SaveManager.Instance.state.bergamotState} p{SaveManager.Instance.state.poppyState} t{SaveManager.Instance.state.thistleState}");
+                Debug.Log($"pT{SaveManager.Instance.state.talkedOnceToPoppy} tT{SaveManager.Instance.state.talkedOnceToThistle}");
+            }
+        }
+
         public override void Refresh()
         {
+            if (SaveManager.Instance.state.poppyState > 1)
+            {
+                SaveManager.Instance.state.talkedOnceToPoppy = true;
+            }
+
             switch (SaveManager.Instance.state.poppyState)
             {
                 default:
@@ -43,7 +58,8 @@ namespace Saving
                     break;
                 case 2f:
                     SetDialogue(dialogue2);
-                    SetTransform(waypoint1);
+                    started = false;
+                    SetTransform(waypoint2);
                     break;
                 case 3f:
                     SetDialogue(dialogue3);
