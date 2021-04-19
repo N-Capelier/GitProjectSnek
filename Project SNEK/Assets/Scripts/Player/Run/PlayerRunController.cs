@@ -22,6 +22,8 @@ namespace Player.Controller
 
         public GameObject techniqueFx;
 
+        public PlayerRunFeebacks feedbacks;
+
         private void Start()
         {
             animator = objectRenderer.GetComponent<Animator>();
@@ -121,32 +123,35 @@ namespace Player.Controller
                 case InputType.SwipeUp:
                     if (currentDirection != PlayerDirection.Down && currentDirection != PlayerDirection.Up)
                     {
+                        feedbacks.PlayAnimUp();
                         nextDirection = PlayerDirection.Up;
-                        inputSpeed = bonusInputSpeed;
+                        inputSpeed = bonusInputSpeed;                        
                     }
                     break;
                 case InputType.SwipeRight:
                     if (currentDirection != PlayerDirection.Left && currentDirection != PlayerDirection.Right)
                     {
+                        feedbacks.PlayAnimRight();
                         nextDirection = PlayerDirection.Right;
-                        inputSpeed = bonusInputSpeed;
+                        inputSpeed = bonusInputSpeed;                        
 
                     }
                     break;
                 case InputType.SwipeDown:
                     if (currentDirection != PlayerDirection.Up && currentDirection != PlayerDirection.Down)
                     {
+                        feedbacks.PlayAnimDown();
                         nextDirection = PlayerDirection.Down;
-                        inputSpeed = bonusInputSpeed;
+                        inputSpeed = bonusInputSpeed;                        
 
                     }
                     break;
                 case InputType.SwipeLeft:
                     if (currentDirection != PlayerDirection.Right && currentDirection != PlayerDirection.Left)
                     {
+                        feedbacks.PlayAnimLeft();
                         inputSpeed = bonusInputSpeed;
-
-                        nextDirection = PlayerDirection.Left;
+                        nextDirection = PlayerDirection.Left;                        
                     }
                     break;
                 default:
