@@ -155,6 +155,7 @@ namespace Player.Attack
         {
             beamIsUp = false;
             beam = Instantiate(beamPrefab, transform.position, Quaternion.identity);
+            AudioManager.Instance.PlaySoundEffect("SwordBeam");
             switch (PlayerManager.Instance.currentController.currentDirection)
             {
                 case Controller.PlayerDirection.Up:

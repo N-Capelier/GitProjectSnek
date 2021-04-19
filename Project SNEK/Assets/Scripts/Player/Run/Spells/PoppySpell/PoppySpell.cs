@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AudioManagement;
 
 
 namespace Player.Spells
@@ -22,6 +23,7 @@ namespace Player.Spells
             PlayerManager.Instance.currentController.spellMoveSpeedModifier = 0.01f;
             GameObject cauldron= Instantiate(bomb, transform.position, Quaternion.identity); ;
             PlayerManager.Instance.currentController.animator.Play("Anim_PlayerRun_Throw");
+            AudioManager.Instance.PlaySoundEffect("MarmiteLancer");
             switch (spellDirection)
             {
                 case PlayerDirection.Up:

@@ -6,6 +6,7 @@ using GameManagement;
 using Hub.Interaction;
 using Cinematic;
 using Saving;
+using AudioManagement;
 
 namespace DialogueManagement
 {
@@ -161,10 +162,12 @@ namespace DialogueManagement
                 else if(sentenceIndex < currentDialogue.sentences.Length)
                 {
                     StartCoroutine(WriteNextLine());
+                    AudioManager.Instance.PlaySoundEffect("UIClick");
                 }
                 else
                 {
                     EndDialogue();
+                    AudioManager.Instance.PlaySoundEffect("UIClick");
                 }
             }
         }

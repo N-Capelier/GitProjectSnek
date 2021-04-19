@@ -121,6 +121,38 @@ namespace AudioManagement
 
         }
 
+        public Source PlayThisSoundEffect(string soundName, bool loop)
+        {
+            //On cherche le son que l'on va jouer dans la liste de son.
+            Sound s = Array.Find(soundsList.sounds, Sound => Sound.name == soundName);
+
+            //Variable locale pour stocker la référence a l'aurisource.
+            Source sourceTemp = null;
+
+
+            //Ensuite, on cherche la première source qui n'est pas entrain de jouer un son et le fait jouer le son.
+            foreach (var source in sourcesAudio)
+            {
+
+                if (source.audioSource.isPlaying == false)
+                {
+
+                    source.audioSource.clip = s.clip;
+                    source.audioSource.volume = s.volume * SoundEffectsVolume;
+
+                    source.audioSource.loop = loop;
+
+                    source.audioSource.Play();
+
+                    sourceTemp = source;
+
+                    break;
+                }
+
+
+            }
+            return sourceTemp;
+        }
         //On update la list en retirant tous les sons qui ne se jouent plus.
         private void UdpdateList()
         {
@@ -207,6 +239,106 @@ namespace AudioManagement
             return null; 
         }
 
+        public void PlayOneSoundEffect(string soundName)
+        {
+            bool isAlreadyPlaying = true;
+
+            //On cherche le son que l'on va jouer dans la liste de son.
+            Sound s = Array.Find(soundsList.sounds, Sound => Sound.name == soundName);
+
+            //Ensuite, on cherche la première source qui n'est pas entrain de jouer un son et le fait jouer le son.
+            foreach (var source in sourcesAudio)
+            {
+
+                if (source.audioSource.isPlaying == true && source.audioSource.clip.name == "soundName")
+                {
+
+                    isAlreadyPlaying = true;
+                    break;
+
+                }
+                else
+                {
+                    isAlreadyPlaying = false;
+                }
+
+            }
+
+            if (isAlreadyPlaying == false)
+            {
+                foreach (var source in sourcesAudio)
+                {
+                    if (source.audioSource.isPlaying == false)
+                    {
+
+                        source.audioSource.clip = s.clip;
+                        source.audioSource.volume = s.volume * SoundEffectsVolume;
+
+                        source.audioSource.loop = false;
+
+
+                        source.audioSource.Play();
+
+                        break;
+                    }
+                }
+            }
+
+
+
+
+
+
+        }
+
+        public void PlayThisOneSoundEffect(string soundName, Transform here)
+        {
+            if (Vector3.Distance(here.position, PlayerManager.Instance.currentController.transform.position) <= minimumSoundPlayDistance)
+            {
+                bool isAlreadyPlaying = true;
+
+                //On cherche le son que l'on va jouer dans la liste de son.
+                Sound s = Array.Find(soundsList.sounds, Sound => Sound.name == soundName);
+
+                //Ensuite, on cherche la première source qui n'est pas entrain de jouer un son et le fait jouer le son.
+                foreach (var source in sourcesAudio)
+                {
+
+                    if (source.audioSource.isPlaying == true && source.audioSource.clip.name == "soundName")
+                    {
+
+                        isAlreadyPlaying = true;
+                        break;
+
+                    }
+                    else
+                    {
+                        isAlreadyPlaying = false;
+                    }
+
+                }
+
+                if (isAlreadyPlaying == false)
+                {
+                    foreach (var source in sourcesAudio)
+                    {
+                        if (source.audioSource.isPlaying == false)
+                        {
+
+                            source.audioSource.clip = s.clip;
+                            source.audioSource.volume = s.volume * SoundEffectsVolume;
+
+                            source.audioSource.loop = false;
+
+
+                            source.audioSource.Play();
+
+                            break;
+                        }
+                    }
+                }
+            }
+        }
 
     }
 

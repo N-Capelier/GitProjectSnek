@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Wall;
+using AudioManagement;
 
 namespace Player.Spells
 {
@@ -15,7 +16,7 @@ namespace Player.Spells
         bool ignited = false;
         Rigidbody rb;
         public CapsuleCollider capCollider;
-        public BoxCollider boxCollider, igniterCollider;
+        public BoxCollider boxCollider;
         List<GameObject> grabbedObjects = new List<GameObject>();
         public GameObject explosionBox;
         public Animator animator;
@@ -26,7 +27,6 @@ namespace Player.Spells
             rb = gameObject.GetComponent<Rigidbody>();
             StartCoroutine(StartBehaviour());
             capCollider.enabled = false;
-            igniterCollider.enabled = false;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -58,6 +58,7 @@ namespace Player.Spells
 
         IEnumerator Absorb(bool hitWall)
         {
+            Source sourceTemp;
             rb.velocity = Vector3.zero;
             transform.position = new Vector3(
             Mathf.RoundToInt(transform.position.x),
@@ -70,9 +71,10 @@ namespace Player.Spells
             yield return new WaitForSeconds(0.3f);
             absorbFx.Play();
             animator.Play("Anim_Kettle_Absorb");
+            sourceTemp = AudioManager.Instance.PlayThisSoundEffect("MarmiteAspire", true);
             capCollider.enabled = true;
-            igniterCollider.enabled = true;
             yield return new WaitForSeconds(timeBeforeIgnition);
+            sourceTemp.audioSource.Stop();
             if(ignited == false)
             StartCoroutine(Ignite());
         }
@@ -80,11 +82,11 @@ namespace Player.Spells
         public IEnumerator Ignite()
         {
             ignited = true;
-            igniterCollider.enabled = false;
             capCollider.enabled = false;
             Destroy(absorbFx.gameObject);
             animator.Play("Anim_Object_KettleExplosion");
             yield return new WaitForSeconds(0.75f);
+            AudioManager.Instance.PlaySoundEffect("MarmiteEnd");
             explosionFx.Play();
             transform.GetChild(1).gameObject.SetActive(false);
             transform.GetChild(2).gameObject.SetActive(false);
