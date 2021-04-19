@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using AudioManagement;
 
 namespace Enemy
 {
@@ -32,6 +33,7 @@ namespace Enemy
         IEnumerator SpitBehaviour()
         {
             Instantiate(vomito, mBm.currentNode, Quaternion.identity);
+            AudioManager.Instance.PlayThisSoundEffect("MouchouVomito", transform);
             yield return new WaitUntil(() => mBm.isMoving == true);
             mBm.canMove = true;
         }

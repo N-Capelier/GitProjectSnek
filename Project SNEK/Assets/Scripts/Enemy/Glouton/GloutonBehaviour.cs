@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AudioManagement;
 
 namespace Enemy
 {
@@ -57,6 +58,7 @@ namespace Enemy
             yield return new WaitForSeconds(1);
             TargetCell();
             yield return new WaitForSeconds(1.8f);
+            AudioManager.Instance.PlayThisSoundEffect("GloutonSpit", transform);
             projectile = Instantiate(bomb, new Vector3(transform.position.x, 1.5f, transform.position.z), Quaternion.identity);
             yield return new WaitForSeconds(0.2f);
             anim.SetBool("isAttacking", false);

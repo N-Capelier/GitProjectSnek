@@ -27,8 +27,7 @@ namespace GameManagement.GameStates
             RunCamController.Instance.Set(CamState.PlayerScrolling);
             if (runMusic == null)
             {
-                runMusic = AudioManager.Instance.PlayThisSoundEffect("LevelMusic");
-                runMusic.audioSource.loop = true;
+                runMusic = AudioManager.Instance.PlayThisSoundEffect("LevelMusic", true);
             }
         }
 

@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
+using AudioManagement;
+
 
 namespace Enemy
 {
@@ -34,7 +36,8 @@ namespace Enemy
             yield return new WaitForSeconds(timeToSpawn - 0.3f);
             projectile = Instantiate(bomb, new Vector3(transform.position.x, 6, transform.position.z), Quaternion.identity);
             yield return new WaitForSeconds(0.3f);
-            Instantiate(explosion, transform.position, Quaternion.identity);            
+            Instantiate(explosion, transform.position, Quaternion.identity);
+            AudioManager.Instance.PlayThisOneSoundEffect("GloutonAttack", transform);
             yield return new WaitForSeconds(0.2f);            
             Destroy(gameObject);
         }

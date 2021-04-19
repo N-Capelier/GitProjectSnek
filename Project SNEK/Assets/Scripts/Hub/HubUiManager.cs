@@ -4,6 +4,7 @@ using GameManagement;
 using Saving;
 using Hub.Interaction;
 using TMPro;
+using AudioManagement;
 
 namespace Hub.UI
 {
@@ -176,6 +177,7 @@ namespace Hub.UI
 
         public void CloseBox(GameObject box)
         {
+            AudioManager.Instance.PlaySoundEffect("UINone");
             box.LeanScale(Vector3.zero, 0.2f);
         }
 
@@ -196,12 +198,14 @@ namespace Hub.UI
 
         public void OpenLevelAccess()
         {
+            AudioManager.Instance.PlaySoundEffect("UIClick");
             levelAccessBox.gameObject.SetActive(true);
             levelAccessBox.transform.LeanScale(Vector3.one, 0.2f);
         }
 
         public void CloseLevelAcces()
         {
+            AudioManager.Instance.PlaySoundEffect("UINone");
             levelAccessBox.transform.LeanScale(Vector3.zero, 0.2f).setOnComplete(SetLevelAccessFalse); 
             if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
             {
@@ -211,11 +215,13 @@ namespace Hub.UI
 
         public void OpenLetterBox()
         {
+            AudioManager.Instance.PlaySoundEffect("UIClick");
             letterBox.transform.LeanScale(Vector3.one, 0.2f);
         }
 
         public void CloseLetterBox()
         {
+            AudioManager.Instance.PlaySoundEffect("UINone");
             letterBox.transform.LeanScale(Vector3.zero, 0.2f).setOnComplete(SetLetterBoxFalse);
             if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
             {
