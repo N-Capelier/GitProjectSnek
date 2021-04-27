@@ -12,6 +12,7 @@ namespace Player.Spirits
         [SerializeField] Animator animator;
 
         [SerializeField] SpiritBehaviour nextSpirit;
+        [SerializeField] ParticleSystem poof;
 
         private void Start()
         {
@@ -88,9 +89,12 @@ namespace Player.Spirits
         public IEnumerator Death()
         {
             //Play death anim
-
+            animator.Play("animSpiritDisappear");
+            yield return new WaitForSeconds(0.66f);
+            if(objectRenderer.activeSelf == true)
+            Instantiate(poof, transform);
             //Prevenir Nico quand on change la durée
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.44f);
             objectRenderer.SetActive(false);
         }
 

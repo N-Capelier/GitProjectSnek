@@ -12,11 +12,13 @@ namespace Map
         bool hasChecked = false;
         public List<ParticleSystem> lanterFlameParticules = new List<ParticleSystem>();
         public List<ParticleSystem> lanterGlowParticules = new List<ParticleSystem>();
+        public ParticleSystem conffeti;
 
         private void OnTriggerEnter(Collider other)
         {
             if (!hasChecked && other.CompareTag("Player"))
             {
+                conffeti.Play();
                 foreach(ParticleSystem particule in lanterFlameParticules)
                 {
                     particule.Play();

@@ -10,6 +10,7 @@ namespace Player.Spirits
     public class SpiritManager : MonoBehaviour
     {
         [SerializeField] SpiritBehaviour spiritPrefab;
+        [SerializeField] ParticleSystem spiritGetParticle, spawnPoofParticle;
         [HideInInspector] public PlayerDirection nextDir;
 
         [Space]
@@ -58,10 +59,13 @@ namespace Player.Spirits
 
         public void AddSpirit()
         {
+
             for (int i = 0; i < spiritChain.Count; i++)
             {
                 if(!spiritChain[i].objectRenderer.gameObject.activeSelf)
                 {
+                    Instantiate(spiritGetParticle, PlayerManager.Instance.currentController.transform);
+                    Instantiate(spawnPoofParticle, spiritChain[i].transform);
                     spiritChain[i].objectRenderer.gameObject.SetActive(true);
                     break;
                 }
