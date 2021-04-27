@@ -24,6 +24,8 @@ namespace GameManagement
 
         [SerializeField] GameState startingState;
 
+        [SerializeField] TransitionScreenManager sceneTransition;
+
         private void Awake()
         {
             animator = GetComponent<Animator>();
@@ -31,19 +33,32 @@ namespace GameManagement
         }
 
 
-        public void Set(GameState newState, string levelName = "")
+        public void Set(GameState newState, string levelName = "", bool makeTransition = true)
         {
-            StartCoroutine(LoadAndWaitScene(newState, levelName));
+            StartCoroutine(LoadAndWaitScene(newState, levelName, makeTransition));
         }
 
-        IEnumerator LoadAndWaitScene(GameState newState, string levelName)
+        //public void SetAlphaUp()
+        //{
+        //    StartCoroutine(sceneTransition.AlphaUp(.2f));
+        //}
+
+        public void SetAlphaDown()
+        {
+            StartCoroutine(sceneTransition.AlphaDown(.05f));
+        }
+
+        IEnumerator LoadAndWaitScene(GameState newState, string levelName, bool makeTransition)
         {
             if (ActiveState == newState)
                 yield return null;
 
             if (levelName != "")
             {
-                SceneManager.LoadScene(levelName);
+                if (makeTransition && sceneTransition != null)
+                {
+                    StartCoroutine(sceneTransition.AlphaUp(.05f, levelName));
+                }
                 /*_newScene.allowSceneActivation = false;
                 while(_newScene.progress < 0.95f)
                 {

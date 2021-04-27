@@ -2,6 +2,7 @@
 using UnityEngine.SceneManagement;
 using Saving;
 using AudioManagement;
+using GameManagement;
 
 namespace MainMenu
 {
@@ -15,11 +16,13 @@ namespace MainMenu
             AudioManager.Instance.PlaySoundEffect("UIConfirm");
             if (SaveManager.Instance.state.bergamotState > 1)
             {
-                SceneManager.LoadScene("Hub");
+                GameManager.Instance.gameState.Set(GameManager.Instance.gameState.ActiveState, "Hub");
+                //SceneManager.LoadScene("Hub");
             }
             else
             {
-                SceneManager.LoadScene("TutorialIntro");
+                GameManager.Instance.gameState.Set(GameManager.Instance.gameState.ActiveState, "TutorialIntro");
+                //SceneManager.LoadScene("TutorialIntro");
             }
         }
 
