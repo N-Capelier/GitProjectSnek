@@ -46,11 +46,11 @@ namespace Player.Spirits
 #if UNITY_EDITOR
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.Return))
             {
                 AddSpirit();
             }
-            else if(Input.GetKeyDown(KeyCode.Backspace))
+            else if (Input.GetKeyDown(KeyCode.Backspace))
             {
                 ConsumeSpirits(3);
             }
@@ -62,7 +62,7 @@ namespace Player.Spirits
 
             for (int i = 0; i < spiritChain.Count; i++)
             {
-                if(!spiritChain[i].objectRenderer.gameObject.activeSelf)
+                if (!spiritChain[i].objectRenderer.gameObject.activeSelf)
                 {
                     Instantiate(spiritGetParticle, PlayerManager.Instance.currentController.transform);
                     Instantiate(spawnPoofParticle, spiritChain[i].transform);
@@ -110,14 +110,14 @@ namespace Player.Spirits
 
             for (int i = 0; i < spiritChain.Count; i++)
             {
-                if(spiritChain[i] == _spiritBehaviour)
+                if (spiritChain[i] == _spiritBehaviour)
                 {
                     _index = i;
                     break;
                 }
             }
 
-            if(_index == 25)
+            if (_index == 25)
             {
                 throw new System.Exception("Spirit not found in spirit chain!");
             }

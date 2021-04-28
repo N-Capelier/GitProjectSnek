@@ -19,11 +19,11 @@ namespace Map
             if (!hasChecked && other.CompareTag("Player"))
             {
                 conffeti.Play();
-                foreach(ParticleSystem particule in lanterFlameParticules)
+                foreach (ParticleSystem particule in lanterFlameParticules)
                 {
                     particule.Play();
                 }
-                foreach(ParticleSystem particule in lanterGlowParticules)
+                foreach (ParticleSystem particule in lanterGlowParticules)
                 {
                     particule.Play();
                 }
