@@ -10,6 +10,12 @@ namespace Hub.Interaction
         public string animationName;
         public Animator objectAnimator;
 
+        public override IEnumerator BeginInteraction()
+        {
+            Interact();
+            yield return null;
+        }
+
         protected override void Interact()
         {
             objectAnimator.Play(animationName);

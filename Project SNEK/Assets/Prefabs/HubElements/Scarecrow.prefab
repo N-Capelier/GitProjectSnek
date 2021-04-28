@@ -107,8 +107,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7860339121953277183}
-  - component: {fileID: 882966700}
   - component: {fileID: 2175968542180720261}
+  - component: {fileID: 882966700}
   m_Layer: 10
   m_Name: Scarecrow
   m_TagString: Untagged
@@ -124,7 +124,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7173143120781113743}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 5, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_Children:
   - {fileID: 4173278752214386093}
@@ -132,6 +132,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!65 &2175968542180720261
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7173143120781113743}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7322267, y: 1.0359555, z: 1}
+  m_Center: {x: -0.042910576, y: 0.54254645, z: -0}
 --- !u!114 &882966700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,19 +163,6 @@ MonoBehaviour:
   orientation: 0
   animationName: animScarecrow
   objectAnimator: {fileID: 4989979152145423900}
---- !u!65 &2175968542180720261
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7173143120781113743}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.7322267, y: 1.0359555, z: 1}
-  m_Center: {x: -0.042910576, y: 0.54254645, z: -0}
 --- !u!1001 &4494820677589787206
 PrefabInstance:
   m_ObjectHideFlags: 0

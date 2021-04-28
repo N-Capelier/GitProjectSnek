@@ -13,7 +13,7 @@ namespace Hub.Interaction
         [SerializeField] [Range(0f, 360f)] float orientation = 0f;
         //[SerializeField] float rotationSpeed = 0.1f;
 
-        public IEnumerator BeginInteraction()
+        public virtual IEnumerator BeginInteraction()
         {
             if (InteractionManager.Instance.camTarget.actions != 0 || InteractionManager.Instance.isInteracting)
                 yield break;
