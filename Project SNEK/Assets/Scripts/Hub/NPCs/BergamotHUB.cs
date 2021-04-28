@@ -7,33 +7,45 @@ namespace Saving
     public class BergamotHUB : NPCHUB
     {
         [Space]
+        [Header("State1")]
         [SerializeField] TimelineAsset cutsceneTuto;
         [SerializeField] Transform waypointTuto;
         [Space]
+        [Header("State2")]
         [SerializeField] TimelineAsset cutscene2;
         [SerializeField] Transform waypoint2;
         [Space]
+        [Header("State3")]
         [SerializeField] Dialogue dialogue3;
         [SerializeField] Transform waypoint3;
         [Space]
+        [Header("State4")]
         [SerializeField] Dialogue dialogue4;
         [Space]
+        [Header("State5")]
         [SerializeField] Dialogue dialogue5;
         [SerializeField] Transform waypoint5;
         [Space]
+        [Header("State6")]
         [SerializeField] Dialogue dialogue6;
         [Space]
+        [Header("State7")]
         [SerializeField] Dialogue dialogue7;
         [Space]
+        [Header("State8")]
         [SerializeField] Dialogue dialogue8;
         [Space]
+        [Header("State9")]
         [SerializeField] Dialogue dialogue9;
         [Space]
+        [Header("State10")]
         [SerializeField] Dialogue dialogue10;
         [Space]
+        [Header("State11")]
         [SerializeField] Dialogue dialogue11;
         [SerializeField] Transform waypoint11;
         [Space]
+        [Header("State12")]
         [SerializeField] Dialogue dialogue12;
         [SerializeField] Transform waypoint12;
 

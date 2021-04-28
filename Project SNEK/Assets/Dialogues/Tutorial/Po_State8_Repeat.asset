@@ -10,15 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
-  m_Name: ID_Po_Hub_Tuto_Repeat_01
+  m_Name: Po_State8_Repeat
   m_EditorClassIdentifier: 
   getCoin: 0
   coinAmount: 0
+  isCutScene: 0
+  bergamotNewState: 0
+  poppyNewState: 0
+  thistleNewState: 0
+  bergamotMinimumState: 0
+  poppyMinimumState: 0
+  thistleMinimumState: 0
   sentences:
   - character: 1
-    sentence: Oh, you're looking for Thistle? I think I saw her behind a bush somewhere...
-      You can't miss her,  she has super cute cat ears with pink ribbons poking out
-      of the leaves.
+    anim: 
+    sentence: "I\u2019m loving to talk with you friend but, isn\u2019t Thistle somewhere
+      out there waiting to meet you? It will be such a nice surprise for her! You
+      shouldn\u2019t wait any longer!"
     voiceLine:
       name: 
       clip: {fileID: 0}

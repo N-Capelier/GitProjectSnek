@@ -8,14 +8,18 @@ namespace Saving
     public class ThistleHUB : NPCHUB
     {
         [Space]
+        [Header("State1")]
         [SerializeField] Transform waypointOutOfVillage;
         [Space]
+        [Header("State2")]
         [SerializeField] Dialogue dialogue2;
         [SerializeField] Transform waypoint2;
         [Space]
+        [Header("State3")]
         [SerializeField] Dialogue dialogue3;
         [SerializeField] Transform waypoint3;
         [Space]
+        [Header("State4")]
         [SerializeField] Dialogue dialogue4;
         [SerializeField] Transform waypoint4;
 

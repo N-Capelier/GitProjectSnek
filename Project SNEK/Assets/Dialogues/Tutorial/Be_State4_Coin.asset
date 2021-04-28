@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
-  m_Name: ID_Be_Hub_Tuto_02
+  m_Name: Be_State4_Coin
   m_EditorClassIdentifier: 
-  getCoin: 0
-  coinAmount: 0
+  getCoin: 1
+  coinAmount: 1
   isCutScene: 0
   bergamotNewState: 5
   poppyNewState: 2
@@ -45,7 +45,26 @@ MonoBehaviour:
   - character: 3
     anim: 
     sentence: Or maybe Thistle will be a bit harder to find haha. She's a bit shy
-      but she's a lovely person, trust me. Come and find me when you're done!
+      but she's a lovely person, trust me.
+    voiceLine:
+      name: 
+      clip: {fileID: 0}
+      source: {fileID: 0}
+      volume: 0
+    activateButtons: 0
+  - character: 3
+    anim: 
+    sentence: Oh! before you go take this!
+    voiceLine:
+      name: 
+      clip: {fileID: 0}
+      source: {fileID: 0}
+      volume: 0
+    activateButtons: 0
+  - character: 3
+    anim: 
+    sentence: It's an heart coin! It's a custom in our village to throw one in the
+      fountain and make a wish so take this as my welcome gift!
     voiceLine:
       name: 
       clip: {fileID: 0}

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
-  m_Name: ID_Be_Cut_Tuto_02
+  m_Name: Po_State9_Repeat
   m_EditorClassIdentifier: 
   getCoin: 0
   coinAmount: 0
-  isCutScene: 1
+  isCutScene: 0
   bergamotNewState: 0
   poppyNewState: 0
   thistleNewState: 0
@@ -22,20 +22,10 @@ MonoBehaviour:
   poppyMinimumState: 0
   thistleMinimumState: 0
   sentences:
-  - character: 3
-    anim: Anim_Bergamot_Emote_Approve
-    sentence: There we are! Welcome to Fall Garden, our nest in the forest. It's
-      not much but it's comfy!
-    voiceLine:
-      name: 
-      clip: {fileID: 0}
-      source: {fileID: 0}
-      volume: 0
-    activateButtons: 0
-  - character: 3
-    anim: Anim_Bergamot_Emote_Haha
-    sentence: There's an empty little house where you can settle in for the time
-      of your stay.
+  - character: 1
+    anim: 
+    sentence: "Oh, isn\u2019t Bergamot looking for you? We can talk any time you
+      want, friend! But you shouldn\u2019t make her wait so long. "
     voiceLine:
       name: 
       clip: {fileID: 0}
