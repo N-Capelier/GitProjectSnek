@@ -13,8 +13,8 @@ namespace Enemy
         [HideInInspector] public Clock attackClock;
         [HideInInspector] public Clock movementClock;
 
-        [SerializeField] [Range(0f, 15f)] float attackCooldown = 5f;
-        [SerializeField] [Range(0f, 10f)] float movementCooldown = 2f;
+        [SerializeField] [Range(0f, 15f)] public float attackCooldown = 5f;
+        [SerializeField] [Range(0f, 10f)] public float movementCooldown = 2f;
 
         [Space]
         [SerializeField] float maxHp = 1;
