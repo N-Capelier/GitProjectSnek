@@ -6,12 +6,13 @@ using Player;
 
 public class PickUpSpirit : MonoBehaviour
 {
+    public GameObject getSpiritParticle;
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.layer == LayerMask.NameToLayer("PlayerController"))
         {
             PlayerManager.Instance.currentController.playerRunSpirits.AddSpirit();
-            //Instantiate pickup particle
+            Instantiate(getSpiritParticle, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

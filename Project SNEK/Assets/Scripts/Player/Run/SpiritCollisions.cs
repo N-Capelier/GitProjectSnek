@@ -11,7 +11,7 @@ namespace Player.Spirits
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController"))
             {
-                PlayerManager.Instance.currentController.Death();
+                PlayerManager.Instance.currentController.Death(0);
             }
             else if(other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {

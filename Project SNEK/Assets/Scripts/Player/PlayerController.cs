@@ -66,7 +66,7 @@ namespace Player.Controller
             //playerRunAttack.attackDamages += _bonusPower;
         }
 
-        public void Death()
+        public void Death(int deathIndex)
         {
             if (SceneManager.GetActiveScene().name != "TutorialMap")
             {
@@ -77,11 +77,11 @@ namespace Player.Controller
             playerRunAttack.canAttack = true;
             if (currentHP <= 0)
             {
-                StartCoroutine(DeathCoroutine());
+                StartCoroutine(DeathCoroutine(deathIndex));
             }
             else
             {
-                StartCoroutine(RespawnCoroutine());
+                StartCoroutine(RespawnCoroutine(deathIndex));
             }
         }
 
@@ -94,11 +94,14 @@ namespace Player.Controller
                 );
         }
 
-        IEnumerator RespawnCoroutine()
+        IEnumerator RespawnCoroutine(int deathAnimIndex)
         {
             //play death anim
             Instantiate(deathFx, transform.position, Quaternion.identity);
-            objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_death");
+            if (deathAnimIndex == 0)
+                objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_death");
+            else if (deathAnimIndex == 1)
+                objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_deathPoison");
             AudioManager.Instance.PlaySoundEffect("PlayerHit");
             yield return new WaitForSeconds(1.5f);
             PlayerManager.Instance.gameObject.SetActive(false);            
@@ -119,11 +122,14 @@ namespace Player.Controller
 
         }
 
-        IEnumerator DeathCoroutine()
+        IEnumerator DeathCoroutine(int deathAnimIndex)
         {
             //play defeat anim
             Instantiate(deathFx, transform.position, Quaternion.identity);
+            if(deathAnimIndex == 0)
             objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_death");
+            else if(deathAnimIndex == 1)
+            objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_deathPoison");
             AudioManager.Instance.PlaySoundEffect("PlayerHit");
             yield return new WaitForSeconds(1f);
             GameManagement.GameManager.Instance.gameState.Set(GameManagement.GameState.Hub, "Hub");

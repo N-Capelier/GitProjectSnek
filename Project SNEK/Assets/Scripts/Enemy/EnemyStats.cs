@@ -97,7 +97,7 @@ namespace Enemy
         public void Death()
         {
             PlayerManager.Instance.currentController.playerRunSpirits.AddSpirit();
-            Instantiate(deathFx, transform.position, Quaternion.identity);
+            Instantiate(hitFx, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
 
@@ -112,7 +112,7 @@ namespace Enemy
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController"))
             {
-                PlayerManager.Instance.currentController.Death();
+                PlayerManager.Instance.currentController.Death(0);
             }
         }
 

@@ -13,12 +13,14 @@ namespace Wall
         [SerializeField] public bool isDestroyable;
         [SerializeField] GameObject objectRenderer;
         [SerializeField] ParticleSystem fx;
+
+        public int deathIndex;
         private void OnTriggerEnter(Collider other)
         {
 
             if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController"))
             {
-                PlayerManager.Instance.currentController.Death();
+                PlayerManager.Instance.currentController.Death(deathIndex);
             }
             else if (other.gameObject.layer == LayerMask.NameToLayer("Attack") && isDestroyable == true)
             {
