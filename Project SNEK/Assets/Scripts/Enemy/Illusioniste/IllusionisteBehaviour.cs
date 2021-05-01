@@ -11,6 +11,7 @@ namespace Enemy
         public GameObject clone;
         public int cloneNumber;
         public GameObject[] clonesList;
+        /*[HideInInspector]*/ public bool isKillable = false;
 
         private void Start()
         {
@@ -21,15 +22,36 @@ namespace Enemy
             movement.InstantiateClones();
         }
 
+        private void Update()
+        {
+            if(isKillable == true)
+            {
+                StartCoroutine(IsRegenerating());
+            }
+        }
+
+        int index = 0;
 
         void OnshouldAttack()
         {
-            Debug.Log("Illu_ATK");
+            if(isKillable == false)
+            {
+                index = Random.Range(0, clonesList.Length);
+                StartCoroutine(clonesList[index].GetComponent<IllusionisteClone>().Fire());
+            }
         }
 
-        void InstantiateClones()
+        public IEnumerator IsRegenerating()
         {
-            
+            clonesList[0].GetComponentInChildren<MeshRenderer>().material = clonesList[0].GetComponent<IllusionisteClone>().killableMat;
+            yield return new WaitForSeconds(5);
+            clonesList[0].GetComponentInChildren<MeshRenderer>().material = clonesList[0].GetComponent<IllusionisteClone>().defaultMat;
+            isKillable = false;
+        }
+
+        public void Death()
+        {
+            stats.Death();
         }
 
     }

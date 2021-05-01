@@ -9,7 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4376464454411805265}
-  m_Layer: 0
+  - component: {fileID: 5774057733726519956}
+  - component: {fileID: 7820240960864877930}
+  - component: {fileID: 3112912292855990024}
+  m_Layer: 11
   m_Name: Illusionist_Clone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,6 +34,59 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5774057733726519956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4376464454411805264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 849a4c576be7d5b4ab5a6484805d2698, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargingMat: {fileID: 2100000, guid: d7991b4bebeb46a43b19270c39b5a4cd, type: 2}
+  bullet: {fileID: 2403027144476230222, guid: 9e8747a0cb42295408c2bdde0cf694c1, type: 3}
+  attackRange: 10
+  bulletSpeed: 100
+--- !u!65 &7820240960864877930
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4376464454411805264}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6, y: 0.8, z: 0.6}
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &3112912292855990024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4376464454411805264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 891fd462e2d92af4dbdfdb4bc63a23c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackCooldown: 15
+  movementCooldown: 10
+  maxHp: 1
+  currentHp: 0
+  deathFx: {fileID: 3893877149857393849, guid: 776a358c2e98ba8409c4035d37f35e3f, type: 3}
+  hitFx: {fileID: 7151187943005086603, guid: dd0215882c7ac2e4da6adacb2666fabf, type: 3}
+  enemyRenderer: {fileID: 3133879280880021978}
+  skinnedRenderer: {fileID: 0}
+  hitMaterial: {fileID: 2100000, guid: 49bd8cf0807c6c3408ac07b5ba52741e, type: 2}
+  rb: {fileID: 0}
+  moveSpeed: 1
+  isClone: 1
 --- !u!1001 &4376464454178434398
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -103,11 +159,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Renderer
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8d7d744fb53af264388add2f6bd63090,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d7d744fb53af264388add2f6bd63090, type: 3}
 --- !u!4 &4266855286399077045 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8d7d744fb53af264388add2f6bd63090,
+    type: 3}
+  m_PrefabInstance: {fileID: 4376464454178434398}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &3133879280880021978 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 8d7d744fb53af264388add2f6bd63090,
     type: 3}
   m_PrefabInstance: {fileID: 4376464454178434398}
   m_PrefabAsset: {fileID: 0}

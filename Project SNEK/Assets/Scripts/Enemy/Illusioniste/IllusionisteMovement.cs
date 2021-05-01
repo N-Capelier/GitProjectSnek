@@ -23,8 +23,8 @@ namespace Enemy
 
         IEnumerator DelayStart()
         {
-            yield return new WaitForSeconds(2.5f);
-            stats.movementClock = new Clock(stats.movementCooldown);
+            yield return new WaitForSeconds(1.5f);
+            stats.movementClock.SetTime(stats.movementCooldown);
         }
 
         void OnShouldMove()
@@ -36,27 +36,36 @@ namespace Enemy
             else
                 patternCount = 0;*/
 
-            patternCount++;
             StartCoroutine(SpawnRoutine());
         }
 
-        
 
+        int remainClones;
         IEnumerator SpawnRoutine()
         {
-            
-
-            for (int i = 0; i < behaviour.clonesList.Length; i++)
+            if(behaviour.isKillable == false)
             {
-                Destroy(behaviour.clonesList[i]);
-            }
-            behaviour.clonesList = new GameObject[behaviour.cloneNumber];
+                remainClones = cloneParent.gameObject.transform.childCount;
+                for (int i = 0; i < behaviour.clonesList.Length; i++)
+                {
+                    if (behaviour.clonesList[i] != null)
+                    {
+                        Destroy(behaviour.clonesList[i]);
+                    }
+                }
+                behaviour.clonesList = new GameObject[remainClones];
 
-            yield return new WaitForSeconds(0.2f);
-            InstantiateClones();
+                yield return new WaitForSeconds(0);
+                InstantiateClones();
+                if (behaviour.clonesList.Length <= 1 && behaviour.isKillable == false)
+                {
+                    behaviour.isKillable = true;                    
+                    StartCoroutine(behaviour.IsRegenerating());
+                }
+            }            
         }
 
-        int index = 0;
+        [SerializeField] int index = 0;
         GameObject clone;
 
         public void InstantiateClones()
@@ -74,9 +83,20 @@ namespace Enemy
                                 clone = Instantiate(behaviour.clone, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x))),Quaternion.identity, cloneParent.transform);
                                 behaviour.clonesList[index] = clone;
                                 index++;
+                                if (index == behaviour.clonesList.Length)
+                                {
+                                    
+                                    break;
+                                }
                             }
                         }
+                        if (index == behaviour.clonesList.Length)
+                        {
+
+                            break;
+                        }
                     }
+                    patternCount++;
                     break;
                 case 1:
                     for (int x = 0; x < patterns[1].row.Length; x++)
@@ -88,9 +108,19 @@ namespace Enemy
                                 clone = Instantiate(behaviour.clone, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x))), Quaternion.identity, cloneParent.transform);
                                 behaviour.clonesList[index] = clone;
                                 index++;
+                                if (index == behaviour.clonesList.Length)
+                                {
+                                    break;
+                                }
                             }
                         }
+                        if (index == behaviour.clonesList.Length)
+                        {
+
+                            break;
+                        }
                     }
+                    patternCount = 0;
                     break;
 
             }
