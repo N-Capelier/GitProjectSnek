@@ -31,17 +31,17 @@ namespace Player.Spells
         void LaunchSpellCast(Controller.PlayerDirection spellDirection)
         {
             //////////////////////////////              TEMPORARY                                ////////////////////////////////////////
-            if (SceneManager.GetActiveScene().name != "Level1_3")
-                return;
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            if (canAttack)
+            if (SceneManager.GetActiveScene().name == "Level1_3" || SceneManager.GetActiveScene().name == "Boss Anorexia")
             {
-                canAttack = false;
-                spellCooldownTimer.SetTime(spellCooldown);
+                if (canAttack)
+                {
+                    canAttack = false;
+                    spellCooldownTimer.SetTime(spellCooldown);
 
-                StartCoroutine(SpellCast(spellDirection));
+                    StartCoroutine(SpellCast(spellDirection));
+                }
             }
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         }
 
         void OnCooldownEnded()

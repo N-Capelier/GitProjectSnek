@@ -22,14 +22,27 @@ namespace Rendering.Run
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if(PlayerManager.Instance.currentController.transform.position.z > RunCamController.Instance.vcam.transform.position.z + 10f)
+            if(PlayerManager.Instance.currentController.transform.position.z - 5f> RunCamController.Instance.vcam.transform.position.z)
             {
-                RunCamController.Instance.rb.velocity = new Vector3(0, 0, 2.5f);
+                RunCamController.Instance.rb.velocity = new Vector3(0, 0, PlayerManager.Instance.currentController.rb.velocity.z);
             }
             else
             {
-                RunCamController.Instance.rb.velocity = new Vector3(0, 0, RunCamController.Instance.scrollSpeed * 2.5f);
+                RunCamController.Instance.rb.velocity = new Vector3(0, 0, 0 /*RunCamController.Instance.scrollSpeed * 2.5f*/);
             }
+
+            RunCamController.Instance.rb.velocity = new Vector3(
+                PlayerManager.Instance.currentController.rb.velocity.x,
+                RunCamController.Instance.rb.velocity.y,
+                RunCamController.Instance.rb.velocity.z);
+
+            //if(PlayerManager.Instance.currentController.transform.position.x != RunCamController.Instance.transform.position.x)
+            //{
+            //    RunCamController.Instance.transform.position = new Vector3(PlayerManager.Instance.currentController.transform.position.x - 5,
+            //        RunCamController.Instance.transform.position.y,
+            //        RunCamController.Instance.transform.position.z);
+
+            //}
         }
 
         // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

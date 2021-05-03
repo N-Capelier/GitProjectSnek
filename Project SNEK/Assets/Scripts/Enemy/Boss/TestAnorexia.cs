@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Enemy;
 using Player;
-using Player.Spells;
-using Map;
 
 namespace Boss
 {
@@ -62,8 +60,15 @@ namespace Boss
             currentHp = maxHp;            
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.J))
+            {
+                Debug.Log(Rendering.Run.RunCamController.Instance.ActiveState);
+            }
+        }
+
+        void FixedUpdate()
         {
             UpdateMovement();
             
@@ -96,7 +101,7 @@ namespace Boss
             
             if(PlayerManager.Instance.currentController != null)
             {
-                if (PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits() == 3 && isTaunt == false)
+                if (PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits() >= 3 && isTaunt == false)
                 {                    
                     animator.SetBool("animIsAttacking", false);
                     StopAllCoroutines();
@@ -128,6 +133,7 @@ namespace Boss
                 yield return new WaitForEndOfFrame();
             }            
             targetVec = new Vector3(targetFeedback.transform.position.x, targetFeedback.transform.position.y, gameObject.transform.position.z);
+            targetVec = SnapPosition(targetVec);
             yield return new WaitForSeconds(0.2f);
             StartCoroutine(TargetCell());
             yield return new WaitForSeconds(0.2f);
@@ -152,6 +158,15 @@ namespace Boss
         }
 
         GameObject marker;
+
+        public Vector3 SnapPosition(Vector3 vector)
+        {
+            return new Vector3(
+                Mathf.RoundToInt(vector.x),
+                vector.y,
+                Mathf.RoundToInt(vector.z)
+                );
+        }
 
         IEnumerator TargetCell()
         {
