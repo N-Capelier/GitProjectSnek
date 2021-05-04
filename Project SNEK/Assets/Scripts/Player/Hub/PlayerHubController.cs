@@ -30,7 +30,7 @@ namespace Player.Controller
             baseAcceleration = agent.acceleration;
 
             actions++;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.5f);
             target = HubCamTargetController.Instance.transform;
             InteractionManager.Instance.playerController = this;
             actions--;
