@@ -28,6 +28,7 @@ namespace Enemy
         [Space]
         [HideInInspector] public Rigidbody rb = null;
         [Range(0, 5)] public int moveSpeed = 1;
+        public bool isClone = false;
 
         //[Space]
         //[SerializeField] [Range(0, 5)] int spiritLoot = 1;
@@ -96,7 +97,16 @@ namespace Enemy
 
         public void Death()
         {
-            PlayerManager.Instance.currentController.playerRunSpirits.AddSpirit();
+            if(isClone == true)
+            {
+                if(GetComponentInParent<IllusionisteBehaviour>().clonesList.Length <= 1)
+                {
+                    GetComponentInParent<IllusionisteBehaviour>().Death();
+                    Destroy(gameObject);
+                }
+            }
+            else
+                PlayerManager.Instance.currentController.playerRunSpirits.AddSpirit();
             Instantiate(hitFx, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
