@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Enemy;
 using Player;
-using Player.Spells;
-using Map;
 
 namespace Boss
 {
@@ -36,6 +34,7 @@ namespace Boss
         bool bombOver = false;
         [SerializeField] bool canBeHit = false;
         bool canDoPattern = true;
+        bool isTaunt = false;
 
         [Space]
         [SerializeField] SkinnedMeshRenderer bodyRenderer;
@@ -61,8 +60,15 @@ namespace Boss
             currentHp = maxHp;            
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.J))
+            {
+                Debug.Log(Rendering.Run.RunCamController.Instance.ActiveState);
+            }
+        }
+
+        void FixedUpdate()
         {
             UpdateMovement();
             
@@ -95,10 +101,12 @@ namespace Boss
             
             if(PlayerManager.Instance.currentController != null)
             {
-                if (PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits() == 3)
-                {
+                if (PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits() >= 3 && isTaunt == false)
+                {                    
+                    animator.SetBool("animIsAttacking", false);
                     StopAllCoroutines();
                     canDoPattern = false;
+                    isTaunt = true;
                     StartCoroutine(ComeClose());
                 }
             }          
@@ -125,6 +133,7 @@ namespace Boss
                 yield return new WaitForEndOfFrame();
             }            
             targetVec = new Vector3(targetFeedback.transform.position.x, targetFeedback.transform.position.y, gameObject.transform.position.z);
+            targetVec = SnapPosition(targetVec);
             yield return new WaitForSeconds(0.2f);
             StartCoroutine(TargetCell());
             yield return new WaitForSeconds(0.2f);
@@ -149,6 +158,15 @@ namespace Boss
         }
 
         GameObject marker;
+
+        public Vector3 SnapPosition(Vector3 vector)
+        {
+            return new Vector3(
+                Mathf.RoundToInt(vector.x),
+                vector.y,
+                Mathf.RoundToInt(vector.z)
+                );
+        }
 
         IEnumerator TargetCell()
         {
@@ -206,10 +224,21 @@ namespace Boss
 
         IEnumerator ComeClose()
         {
+            animator.Play("BossAno_TauntIn");
+            animator.SetBool("animIsTaunt", true);
             camDistance = 10;
             yield return new WaitForSeconds(7f);
+            animator.SetBool("animIsTaunt", false);
+            camDistance = 13;
+            moveSpeed = moveSpeed * 3;
+            yield return new WaitForSeconds(0.5f);
+            playerSpirits = PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits();
+            PlayerManager.Instance.currentController.playerRunSpirits.ConsumeSpirits(playerSpirits);
+            moveSpeed = moveSpeed / 3;
+            yield return new WaitForSeconds(4f);
             patternCount = 0;
             canDoPattern = true;
+            isTaunt = false;
         }
 
         IEnumerator Stun()
@@ -237,13 +266,18 @@ namespace Boss
             StartCoroutine(InstantiateShield());            
         }
 
+        int playerSpirits;
         IEnumerator InstantiateShield()
         {
             yield return new WaitForSeconds(1.7f);
             shieldo.SetActive(true);            
             moveSpeed = moveSpeed / 3;
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(1f);
+            playerSpirits = PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits();
+            PlayerManager.Instance.currentController.playerRunSpirits.ConsumeSpirits(playerSpirits);
+            yield return new WaitForSeconds(3f);
             canDoPattern = true;
+            isTaunt = false;
         }
 
 

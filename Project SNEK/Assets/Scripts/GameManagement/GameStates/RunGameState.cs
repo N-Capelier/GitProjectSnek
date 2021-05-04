@@ -5,6 +5,7 @@ using Map;
 using Rendering.Run;
 using AudioManagement;
 using Saving;
+using UnityEngine.SceneManagement;
 
 namespace GameManagement.GameStates
 {
@@ -24,7 +25,14 @@ namespace GameManagement.GameStates
             PlayerManager.Instance.currentController
                 .Init(SaveManager.Instance.state.bonusHealth, SaveManager.Instance.state.bonusRange, SaveManager.Instance.state.bonusPower);
             PlayerManager.Instance.currentController.transform.position = MapGrid.Instance.GetWorldPos(5, 0);
-            RunCamController.Instance.Set(CamState.PlayerScrolling);
+            if(SceneManager.GetActiveScene().name == "Boss Anorexia")
+            {
+                RunCamController.Instance.Set(CamState.SemiScrolling);
+            }
+            else
+            {
+                RunCamController.Instance.Set(CamState.PlayerScrolling);
+            }
             if (runMusic == null)
             {
                 runMusic = AudioManager.Instance.PlayThisSoundEffect("LevelMusic", true);
