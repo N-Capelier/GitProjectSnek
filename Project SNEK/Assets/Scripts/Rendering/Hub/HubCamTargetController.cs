@@ -21,7 +21,7 @@ namespace Rendering.Hub
 
         public bool isMovingCamera = false;
 
-        private void Start()
+        private void Awake()
         {
             CreateSingleton();
         }

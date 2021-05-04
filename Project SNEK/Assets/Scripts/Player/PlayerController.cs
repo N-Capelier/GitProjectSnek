@@ -132,7 +132,8 @@ namespace Player.Controller
             objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_deathPoison");
             AudioManager.Instance.PlaySoundEffect("PlayerHit");
             yield return new WaitForSeconds(1f);
-            GameManagement.GameManager.Instance.gameState.Set(GameManagement.GameState.Hub, "Hub");
+            //GameManagement.GameManager.Instance.gameState.Set(GameManagement.GameState.Hub, "Hub");
+            GameOverMenu.Instance.menuCanvas.SetActive(true);
             isDead = false;
         }
 
