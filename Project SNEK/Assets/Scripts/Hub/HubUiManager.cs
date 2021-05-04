@@ -5,6 +5,9 @@ using Saving;
 using Hub.Interaction;
 using TMPro;
 using AudioManagement;
+using System.Collections.Generic;
+using System.Collections;
+using DialogueManagement;
 
 namespace Hub.UI
 {
@@ -27,6 +30,8 @@ namespace Hub.UI
         [SerializeField] TextMeshProUGUI upgradeText;
         [SerializeField] GameObject confirmationBox;
         [SerializeField] TextMeshProUGUI fadeBack;
+        [SerializeField] List<GameObject> letterList;
+        [SerializeField] GameObject letterBoxSelectMenu, letterAnimation;
 
         int cost;
         BonusStat statToUpgrade;
@@ -240,9 +245,24 @@ namespace Hub.UI
             fadeBackground.enabled = false;
         }
 
-        public void OpenLetter()
+        public void OpenLetterButton(Dialogue letter)
         {
-            fadeBack.gameObject.LeanAlpha(1, 0.5f);
+            StartCoroutine(OpenLetter(letter));
+        }
+
+        public IEnumerator OpenLetter(Dialogue letterContent)
+        {
+            letterBoxSelectMenu.LeanScale(Vector3.zero, 0.2f);
+            for (float i = 0; i < 0.4; i += 0.01f)
+            {
+                fadeBackground.color = new Color(fadeBackground.color.r, fadeBackground.color.g, fadeBackground.color.b, i);
+                yield return new WaitForSeconds(0.01f);
+            }
+            letterAnimation.LeanScale(Vector3.one, 1.5f);
+            // Couroutine de dialogue pour afficher le contenu de la lettre
+
+            yield return new WaitForSeconds(1.5f);
+            yield return null;
         }
 
         public void SetLetterBoxFalse()
