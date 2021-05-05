@@ -8,6 +8,7 @@ using AudioManagement;
 using System.Collections.Generic;
 using System.Collections;
 using DialogueManagement;
+using LetterMailManagement;
 
 namespace Hub.UI
 {
@@ -32,6 +33,7 @@ namespace Hub.UI
         [SerializeField] TextMeshProUGUI fadeBack;
         [SerializeField] List<GameObject> letterList;
         [SerializeField] GameObject letterBoxSelectMenu, letterAnimation;
+        [SerializeField] TextMeshProUGUI letterText;
 
         int cost;
         BonusStat statToUpgrade;
@@ -245,14 +247,18 @@ namespace Hub.UI
             fadeBackground.enabled = false;
         }
 
-        public void OpenLetterButton(Dialogue letter)
+        public void OpenLetterButton(LetterMail letter)
         {
             StartCoroutine(OpenLetter(letter));
         }
 
-        public IEnumerator OpenLetter(Dialogue letterContent)
+
+        public IEnumerator OpenLetter(LetterMail letterContent)
         {
+            letterText.text = "";
+
             letterBoxSelectMenu.LeanScale(Vector3.zero, 0.2f);
+
             for (float i = 0; i < 0.4; i += 0.01f)
             {
                 fadeBackground.color = new Color(fadeBackground.color.r, fadeBackground.color.g, fadeBackground.color.b, i);
@@ -261,7 +267,13 @@ namespace Hub.UI
             letterAnimation.LeanScale(Vector3.one, 1.5f);
             // Couroutine de dialogue pour afficher le contenu de la lettre
 
-            yield return new WaitForSeconds(1.5f);
+            foreach(char letter in letterContent.text.ToCharArray())
+            {
+                letterText.text += letter;
+                yield return new WaitForSeconds(0.1f);
+            }
+
+                yield return new WaitForSeconds(1.5f);
             yield return null;
         }
 
