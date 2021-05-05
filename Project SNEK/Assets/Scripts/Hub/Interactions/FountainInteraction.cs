@@ -10,7 +10,7 @@ namespace Hub.Interaction
     {
         protected override void Interact()
         {
-            HubUiManager.Instance.OpenSkillTree();
+            //HubUiManager.Instance.OpenSkillTree();
         }
     }
 }

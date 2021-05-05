@@ -304,13 +304,14 @@ namespace DialogueManagement
 
         public void NextLineFeedback()
         {
-            if(dialogueArrow.transform.localScale == Vector3.zero)
+            if(dialogueArrow.GetComponent<CanvasGroup>().alpha == 0)
             {
-                dialogueArrow.transform.LeanScale(Vector3.one,0.2f);
+                LeanTween.alphaCanvas(dialogueArrow.GetComponent<CanvasGroup>(), 1, 0.5f).setLoopPingPong();
             }
             else
             {
-                dialogueArrow.transform.LeanScale(Vector3.zero, 0f);
+                LeanTween.cancel(dialogueArrow.gameObject);
+                LeanTween.alphaCanvas(dialogueArrow.GetComponent<CanvasGroup>(), 0, 0f);
             }
         }
 
