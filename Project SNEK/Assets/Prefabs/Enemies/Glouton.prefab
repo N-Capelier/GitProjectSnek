@@ -179,7 +179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackCooldown: 5
   movementCooldown: 1
-  maxHp: 20
+  maxHp: 10
   currentHp: 0
   deathFx: {fileID: 3893877149857393849, guid: 776a358c2e98ba8409c4035d37f35e3f, type: 3}
   hitFx: {fileID: 6257973856633588798, guid: a67ab8f2a3beb4247b452f06c2c19818, type: 3}
@@ -188,6 +188,7 @@ MonoBehaviour:
   hitMaterial: {fileID: 2100000, guid: 49bd8cf0807c6c3408ac07b5ba52741e, type: 2}
   rb: {fileID: 0}
   moveSpeed: 0
+  isClone: 0
 --- !u!54 &7529173753719780613
 Rigidbody:
   m_ObjectHideFlags: 0
