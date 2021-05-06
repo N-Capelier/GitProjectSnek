@@ -16,6 +16,15 @@
         public int bonusPower = 0;
 
         /// <summary>
+        /// 0 is never picked
+        /// 1 is picked in a level
+        /// 2 is trade with a NPC
+        /// </summary>
+        public int secretObject_1 = 0;
+        public int secretObject_2 = 0;
+        public int secretObject_3 = 0;
+
+        /// <summary>
         /// 0 is null,
         /// 1 is Swift,
         /// 2 is Beam,
