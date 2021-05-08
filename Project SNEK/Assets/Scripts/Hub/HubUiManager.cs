@@ -24,16 +24,34 @@ namespace Hub.UI
             Power
         }
 
-        [SerializeField] GameObject skillTreeBox, levelAccessBox, letterBox,letterScreen,demoScreen;
-        [SerializeField] Image fadeBackground;
+        [Header("Level Access Menu")]
+        [SerializeField] GameObject levelAccessBox;
+
+        [Space]
+
+        [Header("Letter Animation and Menu")]
+        [SerializeField] GameObject letterBox;
+        [SerializeField] GameObject letterBoxSelectMenu;
+        [SerializeField] GameObject letterBoxAnim;
+        [SerializeField] GameObject closeLetterButton;
+        [SerializeField] List<GameObject> letterList;
+        [SerializeField] TextMeshProUGUI letterText;
+
+        [Space]
+
+        [Header("demoScreen Box")]
+        [SerializeField] GameObject demoScreen;
+
+        [Space]
+
+        [Header("Fade background")]
+        [SerializeField] CanvasGroup fadeBackground;
+
+        [Header("WIP")]
+
         [SerializeField] TextMeshProUGUI hearthCoins;
-        [SerializeField] TextMeshProUGUI equipedTechnicText; //temp
         [SerializeField] TextMeshProUGUI upgradeText;
         [SerializeField] GameObject confirmationBox;
-        [SerializeField] TextMeshProUGUI fadeBack;
-        [SerializeField] List<GameObject> letterList;
-        [SerializeField] GameObject letterBoxSelectMenu, letterAnimation;
-        [SerializeField] TextMeshProUGUI letterText;
 
         int cost;
         BonusStat statToUpgrade;
@@ -45,141 +63,28 @@ namespace Hub.UI
 
         void Start()
         {
-            skillTreeBox.transform.localScale = Vector3.zero;
-            skillTreeBox.gameObject.SetActive(false);
-            levelAccessBox.transform.localScale = Vector3.zero;
-            levelAccessBox.gameObject.SetActive(false);
-            letterBox.transform.localScale = Vector3.zero;
-            letterBox.gameObject.SetActive(false);
-            demoScreen.transform.localScale = Vector3.zero;
-            demoScreen.gameObject.SetActive(false);
-            EquipTechnic(SaveManager.Instance.state.equipedTechnic);
-            DrawHeartCoins();
 
-            if(SaveManager.Instance.state.isDemoFinished)
+            levelAccessBox.transform.localScale = Vector3.zero;
+            levelAccessBox.SetActive(false);
+            letterBox.transform.localScale = Vector3.zero;
+            letterBox.SetActive(false);
+            demoScreen.transform.localScale = Vector3.zero;
+            demoScreen.SetActive(false);
+            demoScreen.SetActive(false);
+            LeanTween.alphaCanvas(letterBoxAnim.GetComponent<CanvasGroup>(), 0f, 0f);
+            letterBoxAnim.transform.localScale = Vector3.zero;
+            letterBoxAnim.SetActive(false);
+
+            if (SaveManager.Instance.state.isDemoFinished)
             {
                 OpenBox(demoScreen);
             }
         }
 
-        public void PowerUphealth()
-        {
-            if(SaveManager.Instance.state.heartCoinAmount >= SaveManager.Instance.state.bonusHealth + 1)
-            {
-                cost = SaveManager.Instance.state.bonusHealth + 1;
-                statToUpgrade = BonusStat.Health;
-                OpenBox(confirmationBox);
-                //SaveManager.Instance.state.heartCoinAmount -= SaveManager.Instance.state.bonusHealth + 1;
-                //SaveManager.Instance.state.bonusHealth += 1;
-                //DrawHeartCoins();
-            }
-        }
-
-        public void PowerUpRange()
-        {
-            if (SaveManager.Instance.state.heartCoinAmount >= SaveManager.Instance.state.bonusRange + 1)
-            {
-                cost = SaveManager.Instance.state.bonusRange + 1;
-                statToUpgrade = BonusStat.Range;
-                OpenBox(confirmationBox);
-                //SaveManager.Instance.state.heartCoinAmount -= SaveManager.Instance.state.bonusRange + 1;
-                //SaveManager.Instance.state.bonusRange += 1;
-                //DrawHeartCoins();
-            }
-        }
-
-        public void PowerUpPower()
-        {
-            if (SaveManager.Instance.state.heartCoinAmount >= SaveManager.Instance.state.bonusPower + 1)
-            {
-                cost = SaveManager.Instance.state.bonusPower + 1;
-                statToUpgrade = BonusStat.Power;
-                OpenBox(confirmationBox);
-                //SaveManager.Instance.state.heartCoinAmount -= SaveManager.Instance.state.bonusPower + 1;
-                //SaveManager.Instance.state.bonusPower += 1;
-                //DrawHeartCoins();
-            }
-        }
-
-        public void ApplyPowerUp()
-        {
-            SaveManager.Instance.state.heartCoinAmount -= cost;
-
-            switch (statToUpgrade)
-            {
-                case BonusStat.Health:
-                    SaveManager.Instance.state.bonusHealth += 1;
-                    break;
-                case BonusStat.Range:
-                    SaveManager.Instance.state.bonusRange += 1;
-                    break;
-                case BonusStat.Power:
-                    SaveManager.Instance.state.bonusPower += 1;
-                    break;
-            }
-            DrawHeartCoins();
-            CloseBox(confirmationBox);
-        }
-
-        public void ResetPowerUps()
-        {
-            SaveManager.Instance.state.heartCoinAmount += SaveManager.Instance.state.bonusHealth + SaveManager.Instance.state.bonusRange + SaveManager.Instance.state.bonusPower;
-
-            if(SaveManager.Instance.state.bonusHealth > 0)
-            {
-                for (int i = 0; i < SaveManager.Instance.state.bonusHealth; i++)
-                {
-                    SaveManager.Instance.state.heartCoinAmount += i;
-                }
-            }
-            if (SaveManager.Instance.state.bonusRange > 0)
-            {
-                for (int i = 0; i < SaveManager.Instance.state.bonusRange; i++)
-                {
-                    SaveManager.Instance.state.heartCoinAmount += i;
-                }
-            }
-            if (SaveManager.Instance.state.bonusPower > 0)
-            {
-                for (int i = 0; i < SaveManager.Instance.state.bonusPower; i++)
-                {
-                    SaveManager.Instance.state.heartCoinAmount += i;
-                }
-            }
-
-            SaveManager.Instance.state.bonusHealth = SaveManager.Instance.state.bonusRange = SaveManager.Instance.state.bonusPower = 0;
-            DrawHeartCoins();
-        }
-
-        public void EquipTechnic(int _index)
-        {
-            SaveManager.Instance.state.equipedTechnic = _index;
-            switch(_index)
-            {
-                case 0:
-                    equipedTechnicText.text = "No technic equiped!";
-                    break;
-                case 1:
-                    equipedTechnicText.text = "Equiped technic: Swift combo.";
-                    break;
-                case 2:
-                    equipedTechnicText.text = "Equiped technic: Sword beam.";
-                    break;
-                case 3:
-                    equipedTechnicText.text = "Equiped technic: Bubble shield.";
-                    break;
-            }
-        }
-
-        public void DrawHeartCoins()
-        {
-            hearthCoins.text = $"x{SaveManager.Instance.state.heartCoinAmount}";
-        }
-
         public void OpenBox(GameObject box)
         {
             box.LeanScale(Vector3.one, 0.2f);
-            upgradeText.text = $"Pay {cost} heart coins to upgrade this skill?";
+            //upgradeText.text = $"Pay {cost} heart coins to upgrade this skill?";
         }
 
         public void CloseBox(GameObject box)
@@ -188,24 +93,10 @@ namespace Hub.UI
             box.LeanScale(Vector3.zero, 0.2f);
         }
 
-        public void OpenSkillTree()
-        {
-            skillTreeBox.gameObject.SetActive(true);
-            skillTreeBox.transform.LeanScale(Vector3.one, 0.3f);
-        }
-
-        public void CloseSkillTree()
-        {
-            skillTreeBox.transform.LeanScale(Vector3.zero, 0.3f).setOnComplete(SetSkillTreeFalse);
-            if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
-            {
-                InteractionManager.Instance.EndInteraction();
-            }
-        }
-
         public void OpenLevelAccess()
         {
             AudioManager.Instance.PlaySoundEffect("UIClick");
+            FadeInBackground(.2f);
             levelAccessBox.gameObject.SetActive(true);
             levelAccessBox.transform.LeanScale(Vector3.one, 0.2f);
         }
@@ -213,11 +104,51 @@ namespace Hub.UI
         public void CloseLevelAcces()
         {
             AudioManager.Instance.PlaySoundEffect("UINone");
+            FadeOutBackground(.2f);
             levelAccessBox.transform.LeanScale(Vector3.zero, 0.2f).setOnComplete(SetLevelAccessFalse); 
             if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
             {
                 InteractionManager.Instance.EndInteraction();
             }
+        }
+
+        public void OpenLetter(LetterMail letterContent)
+        {
+            closeLetterButton.GetComponent<Button>().interactable = false;
+            letterBoxAnim.SetActive(true);
+            letterBoxSelectMenu.LeanScale(Vector3.zero, 0.2f);
+            letterBoxAnim.transform.localScale = Vector3.one;
+            LeanTween.alphaCanvas(letterBoxAnim.GetComponent<CanvasGroup>(), 1f, 3f);
+            // Couroutine de dialogue pour afficher le contenu de la lettre 
+            StartCoroutine(OpenLetterCoroutine(letterContent));
+            // A la fin de la coroutine, affiché le feedback lettre done + clique = activé close letter 
+            closeLetterButton.SetActive(true); // L'activer à la fin de l'affichage des lettres 
+            LeanTween.alphaCanvas(closeLetterButton.GetComponent<CanvasGroup>(), 1f, 1f).setLoopPingPong().setDelay(4f);
+        }
+
+        public void CloseLetter()
+        {
+            AudioManager.Instance.PlaySoundEffect("UINone");
+            LeanTween.cancel(closeLetterButton);
+            LeanTween.alphaCanvas(closeLetterButton.GetComponent<CanvasGroup>(), 0, 0f);
+            closeLetterButton.SetActive(false);
+            LeanTween.alphaCanvas(letterBoxAnim.GetComponent<CanvasGroup>(), 0f, 1f);
+            letterBoxSelectMenu.LeanScale(Vector3.one, 0.5f).setDelay(1.25f);
+            letterBoxAnim.LeanScale(Vector3.zero, 0.1f).setDelay(1f).setOnComplete(SetLetterAnimFalse);
+            //Reset Text ? No is ok
+
+        }
+
+        public IEnumerator OpenLetterCoroutine(LetterMail letterContent)
+        {
+            letterText.text = "";
+
+            foreach(char letter in letterContent.text.ToCharArray())
+            {
+                letterText.text += letter;
+                yield return new WaitForSeconds(0.005f);
+            }
+            closeLetterButton.GetComponent<Button>().interactable = true;
         }
 
         public void OpenLetterBox()
@@ -237,57 +168,29 @@ namespace Hub.UI
             }
         }
 
-        public void ActivateFadeBackground()
+        public void FadeInBackground(float duration)
         {
-            fadeBackground.enabled = true;
+            LeanTween.alphaCanvas(fadeBackground, 0.4f, duration);
         }
 
-        public void DeactivateFadeBackground()
+        public void FadeOutBackground(float duration)
         {
-            fadeBackground.enabled = false;
+            LeanTween.alphaCanvas(fadeBackground, 0f, duration);
         }
 
-        public void OpenLetterButton(LetterMail letter)
+        void SetLetterAnimFalse()
         {
-            StartCoroutine(OpenLetter(letter));
+            letterBoxAnim.SetActive(false);
         }
 
-
-        public IEnumerator OpenLetter(LetterMail letterContent)
-        {
-            letterText.text = "";
-
-            letterBoxSelectMenu.LeanScale(Vector3.zero, 0.2f);
-
-            for (float i = 0; i < 0.4; i += 0.01f)
-            {
-                fadeBackground.color = new Color(fadeBackground.color.r, fadeBackground.color.g, fadeBackground.color.b, i);
-                yield return new WaitForSeconds(0.01f);
-            }
-            letterAnimation.LeanScale(Vector3.one, 1.5f);
-            // Couroutine de dialogue pour afficher le contenu de la lettre
-
-            foreach(char letter in letterContent.text.ToCharArray())
-            {
-                letterText.text += letter;
-                yield return new WaitForSeconds(0.1f);
-            }
-
-                yield return new WaitForSeconds(1.5f);
-            yield return null;
-        }
-
-        public void SetLetterBoxFalse()
+        void SetLetterBoxFalse()
         {
             letterBox.SetActive(false);
-        }        
+        }
+
         public void SetLevelAccessFalse()
         {
             levelAccessBox.SetActive(false);
-        }
-        public void SetSkillTreeFalse()
-        {
-            skillTreeBox.SetActive(false);
         }
     }
 }
