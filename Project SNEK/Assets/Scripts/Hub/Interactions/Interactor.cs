@@ -26,29 +26,37 @@ namespace Hub.Interaction
             InteractionManager.Instance.playerController.actions++;
             InteractionManager.Instance.playerController.agent.destination = playerTargetTransform.position;
 
-            while (Vector3.Distance(playerTargetTransform.position, InteractionManager.Instance.playerController.agent.transform.position) > 1f)
+            while (Vector3.Distance(playerTargetTransform.position, InteractionManager.Instance.playerController.agent.transform.position) > .5f)
             {
                 yield return null;
             }
 
-            float _rotationSpeed = 420f;
-            Quaternion _targetQuat = Quaternion.Euler(0, orientation, 0);
-            Debug.Log($"player: {PlayerManager.Instance.currentController.objectRenderer.gameObject.transform.rotation.eulerAngles} || target: {_targetQuat.eulerAngles}");
-            //while (Mathf.Abs(_targetQuat.eulerAngles.y - PlayerManager.Instance.currentController.objectRenderer.gameObject.transform.rotation.eulerAngles.y) > 2)
+            //unstable
+            //while (InteractionManager.Instance.playerController.agent.velocity.magnitude > .5f)
             //{
-            //    if(Vector3.SignedAngle(PlayerManager.Instance.currentController.objectRenderer.gameObject.transform.rotation.eulerAngles, _targetQuat.eulerAngles, Vector3.up) > 0)
-            //    {
-            //        print("1");
-            //        PlayerManager.Instance.currentController.objectRenderer.gameObject.transform.RotateAround(PlayerManager.Instance.currentController.objectRenderer.gameObject.transform.position, Vector3.up, _rotationSpeed * Time.deltaTime);
-            //    }
-            //    else
-            //    {
-            //        print("2");
-            //        PlayerManager.Instance.currentController.objectRenderer.gameObject.transform.RotateAround(PlayerManager.Instance.currentController.objectRenderer.gameObject.transform.position, Vector3.up, -_rotationSpeed * Time.deltaTime);
-            //    }
-                
-            //    yield return new WaitForEndOfFrame();
+            //    yield return null;
             //}
+
+            float _rotationSpeed = 390;
+            int _direction;
+            Vector3 _targetDir = _targetDir = Quaternion.Euler(new Vector3(0, orientation, 0)) * Vector3.forward;
+            // alternative:
+            // = transform.position - PlayerManager.Instance.currentController.objectRenderer.transform.position;
+
+            if (Vector3.SignedAngle(_targetDir, PlayerManager.Instance.currentController.objectRenderer.transform.forward, Vector3.up) > 0)
+                _direction = -1;
+            else
+                _direction = 1;
+
+            float _spentTime = 1f;
+
+            while (Mathf.Abs(_targetDir.y - PlayerManager.Instance.currentController.objectRenderer.gameObject.transform.rotation.eulerAngles.y) > 10)
+            {
+                PlayerManager.Instance.currentController.objectRenderer.gameObject.transform.RotateAround(PlayerManager.Instance.currentController.objectRenderer.gameObject.transform.position, Vector3.up, _rotationSpeed * Time.deltaTime * _direction * 1 / _spentTime);
+                _spentTime += Time.deltaTime;
+
+                yield return new WaitForEndOfFrame();
+            }
 
             //while (Mathf.Abs(InteractionManager.Instance.playerController.agent.transform.rotation.y - orientation) > 0)
             //{
