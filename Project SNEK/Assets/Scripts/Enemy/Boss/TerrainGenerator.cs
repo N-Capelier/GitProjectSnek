@@ -8,8 +8,10 @@ namespace Boss
     public class TerrainGenerator : MonoBehaviour
     {
         [SerializeField] Tilemap tilemap;
+        [SerializeField] Tilemap tilemap2;
 
         [SerializeField] TileBase tile;
+        [SerializeField] TileBase[] customTile;
         [SerializeField] GameObject cliff;
 
         [SerializeField] GameObject deathZone;
@@ -72,7 +74,9 @@ namespace Boss
             for (int x = -1; x < 10; x++)
             {
                 tilemap.SetTile(new Vector3Int(x, currentIndex, 0), tile);
+                tilemap2.SetTile(new Vector3Int(x, currentIndex, 0), customTile[Random.Range(0,9)]);
                 tilemap.SetTile(new Vector3Int(x, currentIndex - 35, 0), null);
+                tilemap2.SetTile(new Vector3Int(x, currentIndex - 35, 0), null);
             }
             currentIndex++;
         }
