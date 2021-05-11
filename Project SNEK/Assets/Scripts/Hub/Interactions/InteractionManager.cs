@@ -1,9 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Rendering.Hub;
+﻿using Rendering.Hub;
 using Player.Controller;
-using Player;
 
 namespace Hub.Interaction
 {

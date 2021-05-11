@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Rendering.Hub;
@@ -68,6 +67,10 @@ namespace Player.Controller
                     agent.destination = target.position;
                     animator.SetFloat("Distance", distanceFromDestination);
                 }
+            }
+            else
+            {
+                animator.SetFloat("Distance", 0);
             }
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Player;
 
 namespace Hub.Interaction
 {
@@ -31,7 +31,24 @@ namespace Hub.Interaction
                 yield return null;
             }
 
-            InteractionManager.Instance.playerController.agent.transform.rotation = Quaternion.Euler(new Vector3(0, orientation, 0));
+            float _rotationSpeed = 420f;
+            Quaternion _targetQuat = Quaternion.Euler(0, orientation, 0);
+            Debug.Log($"player: {PlayerManager.Instance.currentController.objectRenderer.gameObject.transform.rotation.eulerAngles} || target: {_targetQuat.eulerAngles}");
+            //while (Mathf.Abs(_targetQuat.eulerAngles.y - PlayerManager.Instance.currentController.objectRenderer.gameObject.transform.rotation.eulerAngles.y) > 2)
+            //{
+            //    if(Vector3.SignedAngle(PlayerManager.Instance.currentController.objectRenderer.gameObject.transform.rotation.eulerAngles, _targetQuat.eulerAngles, Vector3.up) > 0)
+            //    {
+            //        print("1");
+            //        PlayerManager.Instance.currentController.objectRenderer.gameObject.transform.RotateAround(PlayerManager.Instance.currentController.objectRenderer.gameObject.transform.position, Vector3.up, _rotationSpeed * Time.deltaTime);
+            //    }
+            //    else
+            //    {
+            //        print("2");
+            //        PlayerManager.Instance.currentController.objectRenderer.gameObject.transform.RotateAround(PlayerManager.Instance.currentController.objectRenderer.gameObject.transform.position, Vector3.up, -_rotationSpeed * Time.deltaTime);
+            //    }
+                
+            //    yield return new WaitForEndOfFrame();
+            //}
 
             //while (Mathf.Abs(InteractionManager.Instance.playerController.agent.transform.rotation.y - orientation) > 0)
             //{
