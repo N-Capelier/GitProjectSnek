@@ -137,10 +137,10 @@ MonoBehaviour:
   animator: {fileID: 7513685485664429839}
   hpUi: {fileID: 0}
   hpText: {fileID: 0}
+  coinAnimator: {fileID: 3040309682956613816}
   agent: {fileID: 7479646043010589909}
   target: {fileID: 0}
   actions: 0
-  coinAnimator: {fileID: 3040309682956613816}
 --- !u!54 &3361387238276527668
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -872,6 +872,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Model_Coin
       objectReference: {fileID: 0}
+    - target: {fileID: 2160539205824742240, guid: f4ddfe95de9cb5d4ba6d4d676f2cb37a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ec2ed396f9430d1448673a17b86c3b78, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4ddfe95de9cb5d4ba6d4d676f2cb37a, type: 3}
 --- !u!1 &4557349325567303774 stripped

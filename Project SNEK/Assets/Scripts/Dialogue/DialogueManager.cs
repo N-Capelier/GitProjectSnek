@@ -7,6 +7,7 @@ using Hub.Interaction;
 using Cinematic;
 using Saving;
 using AudioManagement;
+using PauseManagement;
 
 namespace DialogueManagement
 {
@@ -76,6 +77,7 @@ namespace DialogueManagement
             OpenDialogueBox();
             //Mouvement de caméra
             StartCoroutine(WriteNextLine());
+            PauseManagement.PauseManager.Instance.HideOpenMenuButton();
         }
 
         IEnumerator WriteNextLine()
@@ -300,6 +302,7 @@ namespace DialogueManagement
             {
                 InteractionManager.Instance.EndInteraction();
             }
+            PauseManagement.PauseManager.Instance.ShowOpenMenuButton();
         }
 
         public void NextLineFeedback()

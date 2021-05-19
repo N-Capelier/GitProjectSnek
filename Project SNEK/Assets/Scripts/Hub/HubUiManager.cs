@@ -10,6 +10,7 @@ using System.Collections;
 using DialogueManagement;
 using LetterMailManagement;
 using Player;
+using PauseManagement;
 
 namespace Hub.UI
 {
@@ -189,6 +190,8 @@ namespace Hub.UI
         public void CloseFountainBox()
         {
             AudioManager.Instance.PlaySoundEffect("UINone");
+            PlayerManager.Instance.currentController.animator.Play("Anim_Playerhub_PutBackCoin");
+            PlayerManager.Instance.currentController.coinAnimator.Play("Anim_ObjectCoin_PutBack");
             FontainConfirmBox.transform.LeanScale(Vector3.zero, 0.2f).setOnComplete(SetFontainConfirmBoxFalse);
             if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
             {
@@ -219,6 +222,19 @@ namespace Hub.UI
             {
                 InteractionManager.Instance.EndInteraction();
             }
+        }
+
+        public void SetOccupied(bool state)
+        {
+            if(state == true)
+            {
+                PauseManagement.PauseManager.Instance.HideOpenMenuButton();
+            }
+            else
+            {
+                PauseManagement.PauseManager.Instance.ShowOpenMenuButton();
+            }
+
         }
 
         public void FadeInBackground(float duration)

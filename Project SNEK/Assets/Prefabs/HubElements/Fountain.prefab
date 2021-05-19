@@ -70,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2371450969527733347}
   - component: {fileID: 8151136082934115898}
-  - component: {fileID: 1710585105}
+  - component: {fileID: 1132540312}
   m_Layer: 10
   m_Name: Fountain
   m_TagString: Untagged
@@ -110,7 +110,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.6936624
   m_Center: {x: -0.008877516, y: 0, z: 0}
---- !u!114 &1710585105
+--- !u!114 &1132540312
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -337,6 +337,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ObjectHighlightParticle
       objectReference: {fileID: 0}
+    - target: {fileID: 7653027269152806896, guid: b18feecece75c334eb19b09c0294cbc5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7653027269152806897, guid: b18feecece75c334eb19b09c0294cbc5,
         type: 3}
       propertyPath: m_SortingLayer
@@ -356,6 +361,11 @@ PrefabInstance:
         type: 3}
       propertyPath: ShapeModule.radius.value
       value: 0.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 7653027269152806902, guid: b18feecece75c334eb19b09c0294cbc5,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7653027269152806903, guid: b18feecece75c334eb19b09c0294cbc5,
         type: 3}

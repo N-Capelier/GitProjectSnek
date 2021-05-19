@@ -11,6 +11,7 @@ namespace Hub.Interaction
         protected override void Interact()
         {
             HubUiManager.Instance.OpenFountainBox();
+            HubUiManager.Instance.SetOccupied(true);
         }
     }
 }
