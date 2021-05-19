@@ -47,7 +47,7 @@ namespace Cinematic
             {
                 actor.SetActive(false);
             }
-            if (GameManager.Instance.gameState.ActiveState != GameState.Cinematic)
+            if (GameManager.Instance.gameState.ActiveState != GameState.Cinematic && GameManager.Instance.gameState.ActiveState != GameState.Run)
             {
                 InteractionManager.Instance.camTarget.actions--;
                 InteractionManager.Instance.playerController.actions--;

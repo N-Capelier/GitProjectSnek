@@ -80,5 +80,21 @@ namespace Boss
             }
             currentIndex++;
         }
+
+        int secondIndex = -10;
+        public void GenerateStartTerrain()
+        {
+            for (int i = 0; i < 35; i++)
+            {
+                for (int x = -1; x < 10; x++)
+                {
+                    tilemap.SetTile(new Vector3Int(x, secondIndex, 0), tile);
+                    tilemap2.SetTile(new Vector3Int(x, secondIndex, 0), customTile[Random.Range(0, 9)]);
+                    tilemap.SetTile(new Vector3Int(x, secondIndex - 35, 0), null);
+                    tilemap2.SetTile(new Vector3Int(x, secondIndex - 35, 0), null);
+                }
+                secondIndex++;
+            }            
+        }
     }
 }
