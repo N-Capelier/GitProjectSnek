@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1446681430
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1446681431}
+  m_Layer: 0
+  m_Name: Poppy OUT
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1446681431
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446681430}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -29.57, y: 0, z: 1.36}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 761270439874655522}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &761270439874655521
 GameObject:
   m_ObjectHideFlags: 0
@@ -32,6 +62,7 @@ Transform:
   - {fileID: 761270441954161940}
   - {fileID: 761270441063805513}
   - {fileID: 761270440824221726}
+  - {fileID: 1446681431}
   m_Father: {fileID: 761270440216363724}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -155,7 +186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 761270440824221726}
   m_Layer: 0
-  m_Name: OUT
+  m_Name: Thistle OUT
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -235,6 +266,34 @@ Transform:
   m_Father: {fileID: 761270439874655522}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1124618378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4768846440482841377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a2425de59e4d3a478731832c09eb2fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  faceMat: {fileID: 2100000, guid: 20ba6871b5fb5f54397156a8b5fd405d, type: 2}
+  expressionEyesList:
+  - {x: 0, y: 0.5}
+  - {x: 0, y: 0}
+  - {x: 0.5, y: 0}
+  - {x: 0.5, y: 0.5}
+  randomMouthList:
+  - {x: 0.125, y: 0.75}
+  - {x: 0.875, y: 0.75}
+  - {x: 0.625, y: 0.75}
+  expressionMouthList:
+  - {x: 0.625, y: 0.25}
+  - {x: 0.125, y: 0.25}
+  - {x: 0.375, y: 0.25}
+  - {x: 0.875, y: 0.25}
+  mouthColumn: 0
 --- !u!1001 &1041981890771605814
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -471,6 +530,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b491ee12bf6fe70498ab724d88c9f05b, type: 3}
+--- !u!1 &4768846440482841377 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7240529333683453861, guid: b491ee12bf6fe70498ab724d88c9f05b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2762359700709366916}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4768846440482841372 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7240529333683453848, guid: b491ee12bf6fe70498ab724d88c9f05b,
@@ -483,7 +548,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 2762359700709366916}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 4768846440482841377}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56249cd3668382f40993346db3f67bb3, type: 3}
@@ -547,6 +612,11 @@ PrefabInstance:
     - target: {fileID: 1804341654265897754, guid: bb1172ee930733b489d98f82cef1a795,
         type: 3}
       propertyPath: waypoint1
+      value: 
+      objectReference: {fileID: 1446681431}
+    - target: {fileID: 1804341654265897754, guid: bb1172ee930733b489d98f82cef1a795,
+        type: 3}
+      propertyPath: waypoint2
       value: 
       objectReference: {fileID: 761270440006037903}
     - target: {fileID: 5699807947489057368, guid: bb1172ee930733b489d98f82cef1a795,

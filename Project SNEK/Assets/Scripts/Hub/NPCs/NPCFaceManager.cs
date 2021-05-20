@@ -10,16 +10,56 @@ public class NPCFaceManager : MonoBehaviour
     /// </summary>
 
     [SerializeField] Material faceMat;
-    [SerializeField] Vector2[] eyesList;
-    [SerializeField] Vector2[][] mouthList;
-    [SerializeField] int mouthColumn;
+    [SerializeField] Vector2[] expressionEyesList;
+    [SerializeField] Vector2[] randomMouthList;
+    [SerializeField] Vector2[] expressionMouthList;
 
-
-    public void RandomizeMouth(int face)
+    public void RandomizeMouth()
     {
-        faceMat.SetVector("Mouth", mouthList[face][Random.Range(0, mouthList.Length + 1)]);
+        faceMat.SetVector("Mouth", randomMouthList[Random.Range(0, randomMouthList.Length)]);
     }
+    public void SetEyesExpression(int expression)
+    {
+        faceMat.SetVector("Eyes", expressionEyesList[expression]);
 
-    /// Le int Face représente l'expression qu'adopte le personnage,
-    /// Ensuite on randomise la bouche de cette expression pour garder une cohérence.
+        ///Pour THISTLE :
+        ///Int 1 = Neutral
+        ///Int 2 = Surprise
+        ///Int 3 = Blush
+        ///Int 4 = Sad
+        ///
+        ///Pour BERGAMOT:
+        ///Int 1 = Neutral
+        ///Int 2 = Sad
+        ///Int 3 = Empty/Calm/Upset
+        ///Int 4 = Happy
+        ///
+        ///Pour POPPY :
+        ///Int 1 = Neutral
+        ///Int 2 = Sad
+        ///Int 3 = Scared/Very sad/cry
+        ///Int 4 = Happy
+    }
+    public void SetMouthExpression(int expression)
+    {
+        faceMat.SetVector("Mouth", expressionMouthList[expression]);
+
+        ///Pour THISTLE :
+        ///Int 1 = Neutral
+        ///Int 2 = Happy
+        ///Int 3 = Surprise
+        ///Int 4 = Upset/Thinking
+        ///
+        ///Pour BERGAMOT :
+        ///Int 1 = Neutral
+        ///Int 2 = Sad
+        ///Int 3 = Surprise
+        ///Int 4 = Happy
+        ///
+        ///Pour POPPY :
+        ///Int 1 = Neutral
+        ///Int 2 = Sad
+        ///Int 3 = Disguts
+        ///Int 4 = Happy
+    }
 }
