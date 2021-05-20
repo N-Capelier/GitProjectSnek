@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Enemy;
 using Player;
+using UnityEngine.Timeline;
+using UnityEngine.Playables;
 
 namespace Boss
 {
@@ -42,6 +44,12 @@ namespace Boss
         Material defaultMatBody;
         Material defaultMatHands;
         [SerializeField] Material hitMaterial;
+
+        [Space]
+        public PlayableDirector director;
+        public TimelineAsset endCinematic;
+        public GameObject endGraphs;
+        public TerrainGenerator generator;
 
         [Space]
         public EnemyAttackPattern pattern;
@@ -334,7 +342,15 @@ namespace Boss
             }
             else if (currentHp <= 0)
             {
-                animator.Play("BossAno_StunDeath");
+                StopAllCoroutines();
+                director.playableAsset = endCinematic;
+                bodyRenderer.enabled = false;
+                handsRenderer.enabled = false;
+                generator.GenerateStartTerrain();
+                endGraphs.SetActive(true);
+                cam.SetActive(false);
+                PlayerManager.Instance.currentController.gameObject.SetActive(false);
+                director.Play();
             }
         }
 
