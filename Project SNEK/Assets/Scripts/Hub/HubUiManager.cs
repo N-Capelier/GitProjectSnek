@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Collections;
 using DialogueManagement;
 using LetterMailManagement;
+using Player;
+using PauseManagement;
 
 namespace Hub.UI
 {
@@ -38,6 +40,10 @@ namespace Hub.UI
         [SerializeField] TextMeshProUGUI letterText;
 
         [Space]
+
+        [Header("Fontain Animation and boxes")]
+        [SerializeField] GameObject FontainConfirmBox;
+        [SerializeField] GameObject FontainLevelUpBox;
 
         [Header("demoScreen Box")]
         [SerializeField] GameObject demoScreen;
@@ -73,6 +79,10 @@ namespace Hub.UI
             demoScreen.SetActive(false);
             LeanTween.alphaCanvas(letterBoxAnim.GetComponent<CanvasGroup>(), 0f, 0f);
             letterBoxAnim.transform.localScale = Vector3.zero;
+            letterBoxAnim.SetActive(false);
+            FontainConfirmBox.transform.localScale = Vector3.zero;
+            letterBoxAnim.SetActive(false);
+            FontainLevelUpBox.transform.localScale = Vector3.zero;
             letterBoxAnim.SetActive(false);
 
             if (SaveManager.Instance.state.isDemoFinished)
@@ -168,6 +178,65 @@ namespace Hub.UI
             }
         }
 
+        public void OpenFountainBox()
+        {
+            AudioManager.Instance.PlaySoundEffect("UIClick");
+            PlayerManager.Instance.currentController.animator.Play("Anim_PlayerHub_TakeOutCoin");
+            PlayerManager.Instance.currentController.coinAnimator.Play("Anim_ObjectCoin_TakeOut");
+            FontainConfirmBox.SetActive(true); 
+            FontainConfirmBox.transform.LeanScale(Vector3.one, 0.2f);
+        }
+
+        public void CloseFountainBox()
+        {
+            AudioManager.Instance.PlaySoundEffect("UINone");
+            PlayerManager.Instance.currentController.animator.Play("Anim_Playerhub_PutBackCoin");
+            PlayerManager.Instance.currentController.coinAnimator.Play("Anim_ObjectCoin_PutBack");
+            FontainConfirmBox.transform.LeanScale(Vector3.zero, 0.2f).setOnComplete(SetFontainConfirmBoxFalse);
+            if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
+            {
+                InteractionManager.Instance.EndInteraction();
+            }
+        }
+
+        public void PlayFountainAnim()
+        {
+            StartCoroutine(FountainAnim());
+        }
+
+        public IEnumerator FountainAnim()
+        {
+            PlayerManager.Instance.currentController.animator.Play("Anim_PlayerHub_ThrowCoin");
+            PlayerManager.Instance.currentController.coinAnimator.Play("Anim_ObjectCoin_Throw");
+            FontainConfirmBox.transform.LeanScale(Vector3.zero, 0.2f).setOnComplete(SetFontainConfirmBoxFalse);
+            yield return new WaitForSeconds(4.6f);
+            FontainLevelUpBox.SetActive(true);
+            FontainLevelUpBox.LeanScale(Vector3.one, 0.2f);
+        }
+
+        public void CloseFountainLevelupBox()
+        {
+            AudioManager.Instance.PlaySoundEffect("UIClick");
+            FontainLevelUpBox.LeanScale(Vector3.one, 0.2f).setOnComplete(SetFontainLevelUpBoxFalse);
+            if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
+            {
+                InteractionManager.Instance.EndInteraction();
+            }
+        }
+
+        public void SetOccupied(bool state)
+        {
+            if(state == true)
+            {
+                PauseManagement.PauseManager.Instance.HideOpenMenuButton();
+            }
+            else
+            {
+                PauseManagement.PauseManager.Instance.ShowOpenMenuButton();
+            }
+
+        }
+
         public void FadeInBackground(float duration)
         {
             LeanTween.alphaCanvas(fadeBackground, 0.4f, duration);
@@ -186,6 +255,16 @@ namespace Hub.UI
         void SetLetterBoxFalse()
         {
             letterBox.SetActive(false);
+        }
+
+        void SetFontainConfirmBoxFalse()
+        {
+            FontainConfirmBox.SetActive(false);
+        }
+
+        void SetFontainLevelUpBoxFalse()
+        {
+            FontainLevelUpBox.SetActive(false);
         }
 
         public void SetLevelAccessFalse()

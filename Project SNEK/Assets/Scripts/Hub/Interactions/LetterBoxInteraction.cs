@@ -8,7 +8,8 @@ namespace Hub.Interaction
         protected override void Interact()
         {
             HubUiManager.Instance.OpenLetterBox();
-            if(SaveManager.Instance.state.bergamotState == 3f)
+            HubUiManager.Instance.SetOccupied(true);
+            if (SaveManager.Instance.state.bergamotState == 3f)
             {
                 SaveManager.Instance.state.bergamotState = 4f;
                 NPCManager.Instance.RefreshNPCs();

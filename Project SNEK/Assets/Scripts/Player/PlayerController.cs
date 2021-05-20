@@ -53,6 +53,8 @@ namespace Player.Controller
         [SerializeField] GameObject hpUi;
         [SerializeField] TextMeshProUGUI hpText;
 
+        public Animator coinAnimator;
+
         public virtual void Awake()
         {
             rb = GetComponent<Rigidbody>();
