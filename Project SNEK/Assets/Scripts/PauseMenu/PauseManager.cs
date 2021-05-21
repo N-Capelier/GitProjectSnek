@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using GameManagement;
 using Hub.Interaction;
+using AudioManagement;
 
 namespace PauseManagement
 {
@@ -16,6 +17,7 @@ namespace PauseManagement
         [SerializeField] GameObject pauseMenu, openPauseMenu;
         [SerializeField] GameObject[] qualityToggles;
         [SerializeField] GameObject background;
+        [SerializeField] Slider soundSlider, musicSlider;
         bool occupied = false;
 
         private void Awake()
@@ -128,6 +130,20 @@ namespace PauseManagement
                 ResetTime();
             }
         }
+
+        public void SetSoundVolume(bool music)
+        {
+            if (music == true)
+            {
+                AudioManager.Instance.MusicsVolume = musicSlider.value;
+            }
+            else
+            {
+                AudioManager.Instance.SoundEffectsVolume = soundSlider.value;
+            }
+        }
+
+
     }
 }
 

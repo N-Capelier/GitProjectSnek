@@ -675,7 +675,18 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4679244389562690894}
+        m_MethodName: SetSoundVolume
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1292199730027650585
 GameObject:
   m_ObjectHideFlags: 0
@@ -895,7 +906,18 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4679244389562690894}
+        m_MethodName: SetSoundVolume
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1569729027405579535
 GameObject:
   m_ObjectHideFlags: 0
@@ -1681,6 +1703,8 @@ MonoBehaviour:
   - {fileID: 3659778852138747520}
   - {fileID: 6011609904320083766}
   background: {fileID: 8572095472443767776}
+  soundSlider: {fileID: 8352084160954611365}
+  musicSlider: {fileID: 6996252242780055289}
 --- !u!1 &4607821327566169023
 GameObject:
   m_ObjectHideFlags: 0
