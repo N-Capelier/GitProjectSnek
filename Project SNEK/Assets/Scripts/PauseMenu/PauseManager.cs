@@ -6,6 +6,7 @@ using TMPro;
 using GameManagement;
 using Hub.Interaction;
 using AudioManagement;
+using Saving;
 
 namespace PauseManagement
 {
@@ -28,8 +29,10 @@ namespace PauseManagement
         void Start()
         {
             pauseMenu.transform.localScale = Vector3.zero;
+            soundSlider.value = SaveManager.Instance.state.soundVolume;
+            musicSlider.value = SaveManager.Instance.state.musicVolume;
             pauseMenu.SetActive(false);
-            ManageQualitySettings();
+            ManageQualitySettings(SaveManager.Instance.state.quality);
             FadeBackground(false);
         }
 
@@ -116,6 +119,9 @@ namespace PauseManagement
                     qualityToggles[i].SetActive(true);
                 }
             }
+
+            SaveManager.Instance.state.quality = toggleIndex;
+            SaveManager.Instance.Save();
         }
 
         public void QuitOrHub()
@@ -136,10 +142,16 @@ namespace PauseManagement
             if (music == true)
             {
                 AudioManager.Instance.MusicsVolume = musicSlider.value;
+                SaveManager.Instance.state.musicVolume = musicSlider.value;
+                SaveManager.Instance.Save();
+                AudioManager.Instance.UpdateSliders();
             }
             else
             {
                 AudioManager.Instance.SoundEffectsVolume = soundSlider.value;
+                SaveManager.Instance.state.soundVolume = soundSlider.value;
+                SaveManager.Instance.Save();
+                AudioManager.Instance.UpdateSliders();
             }
         }
 

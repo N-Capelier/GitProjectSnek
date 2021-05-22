@@ -2,6 +2,7 @@
 using UnityEngine;
 using System;
 using Player;
+using Saving;
 
 namespace AudioManagement
 {
@@ -43,6 +44,9 @@ namespace AudioManagement
 
         void Start()
         {
+            SaveManager.Instance.Load();
+            MusicsVolume = SaveManager.Instance.state.musicVolume;
+            SoundEffectsVolume = SaveManager.Instance.state.soundVolume;
 
             //Création des Audiosources au start en fonction du nombre d'audiosources dans le tableau.
 
@@ -53,6 +57,7 @@ namespace AudioManagement
 
 
             }
+            UpdateSliders();
 
 
 
@@ -61,22 +66,18 @@ namespace AudioManagement
         private void Update()
         {
             UdpdateList();
-            UpdateSliders();
+            //UpdateSliders();
         }
 
-        private void UpdateSliders()
+        public void UpdateSliders()
         {
             foreach (var sound in sounds)
             {
-                Debug.Log("Update Sound Volume");
-
                 sound.source.volume = sound.volume * SoundEffectsVolume;
             }
 
             foreach (var music in musics)
             {
-                Debug.Log("Update Music Volume");
-
                 music.source.volume = music.volume * MusicsVolume;
             }
 
