@@ -30,9 +30,10 @@ namespace Enemy
             StartCoroutine(SpitBehaviour());
         }
 
+        GameObject lastPoison;
         IEnumerator SpitBehaviour()
         {
-            Instantiate(vomito, mBm.currentNode, Quaternion.identity);
+            lastPoison = Instantiate(vomito, mBm.currentNode, Quaternion.identity);
             AudioManager.Instance.PlayThisSoundEffect("MouchouVomito", transform);
             yield return new WaitUntil(() => mBm.isMoving == true);
             mBm.canMove = true;
@@ -40,6 +41,7 @@ namespace Enemy
 
         private void OnDestroy()
         {
+            Destroy(lastPoison);
             stats.attackClock.ClockEnded -= OnShouldAttack;
         }
     }
