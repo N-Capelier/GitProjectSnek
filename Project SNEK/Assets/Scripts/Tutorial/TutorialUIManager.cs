@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using PauseManagement;
 
 namespace Tutorial
 {
@@ -27,6 +28,10 @@ namespace Tutorial
         {
             tutorialUis[index].SetActive(true);
             tutorialUis[index].LeanScale(Vector3.one, 0.2f).setIgnoreTimeScale(true);
+            if(PauseManager.Instance != null)
+            {
+                PauseManager.Instance.HideOpenMenuButton();
+            }
             //Ajouter l'index à une liste pour empecher la répétition ?
             Time.timeScale = 0f;
         }
@@ -41,6 +46,10 @@ namespace Tutorial
             tutorialUis[index].LeanScale(Vector3.zero, 0.2f).setIgnoreTimeScale(true);
             Time.timeScale = 1f;
             yield return new WaitForSeconds(0.2f);
+            if (PauseManager.Instance != null)
+            {
+                PauseManager.Instance.ShowOpenMenuButton();
+            }
             tutorialUis[index].SetActive(false);
         }
     }
