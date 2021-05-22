@@ -27,7 +27,7 @@ namespace PauseManagement
         {
             pauseMenu.transform.localScale = Vector3.zero;
             pauseMenu.SetActive(false);
-            ManageQualitySettings();
+            ManageQualitySettings(1);
             FadeBackground(false);
         }
 
@@ -92,11 +92,6 @@ namespace PauseManagement
         public void ResetTime()
         {
             Time.timeScale = 1f;
-        }
-
-        public void GoToHub()
-        {
-            GameManager.Instance.gameState.Set(GameManagement.GameState.Hub, "Hub");
         }
 
         public void ManageQualitySettings(int toggleIndex = 0)
