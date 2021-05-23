@@ -99,11 +99,6 @@ namespace PauseManagement
             Time.timeScale = 1f;
         }
 
-        public void GoToHub()
-        {
-            GameManager.Instance.gameState.Set(GameManagement.GameState.Hub, "Hub");
-        }
-
         public void ManageQualitySettings(int toggleIndex = 0)
         {
             QualitySettings.SetQualityLevel(toggleIndex);
