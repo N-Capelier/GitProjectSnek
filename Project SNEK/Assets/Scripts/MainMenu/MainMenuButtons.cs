@@ -33,5 +33,10 @@ namespace MainMenu
             SaveManager.Instance.state = new SaveState();
             SaveManager.Instance.Save();
         }
+
+        public void Quit()
+        {
+            Application.Quit();
+        }
     }
 }
