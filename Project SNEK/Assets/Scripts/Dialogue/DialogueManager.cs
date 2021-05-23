@@ -8,6 +8,7 @@ using Cinematic;
 using Saving;
 using AudioManagement;
 using PauseManagement;
+using AudioManagement;
 
 namespace DialogueManagement
 {
@@ -29,6 +30,7 @@ namespace DialogueManagement
         bool skipSentence = false;
         int sentenceIndex;
         Animator animator, cinematicAnimator;
+        int dialogCount;
 
         [SerializeField] float dialogBoxOffset;
 
@@ -76,6 +78,7 @@ namespace DialogueManagement
             this.animator = animator;
             OpenDialogueBox();
             //Mouvement de caméra
+            dialogCount = 0;
             StartCoroutine(WriteNextLine());
             PauseManagement.PauseManager.Instance.HideOpenMenuButton();
         }
@@ -90,6 +93,7 @@ namespace DialogueManagement
             }
             else
             {
+
                 nameText.text = currentDialogue.sentences[sentenceIndex].character.ToString();
                 if(animator != null && currentDialogue.sentences[sentenceIndex].anim != "")
                 {
@@ -116,6 +120,17 @@ namespace DialogueManagement
             skipSentence = false;
             foreach (char letter in currentDialogue.sentences[sentenceIndex].sentence.ToCharArray())
             {
+                if (dialogCount == 3)
+                {
+                    if(currentDialogue.sentences[sentenceIndex].voiceLine != "")
+                    AudioManager.Instance.PlaySoundEffect(currentDialogue.sentences[sentenceIndex].voiceLine);
+                    dialogCount = 0;
+                }
+                else
+                {
+                    dialogCount++;
+                }
+
                 dialogueText.text += letter;
                 if(!skipSentence)
                 {
