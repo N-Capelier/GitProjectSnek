@@ -30,10 +30,16 @@ namespace Cinematic
                 InteractionManager.Instance.camTarget.actions++;
                 InteractionManager.Instance.playerController.actions++;
             }
+            else if(GameManager.Instance.gameState.ActiveState == GameState.Run)
+            {
+                //
+            }
+
             if(GameManager.Instance.gameState.ActiveState != GameState.Cinematic)
             {
                 PlayerManager.Instance.currentController.objectRenderer.SetActive(false);
             }
+
             mainDirector.playableAsset = _cutscene;
             mainDirector.Play();
         }
@@ -52,6 +58,9 @@ namespace Cinematic
                 InteractionManager.Instance.camTarget.actions--;
                 InteractionManager.Instance.playerController.actions--;
 
+            }
+            if (GameManager.Instance.gameState.ActiveState != GameState.Cinematic)
+            {
                 PlayerManager.Instance.currentController.objectRenderer.SetActive(true);
             }
         }
