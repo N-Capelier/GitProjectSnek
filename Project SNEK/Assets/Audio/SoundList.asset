@@ -13,10 +13,6 @@ MonoBehaviour:
   m_Name: SoundList
   m_EditorClassIdentifier: 
   sounds:
-  - name: LevelMusic
-    clip: {fileID: 8300000, guid: 80e5ca09f66ab5649813bb4736dd096a, type: 3}
-    source: {fileID: 0}
-    volume: 1
   - name: LevelDestroyDefault
     clip: {fileID: 8300000, guid: f0969e08fd683694aae37474bc32726e, type: 3}
     source: {fileID: 0}
@@ -51,10 +47,6 @@ MonoBehaviour:
     volume: 1
   - name: PlayerSwordImpact
     clip: {fileID: 8300000, guid: db0795b12a11a9947a842701a58cf90f, type: 3}
-    source: {fileID: 0}
-    volume: 1
-  - name: HubMusic
-    clip: {fileID: 8300000, guid: f901c4dff34b2f54ea44537cb090ed54, type: 3}
     source: {fileID: 0}
     volume: 1
   - name: UIClick
@@ -95,5 +87,14 @@ MonoBehaviour:
     volume: 1
   - name: MouchouVomito
     clip: {fileID: 8300000, guid: 0e7ef9dba616ecb429b20f9e9ba3889d, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  musics:
+  - name: LevelMusic
+    clip: {fileID: 8300000, guid: 80e5ca09f66ab5649813bb4736dd096a, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: HubMusic
+    clip: {fileID: 8300000, guid: f901c4dff34b2f54ea44537cb090ed54, type: 3}
     source: {fileID: 0}
     volume: 1

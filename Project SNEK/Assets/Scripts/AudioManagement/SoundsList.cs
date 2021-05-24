@@ -9,5 +9,7 @@ namespace AudioManagement
     public class SoundsList : ScriptableObject
     {
         public Sound[] sounds;
+
+        public Sound[] musics;
     }
 }

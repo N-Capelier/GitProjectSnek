@@ -32,6 +32,16 @@
         /// </summary>
         public int equipedTechnic = 0;
 
+        public float soundVolume = 0.9f;
+        public float musicVolume = 0.9f;
+
+        /// <summary>
+        /// 0 is low quality
+        /// 1 is medium quality
+        /// 2 is high quality
+        /// </summary>
+        public int quality = 1;
+
 
         public bool isDemoFinished = false;
     }
