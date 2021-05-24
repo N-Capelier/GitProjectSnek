@@ -23,6 +23,8 @@ namespace Cinematic
             CreateSingleton();
         }
 
+        int spiritCount = 0;
+
         public void PlayCutscene(TimelineAsset _cutscene)
         {
             if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
@@ -32,7 +34,12 @@ namespace Cinematic
             }
             else if(GameManager.Instance.gameState.ActiveState == GameState.Run)
             {
-                //
+                spiritCount = PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits();
+                for (int i = 0; i < PlayerManager.Instance.currentController.playerRunSpirits.spiritChain.Count; i++)
+                {
+                    PlayerManager.Instance.currentController.playerRunSpirits.spiritChain[i].objectRenderer.SetActive(false);
+                }
+                PlayerManager.Instance.currentController.isInCutscene = true;
             }
 
             if(GameManager.Instance.gameState.ActiveState != GameState.Cinematic)
@@ -43,6 +50,7 @@ namespace Cinematic
             mainDirector.playableAsset = _cutscene;
             mainDirector.Play();
         }
+
 
         public void EndCustscene()
         {
@@ -61,6 +69,17 @@ namespace Cinematic
             }
             if (GameManager.Instance.gameState.ActiveState != GameState.Cinematic)
             {
+                PlayerManager.Instance.currentController.objectRenderer.SetActive(true);
+            }
+            if(GameManager.Instance.gameState.ActiveState == GameState.Run)
+            {
+                PlayerManager.Instance.currentController.isInCutscene = false;
+                PlayerManager.Instance.currentController.transform.position = PlayerManager.Instance.currentController.checkPoint.position;
+                PlayerManager.Instance.currentController.playerRunSpirits.ResetSpiritsPositions();
+                for (int i = 0; i < spiritCount; i++)
+                {
+                    PlayerManager.Instance.currentController.playerRunSpirits.AddSpirit();
+                }
                 PlayerManager.Instance.currentController.objectRenderer.SetActive(true);
             }
         }

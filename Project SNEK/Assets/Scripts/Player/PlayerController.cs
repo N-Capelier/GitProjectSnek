@@ -35,6 +35,7 @@ namespace Player.Controller
 
         [Space]
         [HideInInspector] public Rigidbody rb = null;
+        [HideInInspector] public bool isInCutscene = false;
         [Range(0, 400)] public float moveSpeed = 50;
         [HideInInspector] public float attackMoveSpeedModifier = 1f;
         [HideInInspector] public float spellMoveSpeedModifier = 1f;
@@ -70,7 +71,7 @@ namespace Player.Controller
 
         public void Death(int deathIndex)
         {
-            if (SceneManager.GetActiveScene().name != "TutorialMap")
+            if (SceneManager.GetActiveScene().name != "TutorialMap" && !isInCutscene)
             {
                 currentHP--;
             }
@@ -112,9 +113,9 @@ namespace Player.Controller
             //yield return new WaitUntil(() => _loadingScene.isDone);
             PlayerManager.Instance.gameObject.SetActive(true);
             PlayerManager.Instance.currentController.playerRunSpirits.ResetSpiritsPositions();
-            for (int i = 0; i < PlayerManager.Instance.currentController.playerRunSpirits.spiritChain.Count; i++)
+            for (int i = 0; i < playerRunSpirits.spiritChain.Count; i++)
             {
-                PlayerManager.Instance.currentController.playerRunSpirits.spiritChain[i].objectRenderer.SetActive(false);
+                playerRunSpirits.spiritChain[i].objectRenderer.SetActive(false);
             }
             transform.position = checkPoint.position;
             RunCamController.Instance.Set(CamState.PlayerScrolling, true);

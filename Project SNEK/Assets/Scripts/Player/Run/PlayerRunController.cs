@@ -14,7 +14,6 @@ namespace Player.Controller
         Vector3 currentNode;
         Vector3 nextNode;
         
-
         public delegate void PlayerChangingDirection(PlayerDirection direction);
         public static event PlayerChangingDirection PlayerChangedDirection;
 
@@ -66,7 +65,7 @@ namespace Player.Controller
 
         private void FixedUpdate()
         {
-            if (isDead == false)
+            if (isDead == false && isInCutscene == false)
             {
                 rb.velocity = (nextNode - currentNode) * moveSpeed * attackMoveSpeedModifier * spellMoveSpeedModifier * inputSpeed;
             }
@@ -112,6 +111,8 @@ namespace Player.Controller
         /// <param name="inputType"></param>
         void HandleInput(InputType inputType)
         {
+            if (isInCutscene)
+                return;
             if(fadeToHoldCoroutine != null)
             {
                 StopCoroutine(fadeToHoldCoroutine);
@@ -161,6 +162,8 @@ namespace Player.Controller
 
         void OnHold()
         {
+            if (isInCutscene)
+                return;
             PlayerManager.Instance.currentController.animator.Play("Anim_PlayerRun_runCHARGE");
             fadeToHoldCoroutine = StartCoroutine(FadeToHold());
         }
