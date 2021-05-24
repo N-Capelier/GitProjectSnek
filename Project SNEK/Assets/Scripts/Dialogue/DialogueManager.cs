@@ -80,6 +80,7 @@ namespace DialogueManagement
             //Mouvement de caméra
             dialogCount = 0;
             StartCoroutine(WriteNextLine());
+            if(PauseManagement.PauseManager.Instance != null)
             PauseManagement.PauseManager.Instance.HideOpenMenuButton();
         }
 
@@ -317,6 +318,7 @@ namespace DialogueManagement
             {
                 InteractionManager.Instance.EndInteraction();
             }
+            if(PauseManager.Instance != null)
             PauseManagement.PauseManager.Instance.ShowOpenMenuButton();
         }
 

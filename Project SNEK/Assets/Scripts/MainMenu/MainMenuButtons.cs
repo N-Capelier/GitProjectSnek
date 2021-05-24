@@ -38,5 +38,18 @@ namespace MainMenu
         {
             Application.Quit();
         }
+
+        public void OpenBox(GameObject box)
+        {
+            box.SetActive(true);
+            box.transform.localScale = Vector3.zero;
+            box.transform.LeanScale(Vector3.one, 0.2f);
+        }
+        public void CloseBox(GameObject box)
+        {
+            box.transform.localScale = Vector3.zero;
+            box.SetActive(false);
+        }
+
     }
 }
