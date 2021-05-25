@@ -234,7 +234,7 @@ namespace Boss
         {
             animator.Play("BossAno_TauntIn");
             animator.SetBool("animIsTaunt", true);
-            camDistance = 10;
+            camDistance = 9;
             yield return new WaitForSeconds(7f);
             animator.SetBool("animIsTaunt", false);
             camDistance = 13;
@@ -251,6 +251,7 @@ namespace Boss
 
         IEnumerator Stun()
         {
+            camDistance = 0;
             animator.Play("BossAno_StunIn");
             animator.SetBool("animIsStuned", true);
             yield return new WaitForSeconds(7);
@@ -296,9 +297,7 @@ namespace Boss
         }
 
         void UpdateMovement()
-        {
-            if (canBeHit == false)
-            {
+        {            
                 if ((gameObject.transform.position.z - cam.transform.position.z) < camDistance)
                 {
                     rb.velocity = new Vector3(0, 0, moveSpeed);
@@ -308,10 +307,7 @@ namespace Boss
                 {
                     rb.velocity = new Vector3(0, 0, 0);
                     return;
-                }
-            }
-            else
-                rb.velocity = new Vector3(0, 0, 0);
+                }                        
         }
 
         void StopPatterns()
@@ -346,6 +342,7 @@ namespace Boss
                 director.playableAsset = endCinematic;
                 bodyRenderer.enabled = false;
                 handsRenderer.enabled = false;
+                generator.bossIsDead = true;
                 generator.GenerateStartTerrain();
                 endGraphs.SetActive(true);
                 cam.SetActive(false);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Player;
 
 namespace Boss
 {
@@ -26,6 +27,8 @@ namespace Boss
         [SerializeField] List<GameObject> leftCliffs = new List<GameObject>();
         [SerializeField] List<GameObject> rightCliffs = new List<GameObject>();
 
+        [HideInInspector] public bool bossIsDead = false;
+
         int cliffIndex = 6;
 
         private void OnTriggerEnter(Collider other)
@@ -33,6 +36,7 @@ namespace Boss
             if(other.gameObject.layer == LayerMask.NameToLayer("PlayerController"))
             {
                 GenerateNextCliffs();
+                GenerateTerrain();
             }
         }
 
@@ -54,7 +58,7 @@ namespace Boss
 
         private IEnumerator Start()
         {
-            yield return new WaitForSeconds(.5f);
+            yield return new WaitForSeconds(25f);
             StartCoroutine(TimedUpdate());
 
             yield return new WaitForSeconds(1f);
@@ -63,7 +67,7 @@ namespace Boss
 
         IEnumerator TimedUpdate()
         {
-            if(Player.PlayerManager.Instance.currentController.transform.position.z > currentIndex - 17)
+            if(PlayerManager.Instance.currentController.transform.position.z > currentIndex - 17 && bossIsDead == false)
                 GenerateTerrain();
             yield return new WaitForSeconds(delay);
             StartCoroutine(TimedUpdate());
@@ -84,14 +88,14 @@ namespace Boss
         int secondIndex = -10;
         public void GenerateStartTerrain()
         {
-            for (int i = 0; i < 35; i++)
+            for (int i = 0; i < 45; i++)
             {
                 for (int x = -1; x < 10; x++)
                 {
-                    tilemap.SetTile(new Vector3Int(x, secondIndex, 0), tile);
-                    tilemap2.SetTile(new Vector3Int(x, secondIndex, 0), customTile[Random.Range(0, 9)]);
-                    tilemap.SetTile(new Vector3Int(x, secondIndex - 35, 0), null);
-                    tilemap2.SetTile(new Vector3Int(x, secondIndex - 35, 0), null);
+                    tilemap.SetTile(new Vector3Int(x, secondIndex, -20), tile);
+                    tilemap2.SetTile(new Vector3Int(x, secondIndex, - 20), customTile[Random.Range(0, 9)]);
+                    //tilemap.SetTile(new Vector3Int(x, secondIndex - 45, 0), null);
+                    //tilemap2.SetTile(new Vector3Int(x, secondIndex - 45, 0), null);
                 }
                 secondIndex++;
             }            
