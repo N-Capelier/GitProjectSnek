@@ -23,6 +23,7 @@ namespace Cinematic
             CreateSingleton();
         }
 
+
         int spiritCount = 0;
 
         public void PlayCutscene(TimelineAsset _cutscene)

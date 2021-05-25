@@ -5,10 +5,11 @@ using Enemy;
 using Player;
 using UnityEngine.Timeline;
 using UnityEngine.Playables;
+using Cinematic;
 
 namespace Boss
 {
-    public class TestAnorexia : MonoBehaviour
+    public class TestAnorexia : Singleton<TestAnorexia>
     {
         public GameObject mouchou;
 
@@ -59,13 +60,19 @@ namespace Boss
 
         [SerializeField] Vector3 targetVec;
 
+        public TimelineAsset introCinematic;
+
+        private void Awake()
+        {
+            CreateSingleton();
+        }
 
         private void Start()
         {
             rb = GetComponent<Rigidbody>();
             animator = GetComponent<Animator>();
             incomingBombs = new List<GameObject>();
-            currentHp = maxHp;            
+            currentHp = maxHp;
         }
 
         private void Update()

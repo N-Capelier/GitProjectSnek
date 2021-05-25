@@ -63,7 +63,10 @@ namespace Player.Attack
         void HandleInput(InputType inputType)
         {
             if (PlayerManager.Instance.currentController.isInCutscene)
+            {
+                Debug.Log("Input in cinemtic");
                 return;
+            }               
             if (inputType == InputType.Tap && canAttack)
                 attackCoroutine = StartCoroutine(Attack());
         }

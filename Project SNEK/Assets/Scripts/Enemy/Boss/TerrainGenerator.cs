@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Player;
+using GameManagement.GameStates;
+using GameManagement;
 
 namespace Boss
 {
-    public class TerrainGenerator : MonoBehaviour
+    public class TerrainGenerator : Singleton<TerrainGenerator>
     {
         [SerializeField] Tilemap tilemap;
         [SerializeField] Tilemap tilemap2;
@@ -27,9 +29,14 @@ namespace Boss
         [SerializeField] List<GameObject> leftCliffs = new List<GameObject>();
         [SerializeField] List<GameObject> rightCliffs = new List<GameObject>();
 
-        [HideInInspector] public bool bossIsDead = false;
+        public bool bossIsDead = false;
 
         int cliffIndex = 6;
+
+        private void Awake()
+        {
+            CreateSingleton();
+        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -58,9 +65,16 @@ namespace Boss
 
         private IEnumerator Start()
         {
-            yield return new WaitForSeconds(25f);
-            StartCoroutine(TimedUpdate());
-
+            if (GameManager.Instance.playedBossCinematic)
+            {
+                yield return new WaitForEndOfFrame();
+                StartCoroutine(TimedUpdate());
+            }
+            else
+            {
+                yield return new WaitForSeconds(25f);
+                StartCoroutine(TimedUpdate());
+            }          
             yield return new WaitForSeconds(1f);
             deathZone.SetActive(true);
         }

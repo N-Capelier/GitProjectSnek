@@ -6,6 +6,8 @@ using Rendering.Run;
 using AudioManagement;
 using Saving;
 using UnityEngine.SceneManagement;
+using Boss;
+using Cinematic;
 
 namespace GameManagement.GameStates
 {
@@ -14,7 +16,7 @@ namespace GameManagement.GameStates
     /// </summary>
     public class RunGameState : StateMachineBehaviour
     {
-
+        bool playedBossCinematic = false;
         public static Source runMusic;
         
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -28,14 +30,23 @@ namespace GameManagement.GameStates
             if(SceneManager.GetActiveScene().name == "Boss Anorexia")
             {
                 RunCamController.Instance.Set(CamState.SemiScrolling);
+                if (!playedBossCinematic)
+                {
+                    playedBossCinematic = true;
+                    CutsceneManager.Instance.PlayCutscene(TestAnorexia.Instance.introCinematic);
+                    GameManager.Instance.playedBossCinematic = true;
+                }
             }
             else
             {
                 RunCamController.Instance.Set(CamState.PlayerScrolling);
-            }
+            }            
             if (runMusic == null)
             {
-                runMusic = AudioManager.Instance.PlayThisSoundEffect("LevelMusic", true);
+                if(SceneManager.GetActiveScene().name != "Boss Anorexia")
+                {
+                    runMusic = AudioManager.Instance.PlayThisSoundEffect("LevelMusic", true);
+                }
             }
         }
 
@@ -55,7 +66,7 @@ namespace GameManagement.GameStates
                 runMusic.audioSource.Stop();
                 runMusic = null;
             }
-
+            GameManager.Instance.playedBossCinematic = false;
         }
     }
 }

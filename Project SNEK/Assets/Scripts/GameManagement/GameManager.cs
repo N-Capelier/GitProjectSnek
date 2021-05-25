@@ -11,6 +11,8 @@ namespace GameManagement
         public StateMachine gameState = null;
         public InputHandler inputHandler = null;
 
+        [HideInInspector] public bool playedBossCinematic = false;
+
         private void Awake()
         {
             CreateSingleton(true);
