@@ -8,7 +8,6 @@ using Cinematic;
 using Saving;
 using AudioManagement;
 using PauseManagement;
-using AudioManagement;
 
 namespace DialogueManagement
 {
@@ -80,8 +79,10 @@ namespace DialogueManagement
             //Mouvement de caméra
             dialogCount = 0;
             StartCoroutine(WriteNextLine());
-            if(PauseManagement.PauseManager.Instance != null)
-            PauseManagement.PauseManager.Instance.HideOpenMenuButton();
+            print(PauseManager.Instance.ToString());
+            if (PauseManager.Instance == null)
+                yield break;
+            PauseManager.Instance.HideOpenMenuButton();
         }
 
         IEnumerator WriteNextLine()
@@ -318,13 +319,14 @@ namespace DialogueManagement
             {
                 InteractionManager.Instance.EndInteraction();
             }
-            if(PauseManager.Instance != null)
-            PauseManagement.PauseManager.Instance.ShowOpenMenuButton();
+            if (PauseManager.Instance is null)
+                return;
+            PauseManager.Instance.ShowOpenMenuButton();
         }
 
         public void NextLineFeedback()
         {
-            if(dialogueArrow.GetComponent<CanvasGroup>().alpha == 0)
+            if (dialogueArrow.GetComponent<CanvasGroup>().alpha == 0)
             {
                 LeanTween.alphaCanvas(dialogueArrow.GetComponent<CanvasGroup>(), 1, 0.5f).setLoopPingPong();
             }
