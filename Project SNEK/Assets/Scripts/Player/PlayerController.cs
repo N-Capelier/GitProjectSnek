@@ -35,6 +35,7 @@ namespace Player.Controller
 
         [Space]
         [HideInInspector] public Rigidbody rb = null;
+        [HideInInspector] public bool isInCutscene = false;
         [Range(0, 400)] public float moveSpeed = 50;
         [HideInInspector] public float attackMoveSpeedModifier = 1f;
         [HideInInspector] public float spellMoveSpeedModifier = 1f;
@@ -47,8 +48,11 @@ namespace Player.Controller
         public Vector3 respawnNode;
 
         public GameObject objectRenderer;
+        public SkinnedMeshRenderer faceRenderer;
         public GameObject deathFx;
         public Animator animator;
+
+        [SerializeField] Material[] faces;
 
         [SerializeField] GameObject hpUi;
         [SerializeField] TextMeshProUGUI hpText;
@@ -70,7 +74,7 @@ namespace Player.Controller
 
         public void Death(int deathIndex)
         {
-            if (SceneManager.GetActiveScene().name != "TutorialMap")
+            if (SceneManager.GetActiveScene().name != "TutorialMap" && !isInCutscene)
             {
                 currentHP--;
             }
@@ -100,6 +104,7 @@ namespace Player.Controller
         {
             //play death anim
             Instantiate(deathFx, transform.position, Quaternion.identity);
+            faceRenderer.material = faces[1];
             if (deathAnimIndex == 0)
                 objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_death");
             else if (deathAnimIndex == 1)
@@ -112,11 +117,12 @@ namespace Player.Controller
             //yield return new WaitUntil(() => _loadingScene.isDone);
             PlayerManager.Instance.gameObject.SetActive(true);
             PlayerManager.Instance.currentController.playerRunSpirits.ResetSpiritsPositions();
-            for (int i = 0; i < PlayerManager.Instance.currentController.playerRunSpirits.spiritChain.Count; i++)
+            for (int i = 0; i < playerRunSpirits.spiritChain.Count; i++)
             {
-                PlayerManager.Instance.currentController.playerRunSpirits.spiritChain[i].objectRenderer.SetActive(false);
+                playerRunSpirits.spiritChain[i].objectRenderer.SetActive(false);
             }
             transform.position = checkPoint.position;
+            faceRenderer.material = faces[0];
             RunCamController.Instance.Set(CamState.PlayerScrolling, true);
             isDead = false;
             StartCoroutine(DisplayHp());
@@ -127,6 +133,7 @@ namespace Player.Controller
         IEnumerator DeathCoroutine(int deathAnimIndex)
         {
             //play defeat anim
+            faceRenderer.material = faces[1];
             Instantiate(deathFx, transform.position, Quaternion.identity);
             if(deathAnimIndex == 0)
             objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_death");
@@ -134,6 +141,7 @@ namespace Player.Controller
             objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_deathPoison");
             AudioManager.Instance.PlaySoundEffect("PlayerHit");
             yield return new WaitForSeconds(1f);
+            faceRenderer.material = faces[0];
             //GameManagement.GameManager.Instance.gameState.Set(GameManagement.GameState.Hub, "Hub");
             GameOverMenu.Instance.menuCanvas.SetActive(true);
             isDead = false;

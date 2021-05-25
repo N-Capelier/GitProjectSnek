@@ -1185,9 +1185,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6380341503832632277}
   - component: {fileID: 6845822961541303726}
-  - component: {fileID: 6845822961541303727}
   - component: {fileID: 6845822961541303714}
   - component: {fileID: 6845822961541303725}
+  - component: {fileID: 3078934665229857222}
   m_Layer: 17
   m_Name: Boss Anorexie
   m_TagString: Untagged
@@ -1234,19 +1234,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &6845822961541303727
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6034918503391195503}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!95 &6845822961541303714
 Animator:
   serializedVersion: 3
@@ -1289,12 +1276,16 @@ MonoBehaviour:
   shield: {fileID: 5413965205567664628, guid: effbb6ca6b4b9ef43a8cbb95da7b2cf9, type: 3}
   shieldPos: {fileID: 6845822959624783127}
   camDistance: 13
-  maxHp: 100
+  maxHp: 10
   feedbackPosSpeed: 15
   canBeHit: 0
   bodyRenderer: {fileID: 3856975516727409590}
   handsRenderer: {fileID: 413321085095642981}
   hitMaterial: {fileID: 2100000, guid: 49bd8cf0807c6c3408ac07b5ba52741e, type: 2}
+  director: {fileID: 0}
+  endCinematic: {fileID: 11400000, guid: 7f5fe1d388e644948b2ab3f521c73686, type: 2}
+  endGraphs: {fileID: 0}
+  generator: {fileID: 0}
   pattern:
     row:
     - column: 010000000000000000
@@ -1318,6 +1309,19 @@ MonoBehaviour:
     - column: 000101010100000000
     - column: 000101010100000000
   targetVec: {x: 0, y: 0, z: 0}
+--- !u!135 &3078934665229857222
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6034918503391195503}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.12
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &6251277737247276983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1412,6 +1416,50 @@ Transform:
   m_Father: {fileID: 6380341503832632277}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 30.54487, y: 94.90912, z: 6.04096}
+--- !u!1 &6793107537471177401
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7510503286247059523}
+  - component: {fileID: 6997358804406987226}
+  m_Layer: 11
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7510503286247059523
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6793107537471177401}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6845822959615896671}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &6997358804406987226
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6793107537471177401}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.95
+  m_Center: {x: 0, y: 0.99, z: 0}
 --- !u!1 &6845822959615896668
 GameObject:
   m_ObjectHideFlags: 0
@@ -1442,6 +1490,7 @@ Transform:
   - {fileID: 6845822960518110938}
   - {fileID: 6845822960513497925}
   - {fileID: 6845822959624783126}
+  - {fileID: 7510503286247059523}
   m_Father: {fileID: 6380341503832632277}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}

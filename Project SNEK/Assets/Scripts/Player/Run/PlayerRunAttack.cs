@@ -62,6 +62,8 @@ namespace Player.Attack
 
         void HandleInput(InputType inputType)
         {
+            if (PlayerManager.Instance.currentController.isInCutscene)
+                return;
             if (inputType == InputType.Tap && canAttack)
                 attackCoroutine = StartCoroutine(Attack());
         }

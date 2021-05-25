@@ -48,8 +48,11 @@ namespace PauseManagement
         {
             Time.timeScale = 1f;
             pauseMenu.LeanScale(Vector3.zero, 0.2f).setIgnoreTimeScale(true).setOnComplete(SetPauseMenuFalse);
-            openPauseMenu.SetActive(true);
-            openPauseMenu.GetComponent<CanvasGroup>().LeanAlpha(1, 0.2f).setIgnoreTimeScale(true);
+            if(GameManager.Instance.gameState.ActiveState != GameManagement.GameState.MainMenu)
+            {
+                openPauseMenu.SetActive(true);
+                openPauseMenu.GetComponent<CanvasGroup>().LeanAlpha(1, 0.2f).setIgnoreTimeScale(true);
+            }
         }
 
         public void FadeBackground(bool state)
@@ -136,17 +139,15 @@ namespace PauseManagement
         {
             if (music == true)
             {
-                AudioManager.Instance.MusicsVolume = musicSlider.value;
                 SaveManager.Instance.state.musicVolume = musicSlider.value;
                 SaveManager.Instance.Save();
-                AudioManager.Instance.UpdateSliders();
+                AudioManager.Instance.soundsMixer.SetFloat("musicsVolume", (Mathf.Log10(musicSlider.value * 10) * 100) - 80);
             }
             else
             {
-                AudioManager.Instance.SoundEffectsVolume = soundSlider.value;
                 SaveManager.Instance.state.soundVolume = soundSlider.value;
                 SaveManager.Instance.Save();
-                AudioManager.Instance.UpdateSliders();
+                AudioManager.Instance.soundsMixer.SetFloat("sfxVolume", (Mathf.Log10(soundSlider.value * 10) * 100) - 80);
             }
         }
 
