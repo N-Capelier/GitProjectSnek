@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 using Player;
 using GameManagement.GameStates;
 using GameManagement;
+using Boss;
 
 namespace Boss
 {
@@ -74,6 +75,7 @@ namespace Boss
             {
                 yield return new WaitForSeconds(25f);
                 StartCoroutine(TimedUpdate());
+                TestAnorexia.Instance.StartPatterns();
             }          
             yield return new WaitForSeconds(1f);
             deathZone.SetActive(true);

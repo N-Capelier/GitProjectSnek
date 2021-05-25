@@ -36,7 +36,7 @@ namespace Boss
         float moveSpeed = 2.5f;
         bool bombOver = false;
         [SerializeField] bool canBeHit = false;
-        bool canDoPattern = true;
+        [SerializeField] bool canDoPattern = true;
         bool isTaunt = false;
 
         [Space]
@@ -94,7 +94,7 @@ namespace Boss
                 StartCoroutine(Stun());
             }
 
-            if (canDoPattern && canBeHit == false)
+            if (canDoPattern && !canBeHit)
             {
                 switch (patternCount)
                 {
@@ -330,6 +330,14 @@ namespace Boss
                     Destroy(incomingBombs[i]);
                 }
             }           
+        }
+
+        public void StartPatterns()
+        {
+            StopAllCoroutines();
+            targetFeedback.SetActive(false);
+            patternCount = 0;
+            canDoPattern = true;
         }
 
         public void TakeDamage(float damage)
