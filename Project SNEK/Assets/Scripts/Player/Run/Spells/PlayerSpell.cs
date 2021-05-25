@@ -2,6 +2,7 @@
 using GameManagement;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using Cinematic;
 
 namespace Player.Spells
 {
@@ -51,6 +52,11 @@ namespace Player.Spells
 
         void HandleInput(InputType inputType)
         {
+            if (PlayerManager.Instance.currentController.isInCutscene)
+            {
+                return;
+            }
+
             //switch (inputType)
             //{
             //    case InputType.SwipeUp:

@@ -122,6 +122,14 @@ namespace Cinematic
             SaveManager.Instance.state.bergamotState = newState;
             NPCManager.Instance.RefreshNPCs();
         }
+
+
+        public void BackToHubFromBoss()
+        {
+            //Add to save state
+            EndCustscene();
+            GameManager.Instance.gameState.Set(GameState.Hub, "Hub");            
+        }
     }
 
 }
