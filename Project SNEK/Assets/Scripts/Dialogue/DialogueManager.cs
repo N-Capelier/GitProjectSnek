@@ -79,9 +79,10 @@ namespace DialogueManagement
             //Mouvement de caméra
             dialogCount = 0;
             StartCoroutine(WriteNextLine());
-            print(PauseManager.Instance.ToString());
             if (PauseManager.Instance == null)
+            {
                 yield break;
+            }
             PauseManager.Instance.HideOpenMenuButton();
         }
 
