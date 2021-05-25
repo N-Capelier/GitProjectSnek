@@ -3,6 +3,7 @@ using UnityEngine;
 using System;
 using Player;
 using Saving;
+using UnityEngine.Audio;
 
 namespace AudioManagement
 {
@@ -40,6 +41,10 @@ namespace AudioManagement
         //Une variable public pour centraliser la distance a laquelle on joue les sons.
         public float minimumSoundPlayDistance;
 
+        public AudioMixer soundsMixer;
+
+        public AudioMixerGroup musicMixer;
+        public AudioMixerGroup sfxMixer;
 
 
         void Start()
@@ -57,7 +62,7 @@ namespace AudioManagement
 
 
             }
-            UpdateSliders();
+            
 
 
 
@@ -115,6 +120,7 @@ namespace AudioManagement
 
                     source.audioSource.loop = false;
 
+                    source.audioSource.outputAudioMixerGroup = sfxMixer;
 
                     source.audioSource.Play();
 
@@ -151,6 +157,8 @@ namespace AudioManagement
                         sound.source = source.audioSource;
 
                         sounds.Add(sound);
+
+                        source.audioSource.outputAudioMixerGroup = sfxMixer;
                     }
                     else if (m != null)
                     {
@@ -160,6 +168,8 @@ namespace AudioManagement
                         sound.source = source.audioSource;
 
                         musics.Add(sound);
+
+                        source.audioSource.outputAudioMixerGroup = musicMixer;
                     }
 
                     s = m;
@@ -202,26 +212,30 @@ namespace AudioManagement
                     if (s != null)
                     {
                         sound.clip = s.clip;
-                        sound.volume = s.volume * SoundEffectsVolume;
+                        sound.volume = s.volume;
 
                         sound.source = source.audioSource;
 
                         sounds.Add(sound);
+
+                        source.audioSource.outputAudioMixerGroup = sfxMixer;
                     }
                     else if (m != null)
                     {
                         sound.clip = m.clip;
-                        sound.volume = m.volume * SoundEffectsVolume;
+                        sound.volume = m.volume;
 
                         sound.source = source.audioSource;
 
                         musics.Add(sound);
+
+                        source.audioSource.outputAudioMixerGroup = musicMixer;
                     }
 
                     s = m;
 
                     source.audioSource.clip = s.clip;
-                    source.audioSource.volume = s.volume * SoundEffectsVolume;
+                    source.audioSource.volume = s.volume;
 
                     source.audioSource.loop = loop;
 
@@ -270,14 +284,16 @@ namespace AudioManagement
                         Sound sound = new Sound();
 
                         sound.clip = s.clip;
-                        sound.volume = s.volume * SoundEffectsVolume;
+                        sound.volume = s.volume;
 
                         sound.source = source.audioSource;
 
                         sounds.Add(sound);
 
                         source.audioSource.clip = s.clip;
-                        source.audioSource.volume = s.volume * SoundEffectsVolume;
+                        source.audioSource.volume = s.volume;
+
+                        source.audioSource.outputAudioMixerGroup = sfxMixer;
 
                         source.audioSource.Play();
 
@@ -316,14 +332,16 @@ namespace AudioManagement
                         Sound sound = new Sound();
 
                         sound.clip = s.clip;
-                        sound.volume = s.volume * SoundEffectsVolume;
+                        sound.volume = s.volume;
 
                         sound.source = source.audioSource;
 
                         sounds.Add(sound);
 
                         source.audioSource.clip = s.clip;
-                        source.audioSource.volume = s.volume * SoundEffectsVolume;
+                        source.audioSource.volume = s.volume;
+
+                        source.audioSource.outputAudioMixerGroup = sfxMixer;
 
                         source.audioSource.Play();
 
@@ -374,7 +392,7 @@ namespace AudioManagement
                         Sound sound = new Sound();
 
                         sound.clip = s.clip;
-                        sound.volume = s.volume * SoundEffectsVolume;
+                        sound.volume = s.volume;
 
                         sound.source = source.audioSource;
 
@@ -382,7 +400,9 @@ namespace AudioManagement
 
 
                         source.audioSource.clip = s.clip;
-                        source.audioSource.volume = s.volume * SoundEffectsVolume;
+                        source.audioSource.volume = s.volume;
+
+                        source.audioSource.outputAudioMixerGroup = sfxMixer;
 
                         source.audioSource.loop = false;
 
@@ -437,7 +457,7 @@ namespace AudioManagement
                             Sound sound = new Sound();
 
                             sound.clip = s.clip;
-                            sound.volume = s.volume * SoundEffectsVolume;
+                            sound.volume = s.volume;
 
                             sound.source = source.audioSource;
 
@@ -445,9 +465,11 @@ namespace AudioManagement
 
 
                             source.audioSource.clip = s.clip;
-                            source.audioSource.volume = s.volume * SoundEffectsVolume;
+                            source.audioSource.volume = s.volume;
 
                             source.audioSource.loop = false;
+
+                            source.audioSource.outputAudioMixerGroup = sfxMixer;
 
 
                             source.audioSource.Play();

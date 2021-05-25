@@ -136,17 +136,15 @@ namespace PauseManagement
         {
             if (music == true)
             {
-                AudioManager.Instance.MusicsVolume = musicSlider.value;
                 SaveManager.Instance.state.musicVolume = musicSlider.value;
                 SaveManager.Instance.Save();
-                AudioManager.Instance.UpdateSliders();
+                AudioManager.Instance.soundsMixer.SetFloat("musicsVolume", (Mathf.Log10(musicSlider.value * 10) * 100) - 80);
             }
             else
             {
-                AudioManager.Instance.SoundEffectsVolume = soundSlider.value;
                 SaveManager.Instance.state.soundVolume = soundSlider.value;
                 SaveManager.Instance.Save();
-                AudioManager.Instance.UpdateSliders();
+                AudioManager.Instance.soundsMixer.SetFloat("sfxVolume", (Mathf.Log10(soundSlider.value * 10) * 100) - 80);
             }
         }
 
