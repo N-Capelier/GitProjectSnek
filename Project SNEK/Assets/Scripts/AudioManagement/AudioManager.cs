@@ -230,12 +230,11 @@ namespace AudioManagement
                         musics.Add(sound);
 
                         source.audioSource.outputAudioMixerGroup = musicMixer;
+                        s = m;
                     }
 
-                    s = m;
-
-                    source.audioSource.clip = s.clip;
                     source.audioSource.volume = s.volume;
+                    source.audioSource.clip = s.clip;
 
                     source.audioSource.loop = loop;
 
