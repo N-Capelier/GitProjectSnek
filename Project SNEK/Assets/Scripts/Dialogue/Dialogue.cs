@@ -34,7 +34,7 @@ namespace DialogueManagement
         public string anim;
         [TextArea(3, 10)]
         public string sentence;
-        public Sound voiceLine;
+        public string voiceLine;
         public bool activateButtons;
     }
     public enum Character

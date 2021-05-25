@@ -48,8 +48,11 @@ namespace PauseManagement
         {
             Time.timeScale = 1f;
             pauseMenu.LeanScale(Vector3.zero, 0.2f).setIgnoreTimeScale(true).setOnComplete(SetPauseMenuFalse);
-            openPauseMenu.SetActive(true);
-            openPauseMenu.GetComponent<CanvasGroup>().LeanAlpha(1, 0.2f).setIgnoreTimeScale(true);
+            if(GameManager.Instance.gameState.ActiveState != GameManagement.GameState.MainMenu)
+            {
+                openPauseMenu.SetActive(true);
+                openPauseMenu.GetComponent<CanvasGroup>().LeanAlpha(1, 0.2f).setIgnoreTimeScale(true);
+            }
         }
 
         public void FadeBackground(bool state)
