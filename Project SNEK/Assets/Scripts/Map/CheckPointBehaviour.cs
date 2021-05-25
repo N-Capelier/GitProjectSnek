@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using Player;
+using Cinematic;
+using UnityEngine.Timeline;
 
 namespace Map
 {
@@ -14,10 +16,30 @@ namespace Map
         public List<ParticleSystem> lanterGlowParticules = new List<ParticleSystem>();
         public ParticleSystem conffeti;
 
+        [SerializeField] bool useOtherPos = false;
+        public Transform otherPos = null;
+        [SerializeField] TimelineAsset cutscene;    
+
         private void OnTriggerEnter(Collider other)
         {
             if (!hasChecked && other.CompareTag("Player"))
             {
+                hasChecked = true;
+
+                if(useOtherPos)
+                {
+                    PlayerManager.Instance.currentController.checkPoint = otherPos.transform;
+                    PlayerManager.Instance.currentController.respawnNode = otherPos.transform.position;
+
+                    //start cinematic
+                    CutsceneManager.Instance.PlayCutscene(cutscene);
+                }
+                else
+                {
+                    PlayerManager.Instance.currentController.checkPoint = transform;
+                    PlayerManager.Instance.currentController.respawnNode = transform.position;
+                }
+
                 conffeti.Play();
                 foreach (ParticleSystem particule in lanterFlameParticules)
                 {
@@ -27,9 +49,6 @@ namespace Map
                 {
                     particule.Play();
                 }
-                PlayerManager.Instance.currentController.checkPoint = transform;
-                PlayerManager.Instance.currentController.respawnNode = transform.position;
-                hasChecked = true;
             }
         }
     }
