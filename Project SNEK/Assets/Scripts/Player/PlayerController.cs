@@ -64,11 +64,11 @@ namespace Player.Controller
             rb = GetComponent<Rigidbody>();
         }
 
-        public void Init(int _bonusHP, int _bonusRange, int _bonusPower)
+        public void Init(int _bonusHP, float _bonusRange, int _bonusPower)
         {
             currentHP = baseHP + _bonusHP;
-            //playerRunAttack.rangeBonus += _bonusRange;
-            //playerRunAttack.rangeBonusOffSet += _bonusRange * 0.5f;
+            playerRunAttack.rangeBonus += _bonusRange;
+            playerRunAttack.rangeBonusOffSet += _bonusRange * 0.5f;
             //playerRunAttack.attackDamages += _bonusPower;
         }
 

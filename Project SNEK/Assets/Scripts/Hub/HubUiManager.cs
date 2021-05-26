@@ -260,24 +260,32 @@ namespace Hub.UI
                     SaveManager.Instance.state.heartCoinAmount--;
                     SaveManager.Instance.state.spentHeartCoinAmount++;
                     SaveManager.Instance.state.powerLevel++;
+                    SaveManager.Instance.state.bonusHealth = 2;
+                    SaveManager.Instance.state.bonusRange = 1.2f;
                     SaveManager.Instance.Save();
                     break;
                 case 1:
                     SaveManager.Instance.state.heartCoinAmount -= 2;
                     SaveManager.Instance.state.spentHeartCoinAmount += 2;
                     SaveManager.Instance.state.powerLevel++;
+                    SaveManager.Instance.state.bonusHealth = 3;
+                    SaveManager.Instance.state.bonusRange = 1.35f;
                     SaveManager.Instance.Save();
                     break;
                 case 2:
                     SaveManager.Instance.state.heartCoinAmount -= 3;
                     SaveManager.Instance.state.spentHeartCoinAmount += 3;
                     SaveManager.Instance.state.powerLevel++;
+                    SaveManager.Instance.state.bonusHealth = 4;
+                    SaveManager.Instance.state.bonusRange = 1.45f;
                     SaveManager.Instance.Save();
                     break;
                 case 3:
                     SaveManager.Instance.state.heartCoinAmount -= 4;
                     SaveManager.Instance.state.spentHeartCoinAmount += 4;
                     SaveManager.Instance.state.powerLevel++;
+                    SaveManager.Instance.state.bonusHealth = 5;
+                    SaveManager.Instance.state.bonusRange = 1.55f;
                     SaveManager.Instance.Save();
                     break;
             }

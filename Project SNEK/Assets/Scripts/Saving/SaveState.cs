@@ -14,7 +14,7 @@
         public int powerLevel = 0;
 
         public int bonusHealth = 0;
-        public int bonusRange = 0;
+        public float bonusRange = 1;
         public int bonusPower = 0;
 
         /// <summary>
