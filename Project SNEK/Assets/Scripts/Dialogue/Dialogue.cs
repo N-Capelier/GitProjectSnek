@@ -12,6 +12,7 @@ namespace DialogueManagement
         public bool getCoin;
         public short coinAmount;
         public bool isCutScene;
+        public bool activateButtons;
         [Space]
         [Tooltip("Leave to 0 if no change")]
         public float bergamotNewState;

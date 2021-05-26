@@ -302,7 +302,7 @@ namespace DialogueManagement
             animator = null;
             isRunningDialogue = false;
             isTapped = false;
-            CloseDialogueBox();
+            CloseDialogueBox(currentDialogue);
 
         }
 
@@ -312,12 +312,13 @@ namespace DialogueManagement
             DialogueBox.transform.LeanMoveLocalY(dialogYPos, 0.5f);
         }
 
-        public void CloseDialogueBox()
+        public void CloseDialogueBox(Dialogue currentDialogue)
         {
             float dialogYPos = -Screen.height * dialogBoxOffset;
             DialogueBox.transform.LeanMoveLocalY(dialogYPos, 0.5f);
             if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
             {
+                if(currentDialogue.activateButtons == false)
                 InteractionManager.Instance.EndInteraction();
             }
             if (PauseManager.Instance is null)
