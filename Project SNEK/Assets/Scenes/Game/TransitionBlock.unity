@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2052,6 +2052,44 @@ PrefabInstance:
       propertyPath: m_Events.m_Events.Array.data[6].m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1837854003}
+    - target: {fileID: 7235010767457603476, guid: 22f398b678a4cb54587020cbbb7237b2,
+        type: 3}
+      propertyPath: m_InitialState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7235010767457603476, guid: 22f398b678a4cb54587020cbbb7237b2,
+        type: 3}
+      propertyPath: m_PlayableAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: be02c054a93aa244399da0a115cbf618,
+        type: 2}
+    - target: {fileID: 7235010767457603476, guid: 22f398b678a4cb54587020cbbb7237b2,
+        type: 3}
+      propertyPath: m_SceneBindings.Array.size
+      value: 71
+      objectReference: {fileID: 0}
+    - target: {fileID: 7235010767457603476, guid: 22f398b678a4cb54587020cbbb7237b2,
+        type: 3}
+      propertyPath: m_SceneBindings.Array.data[69].key
+      value: 
+      objectReference: {fileID: 5364448557302298692, guid: be02c054a93aa244399da0a115cbf618,
+        type: 2}
+    - target: {fileID: 7235010767457603476, guid: 22f398b678a4cb54587020cbbb7237b2,
+        type: 3}
+      propertyPath: m_SceneBindings.Array.data[70].key
+      value: 
+      objectReference: {fileID: -5195805728286734132, guid: be02c054a93aa244399da0a115cbf618,
+        type: 2}
+    - target: {fileID: 7235010767457603476, guid: 22f398b678a4cb54587020cbbb7237b2,
+        type: 3}
+      propertyPath: m_SceneBindings.Array.data[69].value
+      value: 
+      objectReference: {fileID: 1025173334}
+    - target: {fileID: 7235010767457603476, guid: 22f398b678a4cb54587020cbbb7237b2,
+        type: 3}
+      propertyPath: m_SceneBindings.Array.data[70].value
+      value: 
+      objectReference: {fileID: 704359947}
     - target: {fileID: 8285652505697417026, guid: 22f398b678a4cb54587020cbbb7237b2,
         type: 3}
       propertyPath: m_Name
@@ -2690,6 +2728,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &704359947 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 891082344100910670, guid: 22f398b678a4cb54587020cbbb7237b2,
+    type: 3}
+  m_PrefabInstance: {fileID: 583513372}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &712506595
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46261,6 +46305,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Save Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 2035445905679158205, guid: cf67f6bbac5870e46813201003f1e4c5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4948270155249557898, guid: cf67f6bbac5870e46813201003f1e4c5,
         type: 3}
       propertyPath: m_RootOrder
@@ -46917,6 +46966,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7225952527071754773, guid: 344929a75410193458dfb4c21cbeab09,
     type: 3}
   m_PrefabInstance: {fileID: 987032666}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1025173334 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2935147485574765177, guid: 22f398b678a4cb54587020cbbb7237b2,
+    type: 3}
+  m_PrefabInstance: {fileID: 583513372}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1053785650
 PrefabInstance:
@@ -47867,6 +47922,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Save State Updater
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942532359736124257, guid: 8037fc7804e45ba47b461a39fc667fd7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8800858349169368210, guid: 8037fc7804e45ba47b461a39fc667fd7,
         type: 3}

@@ -182,6 +182,7 @@ namespace Player.Controller
                 PlayerManager.Instance.currentController.animator.SetLayerWeight(1, _weight);
                 yield return new WaitForEndOfFrame();
             }
+            AudioManager.Instance.PlaySoundEffect("ChargeAttackDone");
             techniqueFx.GetComponent<ParticleSystem>().Play();
             yield break;            
         }
