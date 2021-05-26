@@ -49,7 +49,7 @@ namespace Enemy
 
         void Update()
         {
-            if (MapGrid.Instance is null)
+            if (MapGrid.Instance == null)
                 return;
             if ((currentDirection == MouchouDirection.Up && transform.position.z >= MapGrid.Instance.GetWorldPos(0, (int)nextNode.z).z) ||
                 (currentDirection == MouchouDirection.Right && transform.position.x >= MapGrid.Instance.GetWorldPos((int)nextNode.x, 0).x) ||

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Saving;
+using AudioManagement;
 
 
 public class PickUpObject : MonoBehaviour
@@ -31,6 +32,7 @@ public class PickUpObject : MonoBehaviour
     IEnumerator Depop()
     {
         render.SetActive(false);
+        AudioManager.Instance.PlaySoundEffect("ObjectSecretItemCollect");
         //Instantiate Fx
         yield return new WaitForSeconds(0.5f);        
         Destroy(gameObject);

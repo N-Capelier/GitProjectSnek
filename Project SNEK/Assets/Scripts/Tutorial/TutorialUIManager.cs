@@ -27,7 +27,7 @@ namespace Tutorial
         public void ActivateTutorialUI(int index)
         {
             tutorialUis[index].SetActive(true);
-            tutorialUis[index].LeanScale(Vector3.one, 0.2f).setIgnoreTimeScale(true);
+            tutorialUis[index].LeanScale(Vector3.one * 1.2f, 0.2f).setIgnoreTimeScale(true);
             if(PauseManager.Instance != null)
             {
                 PauseManager.Instance.HideOpenMenuButton();

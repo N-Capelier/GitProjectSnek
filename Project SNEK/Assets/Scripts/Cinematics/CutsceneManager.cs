@@ -23,6 +23,7 @@ namespace Cinematic
             CreateSingleton();
         }
 
+
         int spiritCount = 0;
 
         public void PlayCutscene(TimelineAsset _cutscene)
@@ -120,6 +121,14 @@ namespace Cinematic
         {
             SaveManager.Instance.state.bergamotState = newState;
             NPCManager.Instance.RefreshNPCs();
+        }
+
+
+        public void BackToHubFromBoss()
+        {
+            //Add to save state
+            EndCustscene();
+            GameManager.Instance.gameState.Set(GameState.Hub, "Hub");            
         }
     }
 

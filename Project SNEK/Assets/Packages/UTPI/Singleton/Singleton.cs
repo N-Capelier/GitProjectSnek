@@ -20,7 +20,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component
                 instance = FindObjectOfType<T>();
                 if (instance == null)
                 {
-                    Debug.LogError($"Instance of type {typeof(T)} not found.");
+                    Debug.LogWarning($"Instance of type {typeof(T)} not found.");
                     return null;
                 }
             }

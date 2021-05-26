@@ -5,10 +5,11 @@ using Enemy;
 using Player;
 using UnityEngine.Timeline;
 using UnityEngine.Playables;
+using Cinematic;
 
 namespace Boss
 {
-    public class TestAnorexia : MonoBehaviour
+    public class TestAnorexia : Singleton<TestAnorexia>
     {
         public GameObject mouchou;
 
@@ -35,7 +36,7 @@ namespace Boss
         float moveSpeed = 2.5f;
         bool bombOver = false;
         [SerializeField] bool canBeHit = false;
-        bool canDoPattern = true;
+        [SerializeField] bool canDoPattern = true;
         bool isTaunt = false;
 
         [Space]
@@ -59,13 +60,19 @@ namespace Boss
 
         [SerializeField] Vector3 targetVec;
 
+        public TimelineAsset introCinematic;
+
+        private void Awake()
+        {
+            CreateSingleton();
+        }
 
         private void Start()
         {
             rb = GetComponent<Rigidbody>();
             animator = GetComponent<Animator>();
             incomingBombs = new List<GameObject>();
-            currentHp = maxHp;            
+            currentHp = maxHp;
         }
 
         private void Update()
@@ -87,7 +94,7 @@ namespace Boss
                 StartCoroutine(Stun());
             }
 
-            if (canDoPattern && canBeHit == false)
+            if (canDoPattern && !canBeHit)
             {
                 switch (patternCount)
                 {
@@ -323,6 +330,14 @@ namespace Boss
                     Destroy(incomingBombs[i]);
                 }
             }           
+        }
+
+        public void StartPatterns()
+        {
+            StopAllCoroutines();
+            targetFeedback.SetActive(false);
+            patternCount = 0;
+            canDoPattern = true;
         }
 
         public void TakeDamage(float damage)

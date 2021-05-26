@@ -58,7 +58,8 @@ namespace Player.Spells
 
         IEnumerator Absorb(bool hitWall)
         {
-            //Source sourceTemp;
+            Source sourceTemp;
+
             rb.velocity = Vector3.zero;
             transform.position = new Vector3(
             Mathf.RoundToInt(transform.position.x),
@@ -71,10 +72,10 @@ namespace Player.Spells
             yield return new WaitForSeconds(0.3f);
             absorbFx.Play();
             animator.Play("Anim_Kettle_Absorb");
-            //sourceTemp = AudioManager.Instance.PlayThisSoundEffect("MarmiteAspire", true);
+            sourceTemp = AudioManager.Instance.PlayThisSoundEffect("MarmiteAspire", true);
             capCollider.enabled = true;
             yield return new WaitForSeconds(timeBeforeIgnition);
-            //sourceTemp.audioSource.Stop();
+            sourceTemp.audioSource.Stop();
             if(ignited == false)
             StartCoroutine(Ignite());
         }
@@ -85,8 +86,8 @@ namespace Player.Spells
             capCollider.enabled = false;
             Destroy(absorbFx.gameObject);
             animator.Play("Anim_Object_KettleExplosion");
-            yield return new WaitForSeconds(0.75f);
             AudioManager.Instance.PlaySoundEffect("MarmiteEnd");
+            yield return new WaitForSeconds(0.75f);
             explosionFx.Play();
             transform.GetChild(1).gameObject.SetActive(false);
             transform.GetChild(2).gameObject.SetActive(false);
