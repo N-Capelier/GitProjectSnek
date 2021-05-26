@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AudioManagement;
 
 namespace Plates
 {
@@ -51,7 +52,7 @@ namespace Plates
 
 		private IEnumerator DoOpenWay()
 		{
-
+			AudioManager.Instance.PlaySoundEffect("PuzzleClear");
 			foreach (GameObject blockadeElement in blockadeElements)
 			{
 				blockadeElement.GetComponent<Animator>().Play("animPlateBloc");

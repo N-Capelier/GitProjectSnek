@@ -13,6 +13,7 @@ namespace Wall
         [SerializeField] public bool isDestroyable;
         [SerializeField] GameObject objectRenderer;
         [SerializeField] ParticleSystem fx;
+        [SerializeField] string soundName;
 
         public int deathIndex;
         private void OnTriggerEnter(Collider other)
@@ -34,7 +35,7 @@ namespace Wall
             if(fx != null)
             {
                 fx.Play();
-                AudioManager.Instance.PlaySoundEffect("LevelDestroyDefault");
+                AudioManager.Instance.PlaySoundEffect(soundName);
                 yield return new WaitForSeconds(fx.main.duration);
             }
             Destroy(gameObject);

@@ -85,7 +85,6 @@ namespace Player.Attack
 
             //Faire un switch à l'instantiation
             PlayerManager.Instance.currentController.objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_attack");
-            yield return new WaitForSeconds(0.04f);
             slashFx = Instantiate(attackFx, gameObject.transform.GetChild(0).gameObject.transform.position, Quaternion.identity);
             slashFx.gameObject.transform.localScale = new Vector3(rangeBonus + 0.2f, 1, rangeBonus + 0.2f);
             AudioManager.Instance.PlaySoundEffect("PlayerAttack01");
