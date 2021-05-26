@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using GameManagement;
 using Player.Controller;
 using AudioManagement;
+
 
 namespace Player.Attack
 {
@@ -31,6 +33,8 @@ namespace Player.Attack
         GameObject beam;
         bool beamIsUp = true;
 
+        public GameObject swordObject;
+
         private void Start()
         {
             PlayerManager.Instance.currentController.playerRunAttack = this;
@@ -40,6 +44,13 @@ namespace Player.Attack
             cooldownTimer.ClockEnded += OnCooldownEnded;
             PlayerController.PlayerDead += OnDeath;
             PlayerRunController.PlayerChangedDirection += OnChangeDirection;
+
+            if(SceneManager.GetActiveScene().name == "TutorialMap")
+            {
+                canAttack = false;
+                swordObject.SetActive(false);
+                cooldownTimer.ClockEnded -= OnCooldownEnded;
+            }
         }
 
         private void Update()

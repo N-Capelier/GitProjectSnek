@@ -178,12 +178,28 @@ namespace Hub.UI
             }
         }
 
+        
         public void OpenFountainBox()
         {
             AudioManager.Instance.PlaySoundEffect("UIClick");
             PlayerManager.Instance.currentController.animator.Play("Anim_PlayerHub_TakeOutCoin");
             PlayerManager.Instance.currentController.coinAnimator.Play("Anim_ObjectCoin_TakeOut");
-            FontainConfirmBox.SetActive(true); 
+            FontainConfirmBox.SetActive(true);
+            switch (SaveManager.Instance.state.powerLevel)
+            {
+                case 0:
+                    FontainConfirmBox.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Do you want to pay " + 1 + " heart coins to improve yourself ?";
+                    break;
+                case 1:
+                    FontainConfirmBox.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Do you want to pay " + 2 + " heart coins to improve yourself ?";
+                    break;
+                case 2:
+                    FontainConfirmBox.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Do you want to pay " + 3 + " heart coins to improve yourself ?";
+                    break;
+                case 3:
+                    FontainConfirmBox.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Do you want to pay " + 4 + " heart coins to improve yourself ?";
+                    break;
+            }
             FontainConfirmBox.transform.LeanScale(Vector3.one, 0.2f);
         }
 
@@ -201,16 +217,80 @@ namespace Hub.UI
 
         public void PlayFountainAnim()
         {
-            StartCoroutine(FountainAnim());
+            switch (SaveManager.Instance.state.powerLevel)
+            {
+                case 0:
+                    if (SaveManager.Instance.state.heartCoinAmount >= 1)
+                    {
+                        StartCoroutine(FountainAnim(1));
+                    }
+                    break;
+                case 1:
+                    if(SaveManager.Instance.state.heartCoinAmount >= 2)
+                    {
+                        StartCoroutine(FountainAnim(2));
+                    }
+                    break;
+                case 3:
+                    if (SaveManager.Instance.state.heartCoinAmount >= 3)
+                    {
+                        StartCoroutine(FountainAnim(3));
+                    }
+                    break;
+                case 4:
+                    if (SaveManager.Instance.state.heartCoinAmount >= 4)
+                    {
+                        StartCoroutine(FountainAnim(2));
+                    }
+                    break;
+            }
+
+                   
         }
 
-        public IEnumerator FountainAnim()
+        public IEnumerator FountainAnim(int level)
         {
             PlayerManager.Instance.currentController.animator.Play("Anim_PlayerHub_ThrowCoin");
             PlayerManager.Instance.currentController.coinAnimator.Play("Anim_ObjectCoin_Throw");
             FontainConfirmBox.transform.LeanScale(Vector3.zero, 0.2f).setOnComplete(SetFontainConfirmBoxFalse);
             yield return new WaitForSeconds(4.6f);
+            switch (level)
+            {
+                case 0:
+                    SaveManager.Instance.state.heartCoinAmount--;
+                    SaveManager.Instance.state.spentHeartCoinAmount++;
+                    SaveManager.Instance.state.powerLevel++;
+                    SaveManager.Instance.state.bonusHealth = 2;
+                    SaveManager.Instance.state.bonusRange = 1.2f;
+                    SaveManager.Instance.Save();
+                    break;
+                case 1:
+                    SaveManager.Instance.state.heartCoinAmount -= 2;
+                    SaveManager.Instance.state.spentHeartCoinAmount += 2;
+                    SaveManager.Instance.state.powerLevel++;
+                    SaveManager.Instance.state.bonusHealth = 3;
+                    SaveManager.Instance.state.bonusRange = 1.35f;
+                    SaveManager.Instance.Save();
+                    break;
+                case 2:
+                    SaveManager.Instance.state.heartCoinAmount -= 3;
+                    SaveManager.Instance.state.spentHeartCoinAmount += 3;
+                    SaveManager.Instance.state.powerLevel++;
+                    SaveManager.Instance.state.bonusHealth = 4;
+                    SaveManager.Instance.state.bonusRange = 1.45f;
+                    SaveManager.Instance.Save();
+                    break;
+                case 3:
+                    SaveManager.Instance.state.heartCoinAmount -= 4;
+                    SaveManager.Instance.state.spentHeartCoinAmount += 4;
+                    SaveManager.Instance.state.powerLevel++;
+                    SaveManager.Instance.state.bonusHealth = 5;
+                    SaveManager.Instance.state.bonusRange = 1.55f;
+                    SaveManager.Instance.Save();
+                    break;
+            }
             FontainLevelUpBox.SetActive(true);
+            FontainLevelUpBox.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "You are now level " + SaveManager.Instance.state.powerLevel + " . You gain both attack range and vitality";
             FontainLevelUpBox.LeanScale(Vector3.one, 0.2f);
         }
 
