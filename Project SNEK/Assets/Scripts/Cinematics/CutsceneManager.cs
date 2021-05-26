@@ -31,7 +31,7 @@ namespace Cinematic
             if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
             {
                 InteractionManager.Instance.camTarget.actions++;
-                InteractionManager.Instance.playerController.actions++;
+                InteractionManager.Instance.playerController.actions++;  //////////////////
             }
             else if(GameManager.Instance.gameState.ActiveState == GameState.Run)
             {

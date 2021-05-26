@@ -12,7 +12,7 @@ namespace Saving
         [HideInInspector] public bool started = false;
         [SerializeField] DialogueInteraction dialogueInteraction;
         Clock startTimer;
-        float startDelay = .5f;
+        float startDelay = 1f;
 
         public virtual IEnumerator Start()
         {
@@ -43,9 +43,16 @@ namespace Saving
 
         protected void PlayCutscene(TimelineAsset _cutscene)
         {
+            StartCoroutine(DoPlayCutscene(_cutscene));
+        }
+
+        IEnumerator DoPlayCutscene(TimelineAsset _cutscene)
+        {
             if (started)
-                return;
+                yield break;
             SetStarted();
+            yield return new WaitUntil(() => CutsceneManager.Instance != null);
+            yield return new WaitUntil(() => InteractionManager.Instance != null);
             CutsceneManager.Instance.PlayCutscene(_cutscene);
             //NPCManager.Instance.RefreshNPCs();
         }

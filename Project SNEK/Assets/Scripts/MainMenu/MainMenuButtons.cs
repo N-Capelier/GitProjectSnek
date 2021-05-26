@@ -32,6 +32,8 @@ namespace MainMenu
             Debug.Log("Reseting Save");
             SaveManager.Instance.state = new SaveState();
             SaveManager.Instance.Save();
+
+            LaunchGame();
         }
 
         public void Quit()

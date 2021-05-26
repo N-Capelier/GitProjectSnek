@@ -30,7 +30,8 @@ namespace Player.Controller
 
             actions++;
             yield return new WaitForSeconds(0.5f);
-            target = HubCamTargetController.Instance.transform;
+            yield return new WaitUntil(() => HubCamTargetController.Instance != null);
+            target = HubCamTargetController.Instance.transform;  ////////////////////////////////////////////////////////////////////////
             InteractionManager.Instance.playerController = this;
             actions--;
         }
