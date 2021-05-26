@@ -64,11 +64,12 @@ namespace Player.Controller
             rb = GetComponent<Rigidbody>();
         }
 
-        public void Init(int _bonusHP, float _bonusRange, int _bonusPower)
+        public IEnumerator Init(int _bonusHP, float _bonusRange, int _bonusPower)
         {
+            yield return new WaitForEndOfFrame();
             currentHP = baseHP + _bonusHP;
-            playerRunAttack.rangeBonus += _bonusRange;
-            playerRunAttack.rangeBonusOffSet += _bonusRange * 0.5f;
+            playerRunAttack.rangeBonus = _bonusRange;
+            playerRunAttack.rangeBonusOffSet = _bonusRange * 0.5f;
             //playerRunAttack.attackDamages += _bonusPower;
         }
 
