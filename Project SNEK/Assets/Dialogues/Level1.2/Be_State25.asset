@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
+  m_Name: Be_State25
+  m_EditorClassIdentifier: 
+  getCoin: 0
+  coinAmount: 0
+  isCutScene: 0
+  bergamotNewState: 0
+  poppyNewState: 0
+  thistleNewState: 0
+  bergamotMinimumState: 0
+  poppyMinimumState: 0
+  thistleMinimumState: 0
+  sentences:
+  - character: 3
+    anim: 
+    sentence: "Oh no\u2026"
+    voiceLine: BeVoice
+    activateButtons: 0
+  - character: 3
+    anim: 
+    sentence: "Poppy was eating too much again\u2026 Who knows where she could be
+      now? "
+    voiceLine: BeVoice
+    activateButtons: 0
+  - character: 3
+    anim: 
+    sentence: "Anael, please, you need to catch up to her. She could get hurt in
+      the forest\u2026 I hope nothing happens to her. Please, can you do that for
+      her?"
+    voiceLine: BeVoice
+    activateButtons: 0
+  - character: 3
+    anim: 
+    sentence: Thank you so much! Now, go!
+    voiceLine: BeVoice
+    activateButtons: 0
