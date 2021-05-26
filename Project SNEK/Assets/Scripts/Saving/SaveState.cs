@@ -10,6 +10,8 @@
         public bool talkedOnceToThistle = false;
 
         public int heartCoinAmount = 6;
+        public int spentHeartCoinAmount = 0;
+        public int powerLevel = 0;
 
         public int bonusHealth = 0;
         public int bonusRange = 0;
