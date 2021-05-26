@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1448,6 +1448,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 543977705}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &565456379 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2935147485574765177, guid: 22f398b678a4cb54587020cbbb7237b2,
+    type: 3}
+  m_PrefabInstance: {fileID: 583513372}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &583513372
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1655,7 +1661,7 @@ PrefabInstance:
     - target: {fileID: 7235010767457603476, guid: 22f398b678a4cb54587020cbbb7237b2,
         type: 3}
       propertyPath: m_SceneBindings.Array.size
-      value: 29
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 7235010767457603476, guid: 22f398b678a4cb54587020cbbb7237b2,
         type: 3}
@@ -1777,6 +1783,18 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 7235010767457603476, guid: 22f398b678a4cb54587020cbbb7237b2,
         type: 3}
+      propertyPath: m_SceneBindings.Array.data[29].key
+      value: 
+      objectReference: {fileID: 7139379838171775452, guid: 30c58ad0a977b0c41bf496c525b00ca7,
+        type: 2}
+    - target: {fileID: 7235010767457603476, guid: 22f398b678a4cb54587020cbbb7237b2,
+        type: 3}
+      propertyPath: m_SceneBindings.Array.data[30].key
+      value: 
+      objectReference: {fileID: 4536014567507490660, guid: 30c58ad0a977b0c41bf496c525b00ca7,
+        type: 2}
+    - target: {fileID: 7235010767457603476, guid: 22f398b678a4cb54587020cbbb7237b2,
+        type: 3}
       propertyPath: m_SceneBindings.Array.data[8].value
       value: 
       objectReference: {fileID: 583513381}
@@ -1880,6 +1898,16 @@ PrefabInstance:
       propertyPath: m_SceneBindings.Array.data[28].value
       value: 
       objectReference: {fileID: 191471493}
+    - target: {fileID: 7235010767457603476, guid: 22f398b678a4cb54587020cbbb7237b2,
+        type: 3}
+      propertyPath: m_SceneBindings.Array.data[29].value
+      value: 
+      objectReference: {fileID: 1983015617}
+    - target: {fileID: 7235010767457603476, guid: 22f398b678a4cb54587020cbbb7237b2,
+        type: 3}
+      propertyPath: m_SceneBindings.Array.data[30].value
+      value: 
+      objectReference: {fileID: 565456379}
     - target: {fileID: 7280403351039929845, guid: 22f398b678a4cb54587020cbbb7237b2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -41498,6 +41526,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7225952527071754773, guid: 344929a75410193458dfb4c21cbeab09,
     type: 3}
   m_PrefabInstance: {fileID: 1971282765}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1983015617 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8781563489371629826, guid: 22f398b678a4cb54587020cbbb7237b2,
+    type: 3}
+  m_PrefabInstance: {fileID: 583513372}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2088162037
 GameObject:

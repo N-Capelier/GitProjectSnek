@@ -170,9 +170,8 @@ namespace AudioManagement
                         musics.Add(sound);
 
                         source.audioSource.outputAudioMixerGroup = musicMixer;
-                    }
-
-                    s = m;
+                        s = m;
+                    }                    
 
                     source.audioSource.clip = s.clip;
                     source.audioSource.volume = s.volume * SoundEffectsVolume;
@@ -230,12 +229,11 @@ namespace AudioManagement
                         musics.Add(sound);
 
                         source.audioSource.outputAudioMixerGroup = musicMixer;
+                        s = m;
                     }
 
-                    s = m;
-
-                    source.audioSource.clip = s.clip;
                     source.audioSource.volume = s.volume;
+                    source.audioSource.clip = s.clip;
 
                     source.audioSource.loop = loop;
 
@@ -488,6 +486,11 @@ namespace AudioManagement
             audioSource.volume = 0;
 
             audioSource.loop = false;
+        }
+
+        public void PlayMusic(string name)
+        {
+            PlayThisSoundEffect(name, true);
         }
 
 
