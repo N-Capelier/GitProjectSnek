@@ -48,6 +48,74 @@ namespace Saving
         [Header("State12")]
         [SerializeField] Dialogue dialogue12;
         [SerializeField] Transform waypoint12;
+        [Space]
+        [Header("State13")]
+        [SerializeField] Dialogue dialogue13;
+        [SerializeField] Transform waypoint13;
+        [Space]
+        [Header("State14")]
+        [SerializeField] Dialogue dialogue14;
+        [SerializeField] Transform waypoint14;
+        [Space]
+        [Header("State15")]
+        [SerializeField] Dialogue dialogue15;
+        [SerializeField] Transform waypoint15;
+        [Space]
+        [Header("State16")]
+        [SerializeField] Dialogue dialogue16;
+        [SerializeField] Transform waypoint16;
+        [Space]
+        [Header("State17")]
+        [SerializeField] Dialogue dialogue17;
+        [SerializeField] Transform waypoint17;
+        [Space]
+        [Header("State18")]
+        [SerializeField] Dialogue dialogue18;
+        [SerializeField] Transform waypoint18;
+        [Space]
+        [Header("State19")]
+        [SerializeField] Dialogue dialogue19;
+        [SerializeField] Transform waypoint19;
+        [Space]
+        [Header("State20")]
+        [SerializeField] Dialogue dialogue20;
+        [SerializeField] Transform waypoint20;
+        [Space]
+        [Header("State21")]
+        [SerializeField] Dialogue dialogue21;
+        [SerializeField] Transform waypoint21;
+        [Space]
+        [Header("State22")]
+        [SerializeField] Dialogue dialogue22;
+        [SerializeField] Transform waypoint22;
+        [Space]
+        [Header("State23")]
+        [SerializeField] Dialogue dialogue23;
+        [SerializeField] Transform waypoint23;
+        [Space]
+        [Header("State24")]
+        [SerializeField] Dialogue dialogue24;
+        [SerializeField] Transform waypoint24;
+        [Space]
+        [Header("State25")]
+        [SerializeField] Dialogue dialogue25;
+        [SerializeField] Transform waypoint25;
+        [Space]
+        [Header("State26")]
+        [SerializeField] Dialogue dialogue26;
+        [SerializeField] Transform waypoint26;
+        [Space]
+        [Header("State27")]
+        [SerializeField] Dialogue dialogue27;
+        [SerializeField] Transform waypoint27;
+        [Space]
+        [Header("State28")]
+        [SerializeField] Dialogue dialogue28;
+        [SerializeField] Transform waypoint28;
+        [Space]
+        [Header("State29")]
+        [SerializeField] Dialogue dialogue29;
+        [SerializeField] Transform waypoint29;
 
         public override void Refresh()
         {
@@ -112,6 +180,74 @@ namespace Saving
                 case 12f:
                     SetDialogue(dialogue12);
                     SetTransform(waypoint12);
+                    break;
+                case 13f:
+                    SetDialogue(dialogue13);
+                    SetTransform(waypoint13);
+                    break;
+                case 14f:
+                    SetDialogue(dialogue14);
+                    SetTransform(waypoint14);
+                    break;
+                case 15f:
+                    SetDialogue(dialogue15);
+                    SetTransform(waypoint15);
+                    break;
+                case 16f:
+                    SetDialogue(dialogue16);
+                    SetTransform(waypoint16);
+                    break;
+                case 17f:
+                    SetDialogue(dialogue17);
+                    SetTransform(waypoint17);
+                    break;
+                case 18f:
+                    SetDialogue(dialogue18);
+                    SetTransform(waypoint18);
+                    break;
+                case 19f:
+                    SetDialogue(dialogue19);
+                    SetTransform(waypoint19);
+                    break;
+                case 20f:
+                    SetDialogue(dialogue20);
+                    SetTransform(waypoint20);
+                    break;
+                case 21f:
+                    SetDialogue(dialogue21);
+                    SetTransform(waypoint21);
+                    break;
+                case 22f:
+                    SetDialogue(dialogue22);
+                    SetTransform(waypoint22);
+                    break;
+                case 23f:
+                    SetDialogue(dialogue23);
+                    SetTransform(waypoint23);
+                    break;
+                case 24f:
+                    SetDialogue(dialogue24);
+                    SetTransform(waypoint24);
+                    break;
+                case 25f:
+                    SetDialogue(dialogue25);
+                    SetTransform(waypoint25);
+                    break;
+                case 26f:
+                    SetDialogue(dialogue26);
+                    SetTransform(waypoint26);
+                    break;
+                case 27f:
+                    SetDialogue(dialogue27);
+                    SetTransform(waypoint27);
+                    break;
+                case 28f:
+                    SetDialogue(dialogue28);
+                    SetTransform(waypoint28);
+                    break;
+                case 29f:
+                    SetDialogue(dialogue29);
+                    SetTransform(waypoint29);
                     break;
             }
             started = true;

@@ -37,6 +37,98 @@ namespace Saving
         [Space]
         [Header("State9")]
         [SerializeField] Dialogue dialogue9;
+        [Space]
+        [Header("State10")]
+        [SerializeField] Dialogue dialogue10;
+        [SerializeField] Transform waypoint10;
+        [Space]
+        [Header("State11")]
+        [SerializeField] Dialogue dialogue11;
+        [SerializeField] Transform waypoint11;
+        [Space]
+        [Header("State12")]
+        [SerializeField] Dialogue dialogue12;
+        [SerializeField] Transform waypoint12;
+        [Space]
+        [Header("State13")]
+        [SerializeField] Dialogue dialogue13;
+        [SerializeField] Transform waypoint13;
+        [Space]
+        [Header("State14")]
+        [SerializeField] Dialogue dialogue14;
+        [SerializeField] Transform waypoint14;
+        [Space]
+        [Header("State15")]
+        [SerializeField] Dialogue dialogue15;
+        [SerializeField] Transform waypoint15;
+        [Space]
+        [Header("State16")]
+        [SerializeField] Dialogue dialogue16;
+        [SerializeField] Transform waypoint16;
+        [Space]
+        [Header("State17")]
+        [SerializeField] Dialogue dialogue17;
+        [SerializeField] Transform waypoint17;
+        [Space]
+        [Header("State18")]
+        [SerializeField] Dialogue dialogue18;
+        [SerializeField] Transform waypoint18;
+        [Space]
+        [Header("State19")]
+        [SerializeField] Dialogue dialogue19;
+        [SerializeField] Transform waypoint19;
+        [Space]
+        [Header("State20")]
+        [SerializeField] Dialogue dialogue20;
+        [SerializeField] Transform waypoint20;
+        [Space]
+        [Header("State21")]
+        [SerializeField] Dialogue dialogue21;
+        [SerializeField] Transform waypoint21;
+        [Space]
+        [Header("State22")]
+        [SerializeField] Dialogue dialogue22;
+        [SerializeField] Transform waypoint22;
+        [Space]
+        [Header("State23")]
+        [SerializeField] Dialogue dialogue23;
+        [SerializeField] Transform waypoint23;
+        [Space]
+        [Header("State24")]
+        [SerializeField] Dialogue dialogue24;
+        [SerializeField] Transform waypoint24;
+        [Space]
+        [Header("State25")]
+        [SerializeField] Dialogue dialogue25;
+        [SerializeField] Transform waypoint25;
+        [Space]
+        [Header("State26")]
+        [SerializeField] Dialogue dialogue26;
+        [SerializeField] Transform waypoint26;
+        [Space]
+        [Header("State27")]
+        [SerializeField] Dialogue dialogue27;
+        [SerializeField] Transform waypoint27;
+        [Space]
+        [Header("State28")]
+        [SerializeField] Dialogue dialogue28;
+        [SerializeField] Transform waypoint28;
+        [Space]
+        [Header("State29")]
+        [SerializeField] Dialogue dialogue29;
+        [SerializeField] Transform waypoint29;
+        [Space]
+        [Header("State30")]
+        [SerializeField] Dialogue dialogue30;
+        [SerializeField] Transform waypoint30;
+        [Space]
+        [Header("State31")]
+        [SerializeField] Dialogue dialogue31;
+        [SerializeField] Transform waypoint31;
+        [Space]
+        [Header("State32")]
+        [SerializeField] Dialogue dialogue32;
+        [SerializeField] Transform waypoint32;
 
         private void Update()
         {
