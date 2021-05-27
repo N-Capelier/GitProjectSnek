@@ -1,12 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using GameManagement;
+using Saving;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using GameManagement;
-using Hub.Interaction;
-using AudioManagement;
-using Saving;
 
 namespace PauseManagement
 {
@@ -19,7 +14,7 @@ namespace PauseManagement
         [SerializeField] GameObject[] qualityToggles;
         [SerializeField] GameObject background;
         [SerializeField] Slider soundSlider, musicSlider;
-        bool occupied = false;
+        //bool occupied = false;
 
         private void Awake()
         {
@@ -40,7 +35,7 @@ namespace PauseManagement
         {
             pauseMenu.SetActive(true);
             pauseMenu.LeanScale(Vector3.one, 0.2f).setIgnoreTimeScale(true);
-            openPauseMenu.GetComponent<CanvasGroup>().LeanAlpha(0,0.2f).setIgnoreTimeScale(true).setOnComplete(SetOpenPauseFalse);
+            openPauseMenu.GetComponent<CanvasGroup>().LeanAlpha(0, 0.2f).setIgnoreTimeScale(true).setOnComplete(SetOpenPauseFalse);
             Time.timeScale = 0f;
         }
 
@@ -48,7 +43,7 @@ namespace PauseManagement
         {
             Time.timeScale = 1f;
             pauseMenu.LeanScale(Vector3.zero, 0.2f).setIgnoreTimeScale(true).setOnComplete(SetPauseMenuFalse);
-            if(GameManager.Instance.gameState.ActiveState != GameManagement.GameState.MainMenu)
+            if (GameManager.Instance.gameState.ActiveState != GameManagement.GameState.MainMenu)
             {
                 openPauseMenu.SetActive(true);
                 openPauseMenu.GetComponent<CanvasGroup>().LeanAlpha(1, 0.2f).setIgnoreTimeScale(true);
@@ -57,7 +52,7 @@ namespace PauseManagement
 
         public void FadeBackground(bool state)
         {
-            if(state == true)
+            if (state == true)
             {
                 background.SetActive(true);
                 background.GetComponent<CanvasGroup>().LeanAlpha(1, 0.2f).setIgnoreTimeScale(true);
@@ -70,14 +65,14 @@ namespace PauseManagement
 
         public void HideOpenMenuButton()
         {
-            occupied = true;
+            //occupied = true;
             openPauseMenu.GetComponent<CanvasGroup>().LeanAlpha(0, 0.2f).setIgnoreTimeScale(true).setOnComplete(SetOpenPauseFalse);
 
         }
 
         public void ShowOpenMenuButton()
         {
-            occupied = false;
+            //occupied = false;
             openPauseMenu.SetActive(true);
             openPauseMenu.GetComponent<CanvasGroup>().LeanAlpha(1, 0.2f).setIgnoreTimeScale(true);
         }
@@ -108,7 +103,7 @@ namespace PauseManagement
 
             for (int i = 0; i < qualityToggles.Length; i++)
             {
-                if(i != toggleIndex)
+                if (i != toggleIndex)
                 {
                     qualityToggles[i].SetActive(false);
                 }
@@ -124,7 +119,7 @@ namespace PauseManagement
 
         public void QuitOrHub()
         {
-            if(GameManager.Instance.gameState.ActiveState == GameManagement.GameState.Hub)
+            if (GameManager.Instance.gameState.ActiveState == GameManagement.GameState.Hub)
             {
                 Application.Quit();
             }

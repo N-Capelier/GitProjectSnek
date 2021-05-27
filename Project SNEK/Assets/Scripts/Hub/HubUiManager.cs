@@ -338,11 +338,11 @@ namespace Hub.UI
         {
             if(state == true)
             {
-                PauseManagement.PauseManager.Instance.HideOpenMenuButton();
+                PauseManager.Instance.HideOpenMenuButton();
             }
             else
             {
-                PauseManagement.PauseManager.Instance.ShowOpenMenuButton();
+                PauseManager.Instance.ShowOpenMenuButton();
             }
 
         }
