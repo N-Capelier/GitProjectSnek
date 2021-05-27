@@ -9,6 +9,7 @@ using Saving;
 using AudioManagement;
 using PauseManagement;
 using Hub.UI;
+using FaceManager;
 
 namespace DialogueManagement
 {
@@ -128,6 +129,7 @@ namespace DialogueManagement
                 {
                     if(currentDialogue.sentences[sentenceIndex].voiceLine != "")
                     AudioManager.Instance.PlaySoundEffect(currentDialogue.sentences[sentenceIndex].voiceLine);
+                    animator.gameObject.GetComponent<NPCFaceManager>().RandomizeMouth();
                     dialogCount = 0;
                 }
                 else
