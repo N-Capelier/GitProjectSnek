@@ -8,6 +8,7 @@ using Cinematic;
 using Saving;
 using AudioManagement;
 using PauseManagement;
+using Hub.UI;
 
 namespace DialogueManagement
 {
@@ -297,12 +298,12 @@ namespace DialogueManagement
                 //    }
                 //}
             }
-
+            CloseDialogueBox(currentDialogue);
             currentDialogue = null;
             animator = null;
             isRunningDialogue = false;
             isTapped = false;
-            CloseDialogueBox(currentDialogue);
+
 
         }
 
@@ -318,12 +319,18 @@ namespace DialogueManagement
             DialogueBox.transform.LeanMoveLocalY(dialogYPos, 0.5f);
             if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
             {
-                if(currentDialogue.activateButtons == false)
-                InteractionManager.Instance.EndInteraction();
+                if(currentDialogue.sentences[currentDialogue.sentences.Length - 1].activateButtons == false)
+                {
+                    InteractionManager.Instance.EndInteraction();
+                    if (PauseManager.Instance is null)
+                        return;
+                    PauseManager.Instance.ShowOpenMenuButton();
+                }
+                else
+                {
+                    HubUiManager.Instance.OpenPnjLevelAccess(currentDialogue.sentences[currentDialogue.sentences.Length - 1].levelIndex);
+                }
             }
-            if (PauseManager.Instance is null)
-                return;
-            PauseManager.Instance.ShowOpenMenuButton();
         }
 
         public void NextLineFeedback()

@@ -30,7 +30,7 @@ namespace Hub.UI
         [SerializeField] GameObject levelAccessBox;
         [SerializeField] TextMeshProUGUI CoinCountText;
         [Header("PNJ Level Access")]
-        [SerializeField] GameObject level1Box, Level2Box, Level3Box;
+        [SerializeField] GameObject[] levelBoxPNJ;
         [Space]
 
         [Header("Letter Animation and Menu")]
@@ -88,8 +88,11 @@ namespace Hub.UI
             letterBoxAnim.SetActive(false);
             FontainLevelUpBox.transform.localScale = Vector3.zero;
             letterBoxAnim.SetActive(false);
-            level1Box.transform.localScale = Vector3.zero;
-            level1Box.SetActive(false);
+            foreach(GameObject box in levelBoxPNJ)
+            {
+                box.transform.localScale = Vector3.zero;
+                box.SetActive(false);
+            }
 
             if (SaveManager.Instance.state.isDemoFinished)
             {
@@ -117,12 +120,12 @@ namespace Hub.UI
             levelAccessBox.transform.LeanScale(Vector3.one, 0.2f);
         }
 
-        public void OpenPnjLevelAccess(GameObject box)
+        public void OpenPnjLevelAccess(int boxIndex)
         {
             AudioManager.Instance.PlaySoundEffect("UIClick");
             FadeInBackground(.2f);
-            box.gameObject.SetActive(true);
-            box.transform.LeanScale(Vector3.one, 0.2f);
+            levelBoxPNJ[boxIndex].SetActive(true);
+            levelBoxPNJ[boxIndex].transform.LeanScale(Vector3.one, 0.2f);
         }
 
         public void CloseLevelAcces()
