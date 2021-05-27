@@ -301,6 +301,8 @@ namespace DialogueManagement
                 //}
             }
             CloseDialogueBox(currentDialogue);
+            animator.gameObject.GetComponent<NPCFaceManager>().SetEyesExpression(0);
+            animator.gameObject.GetComponent<NPCFaceManager>().SetMouthExpression(0);
             currentDialogue = null;
             animator = null;
             isRunningDialogue = false;
