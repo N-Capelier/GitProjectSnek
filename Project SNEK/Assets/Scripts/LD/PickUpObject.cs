@@ -40,11 +40,11 @@ public class PickUpObject : MonoBehaviour
 
     void CheckIfPicked()
     {
-        if (iD == SaveManager.Instance.state.secretObject_1.ToString())
+        if (iD == nameof(SaveManager.Instance.state.secretObject_1))
         {
             switch (SaveManager.Instance.state.secretObject_1)
             {
-                case 0:
+                case 0:                    
                     break;
                 case 1:
                     Destroy(gameObject);
@@ -54,7 +54,7 @@ public class PickUpObject : MonoBehaviour
                     break;
             }
         }
-        else if (iD == SaveManager.Instance.state.secretObject_2.ToString())
+        else if (iD == nameof(SaveManager.Instance.state.secretObject_2))
         {
             switch (SaveManager.Instance.state.secretObject_2)
             {
@@ -68,7 +68,7 @@ public class PickUpObject : MonoBehaviour
                     break;
             }
         }
-        else if (iD == SaveManager.Instance.state.secretObject_3.ToString())
+        else if (iD == nameof(SaveManager.Instance.state.secretObject_3))
         {
             switch (SaveManager.Instance.state.secretObject_3)
             {
@@ -84,27 +84,28 @@ public class PickUpObject : MonoBehaviour
         }
         else
         {
-            Debug.Log("secret object iD name is wrong");
+            Debug.Log(iD);
+            Debug.Log(nameof(SaveManager.Instance.state.secretObject_1));
         }
     }
 
     void AddToSave()
     {
-        if (iD == SaveManager.Instance.state.secretObject_1.ToString())
+        if (iD == nameof(SaveManager.Instance.state.secretObject_1))
         {
             SaveManager.Instance.state.secretObject_1 = 1;
         }
-        else if (iD == SaveManager.Instance.state.secretObject_2.ToString())
+        else if (iD == nameof(SaveManager.Instance.state.secretObject_2))
         {
             SaveManager.Instance.state.secretObject_2 = 1;
         }
-        else if (iD == SaveManager.Instance.state.secretObject_3.ToString())
+        else if (iD == nameof(SaveManager.Instance.state.secretObject_3))
         {
             SaveManager.Instance.state.secretObject_3 = 1;
         }
         else
         {
-            Debug.Log("secret object iD name is wrong");
+            Debug.Log("secret object iD name is wrong to save");
         }
     }
 }
