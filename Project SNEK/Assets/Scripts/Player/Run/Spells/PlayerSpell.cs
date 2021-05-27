@@ -52,7 +52,7 @@ namespace Player.Spells
 
         void HandleInput(InputType inputType)
         {
-            if (PlayerManager.Instance.currentController.isInCutscene)
+            if (PlayerManager.Instance.currentController.isInCutscene || SceneManager.GetActiveScene().name == "TutorialMap")
             {
                 return;
             }

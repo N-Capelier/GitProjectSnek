@@ -28,7 +28,9 @@ namespace Hub.UI
 
         [Header("Level Access Menu")]
         [SerializeField] GameObject levelAccessBox;
-
+        [SerializeField] TextMeshProUGUI CoinCountText;
+        [Header("PNJ Level Access")]
+        [SerializeField] GameObject[] levelBoxPNJ;
         [Space]
 
         [Header("Letter Animation and Menu")]
@@ -44,6 +46,8 @@ namespace Hub.UI
         [Header("Fontain Animation and boxes")]
         [SerializeField] GameObject FontainConfirmBox;
         [SerializeField] GameObject FontainLevelUpBox;
+
+
 
         [Header("demoScreen Box")]
         [SerializeField] GameObject demoScreen;
@@ -84,6 +88,11 @@ namespace Hub.UI
             letterBoxAnim.SetActive(false);
             FontainLevelUpBox.transform.localScale = Vector3.zero;
             letterBoxAnim.SetActive(false);
+            foreach(GameObject box in levelBoxPNJ)
+            {
+                box.transform.localScale = Vector3.zero;
+                box.SetActive(false);
+            }
 
             if (SaveManager.Instance.state.isDemoFinished)
             {
@@ -111,11 +120,30 @@ namespace Hub.UI
             levelAccessBox.transform.LeanScale(Vector3.one, 0.2f);
         }
 
+        public void OpenPnjLevelAccess(int boxIndex)
+        {
+            AudioManager.Instance.PlaySoundEffect("UIClick");
+            FadeInBackground(.2f);
+            levelBoxPNJ[boxIndex].SetActive(true);
+            levelBoxPNJ[boxIndex].transform.LeanScale(Vector3.one, 0.2f);
+        }
+
         public void CloseLevelAcces()
         {
             AudioManager.Instance.PlaySoundEffect("UINone");
             FadeOutBackground(.2f);
             levelAccessBox.transform.LeanScale(Vector3.zero, 0.2f).setOnComplete(SetLevelAccessFalse); 
+            if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
+            {
+                InteractionManager.Instance.EndInteraction();
+            }
+        }
+
+        public void ClosePNJLevelAcces(GameObject box)
+        {
+            AudioManager.Instance.PlaySoundEffect("UINone");
+            FadeOutBackground(.2f);
+            box.transform.LeanScale(Vector3.zero, 0.2f).setOnComplete(SetLevelAccessFalse);
             if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
             {
                 InteractionManager.Instance.EndInteraction();
@@ -185,6 +213,7 @@ namespace Hub.UI
             PlayerManager.Instance.currentController.animator.Play("Anim_PlayerHub_TakeOutCoin");
             PlayerManager.Instance.currentController.coinAnimator.Play("Anim_ObjectCoin_TakeOut");
             FontainConfirmBox.SetActive(true);
+            CoinCountText.text = "x" + SaveManager.Instance.state.heartCoinAmount.ToString();
             switch (SaveManager.Instance.state.powerLevel)
             {
                 case 0:
@@ -289,6 +318,7 @@ namespace Hub.UI
                     SaveManager.Instance.Save();
                     break;
             }
+            CoinCountText.text = "x" + SaveManager.Instance.state.heartCoinAmount.ToString();
             FontainLevelUpBox.SetActive(true);
             FontainLevelUpBox.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "You are now level " + SaveManager.Instance.state.powerLevel + " . You gain both attack range and vitality";
             FontainLevelUpBox.LeanScale(Vector3.one, 0.2f);

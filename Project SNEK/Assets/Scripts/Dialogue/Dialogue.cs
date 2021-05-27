@@ -36,6 +36,7 @@ namespace DialogueManagement
         public string sentence;
         public string voiceLine;
         public bool activateButtons;
+        public int levelIndex;
     }
     public enum Character
     {
