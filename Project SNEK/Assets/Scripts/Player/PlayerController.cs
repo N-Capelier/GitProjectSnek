@@ -75,6 +75,8 @@ namespace Player.Controller
 
         public void Death(int deathIndex)
         {
+            if (isDead)
+                return;
             if (SceneManager.GetActiveScene().name != "TutorialMap" && !isInCutscene)
             {
                 currentHP--;
