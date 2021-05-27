@@ -53,14 +53,6 @@ namespace Player.Attack
             }
         }
 
-        private void Update()
-        {
-            if(PlayerManager.Instance.currentController.isDead == true)
-            {
-                canAttack = false;
-            }
-        }
-
         private void OnDestroy()
         {
             cooldownTimer.ClockEnded -= OnCooldownEnded;
@@ -77,7 +69,9 @@ namespace Player.Attack
             {
                 Debug.Log("Input in cinemtic");
                 return;
-            }               
+            }
+            if (PlayerManager.Instance.currentController.isDead)
+                return;
             if (inputType == InputType.Tap && canAttack)
                 attackCoroutine = StartCoroutine(Attack());
         }
