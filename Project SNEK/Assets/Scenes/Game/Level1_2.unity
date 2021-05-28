@@ -5974,6 +5974,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 863183987726335795, guid: ceb8076e4c6857f4ebdab7cc8cf81d79,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 6414891933858861750, guid: ceb8076e4c6857f4ebdab7cc8cf81d79,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -5983,6 +5988,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SecretObject_1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7936679209257779237, guid: ceb8076e4c6857f4ebdab7cc8cf81d79,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7936679209257779238, guid: ceb8076e4c6857f4ebdab7cc8cf81d79,
         type: 3}
@@ -6039,6 +6049,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7936679209331290018, guid: ceb8076e4c6857f4ebdab7cc8cf81d79,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 7936679209331290029, guid: ceb8076e4c6857f4ebdab7cc8cf81d79,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -6050,6 +6065,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4715298111332816193, guid: 7ccd458730521a54b88080c389b01064,
         type: 3}
+    - target: {fileID: 7936679209671095265, guid: ceb8076e4c6857f4ebdab7cc8cf81d79,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7936679209923398657, guid: ceb8076e4c6857f4ebdab7cc8cf81d79,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 7936679209923398659, guid: ceb8076e4c6857f4ebdab7cc8cf81d79,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -6077,6 +6102,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iD: secretObject_2
   render: {fileID: 295442429}
+--- !u!65 &295442431
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295442429}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8, y: 0.8, z: 0.8}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &296042597
 PrefabInstance:
   m_ObjectHideFlags: 0

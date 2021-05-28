@@ -69,9 +69,14 @@ namespace Player.Controller
             {
                 rb.velocity = (nextNode - currentNode) * moveSpeed * attackMoveSpeedModifier * spellMoveSpeedModifier * inputSpeed;
             }
-            else
+            else if(isDead)
             {
                 rb.velocity = Vector3.zero;
+            }
+            else
+            {
+                //Physics pro tips
+                rb.velocity = new Vector3(.01f, .01f, .01f);
             }
         }
 

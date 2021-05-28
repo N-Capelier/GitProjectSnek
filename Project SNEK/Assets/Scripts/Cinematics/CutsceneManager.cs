@@ -82,6 +82,7 @@ namespace Cinematic
                     PlayerManager.Instance.currentController.playerRunSpirits.AddSpirit();
                 }
                 PlayerManager.Instance.currentController.objectRenderer.SetActive(true);
+                PlayerManager.Instance.currentController.playerRunSpirits.ResetSpiritsPositions();
             }
         }
 
