@@ -23,12 +23,13 @@ namespace Hub.Interaction
 
         IEnumerator EndInteractionCoroutine()
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.1f);
             if (!isInteracting)
                 yield break;
             camTarget.transform.position = playerController.agent.transform.position;
             camTarget.actions--;
             playerController.actions--;
+            yield return new WaitForSeconds(1f);
             isInteracting = false;
         }
     }

@@ -15,9 +15,9 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 1
-  bergamotNewState: 0
-  poppyNewState: 0
-  thistleNewState: 0
+  bergamotNewState: 27
+  poppyNewState: 30
+  thistleNewState: 14
   bergamotMinimumState: 0
   poppyMinimumState: 0
   thistleMinimumState: 0
@@ -27,17 +27,20 @@ MonoBehaviour:
     sentence: "They\u2019re back!"
     voiceLine: ThVoice
     activateButtons: 0
+    levelIndex: 0
   - character: 3
     anim: 
     sentence: "Thank god you\u2019re back! We were so worried! We heard terrible
       noises coming from the forest\u2026 Are you alright?"
     voiceLine: BeVoice
     activateButtons: 0
+    levelIndex: 0
   - character: 1
     anim: 
     sentence: ...
     voiceLine: BeVoice
     activateButtons: 0
+    levelIndex: 0
   - character: 2
     anim: 
     sentence: '...
@@ -45,37 +48,44 @@ MonoBehaviour:
 '
     voiceLine: ThVoice
     activateButtons: 0
+    levelIndex: 0
   - character: 2
     anim: 
     sentence: "Poppy! You\u2019re so pretty! "
     voiceLine: ThVoice
     activateButtons: 0
+    levelIndex: 0
   - character: 2
     anim: 
     sentence: What happened?
     voiceLine: ThVoice
     activateButtons: 0
+    levelIndex: 0
   - character: 1
     anim: 
     sentence: "That\u2019s a long story, but now, I feel much better than before,
       Thistle."
     voiceLine: PoVoice
     activateButtons: 0
+    levelIndex: 0
   - character: 3
     anim: 
     sentence: "That\u2019s amazing! I\u2019m so happy for you Poppy."
     voiceLine: BeVoice
     activateButtons: 0
+    levelIndex: 0
   - character: 2
     anim: 
     sentence: "It\u2019s because of Ana\xEBl, right?"
     voiceLine: ThVoice
     activateButtons: 0
+    levelIndex: 0
   - character: 1
     anim: 
     sentence: 'Yes, she helped me a lot. '
     voiceLine: PoVoice
     activateButtons: 0
+    levelIndex: 0
   - character: 3
     anim: 
     sentence: "We can\u2019t thank you enough, Ana\xEBl. Well, Poppy, what about
@@ -83,8 +93,10 @@ MonoBehaviour:
       about it. "
     voiceLine: BeVoice
     activateButtons: 0
+    levelIndex: 0
   - character: 1
     anim: 
     sentence: Sure!
     voiceLine: PoVoice
     activateButtons: 0
+    levelIndex: 0
