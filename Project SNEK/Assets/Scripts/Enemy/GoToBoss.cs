@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
+using GameManagement;
 
 public class GoToBoss : MonoBehaviour
 {
@@ -9,7 +7,7 @@ public class GoToBoss : MonoBehaviour
     {
         if(other.gameObject.layer == LayerMask.NameToLayer("PlayerController"))
         {
-            SceneManager.LoadScene("Boss Anorexia");
+            GameManager.Instance.gameState.Set(GameState.Cinematic, "Boss Anorexia");
         }
     }
 }
