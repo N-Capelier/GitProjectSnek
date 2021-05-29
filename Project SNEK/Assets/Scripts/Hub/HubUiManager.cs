@@ -57,6 +57,11 @@ namespace Hub.UI
         [Header("Fade background")]
         [SerializeField] CanvasGroup fadeBackground;
 
+        [Space]
+
+        [Header("Sword get Ui")]
+        [SerializeField] GameObject swordBox;
+
         [Header("WIP")]
 
         [SerializeField] TextMeshProUGUI hearthCoins;
@@ -88,6 +93,8 @@ namespace Hub.UI
             letterBoxAnim.SetActive(false);
             FontainLevelUpBox.transform.localScale = Vector3.zero;
             letterBoxAnim.SetActive(false);
+            swordBox.transform.localScale = Vector3.zero;
+            swordBox.SetActive(false);
             foreach(GameObject box in levelBoxPNJ)
             {
                 box.transform.localScale = Vector3.zero;
@@ -194,6 +201,21 @@ namespace Hub.UI
             AudioManager.Instance.PlaySoundEffect("UIClick");
             letterBox.SetActive(true);
             letterBox.transform.LeanScale(Vector3.one, 0.2f);
+        }
+
+        public void OpenSwordBox()
+        {
+            AudioManager.Instance.PlaySoundEffect("UIClick");
+            swordBox.SetActive(true);
+            swordBox.transform.LeanScale(Vector3.one, 0.2f);
+        }
+
+        public void CloseSwordBox()
+        {
+            AudioManager.Instance.PlaySoundEffect("UINone");
+            swordBox.transform.localScale = Vector3.zero;
+            swordBox.SetActive(false);
+
         }
 
         public void CloseLetterBox()
