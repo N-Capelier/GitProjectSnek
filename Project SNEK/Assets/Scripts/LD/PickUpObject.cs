@@ -12,7 +12,7 @@ public class PickUpObject : MonoBehaviour
     public string iD;
     public GameObject render;
 
-    //public GameObject fX;
+    public GameObject fX;
 
     private void Start()
     {
@@ -33,7 +33,7 @@ public class PickUpObject : MonoBehaviour
     {
         render.SetActive(false);
         AudioManager.Instance.PlaySoundEffect("ObjectSecretItemCollect");
-        //Instantiate Fx
+        Instantiate(fX, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(0.5f);        
         Destroy(gameObject);
     }
@@ -94,14 +94,17 @@ public class PickUpObject : MonoBehaviour
         if (iD == nameof(SaveManager.Instance.state.secretObject_1))
         {
             SaveManager.Instance.state.secretObject_1 = 1;
+            SaveManager.Instance.state.heartCoinAmount++;
         }
         else if (iD == nameof(SaveManager.Instance.state.secretObject_2))
         {
             SaveManager.Instance.state.secretObject_2 = 1;
+            SaveManager.Instance.state.heartCoinAmount++;
         }
         else if (iD == nameof(SaveManager.Instance.state.secretObject_3))
         {
             SaveManager.Instance.state.secretObject_3 = 1;
+            SaveManager.Instance.state.heartCoinAmount++;
         }
         else
         {
