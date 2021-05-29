@@ -258,7 +258,7 @@ namespace Boss
 
         IEnumerator Stun()
         {
-            camDistance = 0;
+            camDistance = 7;
             animator.Play("BossAno_StunIn");
             animator.SetBool("animIsStuned", true);
             yield return new WaitForSeconds(7);
