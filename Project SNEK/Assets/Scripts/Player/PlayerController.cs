@@ -57,6 +57,7 @@ namespace Player.Controller
 
         [SerializeField] GameObject hpUi;
         [SerializeField] TextMeshProUGUI hpText;
+        [SerializeField] GameObject spiritChainPrefab;
 
         public Animator coinAnimator;
         public CoinCountUI coinUI;
@@ -75,7 +76,7 @@ namespace Player.Controller
             //playerRunAttack.attackDamages += _bonusPower;
         }
 
-        public void Death(int deathIndex)
+        public void Death(int deathIndex, int _spiritCount = 0)
         {
             if (isDead)
                 return;
@@ -92,7 +93,7 @@ namespace Player.Controller
             }
             else
             {
-                StartCoroutine(RespawnCoroutine(deathIndex));
+                StartCoroutine(RespawnCoroutine(deathIndex, _spiritCount));
             }
         }
 
@@ -105,7 +106,7 @@ namespace Player.Controller
                 );
         }
 
-        IEnumerator RespawnCoroutine(int deathAnimIndex)
+        IEnumerator RespawnCoroutine(int deathAnimIndex, int _spiritCount = 0)
         {
             //death fx
             Instantiate(deathFx, transform.position, Quaternion.identity);
@@ -143,6 +144,14 @@ namespace Player.Controller
                 playerRunSpirits.spiritChain[i].objectRenderer.SetActive(false);
             }
 
+            if(_spiritCount > 0)
+            {
+                for (int i = 0; i < _spiritCount; i++)
+                {
+                    playerRunSpirits.AddSpirit();
+                }
+            }
+
             //Teleports player to checkpoint
             transform.position = checkPoint.position;
 
@@ -174,6 +183,33 @@ namespace Player.Controller
             //GameManagement.GameManager.Instance.gameState.Set(GameManagement.GameState.Hub, "Hub");
             GameOverMenu.Instance.menuCanvas.SetActive(true);
             isDead = false;
+        }
+
+
+        public void RespawnAfterCutscene(int _spiritCount)
+        {
+            PlayerManager.Instance.gameObject.SetActive(false);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            PlayerManager.Instance.gameObject.SetActive(true);
+
+            playerRunSpirits.ResetSpiritsPositions();
+            if (_spiritCount > 0)
+            {
+                for (int i = 0; i < _spiritCount; i++)
+                {
+                    playerRunSpirits.AddSpirit();
+                }
+            }
+
+            transform.position = checkPoint.position;
+
+            RunCamController.Instance.Set(CamState.PlayerScrolling, true);
+
+            //Destroy(playerRunSpirits.gameObject);
+            //GameObject _newSpiritChain = Instantiate(spiritChainPrefab, transform);
+            //playerRunSpirits = _newSpiritChain.GetComponent<SpiritManager>();
+
+            isInCutscene = false;
         }
 
         IEnumerator DisplayHp()
