@@ -83,7 +83,7 @@ namespace Player.Controller
             }
             PlayerDead?.Invoke();
             isDead = true;
-            playerRunAttack.canAttack = true;
+            playerRunAttack.canAttack = true;           ////// ?????????????? J'ai vraiment écrit ça moi ? Nico
             if (currentHP <= 0)
             {
                 StartCoroutine(DeathCoroutine(deathIndex));
@@ -105,32 +105,56 @@ namespace Player.Controller
 
         IEnumerator RespawnCoroutine(int deathAnimIndex)
         {
-            //play death anim
+            //death fx
             Instantiate(deathFx, transform.position, Quaternion.identity);
+
+            //death face
             faceRenderer.material = faces[1];
+
+            //death anim
             if (deathAnimIndex == 0)
                 objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_death");
             else if (deathAnimIndex == 1)
                 objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_deathPoison");
+
+            //death sound
             AudioManager.Instance.PlaySoundEffect("PlayerHit");
+
+            //Wait until death anim ends
             yield return new WaitForSeconds(1.5f);
-            PlayerManager.Instance.gameObject.SetActive(false);            
-            /*AsyncOperation _loadingScene = */
+
+            //deactivate player during scene reload
+            PlayerManager.Instance.gameObject.SetActive(false);      
+            
+            // Reload scene
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            //yield return new WaitUntil(() => _loadingScene.isDone);
+            
+            //reactivate player
             PlayerManager.Instance.gameObject.SetActive(true);
+
+            //Align spirits
             PlayerManager.Instance.currentController.playerRunSpirits.ResetSpiritsPositions();
+
+            //deactivate all spirit renderers
             for (int i = 0; i < playerRunSpirits.spiritChain.Count; i++)
             {
                 playerRunSpirits.spiritChain[i].objectRenderer.SetActive(false);
             }
-            transform.position = checkPoint.position;
-            faceRenderer.material = faces[0];
-            RunCamController.Instance.Set(CamState.PlayerScrolling, true);
-            isDead = false;
-            StartCoroutine(DisplayHp());
-            //play respawn anim
 
+            //Teleports player to checkpoint
+            transform.position = checkPoint.position;
+
+            //alive face
+            faceRenderer.material = faces[0];
+
+            //Camera reset
+            RunCamController.Instance.Set(CamState.PlayerScrolling, true);
+
+            //Leave death "state"
+            isDead = false;
+
+            //Display hp
+            StartCoroutine(DisplayHp());
         }
 
         IEnumerator DeathCoroutine(int deathAnimIndex)

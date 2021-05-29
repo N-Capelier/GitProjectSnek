@@ -5977,6 +5977,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4339509987439439752, guid: 8ec5a8907a5ea024287e3cab6923c450,
         type: 3}
+      propertyPath: m_Events.m_Events.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 252497918}
+    - target: {fileID: 4339509987439439752, guid: 8ec5a8907a5ea024287e3cab6923c450,
+        type: 3}
       propertyPath: m_Events.m_Events.Array.data[4].m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 11400000, guid: 47b298ad2ebf9634591f864b6863cf8f,
@@ -6099,6 +6104,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ec5a8907a5ea024287e3cab6923c450, type: 3}
+--- !u!95 &252497918 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6310196477820831802, guid: 8ec5a8907a5ea024287e3cab6923c450,
+    type: 3}
+  m_PrefabInstance: {fileID: 252497917}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &252804721
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44816,7 +44827,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1846191468}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.8, y: 0.8, z: 0.8}
