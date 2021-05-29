@@ -10,6 +10,8 @@ using AudioManagement;
 using PauseManagement;
 using Hub.UI;
 using FaceManager;
+using CoinUI;
+using Player;
 
 namespace DialogueManagement
 {
@@ -303,6 +305,11 @@ namespace DialogueManagement
             CloseDialogueBox(currentDialogue);
             animator.gameObject.GetComponent<NPCFaceManager>().SetEyesExpression(0);
             animator.gameObject.GetComponent<NPCFaceManager>().SetMouthExpression(0);
+            if (currentDialogue.getCoin == true)
+            {
+                SaveManager.Instance.state.heartCoinAmount++;
+                PlayerManager.Instance.currentController.coinUI.UpdateCoinCount();
+            }
             currentDialogue = null;
             animator = null;
             isRunningDialogue = false;

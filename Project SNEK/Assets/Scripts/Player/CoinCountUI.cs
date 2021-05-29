@@ -3,21 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Saving;
+using GameManagement;
+using Player;
 
 namespace CoinUI
 {
-    public class CoinCountUI : Singleton<CoinCountUI>
+    public class CoinCountUI : MonoBehaviour
     {
         [SerializeField] GameObject UiCoin;
         [SerializeField] TextMeshProUGUI currentCoinCount;
+
+        [SerializeField] GameObject playerRenderer;
         private void Awake()
         {
-            CreateSingleton();
+            //CreateSingleton();
         }
         void Start()
         {
             UiCoin.transform.localScale = Vector3.zero;
             currentCoinCount.text = "x" + SaveManager.Instance.state.heartCoinAmount;
+        }
+
+        private void FixedUpdate()
+        {
+            if(GameManager.Instance.gameState.ActiveState == GameState.Hub && playerRenderer != null)
+            {
+                transform.position = playerRenderer.transform.localPosition;
+            }
         }
 
         public void UpdateCoinCount()
