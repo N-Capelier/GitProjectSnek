@@ -131,6 +131,21 @@ namespace Cinematic
             EndCustscene();
             GameManager.Instance.gameState.Set(GameState.Hub, "Hub");            
         }
+
+        public void SetBergamotState(float _state)
+        {
+
+        }
+
+        public void SetPoppyState(float _state)
+        {
+
+        }
+
+        public void SetThitleState(float _state)
+        {
+
+        }
     }
 
 }
