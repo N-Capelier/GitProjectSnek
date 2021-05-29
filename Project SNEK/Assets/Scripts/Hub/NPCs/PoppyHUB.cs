@@ -134,7 +134,7 @@ namespace Saving
 
         public override void Refresh()
         {
-            if (SaveManager.Instance.state.poppyState > 1)
+            if (SaveManager.Instance.state.poppyState > 2)
             {
                 SaveManager.Instance.state.talkedOnceToPoppy = true;
             }

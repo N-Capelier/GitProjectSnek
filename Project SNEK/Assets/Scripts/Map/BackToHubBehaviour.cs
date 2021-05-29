@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
+using GameManagement;
 
 namespace Map
 {
@@ -17,10 +17,14 @@ namespace Map
                 switch (index)
                 {
                     case 0:
-                        SceneManager.LoadScene("Level1_1End");
+                        GameManager.Instance.gameState.Set(GameState.Hub, "Hub");
+
                         break;
                     case 1:
-                        SceneManager.LoadScene("Level1_2End");
+                        GameManager.Instance.gameState.Set(GameState.Cinematic, "Level1_1End");
+                        break;
+                    case 2:
+                        GameManager.Instance.gameState.Set(GameState.Cinematic, "Level1_2End");
                         break;
                 }
             }

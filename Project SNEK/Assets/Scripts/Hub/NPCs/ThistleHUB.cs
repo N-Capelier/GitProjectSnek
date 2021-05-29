@@ -65,7 +65,7 @@ namespace Saving
 
         public override void Refresh()
         {
-            if(SaveManager.Instance.state.thistleState > 1)
+            if(SaveManager.Instance.state.thistleState > 2)
             {
                 SaveManager.Instance.state.talkedOnceToThistle = true;
             }
