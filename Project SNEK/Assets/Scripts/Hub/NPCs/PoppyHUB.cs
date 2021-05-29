@@ -4,6 +4,7 @@ using UnityEngine;
 using Saving;
 using Hub.Interaction;
 using DialogueManagement;
+using UnityEngine.Timeline;
 
 namespace Saving
 {
@@ -103,7 +104,7 @@ namespace Saving
         [SerializeField] Transform waypoint25;
         [Space]
         [Header("State26")]
-        [SerializeField] Dialogue dialogue26;
+        [SerializeField] TimelineAsset cutscene26;
         [SerializeField] Transform waypoint26;
         [Space]
         [Header("State27")]
@@ -115,7 +116,7 @@ namespace Saving
         [SerializeField] Transform waypoint28;
         [Space]
         [Header("State29")]
-        [SerializeField] Dialogue dialogue29;
+        [SerializeField] TimelineAsset cutscene29;
         [SerializeField] Transform waypoint29;
         [Space]
         [Header("State30")]
@@ -125,10 +126,6 @@ namespace Saving
         [Header("State31")]
         [SerializeField] Dialogue dialogue31;
         [SerializeField] Transform waypoint31;
-        [Space]
-        [Header("State32")]
-        [SerializeField] Dialogue dialogue32;
-        [SerializeField] Transform waypoint32;
 
         private void Update()
         {
@@ -187,6 +184,94 @@ namespace Saving
                 case 9f:
                     SetDialogue(dialogue9);
                     SetTransform(waypoint1);
+                    break;
+                case 10f:
+                    SetDialogue(dialogue10);
+                    SetTransform(waypoint10);
+                    break;
+                case 11f:
+                    //SetDialogue(dialogue11);
+                    SetTransform(waypoint11);
+                    break;
+                case 12f:
+                    //SetDialogue(dialogue12);
+                    SetTransform(waypoint12);
+                    break;
+                case 13f:
+                    SetDialogue(dialogue13);
+                    SetTransform(waypoint13);
+                    break;
+                case 14f:
+                    SetDialogue(dialogue14);
+                    SetTransform(waypoint14);
+                    break;
+                case 15f:
+                    SetDialogue(dialogue15);
+                    SetTransform(waypoint15);
+                    break;
+                case 16f:
+                    SetDialogue(dialogue16);
+                    SetTransform(waypoint16);
+                    break;
+                case 17f:
+                    SetDialogue(dialogue17);
+                    SetTransform(waypoint17);
+                    break;
+                case 18f:
+                    SetDialogue(dialogue18);
+                    SetTransform(waypoint18);
+                    break;
+                case 19f:
+                    SetDialogue(dialogue19);
+                    SetTransform(waypoint19);
+                    break;
+                case 20f:
+                    SetDialogue(dialogue20);
+                    SetTransform(waypoint20);
+                    break;
+                case 21f:
+                    SetDialogue(dialogue20);
+                    SetTransform(waypoint21);
+                    break;
+                case 22f:
+                    SetDialogue(dialogue22);
+                    SetTransform(waypoint22);
+                    break;
+                case 23f:
+                    SetDialogue(dialogue23);
+                    SetTransform(waypoint23);
+                    break;
+                case 24f:
+                    SetDialogue(dialogue24);
+                    SetTransform(waypoint24);
+                    break;
+                case 25f:
+                    SetDialogue(dialogue25);
+                    SetTransform(waypoint25);
+                    break;
+                case 26f:
+                    PlayCutscene(cutscene26);
+                    SetTransform(waypoint26);
+                    break;
+                case 27f:
+                    SetDialogue(dialogue27);
+                    SetTransform(waypoint27);
+                    break;
+                case 28f:
+                    SetDialogue(dialogue28);
+                    SetTransform(waypoint28);
+                    break;
+                case 29f:
+                    PlayCutscene(cutscene29);
+                    SetTransform(waypoint29);
+                    break;
+                case 30f:
+                    SetDialogue(dialogue30);
+                    SetTransform(waypoint30);
+                    break;
+                case 31f:
+                    SetDialogue(dialogue31);
+                    SetTransform(waypoint31);
                     break;
             }
             started = true;

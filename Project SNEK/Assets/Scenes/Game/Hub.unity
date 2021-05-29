@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -14251,6 +14251,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Panel (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3923554647238184643, guid: 01a4a7d8c29b2ac4b9945a85ec287f71,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01a4a7d8c29b2ac4b9945a85ec287f71, type: 3}
 --- !u!1001 &1011709304
@@ -16543,39 +16548,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1119773659}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1124618377 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4768846440482841377, guid: 48bd77e26dbcd944a8b073fd5629f2e0,
-    type: 3}
-  m_PrefabInstance: {fileID: 761270441952131504}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1124618378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1124618377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a2425de59e4d3a478731832c09eb2fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  faceMat: {fileID: 2100000, guid: 20ba6871b5fb5f54397156a8b5fd405d, type: 2}
-  expressionEyesList:
-  - {x: 0, y: 0.5}
-  - {x: 0, y: 0}
-  - {x: 0.5, y: 0}
-  - {x: 0.5, y: 0.5}
-  randomMouthList:
-  - {x: 0.125, y: 0.75}
-  - {x: 0.875, y: 0.75}
-  - {x: 0.625, y: 0.75}
-  expressionMouthList:
-  - {x: 0.625, y: 0.25}
-  - {x: 0.125, y: 0.25}
-  - {x: 0.375, y: 0.25}
-  - {x: 0.875, y: 0.25}
 --- !u!4 &1126027662 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8313474688887898886, guid: dd911cd2e9bc4ae498be45c3ae9987c7,
@@ -20083,36 +20055,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 725163438}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1446681430
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1446681431}
-  m_Layer: 0
-  m_Name: Poppy OUT
-  m_TagString: Untagged
-  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1446681431
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1446681430}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -29.57, y: 0, z: 1.36}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 761270441952131505}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1449704226
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29108,12 +29050,41 @@ PrefabInstance:
         type: 3}
       propertyPath: waypoint1
       value: 
-      objectReference: {fileID: 1446681431}
-    m_RemovedComponents: []
+      objectReference: {fileID: 761270441952131505}
+    - target: {fileID: 7588686927911454979, guid: 48bd77e26dbcd944a8b073fd5629f2e0,
+        type: 3}
+      propertyPath: cutscene26
+      value: 
+      objectReference: {fileID: 11400000, guid: cf6ccbdf8b7d20e4ab13304da425c650,
+        type: 2}
+    - target: {fileID: 7588686927911454979, guid: 48bd77e26dbcd944a8b073fd5629f2e0,
+        type: 3}
+      propertyPath: cutscene29
+      value: 
+      objectReference: {fileID: 11400000, guid: dbb89043abba9784e94cddce9086b473,
+        type: 2}
+    - target: {fileID: 7588686927911454979, guid: 48bd77e26dbcd944a8b073fd5629f2e0,
+        type: 3}
+      propertyPath: dialogue11
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7588686927911454979, guid: 48bd77e26dbcd944a8b073fd5629f2e0,
+        type: 3}
+      propertyPath: dialogue13
+      value: 
+      objectReference: {fileID: 11400000, guid: 923fa64c82322534f9e0a14ca5c22310,
+        type: 2}
+    - target: {fileID: 7588686927911454979, guid: 48bd77e26dbcd944a8b073fd5629f2e0,
+        type: 3}
+      propertyPath: waypoint26
+      value: 
+      objectReference: {fileID: 761270441952131505}
+    m_RemovedComponents:
+    - {fileID: 1124618378, guid: 48bd77e26dbcd944a8b073fd5629f2e0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 48bd77e26dbcd944a8b073fd5629f2e0, type: 3}
 --- !u!4 &761270441952131505 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 761270439874655522, guid: 48bd77e26dbcd944a8b073fd5629f2e0,
+  m_CorrespondingSourceObject: {fileID: 1446681431, guid: 48bd77e26dbcd944a8b073fd5629f2e0,
     type: 3}
   m_PrefabInstance: {fileID: 761270441952131504}
   m_PrefabAsset: {fileID: 0}

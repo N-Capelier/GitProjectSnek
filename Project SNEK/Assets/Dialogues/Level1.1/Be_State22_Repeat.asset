@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
-  m_Name: Be_State22
+  m_Name: Be_State22_Repeat
   m_EditorClassIdentifier: 
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
-  bergamotNewState: 0
+  bergamotNewState: 17
   poppyNewState: 0
   thistleNewState: 0
   bergamotMinimumState: 0
@@ -27,6 +27,7 @@ MonoBehaviour:
     sentence: 'Oh, the poem? It starts like that: '
     voiceLine: BeVoice
     activateButtons: 0
+    levelIndex: 0
   - character: 3
     anim: 
     sentence: "        Autumn, the robin birds sing a song\r\n        The flowing
@@ -34,6 +35,7 @@ MonoBehaviour:
       whistling with colorless hue"
     voiceLine: BeVoice
     activateButtons: 0
+    levelIndex: 0
   - character: 3
     anim: 
     sentence: "What do you think? I don\u2019t know what I should add next. I always
@@ -41,9 +43,11 @@ MonoBehaviour:
       Maybe I should leave it as a short poem\u2026?"
     voiceLine: BeVoice
     activateButtons: 0
+    levelIndex: 0
   - character: 3
     anim: 
     sentence: "Oh I know it\u2019s a bit melancholic, but autumn is such a nostalgic
       season haha. I think it goes along well with it don\u2019t you think?"
     voiceLine: BeVoice
     activateButtons: 0
+    levelIndex: 0

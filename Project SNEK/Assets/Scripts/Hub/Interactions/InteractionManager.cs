@@ -1,5 +1,7 @@
 ﻿using Rendering.Hub;
 using Player.Controller;
+using System.Collections;
+using UnityEngine;
 
 namespace Hub.Interaction
 {
@@ -16,11 +18,18 @@ namespace Hub.Interaction
 
         public virtual void EndInteraction()
         {
+            StartCoroutine(EndInteractionCoroutine());
+        }
+
+        IEnumerator EndInteractionCoroutine()
+        {
+            yield return new WaitForSeconds(0.1f);
             if (!isInteracting)
-                return;
+                yield break;
             camTarget.transform.position = playerController.agent.transform.position;
             camTarget.actions--;
             playerController.actions--;
+            yield return new WaitForSeconds(1f);
             isInteracting = false;
         }
     }
