@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Tutorial;
 
 public class TutorialTrigger : MonoBehaviour
 {
-
     public int tutoIndex;
 
     private void OnTriggerEnter(Collider other)
