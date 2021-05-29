@@ -2,7 +2,7 @@
 using UnityEngine;
 using Saving;
 using AudioManagement;
-
+using CoinUI;
 
 public class PickUpObject : MonoBehaviour
 {
@@ -92,19 +92,23 @@ public class PickUpObject : MonoBehaviour
     void AddToSave()
     {
         if (iD == nameof(SaveManager.Instance.state.secretObject_1))
-        {
+        {            
             SaveManager.Instance.state.secretObject_1 = 1;
             SaveManager.Instance.state.heartCoinAmount++;
+            CoinCountUI.Instance.UpdateCoinCount();
+
         }
         else if (iD == nameof(SaveManager.Instance.state.secretObject_2))
         {
             SaveManager.Instance.state.secretObject_2 = 1;
             SaveManager.Instance.state.heartCoinAmount++;
+            CoinCountUI.Instance.UpdateCoinCount();
         }
         else if (iD == nameof(SaveManager.Instance.state.secretObject_3))
         {
             SaveManager.Instance.state.secretObject_3 = 1;
             SaveManager.Instance.state.heartCoinAmount++;
+            CoinCountUI.Instance.UpdateCoinCount();
         }
         else
         {

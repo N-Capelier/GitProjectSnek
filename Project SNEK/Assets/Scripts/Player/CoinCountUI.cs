@@ -25,9 +25,12 @@ namespace CoinUI
             StartCoroutine(UpdateCoinCountAnim());
         }
 
+
         IEnumerator UpdateCoinCountAnim()
         {
+            int oldCount = SaveManager.Instance.state.heartCoinAmount - 1;
             UiCoin.LeanScale(Vector3.one, 0.2f);
+            currentCoinCount.text = "x" + oldCount;
             yield return new WaitForSeconds(1f);
             currentCoinCount.text = "x" + SaveManager.Instance.state.heartCoinAmount;
             yield return new WaitForSeconds(1f);
