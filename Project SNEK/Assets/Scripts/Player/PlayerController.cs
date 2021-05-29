@@ -7,6 +7,7 @@ using Player.Attack;
 using Player.Spirits;
 using Rendering.Run;
 using AudioManagement;
+using CoinUI;
 
 namespace Player.Controller
 {
@@ -58,6 +59,7 @@ namespace Player.Controller
         [SerializeField] TextMeshProUGUI hpText;
 
         public Animator coinAnimator;
+        public CoinCountUI coinUI;
 
         public virtual void Awake()
         {

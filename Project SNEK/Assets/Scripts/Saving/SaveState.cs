@@ -9,7 +9,7 @@
         public bool talkedOnceToPoppy = false;
         public bool talkedOnceToThistle = false;
 
-        public int heartCoinAmount = 6;
+        public int heartCoinAmount = 0;
         public int spentHeartCoinAmount = 0;
         public int powerLevel = 0;
 

@@ -132,6 +132,36 @@ namespace Cinematic
             GameManager.Instance.gameState.Set(GameState.Hub, "Hub");            
         }
 
+        public void BackToHubFromLvl1_1()
+        {
+            //Add to save state
+            SaveManager.Instance.state.bergamotState = 16;
+            SaveManager.Instance.state.thistleState = 6;
+            SaveManager.Instance.state.poppyState = 13;
+            EndCustscene();
+            GameManager.Instance.gameState.Set(GameState.Hub, "Hub");
+        }
+
+        public void BackToHubFromLvl1_2()
+        {
+            //Add to save state
+            SaveManager.Instance.state.bergamotState = 23;
+            SaveManager.Instance.state.thistleState = 9;
+            SaveManager.Instance.state.poppyState = 26;
+            EndCustscene();
+            GameManager.Instance.gameState.Set(GameState.Hub, "Hub");
+        }
+
+        public void BackToHubFromLvl1_3()
+        {
+            //Add to save state
+            SaveManager.Instance.state.bergamotState = 27;
+            SaveManager.Instance.state.thistleState = 14;
+            SaveManager.Instance.state.poppyState = 29;
+            EndCustscene();
+            GameManager.Instance.gameState.Set(GameState.Hub, "Hub");
+        }
+
         public void SetBergamotState(float _state)
         {
 
