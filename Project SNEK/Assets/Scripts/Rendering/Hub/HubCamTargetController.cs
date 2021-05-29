@@ -7,8 +7,8 @@ namespace Rendering.Hub
     /// </summary>
     public class HubCamTargetController : Singleton<HubCamTargetController>
     {
-        [SerializeField] [Range(0f, 1000f)] float cameraSpeed = 20f;
-        [SerializeField] [Range(1f, 10f)] float horizontalSpeedModifier = 2f;
+        [SerializeField] [Range(0f, 1000f)] float cameraSpeed = 30f;
+        [SerializeField] [Range(1f, 10f)] float horizontalSpeedModifier = 1.8f;
 
         [SerializeField] Rigidbody rb;
 
