@@ -3712,6 +3712,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4853415423787650692}
   - component: {fileID: 4853415423787650694}
+  - component: {fileID: 8897306888275439886}
   - component: {fileID: 4853415423787650693}
   m_Layer: 5
   m_Name: LevelSecretItem
@@ -3747,6 +3748,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4853415423787650691}
   m_CullTransparentMesh: 0
+--- !u!114 &8897306888275439886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4853415423787650691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0763e159574ff5548a70f84f3422a5fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iD: 1
+  spriteToChange: {fileID: 3739406366336773166, guid: b5958f733e0895944b3dff8d7ee39361,
+    type: 3}
 --- !u!114 &4853415423787650693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3766,7 +3782,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -9116699926517858717, guid: b5958f733e0895944b3dff8d7ee39361,
+  m_Sprite: {fileID: -4847906821805715388, guid: b5958f733e0895944b3dff8d7ee39361,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -4088,6 +4104,7 @@ GameObject:
   - component: {fileID: 4853415423863223515}
   - component: {fileID: 4853415423863223517}
   - component: {fileID: 4853415423863223516}
+  - component: {fileID: 4796194914233649536}
   m_Layer: 5
   m_Name: LevelSecretItem
   m_TagString: Untagged
@@ -4152,6 +4169,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4796194914233649536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4853415423863223514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0763e159574ff5548a70f84f3422a5fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iD: 2
+  spriteToChange: {fileID: 4280573357303784846, guid: b5958f733e0895944b3dff8d7ee39361,
+    type: 3}
 --- !u!1 &4853415424000460159
 GameObject:
   m_ObjectHideFlags: 0
@@ -4163,6 +4195,7 @@ GameObject:
   - component: {fileID: 4853415424000460144}
   - component: {fileID: 4853415424000460146}
   - component: {fileID: 4853415424000460145}
+  - component: {fileID: 8394654540792507665}
   m_Layer: 5
   m_Name: LevelSecretItem
   m_TagString: Untagged
@@ -4226,6 +4259,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8394654540792507665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4853415424000460159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0763e159574ff5548a70f84f3422a5fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iD: 3
+  spriteToChange: {fileID: -6269830149418220644, guid: b5958f733e0895944b3dff8d7ee39361,
+    type: 3}
 --- !u!1 &4853415424009789159
 GameObject:
   m_ObjectHideFlags: 0
