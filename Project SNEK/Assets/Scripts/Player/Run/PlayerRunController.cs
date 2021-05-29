@@ -118,7 +118,8 @@ namespace Player.Controller
         {
             if (isInCutscene)
                 return;
-            if(fadeToHoldCoroutine != null)
+
+            if (fadeToHoldCoroutine != null)
             {
                 StopCoroutine(fadeToHoldCoroutine);
             }

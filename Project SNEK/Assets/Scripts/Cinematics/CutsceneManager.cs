@@ -7,6 +7,7 @@ using Hub.Interaction;
 using GameManagement;
 using Player;
 using Saving;
+using UnityEngine.SceneManagement;
 
 namespace Cinematic
 {
@@ -74,17 +75,29 @@ namespace Cinematic
             }
             if(GameManager.Instance.gameState.ActiveState == GameState.Run)
             {
-                PlayerManager.Instance.currentController.isInCutscene = false;
-                PlayerManager.Instance.currentController.transform.position = PlayerManager.Instance.currentController.checkPoint.position;
-                PlayerManager.Instance.currentController.playerRunSpirits.ResetSpiritsPositions();
-                for (int i = 0; i < spiritCount; i++)
-                {
-                    PlayerManager.Instance.currentController.playerRunSpirits.AddSpirit();
-                }
-                PlayerManager.Instance.currentController.objectRenderer.SetActive(true);
-                PlayerManager.Instance.currentController.playerRunSpirits.ResetSpiritsPositions();
+                //PlayerManager.Instance.currentController.transform.position = PlayerManager.Instance.currentController.checkPoint.position;
+                //PlayerManager.Instance.currentController.SnapPosition();
+                //PlayerManager.Instance.currentController.playerRunSpirits.ResetSpiritsPositions();
+                //for (int i = 0; i < spiritCount; i++)
+                //{
+                //    PlayerManager.Instance.currentController.playerRunSpirits.AddSpirit();
+                //}
+                //PlayerManager.Instance.currentController.objectRenderer.SetActive(true);
+                //PlayerManager.Instance.currentController.playerRunSpirits.ResetSpiritsPositions();
+
+                //PlayerManager.Instance.currentController.Death(0);
+                //for (int i = 0; i < spiritCount; i++)
+                //{
+                //    PlayerManager.Instance.currentController.playerRunSpirits.AddSpirit();
+                //}
+
+                //PlayerManager.Instance.currentController.isInCutscene = false;
+
+                PlayerManager.Instance.currentController.RespawnAfterCutscene(spiritCount);
             }
         }
+
+
 
         public IEnumerator PauseCutscene()
         {
