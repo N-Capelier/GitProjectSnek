@@ -2,6 +2,7 @@
 using Saving;
 using UnityEngine;
 using UnityEngine.UI;
+using AudioManagement;
 
 namespace PauseManagement
 {
@@ -136,13 +137,13 @@ namespace PauseManagement
             {
                 SaveManager.Instance.state.musicVolume = musicSlider.value;
                 SaveManager.Instance.Save();
-                //AudioManager.Instance.soundsMixer.SetFloat("musicsVolume", (Mathf.Log10(musicSlider.value * 10) * 100) - 80);
+                AudioManager.Instance.soundsMixer.SetFloat("musicsVolume", (Mathf.Log10(musicSlider.value * 10) * 100) - 80);
             }
             else
             {
                 SaveManager.Instance.state.soundVolume = soundSlider.value;
                 SaveManager.Instance.Save();
-                //AudioManager.Instance.soundsMixer.SetFloat("sfxVolume", (Mathf.Log10(soundSlider.value * 10) * 100) - 80);
+                AudioManager.Instance.soundsMixer.SetFloat("sfxVolume", (Mathf.Log10(soundSlider.value * 10) * 100) - 80);
             }
         }
 
