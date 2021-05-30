@@ -5,6 +5,7 @@ using TMPro;
 using Saving;
 using GameManagement;
 using Player;
+using AudioManagement;
 
 namespace CoinUI
 {
@@ -41,6 +42,7 @@ namespace CoinUI
         IEnumerator UpdateCoinCountAnim()
         {
             int oldCount = SaveManager.Instance.state.heartCoinAmount - 1;
+            AudioManager.Instance.PlaySoundEffect("ObjectSecretItemCollect");
             UiCoin.LeanScale(Vector3.one, 0.2f);
             currentCoinCount.text = "x" + oldCount;
             yield return new WaitForSeconds(1f);

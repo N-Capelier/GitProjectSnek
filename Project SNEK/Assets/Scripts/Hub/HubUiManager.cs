@@ -186,6 +186,12 @@ namespace Hub.UI
             LeanTween.alphaCanvas(closeLetterButton.GetComponent<CanvasGroup>(), 1f, 1f).setLoopPingPong().setDelay(4f);
         }
 
+        public void OpenDemoBox()
+        {
+            demoScreen.SetActive(true);
+            demoScreen.LeanScale(Vector3.one, 0.2f);
+        }
+
         public void CloseLetter()
         {
             AudioManager.Instance.PlaySoundEffect("UINone");

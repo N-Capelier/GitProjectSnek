@@ -33,7 +33,7 @@ public class PickUpObject : MonoBehaviour
     IEnumerator Depop()
     {
         render.SetActive(false);
-        AudioManager.Instance.PlaySoundEffect("ObjectSecretItemCollect");
+        //AudioManager.Instance.PlaySoundEffect("ObjectSecretItemCollect");
         Instantiate(fX, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(0.5f);        
         Destroy(gameObject);
