@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Player;
 using Cinematic;
 using UnityEngine.Timeline;
+using AudioManagement;
 
 namespace Map
 {
@@ -38,6 +39,7 @@ namespace Map
                 {
                     PlayerManager.Instance.currentController.checkPoint = transform;
                     PlayerManager.Instance.currentController.respawnNode = transform.position;
+                    AudioManager.Instance.PlaySoundEffect("LevelCheckpoint");
                 }
 
                 conffeti.Play();

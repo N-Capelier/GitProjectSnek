@@ -34,6 +34,10 @@
         /// </summary>
         public int equipedTechnic = 0;
 
+        public int unlockedLetters = 1;
+
+        public int canvasCurrentState;
+
         public float soundVolume = 0.9f;
         public float musicVolume = 0.9f;
 

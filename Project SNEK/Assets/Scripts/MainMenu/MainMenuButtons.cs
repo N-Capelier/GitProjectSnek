@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using Saving;
 using AudioManagement;
 using GameManagement;
+using System.Collections;
 
 namespace MainMenu
 {
@@ -53,5 +54,22 @@ namespace MainMenu
             box.SetActive(false);
         }
 
+        public void FadeIn(GameObject fade)
+        {
+            fade.SetActive(true);
+            fade.GetComponent<CanvasGroup>().LeanAlpha(1, 0.3f);
+        }
+
+        public void FadeOut(GameObject fade)
+        {
+            StartCoroutine(FadeOutAnim(fade));
+        }
+
+        IEnumerator FadeOutAnim(GameObject fade)
+        {
+            fade.GetComponent<CanvasGroup>().LeanAlpha(0, 0.3f);
+            yield return new WaitForSeconds(0.35f);
+            fade.SetActive(false);
+        }
     }
 }

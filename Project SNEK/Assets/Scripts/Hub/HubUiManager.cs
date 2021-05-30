@@ -101,6 +101,16 @@ namespace Hub.UI
                 box.SetActive(false);
             }
 
+            foreach(GameObject letter in letterList)
+            {
+
+            }
+
+            for (int i = 0; i < SaveManager.Instance.state.unlockedLetters; i++)
+            {
+                letterList[i].SetActive(true);
+            }
+
             if (SaveManager.Instance.state.isDemoFinished)
             {
                 OpenBox(demoScreen);
@@ -193,6 +203,12 @@ namespace Hub.UI
                 letterText.text += letter;
                 yield return new WaitForSeconds(0.005f);
             }
+            if(SaveManager.Instance.state.bergamotState == 3f)
+            {
+                OpenSwordBox();
+                SaveManager.Instance.state.bergamotState = 4f;
+                NPCManager.Instance.RefreshNPCs();
+            }
             closeLetterButton.GetComponent<Button>().interactable = true;
         }
 
@@ -273,13 +289,13 @@ namespace Hub.UI
                 case 0:
                     if (SaveManager.Instance.state.heartCoinAmount >= 1)
                     {
-                        StartCoroutine(FountainAnim(1));
+                        StartCoroutine(FountainAnim(0));
                     }
                     break;
                 case 1:
                     if(SaveManager.Instance.state.heartCoinAmount >= 2)
                     {
-                        StartCoroutine(FountainAnim(2));
+                        StartCoroutine(FountainAnim(1));
                     }
                     break;
                 case 3:
@@ -291,7 +307,7 @@ namespace Hub.UI
                 case 4:
                     if (SaveManager.Instance.state.heartCoinAmount >= 4)
                     {
-                        StartCoroutine(FountainAnim(2));
+                        StartCoroutine(FountainAnim(4));
                     }
                     break;
             }
@@ -308,7 +324,7 @@ namespace Hub.UI
             switch (level)
             {
                 case 0:
-                    SaveManager.Instance.state.heartCoinAmount--;
+                    SaveManager.Instance.state.heartCoinAmount -= 1;
                     SaveManager.Instance.state.spentHeartCoinAmount++;
                     SaveManager.Instance.state.powerLevel++;
                     SaveManager.Instance.state.bonusHealth = 2;
@@ -371,7 +387,7 @@ namespace Hub.UI
 
         public void FadeInBackground(float duration)
         {
-            LeanTween.alphaCanvas(fadeBackground, 0.4f, duration);
+            LeanTween.alphaCanvas(fadeBackground, 0.8f, duration);
         }
 
         public void FadeOutBackground(float duration)
