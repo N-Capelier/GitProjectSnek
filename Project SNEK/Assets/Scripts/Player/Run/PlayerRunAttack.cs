@@ -53,6 +53,16 @@ namespace Player.Attack
             }
         }
 
+        private void Update()
+        {
+            if (SceneManager.GetActiveScene().name == "TutorialMap" && canAttack == true)
+            {
+                canAttack = false;
+                swordObject.SetActive(false);
+                cooldownTimer.ClockEnded -= OnCooldownEnded;
+            }
+        }
+
         private void OnDestroy()
         {
             cooldownTimer.ClockEnded -= OnCooldownEnded;

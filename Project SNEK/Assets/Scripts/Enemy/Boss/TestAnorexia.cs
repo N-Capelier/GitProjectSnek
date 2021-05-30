@@ -6,6 +6,8 @@ using Player;
 using UnityEngine.Timeline;
 using UnityEngine.Playables;
 using Cinematic;
+using AudioManagement;
+using Saving;
 
 namespace Boss
 {
@@ -150,11 +152,12 @@ namespace Boss
             targetVec = new Vector3(targetFeedback.transform.position.x, targetFeedback.transform.position.y, gameObject.transform.position.z);
             targetVec = SnapPosition(targetVec);
             yield return new WaitForSeconds(0.2f);
-            StartCoroutine(TargetCell());
+            StartCoroutine(TargetCell());            
             yield return new WaitForSeconds(0.2f);
             targetFeedback.SetActive(false);
             yield return new WaitForSeconds(2f);
-            animator.SetBool("animIsAttacking", false);                      
+            animator.SetBool("animIsAttacking", false);
+            AudioManager.Instance.PlayThisSoundEffect("BossGrunt");
             yield return new WaitForSeconds(5);
             bombOver = false;
             canDoPattern = true;
@@ -168,6 +171,7 @@ namespace Boss
             animator.SetBool("animIsAttacking", false);
             yield return new WaitForSeconds(2f);
             TargetCellLabyrinth();
+            AudioManager.Instance.PlayThisSoundEffect("StartPoisonRain");
             yield return new WaitForSeconds(10f);            
             canDoPattern = true;
         }
@@ -225,11 +229,14 @@ namespace Boss
             animator.SetBool("animIsAttacking", true);
             animator.SetInteger("animPatternCount", 3);
             yield return new WaitForSeconds(3f);
+            AudioManager.Instance.PlayThisSoundEffect("SummonMouchou");
             Instantiate(mouchou, new Vector3(transform.position.x + Random.Range(-3, 3), transform.position.y, transform.position.z -1), Quaternion.identity);
             animator.SetBool("animIsAttacking", false);
-            yield return new WaitForSeconds(2.5f);            
+            yield return new WaitForSeconds(2.5f);
+            AudioManager.Instance.PlayThisSoundEffect("SummonMouchou");
             Instantiate(mouchou, new Vector3(transform.position.x + Random.Range(-3, 3), transform.position.y, transform.position.z -1), Quaternion.identity);
             yield return new WaitForSeconds(2.5f);
+            AudioManager.Instance.PlayThisSoundEffect("SummonMouchou");
             Instantiate(mouchou, new Vector3(transform.position.x + Random.Range(-3, 3), transform.position.y, transform.position.z - 1), Quaternion.identity);            
             yield return new WaitForSeconds(2);
             
@@ -344,6 +351,7 @@ namespace Boss
         {
             currentHp -= damage;
             print(currentHp);
+            AudioManager.Instance.PlayThisSoundEffect("BossHit");
 
             if (currentHp > 0)
             {
@@ -354,6 +362,7 @@ namespace Boss
             else if (currentHp <= 0)
             {
                 StopAllCoroutines();
+                CutsceneManager.Instance.StopMusic();
                 director.playableAsset = endCinematic;
                 bodyRenderer.enabled = false;
                 handsRenderer.enabled = false;
@@ -361,6 +370,8 @@ namespace Boss
                 generator.GenerateStartTerrain();
                 endGraphs.SetActive(true);
                 cam.SetActive(false);
+                SaveManager.Instance.state.isDemoFinished = true;
+                SaveManager.Instance.Save();
                 PlayerManager.Instance.currentController.gameObject.SetActive(false);
                 director.Play();
             }
