@@ -146,6 +146,10 @@ namespace PauseManagement
             }
             SaveManager.Instance.Save();
         }
+
+        public void QuitApp()
+        {
+            AppManager.Quit();
+        }
     }
 }
-
