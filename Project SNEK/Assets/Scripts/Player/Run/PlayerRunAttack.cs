@@ -123,6 +123,7 @@ namespace Player.Attack
             }
             yield return new WaitForSeconds(0.1f);
             attack = Instantiate(attackCollision, transform.position, Quaternion.identity);
+
             switch (PlayerManager.Instance.currentController.currentDirection)
             {
                 // Ajouter un * par rapport à la range
@@ -155,7 +156,7 @@ namespace Player.Attack
             {
                 StartCoroutine(BeamAttack());
             }
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.1f);
             Destroy(attack);
             yield return new WaitForSeconds(attackCooldown * 0.4f);
             isAttacking = false;
