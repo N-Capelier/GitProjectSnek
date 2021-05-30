@@ -59,6 +59,12 @@ namespace GameManagement.GameStates
         // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            if (SceneManager.GetActiveScene().name == "Boss Anorexia")
+            {
+                playedBossCinematic = false;
+                GameManager.Instance.playedBossCinematic = false;
+            }
+
             Destroy(PlayerManager.Instance.currentController.gameObject);
             Destroy(MapGrid.Instance.gameObject);
             if (runMusic != null)
