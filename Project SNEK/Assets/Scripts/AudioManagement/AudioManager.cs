@@ -487,13 +487,6 @@ namespace AudioManagement
 
             audioSource.loop = false;
         }
-
-        public void PlayMusic(string name)
-        {
-            PlayThisSoundEffect(name, true);
-        }
-
-
     }
 
 

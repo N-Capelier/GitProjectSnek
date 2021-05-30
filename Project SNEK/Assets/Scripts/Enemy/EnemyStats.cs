@@ -97,15 +97,16 @@ namespace Enemy
 
         public void Death()
         {
-            if(isClone == true)
+            if (isClone == true)
             {
-                if(GetComponentInParent<IllusionisteBehaviour>().clonesList.Length <= 1)
+                if (GetComponentInParent<IllusionisteBehaviour>().clonesList.Length <= 1)
                 {
                     GetComponentInParent<IllusionisteBehaviour>().Death();
                     Destroy(gameObject);
                 }
             }
             else
+                AudioManager.Instance.PlaySoundEffect("ObjectSpiritCollect");
                 PlayerManager.Instance.currentController.playerRunSpirits.AddSpirit();
             Instantiate(hitFx, transform.position, Quaternion.identity);
             Destroy(gameObject);

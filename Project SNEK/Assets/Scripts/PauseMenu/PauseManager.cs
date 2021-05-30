@@ -120,13 +120,14 @@ namespace PauseManagement
 
         public void QuitOrHub()
         {
-            if (GameManager.Instance.gameState.ActiveState == GameManagement.GameState.Hub)
+            if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
             {
-                Application.Quit();
+                ResetTime();
+                GameManager.Instance.gameState.Set(GameState.MainMenu, "MainMenu");
             }
             else
             {
-                GameManager.Instance.gameState.Set(GameManagement.GameState.Hub, "Hub");
+                GameManager.Instance.gameState.Set(GameState.Hub, "Hub");
                 ResetTime();
             }
         }

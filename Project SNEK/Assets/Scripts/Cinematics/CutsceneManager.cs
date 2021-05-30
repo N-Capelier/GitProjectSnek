@@ -8,6 +8,7 @@ using GameManagement;
 using Player;
 using Saving;
 using UnityEngine.SceneManagement;
+using AudioManagement;
 
 namespace Cinematic
 {
@@ -17,7 +18,10 @@ namespace Cinematic
         public PlayableDirector mainDirector;
         [SerializeField] GameObject playableCamera;
         [SerializeField] GameObject[] playableActors;
+        [SerializeField] Material newNPCMaterial; // Pour l'instant c'est juste le materiel de Dark Poppy
         //Vector3[] actorsPositions;
+
+        Source musicAudio;
 
         private void Awake()
         {
@@ -151,6 +155,8 @@ namespace Cinematic
             SaveManager.Instance.state.bergamotState = 16;
             SaveManager.Instance.state.thistleState = 6;
             SaveManager.Instance.state.poppyState = 13;
+            SaveManager.Instance.state.unlockedLetters = 2;
+            SaveManager.Instance.state.canvasCurrentState = 1;
             EndCustscene();
             GameManager.Instance.gameState.Set(GameState.Hub, "Hub");
         }
@@ -161,6 +167,8 @@ namespace Cinematic
             SaveManager.Instance.state.bergamotState = 23;
             SaveManager.Instance.state.thistleState = 9;
             SaveManager.Instance.state.poppyState = 26;
+            SaveManager.Instance.state.unlockedLetters = 3;
+            SaveManager.Instance.state.canvasCurrentState = 2;
             EndCustscene();
             GameManager.Instance.gameState.Set(GameState.Hub, "Hub");
         }
@@ -171,8 +179,26 @@ namespace Cinematic
             SaveManager.Instance.state.bergamotState = 27;
             SaveManager.Instance.state.thistleState = 14;
             SaveManager.Instance.state.poppyState = 29;
+            SaveManager.Instance.state.unlockedLetters = 4;
+            SaveManager.Instance.state.canvasCurrentState = 3;
             EndCustscene();
             GameManager.Instance.gameState.Set(GameState.Hub, "Hub");
+        }
+
+        public void PlayMusic(string name)
+        {
+            musicAudio = AudioManager.Instance.PlayThisSoundEffect(name, true);
+        }
+
+        public void StopMusic()
+        {
+            if(musicAudio != null)
+            musicAudio.audioSource.Stop();
+        }
+
+        public void ChangeNPCMaterial(SkinnedMeshRenderer renderer)
+        {
+            renderer.material = newNPCMaterial;
         }
 
         public void SetBergamotState(float _state)

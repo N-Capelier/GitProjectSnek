@@ -9,11 +9,11 @@ namespace Hub.Interaction
         {
             HubUiManager.Instance.OpenLetterBox();
             HubUiManager.Instance.SetOccupied(true);
-            if (SaveManager.Instance.state.bergamotState == 3f)
-            {
-                SaveManager.Instance.state.bergamotState = 4f;
-                NPCManager.Instance.RefreshNPCs();
-            }
+            //if (SaveManager.Instance.state.bergamotState == 3f)
+            //{
+            //    SaveManager.Instance.state.bergamotState = 4f;
+            //    NPCManager.Instance.RefreshNPCs();
+            //}
         }
     }
 
