@@ -185,12 +185,15 @@ namespace Player.Controller
             isDead = false;
         }
 
-
+        bool bossLevel = false;
         public void RespawnAfterCutscene(int _spiritCount)
         {
-            PlayerManager.Instance.gameObject.SetActive(false);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            PlayerManager.Instance.gameObject.SetActive(true);
+            if (SceneManager.GetActiveScene().name != "Boss Anorexia")
+            {
+                PlayerManager.Instance.gameObject.SetActive(false);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                PlayerManager.Instance.gameObject.SetActive(true);
+            }
 
             playerRunSpirits.ResetSpiritsPositions();
             if (_spiritCount > 0)
