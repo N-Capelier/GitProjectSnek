@@ -62,6 +62,9 @@ namespace Hub.UI
         [Header("Sword get Ui")]
         [SerializeField] GameObject swordBox;
 
+        [Header("Hub Tuto UI")]
+        [SerializeField] GameObject TutoBox;
+
         [Header("WIP")]
 
         [SerializeField] TextMeshProUGUI hearthCoins;
@@ -95,21 +98,23 @@ namespace Hub.UI
             letterBoxAnim.SetActive(false);
             swordBox.transform.localScale = Vector3.zero;
             swordBox.SetActive(false);
+            TutoBox.transform.localScale = Vector3.zero;
+            TutoBox.SetActive(false);
             foreach(GameObject box in levelBoxPNJ)
             {
                 box.transform.localScale = Vector3.zero;
                 box.SetActive(false);
             }
 
-            foreach(GameObject letter in letterList)
-            {
-
-            }
-
             for (int i = 0; i < SaveManager.Instance.state.unlockedLetters; i++)
             {
                 letterList[i].SetActive(true);
             }
+
+            //if(SaveManager.Instance.state.bergamotState == 2f)
+            //{
+            //    OpenTutoBox();
+            //}
 
             if (SaveManager.Instance.state.isDemoFinished)
             {
@@ -232,6 +237,17 @@ namespace Hub.UI
             swordBox.transform.localScale = Vector3.zero;
             swordBox.SetActive(false);
 
+        }
+
+        public void OpenTutoBox()
+        {
+            TutoBox.SetActive(true);
+            TutoBox.transform.LeanScale(Vector3.one, 0.2f);
+        }
+
+        public void CloseTutoBox()
+        {
+            TutoBox.LeanScale(Vector3.zero, 0.2f).setOnComplete(SetTutoBoxFalse);
         }
 
         public void CloseLetterBox()
@@ -418,6 +434,11 @@ namespace Hub.UI
         public void SetLevelAccessFalse()
         {
             levelAccessBox.SetActive(false);
+        }
+
+        public void SetTutoBoxFalse()
+        {
+            TutoBox.SetActive(false);
         }
     }
 }
