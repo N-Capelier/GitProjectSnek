@@ -7,6 +7,7 @@ using UnityEngine.Timeline;
 using UnityEngine.Playables;
 using Cinematic;
 using AudioManagement;
+using Saving;
 
 namespace Boss
 {
@@ -369,6 +370,8 @@ namespace Boss
                 generator.GenerateStartTerrain();
                 endGraphs.SetActive(true);
                 cam.SetActive(false);
+                SaveManager.Instance.state.isDemoFinished = true;
+                SaveManager.Instance.Save();
                 PlayerManager.Instance.currentController.gameObject.SetActive(false);
                 director.Play();
             }
