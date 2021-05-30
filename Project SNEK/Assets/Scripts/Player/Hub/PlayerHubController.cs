@@ -71,7 +71,14 @@ namespace Player.Controller
             }
             else
             {
-                animator.SetFloat("Distance", 0);
+                if(distanceFromDestination > 1)
+                {
+                    animator.SetFloat("Distance", distanceFromDestination);
+                }
+                else
+                {
+                    animator.SetFloat("Distance", 0);
+                }
             }
         }
     }

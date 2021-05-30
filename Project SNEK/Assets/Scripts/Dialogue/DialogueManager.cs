@@ -25,7 +25,7 @@ namespace DialogueManagement
         [SerializeField] Image dialogueArrow;
         [SerializeField] GameObject DialogueBox;
         Dialogue currentDialogue;
-        bool isRunningDialogue;
+        [HideInInspector] public bool isRunningDialogue = false;
         bool isSpeaking;
         bool isTapped;
         bool isCutSceneDialogue;

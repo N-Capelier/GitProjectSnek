@@ -8,8 +8,8 @@ namespace Rendering.Hub
     /// </summary>
     public class HubCamTargetController : Singleton<HubCamTargetController>
     {
-        [SerializeField] [Range(0f, 1000f)] float cameraSpeed = 30f;
-        [SerializeField] [Range(1f, 10f)] float horizontalSpeedModifier = 1.8f;
+        [SerializeField] [Range(0f, 1000f)] float cameraSpeed = 35f;
+        [SerializeField] [Range(1f, 10f)] float horizontalSpeedModifier = 1.35f;
 
         [SerializeField] Rigidbody rb;
 
@@ -32,6 +32,11 @@ namespace Rendering.Hub
             if (actions > 0)
                 return;
 
+            if (PlayerManager.Instance == null)
+            {
+                return;
+            }
+
 #if UNITY_STANDALONE || UNITY_EDITOR
             HandleStandaloneInputs();
 #elif UNITY_ANDROID || UNITY_IOS
@@ -41,15 +46,6 @@ namespace Rendering.Hub
 
         private void Update()
         {
-            if(PlayerManager.Instance == null)
-            {
-                return;
-            }
-            else if(PlayerManager.Instance.currentController.isInCutscene)
-            {
-                return;
-            }
-
             if (transform.position.x < leftConfiner)
             {
                 rb.velocity = Vector3.zero;
@@ -78,7 +74,7 @@ namespace Rendering.Hub
         private void HandleStandaloneInputs()
         {
             lastPos = currentPos;
-            if(Input.GetMouseButton(0))
+            if(Input.GetMouseButton(0) && !DialogueManagement.DialogueManager.Instance.isRunningDialogue)
             {
                 currentPos = Input.mousePosition;
 
@@ -107,8 +103,17 @@ namespace Rendering.Hub
 
         private void HandleMobileTouchInputs()
         {
+            if (PlayerManager.Instance == null)
+            {
+                return;
+            }
+            else if (PlayerManager.Instance.currentController.isInCutscene)
+            {
+                return;
+            }
+
             lastPos = currentPos;
-            if (Input.touchCount == 1)
+            if (Input.touchCount == 1 && !DialogueManagement.DialogueManager.Instance.isRunningDialogue)
             {
                 currentPos = Input.GetTouch(0).position;
 
