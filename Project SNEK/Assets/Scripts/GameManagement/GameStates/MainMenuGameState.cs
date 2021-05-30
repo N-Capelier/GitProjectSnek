@@ -14,7 +14,7 @@ namespace GameManagement.GameStates
         {
             if(mainMenuMusic == null)
             {
-                mainMenuMusic = AudioManager.Instance.PlayThisSoundEffect("EndLevelMusic", true);
+                mainMenuMusic = AudioManager.Instance.PlayThisSoundEffect("MainMenuMusic", true);
             }
 
         }
