@@ -72,10 +72,9 @@ namespace Player.Spells
             yield return new WaitForSeconds(0.3f);
             absorbFx.Play();
             animator.Play("Anim_Kettle_Absorb");
-            sourceTemp = AudioManager.Instance.PlayThisSoundEffect("MarmiteAspire", true);
+            AudioManager.Instance.PlaySoundEffect("MarmiteAspire");
             capCollider.enabled = true;
             yield return new WaitForSeconds(timeBeforeIgnition);
-            sourceTemp.audioSource.Stop();
             if(ignited == false)
             StartCoroutine(Ignite());
         }
