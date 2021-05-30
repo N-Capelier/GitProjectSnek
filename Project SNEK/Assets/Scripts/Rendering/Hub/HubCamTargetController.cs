@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Player;
 
 namespace Rendering.Hub
 {
@@ -40,6 +41,15 @@ namespace Rendering.Hub
 
         private void Update()
         {
+            if(PlayerManager.Instance == null)
+            {
+                return;
+            }
+            else if(PlayerManager.Instance.currentController.isInCutscene)
+            {
+                return;
+            }
+
             if (transform.position.x < leftConfiner)
             {
                 rb.velocity = Vector3.zero;

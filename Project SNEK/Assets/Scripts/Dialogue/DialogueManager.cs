@@ -10,7 +10,6 @@ using AudioManagement;
 using PauseManagement;
 using Hub.UI;
 using FaceManager;
-using CoinUI;
 using Player;
 
 namespace DialogueManagement
@@ -61,6 +60,9 @@ namespace DialogueManagement
                 Debug.LogError("Cannot start a dialogue when it's already running!");
                 yield break;
             }
+
+            //                  Debug
+            //Debug.Log($"Playing dialog {dialogue.name}");
 
             if (GameManager.Instance.gameState.ActiveState != GameState.Cinematic && GameManager.Instance.gameState.ActiveState != GameState.Run)
             {
@@ -315,7 +317,13 @@ namespace DialogueManagement
             isRunningDialogue = false;
             isTapped = false;
 
+            if(SaveManager.Instance.state.poppyState == 26f)
+            {
+                NPCManager.Instance.poppy.transform.position = NPCManager.Instance.poppy.waypoint26.position;
+            }
 
+            //                              Debug
+            //Debug.Log($"Poppy state after dialog: {SaveManager.Instance.state.poppyState}");
         }
 
         public void OpenDialogueBox()

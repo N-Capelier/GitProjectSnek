@@ -65,9 +65,11 @@ namespace Saving
 
         public override void Refresh()
         {
-            if(SaveManager.Instance.state.thistleState > 2)
+            if(SaveManager.Instance.state.thistleState > 2 && SaveManager.Instance.state.talkedOnceToThistle == false)
             {
                 SaveManager.Instance.state.talkedOnceToThistle = true;
+                NPCManager.Instance.RefreshNPCs();
+                return;
             }
 
             switch (SaveManager.Instance.state.thistleState)
