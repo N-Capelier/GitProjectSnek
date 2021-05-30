@@ -46,6 +46,7 @@ namespace Hub.UI
         [Header("Fontain Animation and boxes")]
         [SerializeField] GameObject FontainConfirmBox;
         [SerializeField] GameObject FontainLevelUpBox;
+        [SerializeField] ParticleSystem upgradeParticule;
 
 
 
@@ -342,7 +343,10 @@ namespace Hub.UI
             PlayerManager.Instance.currentController.animator.Play("Anim_PlayerHub_ThrowCoin");
             PlayerManager.Instance.currentController.coinAnimator.Play("Anim_ObjectCoin_Throw");
             FontainConfirmBox.transform.LeanScale(Vector3.zero, 0.2f).setOnComplete(SetFontainConfirmBoxFalse);
-            yield return new WaitForSeconds(4.6f);
+            yield return new WaitForSeconds(3f);
+            Instantiate(upgradeParticule, PlayerManager.Instance.currentController.transform.GetChild(0).transform.position, Quaternion.identity);
+            AudioManager.Instance.PlaySoundEffect("PlayerLevelUp");
+            yield return new WaitForSeconds(1.6f);
             switch (level)
             {
                 case 0:
