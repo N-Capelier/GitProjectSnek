@@ -57,7 +57,7 @@ namespace Boss
         [Space]
         public EnemyAttackPattern pattern;
         [Space]
-        public EnemyAttackPattern labyrinth;
+        public EnemyAttackPattern[] labyrinth;
         List<GameObject> incomingBombs;
 
         [SerializeField] Vector3 targetVec;
@@ -149,7 +149,7 @@ namespace Boss
                 targetFeedback.transform.localPosition = Vector3.Lerp(pos1, pos2, (Mathf.Sin(Time.time * feedbackPosSpeed) +1) /2);                
                 yield return new WaitForEndOfFrame();
             }            
-            targetVec = new Vector3(targetFeedback.transform.position.x, targetFeedback.transform.position.y, gameObject.transform.position.z);
+            targetVec = new Vector3(PlayerManager.Instance.currentController.transform.position.x, targetFeedback.transform.position.y, gameObject.transform.position.z);
             targetVec = SnapPosition(targetVec);
             yield return new WaitForSeconds(0.2f);
             StartCoroutine(TargetCell());            
@@ -206,15 +206,29 @@ namespace Boss
             patternCount++;            
         }
 
+        int i;
         void TargetCellLabyrinth()
         {
             incomingBombs = new List<GameObject>();
 
-            for (int x = 0; x < labyrinth.row.Length; x++)
+            switch (currentHp)
             {
-                for (int y = 0; y < labyrinth.row[x].column.Length; y++)
+                case 30:
+                    i = 0;
+                    break;
+                case 20:
+                    i = 1;
+                    break;
+                case 10:
+                    i = 2;
+                    break;
+            }
+
+            for (int x = 0; x < labyrinth[i].row.Length; x++)
+            {
+                for (int y = 0; y < labyrinth[i].row[x].column.Length; y++)
                 {
-                    if (labyrinth.row[x].column[y] == false)
+                    if (labyrinth[i].row[x].column[y] == false)
                     {
                         marker = Instantiate(targetMarkerLong, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x))), Quaternion.identity, gameObject.transform);
                         incomingBombs.Add(marker);
@@ -268,6 +282,7 @@ namespace Boss
             camDistance = 7;
             animator.Play("BossAno_StunIn");
             animator.SetBool("animIsStuned", true);
+            animator.SetBool("animIsTaunt", false);
             yield return new WaitForSeconds(7);
             if(shieldPos.transform.childCount == 0)
             {
