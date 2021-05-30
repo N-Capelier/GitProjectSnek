@@ -101,7 +101,7 @@ namespace Saving
         [Space]
         [Header("State26")]
         [SerializeField] TimelineAsset cutscene26;
-        [SerializeField] Transform waypoint26;
+        public Transform waypoint26;
         [Space]
         [Header("State27")]
         [SerializeField] Dialogue dialogue27;
@@ -123,20 +123,13 @@ namespace Saving
         [SerializeField] Dialogue dialogue31;
         [SerializeField] Transform waypoint31;
 
-        private void Update()
-        {
-            if(Input.GetKeyDown(KeyCode.O))
-            {
-                Debug.Log($"b{SaveManager.Instance.state.bergamotState} p{SaveManager.Instance.state.poppyState} t{SaveManager.Instance.state.thistleState}");
-                Debug.Log($"pT{SaveManager.Instance.state.talkedOnceToPoppy} tT{SaveManager.Instance.state.talkedOnceToThistle}");
-            }
-        }
-
         public override void Refresh()
         {
-            if (SaveManager.Instance.state.poppyState > 2)
+            if (SaveManager.Instance.state.poppyState > 2 && SaveManager.Instance.state.talkedOnceToPoppy == false)
             {
                 SaveManager.Instance.state.talkedOnceToPoppy = true;
+                NPCManager.Instance.RefreshNPCs();
+                return;
             }
 
             switch (SaveManager.Instance.state.poppyState)

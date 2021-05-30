@@ -67,7 +67,6 @@ namespace Player.Attack
         {
             if (PlayerManager.Instance.currentController.isInCutscene)
             {
-                Debug.Log("Input in cinemtic");
                 return;
             }
             if (PlayerManager.Instance.currentController.isDead)

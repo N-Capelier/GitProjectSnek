@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using Saving;
 using AudioManagement;
 using GameManagement;
 using System.Collections;
+using PauseManagement;
 
 namespace MainMenu
 {
@@ -32,6 +32,8 @@ namespace MainMenu
             AudioManager.Instance.PlaySoundEffect("UIClick");
             Debug.Log("Reseting Save");
             SaveManager.Instance.state = new SaveState();
+            PauseManager.Instance.SetSoundVolume(false);
+            PauseManager.Instance.SetSoundVolume(true);
             SaveManager.Instance.Save();
 
             LaunchGame();
