@@ -155,12 +155,12 @@ namespace DialogueManagement
 
             NextLineFeedback();
             
-            if(currentDialogue.sentences[sentenceIndex].character == Character.Poppy
-                || currentDialogue.sentences[sentenceIndex].character == Character.Bergamot
-                || currentDialogue.sentences[sentenceIndex].character == Character.Thistle)
-            {
-                animator.Play($"Anim_{currentDialogue.sentences[sentenceIndex].character}_idle");
-            }
+            //if(currentDialogue.sentences[sentenceIndex].character == Character.Poppy
+            //    || currentDialogue.sentences[sentenceIndex].character == Character.Bergamot
+            //    || currentDialogue.sentences[sentenceIndex].character == Character.Thistle)
+            //{
+            //    animator.Play($"Anim_{currentDialogue.sentences[sentenceIndex].character}_idle");
+            //}
 
             if (animator != null)
             {
