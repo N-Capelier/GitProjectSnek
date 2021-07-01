@@ -365,15 +365,6 @@ namespace DialogueManagement
             }
         }
 
-        public void ChangeGameMode()
-        {
-
-        }
-
-        public void LaunchCutscene()
-        {
-
-        }
     }
 }
 
