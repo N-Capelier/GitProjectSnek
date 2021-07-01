@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Collections;
 
 namespace GameManagement
@@ -32,23 +31,12 @@ namespace GameManagement
             Set(startingState);
         }
 
-
         public void Set(GameState newState, string levelName = "", bool makeTransition = true)
         {
-            StartCoroutine(LoadAndWaitScene(newState, levelName, makeTransition));
+            StartCoroutine(LoadAndWaitForScene(newState, levelName, makeTransition));
         }
 
-        //public void SetAlphaUp()
-        //{
-        //    StartCoroutine(sceneTransition.AlphaUp(.2f));
-        //}
-
-        public void SetAlphaDown()
-        {
-            StartCoroutine(sceneTransition.AlphaDown(.05f));
-        }
-
-        IEnumerator LoadAndWaitScene(GameState newState, string levelName, bool makeTransition)
+        IEnumerator LoadAndWaitForScene(GameState newState, string levelName, bool makeTransition)
         {
             if (ActiveState == newState)
                 yield return null;
@@ -59,12 +47,6 @@ namespace GameManagement
                 {
                     StartCoroutine(sceneTransition.AlphaUp(.05f, levelName));
                 }
-                /*_newScene.allowSceneActivation = false;
-                while(_newScene.progress < 0.95f)
-                {
-                    yield return null;
-                }
-                _newScene.allowSceneActivation = true;*/
                 Set(newState);
             }
             else
@@ -72,6 +54,11 @@ namespace GameManagement
                 animator.Play(newState.ToString());
                 ActiveState = newState;
             }
+        }
+
+        public void SetAlphaDown()
+        {
+            StartCoroutine(sceneTransition.AlphaDown(.05f));
         }
     }
 }
