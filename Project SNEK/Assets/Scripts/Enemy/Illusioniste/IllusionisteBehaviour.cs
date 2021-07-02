@@ -43,9 +43,12 @@ namespace Enemy
 
         public IEnumerator IsRegenerating()
         {
-            clonesList[0].GetComponentInChildren<MeshRenderer>().material = clonesList[0].GetComponent<IllusionisteClone>().killableMat;
+            MeshRenderer _cloneMeshRenderer = clonesList[0].GetComponentInChildren<MeshRenderer>();
+            IllusionisteClone _clone = clonesList[0].GetComponent<IllusionisteClone>();
+
+            _cloneMeshRenderer.material = _clone.killableMat;
             yield return new WaitForSeconds(5);
-            clonesList[0].GetComponentInChildren<MeshRenderer>().material = clonesList[0].GetComponent<IllusionisteClone>().defaultMat;
+            _cloneMeshRenderer.material = _clone.defaultMat;
             isKillable = false;
         }
 

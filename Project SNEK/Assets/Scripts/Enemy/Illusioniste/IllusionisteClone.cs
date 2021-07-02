@@ -37,9 +37,10 @@ namespace Enemy
             }
             else
             {
-                GetComponentInChildren<MeshRenderer>().material = chargingMat;
+                MeshRenderer _childMeshRenderer = GetComponentInChildren<MeshRenderer>();
+                _childMeshRenderer.material = chargingMat;
                 yield return new WaitForSeconds(1);
-                GetComponentInChildren<MeshRenderer>().material = defaultMat;
+                _childMeshRenderer.material = defaultMat;
                 incomingBullet = Instantiate(bullet, gameObject.transform.position, Quaternion.identity);
                 incomingBullet.GetComponent<Rigidbody>().AddForce(bulletDir.normalized * bulletSpeed, ForceMode.Force);
             }

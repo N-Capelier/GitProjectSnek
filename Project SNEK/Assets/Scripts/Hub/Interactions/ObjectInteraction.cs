@@ -18,7 +18,7 @@ namespace Hub.Interaction
 
         protected override void Interact()
         {
-            objectAnimator.Play(animationName);
+            objectAnimator.Play(Animator.StringToHash(animationName));
         }
     }
 }

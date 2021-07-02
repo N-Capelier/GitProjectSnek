@@ -88,7 +88,7 @@ namespace Player.Controller
                 || currentDirection == PlayerDirection.Left && nextDirection == PlayerDirection.Up)
             {
                 objectRenderer.transform.Rotate(0, 90, 0);
-                animator.Play("Anim_PlayerRun_TurnR");
+                animator.Play(Animator.StringToHash("Anim_PlayerRun_TurnR"));
                 AudioManager.Instance.PlaySoundEffect("PlayerSwipe01");
             }
             else if (currentDirection == PlayerDirection.Up && nextDirection == PlayerDirection.Left
@@ -97,7 +97,7 @@ namespace Player.Controller
                 || currentDirection == PlayerDirection.Left && nextDirection == PlayerDirection.Down)
             {
                 objectRenderer.transform.Rotate(0, -90, 0);
-                animator.Play("Anim_PlayerRun_TurnL");
+                animator.Play(Animator.StringToHash("Anim_PlayerRun_TurnL"));
                 AudioManager.Instance.PlaySoundEffect("PlayerSwipe01");
             }
 
@@ -170,7 +170,7 @@ namespace Player.Controller
         {
             if (isInCutscene)
                 return;
-            PlayerManager.Instance.currentController.animator.Play("Anim_PlayerRun_runCHARGE");
+            PlayerManager.Instance.currentController.animator.Play(Animator.StringToHash("Anim_PlayerRun_runCHARGE"));
             fadeToHoldCoroutine = StartCoroutine(FadeToHold());
         }
 

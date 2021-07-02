@@ -30,7 +30,7 @@ namespace Plates
             {
                 Instantiate(onEnterParticle, transform.position + Vector3.up * 0.25f, Quaternion.identity);
                 if(done == false)
-                animator.Play("animPlateON");
+                animator.Play(Animator.StringToHash("animPlateON"));
 
                 //if (other.gameObject.layer == LayerMask.NameToLayer("Spirit"))
                 //    print("sprit in");
@@ -60,7 +60,7 @@ namespace Plates
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController") || other.gameObject.layer == LayerMask.NameToLayer("Spirit"))
             {
-                animator.Play("animPlateOFF");
+                animator.Play(Animator.StringToHash("animPlateOFF"));
                 //if (other.gameObject.layer == LayerMask.NameToLayer("Spirit"))
                 //    print("sprit out");
 

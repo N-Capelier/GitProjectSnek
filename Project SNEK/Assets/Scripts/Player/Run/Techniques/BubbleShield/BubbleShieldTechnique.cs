@@ -17,7 +17,7 @@ namespace Player.Technique
 
         public override IEnumerator TechniqueCast(Controller.PlayerDirection techniqueDirection)
         {
-                PlayerManager.Instance.currentController.animator.Play("Anim_PlayerRun_Shield");
+                PlayerManager.Instance.currentController.animator.Play(Animator.StringToHash("Anim_PlayerRun_Shield"));
                 PlayerManager.Instance.currentController.spellMoveSpeedModifier = 0.01f;
                 yield return new WaitForSeconds(0.833f); //Cooldown Anim Shield
                 PlayerManager.Instance.currentController.spellMoveSpeedModifier = 1f;

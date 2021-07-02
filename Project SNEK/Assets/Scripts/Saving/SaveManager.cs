@@ -8,12 +8,17 @@ namespace Saving
     public class SaveManager : Singleton<SaveManager>
     {
         public SaveState state;
+        public static bool loaded = false;
 
         private void Awake()
         {
             CreateSingleton(true);
-            Load();
-            print("Loaded save");
+            if(!loaded)
+            {
+                loaded = true;
+                Load();
+                print("Loaded save");
+            }
         }
 
         public void Save()
