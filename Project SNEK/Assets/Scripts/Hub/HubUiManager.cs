@@ -7,7 +7,6 @@ using TMPro;
 using AudioManagement;
 using System.Collections.Generic;
 using System.Collections;
-using DialogueManagement;
 using LetterMailManagement;
 using Player;
 using PauseManagement;
@@ -19,15 +18,9 @@ namespace Hub.UI
     /// </summary>
     public class HubUiManager : Singleton<HubUiManager>
     {
-        enum BonusStat
-        {
-            Health,
-            Range,
-            Power
-        }
-
         [Header("Level Access Menu")]
         [SerializeField] GameObject levelAccessBox;
+        [SerializeField] RectTransform scrollviewContent;
         [SerializeField] TextMeshProUGUI CoinCountText;
         [Header("PNJ Level Access")]
         [SerializeField] GameObject[] levelBoxPNJ;
@@ -49,7 +42,6 @@ namespace Hub.UI
         [SerializeField] ParticleSystem upgradeParticule;
 
 
-
         [Header("demoScreen Box")]
         [SerializeField] GameObject demoScreen;
 
@@ -65,15 +57,6 @@ namespace Hub.UI
 
         [Header("Hub Tuto UI")]
         [SerializeField] GameObject TutoBox;
-
-        [Header("WIP")]
-
-        [SerializeField] TextMeshProUGUI hearthCoins;
-        [SerializeField] TextMeshProUGUI upgradeText;
-        [SerializeField] GameObject confirmationBox;
-
-        int cost;
-        BonusStat statToUpgrade;
 
         private void Awake()
         {
@@ -138,6 +121,7 @@ namespace Hub.UI
         public void OpenLevelAccess()
         {
             AudioManager.Instance.PlaySoundEffect("UIClick");
+            scrollviewContent.offsetMin = Vector2.zero;
             FadeInBackground(.2f);
             levelAccessBox.gameObject.SetActive(true);
             levelAccessBox.transform.LeanScale(Vector3.one, 0.2f);
