@@ -33,6 +33,7 @@ namespace Hub.UI
         [SerializeField] GameObject closeLetterButton;
         [SerializeField] List<GameObject> letterList;
         [SerializeField] TextMeshProUGUI letterText;
+        WaitForSeconds charDelay = new WaitForSeconds(0.005f);
 
         [Space]
 
@@ -197,7 +198,7 @@ namespace Hub.UI
             foreach(char letter in letterContent.text.ToCharArray())
             {
                 letterText.text += letter;
-                yield return new WaitForSeconds(0.005f);
+                yield return charDelay;
             }
             if(SaveManager.Instance.state.bergamotState == 3f)
             {
@@ -255,8 +256,8 @@ namespace Hub.UI
         public void OpenFountainBox()
         {
             AudioManager.Instance.PlaySoundEffect("UIClick");
-            PlayerManager.Instance.currentController.animator.Play("Anim_PlayerHub_TakeOutCoin");
-            PlayerManager.Instance.currentController.coinAnimator.Play("Anim_ObjectCoin_TakeOut");
+            PlayerManager.Instance.currentController.animator.Play(Animator.StringToHash("Anim_PlayerHub_TakeOutCoin"));
+            PlayerManager.Instance.currentController.coinAnimator.Play(Animator.StringToHash("Anim_ObjectCoin_TakeOut"));
             FontainConfirmBox.SetActive(true);
             CoinCountText.text = "x" + SaveManager.Instance.state.heartCoinAmount.ToString();
             switch (SaveManager.Instance.state.powerLevel)
@@ -280,8 +281,8 @@ namespace Hub.UI
         public void CloseFountainBox()
         {
             AudioManager.Instance.PlaySoundEffect("UINone");
-            PlayerManager.Instance.currentController.animator.Play("Anim_Playerhub_PutBackCoin");
-            PlayerManager.Instance.currentController.coinAnimator.Play("Anim_ObjectCoin_PutBack");
+            PlayerManager.Instance.currentController.animator.Play(Animator.StringToHash("Anim_Playerhub_PutBackCoin"));
+            PlayerManager.Instance.currentController.coinAnimator.Play(Animator.StringToHash("Anim_ObjectCoin_PutBack"));
             FontainConfirmBox.transform.LeanScale(Vector3.zero, 0.2f).setOnComplete(SetFontainConfirmBoxFalse);
             if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
             {
@@ -324,8 +325,8 @@ namespace Hub.UI
 
         public IEnumerator FountainAnim(int level)
         {
-            PlayerManager.Instance.currentController.animator.Play("Anim_PlayerHub_ThrowCoin");
-            PlayerManager.Instance.currentController.coinAnimator.Play("Anim_ObjectCoin_Throw");
+            PlayerManager.Instance.currentController.animator.Play(Animator.StringToHash("Anim_PlayerHub_ThrowCoin"));
+            PlayerManager.Instance.currentController.coinAnimator.Play(Animator.StringToHash("Anim_ObjectCoin_Throw"));
             FontainConfirmBox.transform.LeanScale(Vector3.zero, 0.2f).setOnComplete(SetFontainConfirmBoxFalse);
             yield return new WaitForSeconds(3f);
             Instantiate(upgradeParticule, PlayerManager.Instance.currentController.transform.GetChild(0).transform.position, Quaternion.identity);

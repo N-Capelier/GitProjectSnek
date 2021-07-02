@@ -51,7 +51,7 @@ namespace GameManagement
             }
             else
             {
-                animator.Play(newState.ToString());
+                animator.Play(Animator.StringToHash(newState.ToString()));
                 ActiveState = newState;
             }
         }

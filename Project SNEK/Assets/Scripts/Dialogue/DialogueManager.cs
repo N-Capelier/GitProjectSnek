@@ -11,6 +11,7 @@ using PauseManagement;
 using Hub.UI;
 using FaceManager;
 using Player;
+using System.Text;
 
 namespace DialogueManagement
 {
@@ -35,6 +36,8 @@ namespace DialogueManagement
         int dialogCount;
 
         [SerializeField] float dialogBoxOffset;
+
+        WaitForSeconds charDelay = new WaitForSeconds(0.05f);
 
         private void Awake()
         {
@@ -106,7 +109,7 @@ namespace DialogueManagement
                 nameText.text = currentDialogue.sentences[sentenceIndex].character.ToString();
                 if(animator != null && currentDialogue.sentences[sentenceIndex].anim != "")
                 {
-                    animator.Play(currentDialogue.sentences[sentenceIndex].anim);
+                    animator.Play(Animator.StringToHash(currentDialogue.sentences[sentenceIndex].anim));
                 }
                 else if(animator != null)
                 {
@@ -126,6 +129,7 @@ namespace DialogueManagement
                 //Cacher l'ui des boutons
             }
             dialogueText.text = "";
+            StringBuilder strBuilder = new StringBuilder("");
             skipSentence = false;
             foreach (char letter in currentDialogue.sentences[sentenceIndex].sentence.ToCharArray())
             {
@@ -141,10 +145,12 @@ namespace DialogueManagement
                     dialogCount++;
                 }
 
-                dialogueText.text += letter;
+                strBuilder.Append(letter);
+                dialogueText.text = strBuilder.ToString();
+
                 if(!skipSentence)
                 {
-                    yield return new WaitForSeconds(0.05f);
+                    yield return charDelay;
                 }
                 else
                 {
@@ -305,8 +311,9 @@ namespace DialogueManagement
                 //}
             }
             CloseDialogueBox(currentDialogue);
-            animator.gameObject.GetComponent<NPCFaceManager>().SetEyesExpression(0);
-            animator.gameObject.GetComponent<NPCFaceManager>().SetMouthExpression(0);
+            NPCFaceManager _face = animator.GetComponent<NPCFaceManager>();
+            _face.SetEyesExpression(0);
+            _face.SetMouthExpression(0);
             if (currentDialogue.getCoin == true)
             {
                 SaveManager.Instance.state.heartCoinAmount++;
@@ -354,14 +361,15 @@ namespace DialogueManagement
 
         public void NextLineFeedback()
         {
-            if (dialogueArrow.GetComponent<CanvasGroup>().alpha == 0)
+            CanvasGroup _canvasGroup = dialogueArrow.GetComponent<CanvasGroup>();
+            if (_canvasGroup.alpha == 0)
             {
-                LeanTween.alphaCanvas(dialogueArrow.GetComponent<CanvasGroup>(), 1, 0.5f).setLoopPingPong();
+                LeanTween.alphaCanvas(_canvasGroup, 1, 0.5f).setLoopPingPong();
             }
             else
             {
                 LeanTween.cancel(dialogueArrow.gameObject);
-                LeanTween.alphaCanvas(dialogueArrow.GetComponent<CanvasGroup>(), 0, 0f);
+                LeanTween.alphaCanvas(_canvasGroup, 0, 0f);
             }
         }
 

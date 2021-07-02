@@ -89,7 +89,7 @@ namespace Player.Spirits
         public IEnumerator Death()
         {
             //Play death anim
-            animator.Play("animSpiritDisappear");
+            animator.Play(Animator.StringToHash("animSpiritDisappear"));
             yield return new WaitForSeconds(0.66f);
             if(objectRenderer.activeSelf == true)
             Instantiate(poof, transform);

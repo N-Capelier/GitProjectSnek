@@ -39,7 +39,7 @@ namespace Rendering.Run
         {
             if(ActiveState != newState || forceState == true)
             {
-                animator.Play(newState.ToString());
+                animator.Play(Animator.StringToHash(newState.ToString()));
                 ActiveState = newState;
             }
         }

@@ -63,6 +63,7 @@ namespace Boss
         [SerializeField] Vector3 targetVec;
 
         public TimelineAsset introCinematic;
+        WaitForSeconds markerDelay = new WaitForSeconds(.1f);
 
         private void Awake()
         {
@@ -199,7 +200,7 @@ namespace Boss
                     {
                         marker = Instantiate(targetMarker, (new Vector3(targetVec.x + y, targetVec.y, targetVec.z - x -1)), Quaternion.identity, gameObject.transform);
                         incomingBombs.Add(marker);
-                        yield return new WaitForSeconds(0.1f);
+                        yield return markerDelay;
                     }
                 }
             }
@@ -260,7 +261,7 @@ namespace Boss
 
         IEnumerator ComeClose()
         {
-            animator.Play("BossAno_TauntIn");
+            animator.Play(Animator.StringToHash("BossAno_TauntIn"));
             animator.SetBool("animIsTaunt", true);
             camDistance = 9;
             yield return new WaitForSeconds(7f);
@@ -280,7 +281,7 @@ namespace Boss
         IEnumerator Stun()
         {
             camDistance = 7;
-            animator.Play("BossAno_StunIn");
+            animator.Play(Animator.StringToHash("BossAno_StunIn"));
             animator.SetBool("animIsStuned", true);
             animator.SetBool("animIsTaunt", false);
             yield return new WaitForSeconds(7);

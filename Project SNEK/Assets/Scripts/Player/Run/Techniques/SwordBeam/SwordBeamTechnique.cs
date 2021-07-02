@@ -16,7 +16,7 @@ namespace Player.Technique
         public override IEnumerator TechniqueCast(Controller.PlayerDirection techniqueDirection)
         {
             PlayerManager.Instance.currentController.spellMoveSpeedModifier = 0.01f;
-            PlayerManager.Instance.currentController.animator.Play("Anim_PlayerRun_SwordBeam");
+            PlayerManager.Instance.currentController.animator.Play(Animator.StringToHash("Anim_PlayerRun_SwordBeam"));
             yield return new WaitForSeconds(0.5f); // Timing partie 1
             beam = Instantiate(beamPrefab, transform.position, Quaternion.identity);
             switch (techniqueDirection)

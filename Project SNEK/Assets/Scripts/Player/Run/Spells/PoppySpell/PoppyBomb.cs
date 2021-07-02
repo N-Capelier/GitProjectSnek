@@ -71,7 +71,7 @@ namespace Player.Spells
             boxCollider.enabled = false;
             yield return new WaitForSeconds(0.3f);
             absorbFx.Play();
-            animator.Play("Anim_Kettle_Absorb");
+            animator.Play(Animator.StringToHash("Anim_Kettle_Absorb"));
             AudioManager.Instance.PlaySoundEffect("MarmiteAspire");
             capCollider.enabled = true;
             yield return new WaitForSeconds(timeBeforeIgnition);
@@ -84,7 +84,7 @@ namespace Player.Spells
             ignited = true;
             capCollider.enabled = false;
             Destroy(absorbFx.gameObject);
-            animator.Play("Anim_Object_KettleExplosion");
+            animator.Play(Animator.StringToHash("Anim_Object_KettleExplosion"));
             AudioManager.Instance.PlaySoundEffect("MarmiteEnd");
             yield return new WaitForSeconds(0.75f);
             explosionFx.Play();

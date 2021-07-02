@@ -16,6 +16,7 @@ namespace GameManagement
         private void Awake()
         {
             CreateSingleton(true);
+            Application.targetFrameRate = 30;
         }
     }
 }
