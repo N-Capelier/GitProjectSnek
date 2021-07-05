@@ -37,26 +37,36 @@ namespace Hub.Interaction
             //    yield return null;
             //}
 
-            float _rotationSpeed = 390;
-            int _direction;
+            float _rotationSpeed = 1;
+            //int _direction;
             Vector3 _targetDir = _targetDir = Quaternion.Euler(new Vector3(0, orientation, 0)) * Vector3.forward;
             // alternative:
             // = transform.position - PlayerManager.Instance.currentController.objectRenderer.transform.position;
 
-            if (Vector3.SignedAngle(_targetDir, PlayerManager.Instance.currentController.objectRenderer.transform.forward, Vector3.up) > 0)
-                _direction = -1;
-            else
-                _direction = 1;
 
-            float _spentTime = 1f;
+            /* if (Vector3.SignedAngle(_targetDir, PlayerManager.Instance.currentController.objectRenderer.transform.forward, Vector3.up) > 0)
+                 _direction = -1;
+             else
+                 _direction = 1;
 
-            while (Mathf.Abs(_targetDir.y - PlayerManager.Instance.currentController.objectRenderer.gameObject.transform.rotation.eulerAngles.y) > 10)
+             while (Mathf.Abs(_targetDir.y - PlayerManager.Instance.currentController.objectRenderer.gameObject.transform.rotation.eulerAngles.y) > 10)
+             {
+                 PlayerManager.Instance.currentController.objectRenderer.gameObject.transform.RotateAround(PlayerManager.Instance.currentController.objectRenderer.gameObject.transform.position, Vector3.up, _rotationSpeed * Time.deltaTime * _direction * 1 / _spentTime);
+                 _spentTime += Time.deltaTime;
+
+                 yield return new WaitForEndOfFrame();
+             }*/
+
+            float _spentTime = 0f;
+            while (_spentTime < 1)
             {
-                PlayerManager.Instance.currentController.objectRenderer.gameObject.transform.RotateAround(PlayerManager.Instance.currentController.objectRenderer.gameObject.transform.position, Vector3.up, _rotationSpeed * Time.deltaTime * _direction * 1 / _spentTime);
-                _spentTime += Time.deltaTime;
-
+                _spentTime += Time.deltaTime * _rotationSpeed;
+                PlayerManager.Instance.currentController.objectRenderer.gameObject.transform.forward = Vector3.Lerp(PlayerManager.Instance.currentController.objectRenderer.gameObject.transform.forward, _targetDir, _spentTime);
                 yield return new WaitForEndOfFrame();
             }
+
+
+
 
             //while (Mathf.Abs(InteractionManager.Instance.playerController.agent.transform.rotation.y - orientation) > 0)
             //{
