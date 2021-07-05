@@ -24,9 +24,6 @@ namespace AudioManagement
         //La List qui gère tous les sons actuellement joués sur une audiosource de cet objet
         public List<Sound> sounds = new List<Sound>();
 
-        //La List qui gère tous les sons actuellement joués sur une audiosource de cet objet
-        public List<Sound> musics = new List<Sound>();
-
         //Variable qui récupère la liste de tous les sons dans la base de donnée.
         public SoundsList soundsList;
 
@@ -57,37 +54,14 @@ namespace AudioManagement
 
             foreach (var source in sourcesAudio)
             {
-
                 source.audioSource = gameObject.AddComponent<AudioSource>();
-
-
             }
-            
-
-
-
         }
 
         private void Update()
         {
             UdpdateList();
-            //UpdateSliders();
         }
-
-        public void UpdateSliders()
-        {
-            foreach (var sound in sounds)
-            {
-                sound.source.volume = sound.volume * SoundEffectsVolume;
-            }
-
-            foreach (var music in musics)
-            {
-                music.source.volume = music.volume * MusicsVolume;
-            }
-
-        }
-
 
         //Fontion pour jouer un son simplement.
         public void PlaySoundEffect(string soundName)
@@ -96,9 +70,6 @@ namespace AudioManagement
             //On cherche le son que l'on va jouer dans la liste de son.
 
             Sound s = Array.Find(soundsList.sounds, Sound => Sound.name == soundName);
-
-
-
 
             //Ensuite, on cherche la première source qui n'est pas entrain de jouer un son et le fait jouer le son.
             foreach (var source in sourcesAudio)
@@ -136,8 +107,6 @@ namespace AudioManagement
             //On cherche le son que l'on va jouer dans la liste de son.
             Sound s = Array.Find(soundsList.sounds, Sound => Sound.name == soundName);
 
-            Sound m = Array.Find(soundsList.musics, Sound => Sound.name == soundName);
-
             //Variable locale pour stocker la référence a l'aurisource.
             Source sourceTemp = null;
 
@@ -149,29 +118,14 @@ namespace AudioManagement
                 {
                     Sound sound = new Sound();
 
-                    if (s != null)
-                    {
-                        sound.clip = s.clip;
-                        sound.volume = s.volume * SoundEffectsVolume;
+                    sound.clip = s.clip;
+                    sound.volume = s.volume * SoundEffectsVolume;
 
-                        sound.source = source.audioSource;
+                    sound.source = source.audioSource;
 
-                        sounds.Add(sound);
+                    sounds.Add(sound);
 
-                        source.audioSource.outputAudioMixerGroup = sfxMixer;
-                    }
-                    else if (m != null)
-                    {
-                        sound.clip = m.clip;
-                        sound.volume = m.volume * SoundEffectsVolume;
-
-                        sound.source = source.audioSource;
-
-                        musics.Add(sound);
-
-                        source.audioSource.outputAudioMixerGroup = musicMixer;
-                        s = m;
-                    }                    
+                    source.audioSource.outputAudioMixerGroup = sfxMixer;                    
 
                     source.audioSource.clip = s.clip;
                     source.audioSource.volume = s.volume * SoundEffectsVolume;
@@ -185,8 +139,8 @@ namespace AudioManagement
 
 
             }
-            return sourceTemp;
 
+            return sourceTemp;
         }
 
         public Source PlayThisSoundEffect(string soundName, bool loop)
@@ -194,11 +148,8 @@ namespace AudioManagement
             //On cherche le son que l'on va jouer dans la liste de son.
             Sound s = Array.Find(soundsList.sounds, Sound => Sound.name == soundName);
 
-            Sound m = Array.Find(soundsList.musics, Sound => Sound.name == soundName);
-
             //Variable locale pour stocker la référence a l'aurisource.
             Source sourceTemp = null;
-
 
             //Ensuite, on cherche la première source qui n'est pas entrain de jouer un son et le fait jouer le son.
             foreach (var source in sourcesAudio)
@@ -208,29 +159,14 @@ namespace AudioManagement
                 {
                     Sound sound = new Sound();
 
-                    if (s != null)
-                    {
-                        sound.clip = s.clip;
-                        sound.volume = s.volume;
+                    sound.clip = s.clip;
+                    sound.volume = s.volume;
 
-                        sound.source = source.audioSource;
+                    sound.source = source.audioSource;
 
-                        sounds.Add(sound);
+                    sounds.Add(sound);
 
-                        source.audioSource.outputAudioMixerGroup = sfxMixer;
-                    }
-                    else if (m != null)
-                    {
-                        sound.clip = m.clip;
-                        sound.volume = m.volume;
-
-                        sound.source = source.audioSource;
-
-                        musics.Add(sound);
-
-                        source.audioSource.outputAudioMixerGroup = musicMixer;
-                        s = m;
-                    }
+                    source.audioSource.outputAudioMixerGroup = sfxMixer;
 
                     source.audioSource.volume = s.volume;
                     source.audioSource.clip = s.clip;
@@ -243,11 +179,11 @@ namespace AudioManagement
 
                     break;
                 }
-
-
             }
+
             return sourceTemp;
         }
+
         //On update la list en retirant tous les sons qui ne se jouent plus.
         private void UdpdateList()
         {
@@ -479,7 +415,6 @@ namespace AudioManagement
             }
         }
 
-        
         private void InitialiseSource(AudioSource audioSource)
         {
             audioSource.clip = null;
