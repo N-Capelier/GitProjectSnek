@@ -20,11 +20,6 @@ namespace Map
 
         #region Private methods
 
-        private void Awake()
-        {
-            //CreateSingleton(true);
-        }
-
         private void Start()
         {
             cells = new int[width, height];

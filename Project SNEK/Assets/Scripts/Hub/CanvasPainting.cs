@@ -10,23 +10,23 @@ public class CanvasPainting : MonoBehaviour
     /// </summary>
     // Start is called before the first frame update
 
-    [SerializeField] SpriteRenderer renderer;
+    [SerializeField] SpriteRenderer sr;
     [SerializeField] Sprite[] rendererArray;
     void Start()
     {
         switch (SaveManager.Instance.state.canvasCurrentState)
         {
             case 0:
-                renderer.sprite = null;
+                sr.sprite = null;
                 break;
             case 1:
-                renderer.sprite = rendererArray[0];
+                sr.sprite = rendererArray[0];
                 break;
             case 2:
-                renderer.sprite = rendererArray[1];
+                sr.sprite = rendererArray[1];
                 break;
             case 3:
-                renderer.sprite = rendererArray[2];
+                sr.sprite = rendererArray[2];
                 break;
         }
     }

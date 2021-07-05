@@ -15,10 +15,7 @@ namespace CoinUI
         [SerializeField] TextMeshProUGUI currentCoinCount;
 
         [SerializeField] GameObject playerRenderer;
-        private void Awake()
-        {
-            //CreateSingleton();
-        }
+
         void Start()
         {
             UiCoin.transform.localScale = Vector3.zero;
