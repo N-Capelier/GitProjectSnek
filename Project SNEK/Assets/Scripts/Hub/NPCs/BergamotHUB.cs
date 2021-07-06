@@ -6,6 +6,7 @@ namespace Saving
 {
     public class BergamotHUB : NPCHUB
     {
+        #region old
         /*[Space]
         [Header("State1")]
         [SerializeField] TimelineAsset cutsceneTuto;
@@ -116,6 +117,7 @@ namespace Saving
         [Header("State29")]
         [SerializeField] Dialogue dialogue29;
         [SerializeField] Transform waypoint29;*/
+        #endregion
 
         public override void Refresh()
         {
