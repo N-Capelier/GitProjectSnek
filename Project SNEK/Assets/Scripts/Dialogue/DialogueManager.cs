@@ -326,7 +326,7 @@ namespace DialogueManagement
 
             if(SaveManager.Instance.state.poppyState == 26f)
             {
-                NPCManager.Instance.poppy.transform.position = NPCManager.Instance.poppy.waypoint26.position;
+                NPCManager.Instance.poppy.transform.position = NPCManager.Instance.poppy.waypointOutOfVillage.position;
             }
 
             //                              Debug

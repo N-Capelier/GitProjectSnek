@@ -263,6 +263,8 @@ namespace AudioManagement
         //Fonction alternative qui joue le son uniquement si la distance au joueur de l'objet est suffisement petite. Cette version de la fonction utilise la variable de distace globale.
         public Source PlayThisSoundEffect(string soundName, Transform here)
         {
+            if(PlayerManager.Instance.currentController == null)
+                return null;
 
             if (Vector3.Distance(here.position, PlayerManager.Instance.currentController.transform.position) <= minimumSoundPlayDistance)
             {

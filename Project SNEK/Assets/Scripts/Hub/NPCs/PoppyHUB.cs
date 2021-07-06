@@ -6,8 +6,7 @@ namespace Saving
 {
     public class PoppyHUB : NPCHUB
     {
-        [Space]
-        [Header ("State1")]
+        /*[Header ("State1")]
         [SerializeField] Transform waypoint1;
         [Space]
         [Header("State2")]
@@ -121,7 +120,7 @@ namespace Saving
         [Space]
         [Header("State31")]
         [SerializeField] Dialogue dialogue31;
-        [SerializeField] Transform waypoint31;
+        [SerializeField] Transform waypoint31;*/
 
         public override void Refresh()
         {
@@ -148,6 +147,9 @@ namespace Saving
                             PlayCutscene(npcStates[i].cutscene);
                             break;
                     }
+
+                    if (npcStates[i].stateID == 2)
+                        started = false;
 
                     if (npcStates[i].notInVillage)
                         SetTransform(waypointOutOfVillage);

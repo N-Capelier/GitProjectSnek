@@ -44,7 +44,7 @@ namespace Saving
         float startDelay = 1f;
 
         [Space]
-        [SerializeField] protected Transform waypointOutOfVillage = null;
+        public Transform waypointOutOfVillage = null;
         [Space]
         [SerializeField] protected List<NPCState> npcStates = new List<NPCState>();
 
