@@ -162,6 +162,7 @@ namespace Saving
 
             started = true;
 
+            #region old
             /*switch (SaveManager.Instance.state.bergamotState)
             {
                 default:
@@ -289,6 +290,8 @@ namespace Saving
                     break;
             }*/
             //started = true;
+            #endregion
+
         }
     }
 }

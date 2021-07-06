@@ -17,7 +17,6 @@ namespace Saving
             {
                 loaded = true;
                 Load();
-                print("Loaded save");
             }
         }
 
@@ -30,15 +29,13 @@ namespace Saving
         {
             if(PlayerPrefs.HasKey("save"))
             {
-                //Switch when unstable
                 state = Serializer.Deserialize<SaveState>(PlayerPrefs.GetString("save"));
-                //state = new SaveState();
             }
             else
             {
                 Debug.Log("Creating save");
                 state = new SaveState();
-                Save(); //Deactivate when unstable
+                Save();
             }
         }
     }
