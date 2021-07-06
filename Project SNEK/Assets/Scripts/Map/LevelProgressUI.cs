@@ -14,6 +14,7 @@ namespace Map
     {
         [SerializeField] Image fillMask;
         [SerializeField] int levelLength;
+        [HideInInspector] public int cinematicLength;
 
         PlayerController player;
 
@@ -32,7 +33,7 @@ namespace Map
             }
             else
             {
-                currentProgression = player.transform.position.z / levelLength;
+                currentProgression = player.transform.position.z - cinematicLength / levelLength;
 
                 if(currentProgression > fillMask.fillAmount)
                 {
