@@ -6,7 +6,7 @@ namespace Saving
 {
     public class BergamotHUB : NPCHUB
     {
-        [Space]
+        /*[Space]
         [Header("State1")]
         [SerializeField] TimelineAsset cutsceneTuto;
         [SerializeField] Transform waypointTuto;
@@ -115,7 +115,7 @@ namespace Saving
         [Space]
         [Header("State29")]
         [SerializeField] Dialogue dialogue29;
-        [SerializeField] Transform waypoint29;
+        [SerializeField] Transform waypoint29;*/
 
         public override void Refresh()
         {
@@ -124,7 +124,46 @@ namespace Saving
                 SaveManager.Instance.state.bergamotState = 11f;
             }
 
-            switch (SaveManager.Instance.state.bergamotState)
+            for (int i = 0; i < npcStates.Count; i++)
+            {
+                if(npcStates[i].stateID == SaveManager.Instance.state.bergamotState)
+                {
+                    switch(npcStates[i].stateType)
+                    {
+                        case NPCStateType.None:
+                        default:
+                            break;
+                        case NPCStateType.Dialogue:
+                            SetDialogue(npcStates[i].dialogue);
+                            break;
+                        case NPCStateType.Cutscene:
+                            PlayCutscene(npcStates[i].cutscene);
+                            break;
+                    }
+
+                    if (npcStates[i].notInVillage)
+                        SetTransform(waypointOutOfVillage);
+                    else
+                        SetTransform(npcStates[i].waypoint);
+
+                    if(npcStates[i].setNewStates)
+                    {
+                        if(npcStates[i].newBergamotState != 0)
+                            SaveManager.Instance.state.bergamotState = npcStates[i].newBergamotState;
+                        if(npcStates[i].newPoppyState != 0)
+                            SaveManager.Instance.state.poppyState = npcStates[i].newPoppyState;
+                        if(npcStates[i].newThistleState != 0)
+                            SaveManager.Instance.state.thistleState = npcStates[i].newThistleState;
+                    }
+
+                    break;
+                }
+            }
+
+            started = true;
+
+            #region old
+            /*switch (SaveManager.Instance.state.bergamotState)
             {
                 default:
                     Debug.LogError("No save state for BergamotHub!");
@@ -249,8 +288,10 @@ namespace Saving
                     SetDialogue(dialogue29);
                     SetTransform(waypoint29);
                     break;
-            }
-            started = true;
+            }*/
+            //started = true;
+            #endregion
+
         }
     }
 }

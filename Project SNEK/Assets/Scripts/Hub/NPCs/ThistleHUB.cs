@@ -9,7 +9,7 @@ namespace Saving
     {
         [Space]
         [Header("State1")]
-        [SerializeField] Transform waypointOutOfVillage;
+        //[SerializeField] Transform waypointOutOfVillage;
         [Space]
         [Header("State2")]
         [SerializeField] Dialogue dialogue2;

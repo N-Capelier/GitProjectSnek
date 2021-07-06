@@ -4,15 +4,49 @@ using DialogueManagement;
 using UnityEngine.Timeline;
 using Cinematic;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Saving
 {
+    public enum NPCStateType
+    {
+        None,
+        Cutscene,
+        Dialogue,
+    }
+
+    [System.Serializable]
+    public struct NPCState
+    {
+        [Header("State info")]
+        public int stateID;
+        [Space]
+        [Header("State content")]
+        public bool notInVillage;
+        public Transform waypoint;
+        [Space]
+        public NPCStateType stateType;
+        public TimelineAsset cutscene;
+        public Dialogue dialogue;
+        [Space]
+        [Header("Additionnal set")]
+        public bool setNewStates;
+        public float newBergamotState;
+        public float newPoppyState;
+        public float newThistleState;
+    }
+
     public abstract class NPCHUB : MonoBehaviour
     {
         [HideInInspector] public bool started = false;
         [SerializeField] DialogueInteraction dialogueInteraction;
         Clock startTimer;
         float startDelay = 1f;
+
+        [Space]
+        public Transform waypointOutOfVillage = null;
+        [Space]
+        [SerializeField] protected List<NPCState> npcStates = new List<NPCState>();
 
         public virtual IEnumerator Start()
         {

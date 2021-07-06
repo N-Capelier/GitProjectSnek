@@ -6,8 +6,7 @@ namespace Saving
 {
     public class PoppyHUB : NPCHUB
     {
-        [Space]
-        [Header ("State1")]
+        /*[Header ("State1")]
         [SerializeField] Transform waypoint1;
         [Space]
         [Header("State2")]
@@ -121,7 +120,7 @@ namespace Saving
         [Space]
         [Header("State31")]
         [SerializeField] Dialogue dialogue31;
-        [SerializeField] Transform waypoint31;
+        [SerializeField] Transform waypoint31;*/
 
         public override void Refresh()
         {
@@ -132,7 +131,49 @@ namespace Saving
                 return;
             }
 
-            switch (SaveManager.Instance.state.poppyState)
+            for (int i = 0; i < npcStates.Count; i++)
+            {
+                if (npcStates[i].stateID == SaveManager.Instance.state.poppyState)
+                {
+                    switch (npcStates[i].stateType)
+                    {
+                        case NPCStateType.None:
+                        default:
+                            break;
+                        case NPCStateType.Dialogue:
+                            SetDialogue(npcStates[i].dialogue);
+                            break;
+                        case NPCStateType.Cutscene:
+                            PlayCutscene(npcStates[i].cutscene);
+                            break;
+                    }
+
+                    if (npcStates[i].stateID == 2)
+                        started = false;
+
+                    if (npcStates[i].notInVillage)
+                        SetTransform(waypointOutOfVillage);
+                    else
+                        SetTransform(npcStates[i].waypoint);
+
+                    if (npcStates[i].setNewStates)
+                    {
+                        if (npcStates[i].newBergamotState != 0)
+                            SaveManager.Instance.state.bergamotState = npcStates[i].newBergamotState;
+                        if (npcStates[i].newPoppyState != 0)
+                            SaveManager.Instance.state.poppyState = npcStates[i].newPoppyState;
+                        if (npcStates[i].newThistleState != 0)
+                            SaveManager.Instance.state.thistleState = npcStates[i].newThistleState;
+                    }
+
+                    break;
+                }
+            }
+
+            started = true;
+
+            #region old
+            /*switch (SaveManager.Instance.state.poppyState)
             {
                 default:
                     Debug.LogError("No save state for PoppyHub!");
@@ -264,6 +305,9 @@ namespace Saving
                     break;
             }
             started = true;
+            */
+            #endregion
+
         }
     }
 }
