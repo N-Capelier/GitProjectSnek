@@ -187,13 +187,12 @@ namespace Cinematic
 
         public void PlayMusic(string name)
         {
-            musicAudio = AudioManager.Instance.PlayThisSoundEffect(name, true);
+            MusicManager.Instance.Music(name);
         }
 
         public void StopMusic()
         {
-            if(musicAudio != null)
-            musicAudio.audioSource.Stop();
+            MusicManager.Instance.Music(null);
         }
 
         public void ChangeNPCMaterial(SkinnedMeshRenderer renderer)
