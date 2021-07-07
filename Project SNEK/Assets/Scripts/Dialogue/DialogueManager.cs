@@ -8,7 +8,6 @@ using Cinematic;
 using Saving;
 using AudioManagement;
 using PauseManagement;
-using Hub.UI;
 using FaceManager;
 using Player;
 using System.Text;
@@ -18,7 +17,7 @@ namespace DialogueManagement
     /// <summary>
     /// Corentin
     /// </summary>
-    public class DialogueManager : Singleton<DialogueManager>
+    public class DialogueManager : MonoBehaviour
     {
 
         [SerializeField] TextMeshProUGUI nameText;
@@ -35,18 +34,19 @@ namespace DialogueManagement
         Animator animator, cinematicAnimator;
         int dialogCount;
 
+        PauseManager pauseManager;
+
         [SerializeField] float dialogBoxOffset;
 
         WaitForSeconds charDelay = new WaitForSeconds(0.05f);
 
-        private void Awake()
-        {
-            CreateSingleton();
-        }
         private void Start()
         {
+            GameManager.Instance.uiHandler.dialogueUI = this;
             DialogueBox.transform.localPosition = new Vector3(0, -Screen.height * dialogBoxOffset);
             InputHandler.InputReceived += OnTap;
+
+            pauseManager = GameManager.Instance.uiHandler.pauseUI;
         }
         public void SetCinematicDialogueAnimator(Animator animator)
         {
@@ -88,11 +88,11 @@ namespace DialogueManagement
             //Mouvement de caméra
             dialogCount = 0;
             StartCoroutine(WriteNextLine());
-            if (PauseManager.Instance == null)
+            if (pauseManager == null)
             {
                 yield break;
             }
-            PauseManager.Instance.HideOpenMenuButton();
+           pauseManager.HideOpenMenuButton();
         }
 
         IEnumerator WriteNextLine()
@@ -348,13 +348,13 @@ namespace DialogueManagement
                 if(currentDialogue.sentences[currentDialogue.sentences.Length - 1].activateButtons == false)
                 {
                     InteractionManager.Instance.EndInteraction();
-                    if (PauseManager.Instance is null)
+                    if (pauseManager is null)
                         return;
-                    PauseManager.Instance.ShowOpenMenuButton();
+                    pauseManager.ShowOpenMenuButton();
                 }
                 else
                 {
-                    HubUiManager.Instance.OpenPnjLevelAccess(currentDialogue.sentences[currentDialogue.sentences.Length - 1].levelIndex);
+                    GameManager.Instance.uiHandler.hubUI.OpenPnjLevelAccess(currentDialogue.sentences[currentDialogue.sentences.Length - 1].levelIndex);
                 }
             }
         }

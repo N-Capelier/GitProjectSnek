@@ -1,4 +1,5 @@
-﻿using Player;
+﻿using GameManagement;
+using Player;
 using Player.Controller;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,14 +14,17 @@ namespace Map
     public class LevelProgressUI : MonoBehaviour
     {
         [SerializeField] Image fillMask;
+        [SerializeField] Slider headSlider;
         [SerializeField] int levelLength;
-        [HideInInspector] public int cinematicLength;
 
         PlayerController player;
 
         float currentProgression;
+
         void Start()
         {
+            GameManager.Instance.uiHandler.levelProgressUI = this;
+            
             fillMask.fillAmount = 0;
             player = PlayerManager.Instance.currentController;
         }
@@ -33,11 +37,12 @@ namespace Map
             }
             else
             {
-                currentProgression = player.transform.position.z - cinematicLength / levelLength;
+                currentProgression = player.transform.position.z / levelLength;
 
                 if(currentProgression > fillMask.fillAmount)
                 {
                     fillMask.fillAmount = currentProgression;
+                    headSlider.value = currentProgression;
                 }
                 else
                 {

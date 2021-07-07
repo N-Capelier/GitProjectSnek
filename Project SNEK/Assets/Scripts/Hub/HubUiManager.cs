@@ -16,7 +16,7 @@ namespace Hub.UI
     /// <summary>
     /// Coco
     /// </summary>
-    public class HubUiManager : Singleton<HubUiManager>
+    public class HubUiManager : MonoBehaviour
     {
         [Header("Level Access Menu")]
         [SerializeField] GameObject levelAccessBox;
@@ -59,13 +59,13 @@ namespace Hub.UI
         [Header("Hub Tuto UI")]
         [SerializeField] GameObject TutoBox;
 
-        private void Awake()
-        {
-            CreateSingleton();
-        }
+
+        PauseManager pauseMananger;
 
         void Start()
         {
+            GameManager.Instance.uiHandler.hubUI = this;
+            pauseMananger = GameManager.Instance.uiHandler.pauseUI;
 
             levelAccessBox.transform.localScale = Vector3.zero;
             levelAccessBox.SetActive(false);
@@ -387,11 +387,11 @@ namespace Hub.UI
         {
             if(state == true)
             {
-                PauseManager.Instance.HideOpenMenuButton();
+               pauseMananger.HideOpenMenuButton();
             }
             else
             {
-                PauseManager.Instance.ShowOpenMenuButton();
+                pauseMananger.ShowOpenMenuButton();
             }
 
         }

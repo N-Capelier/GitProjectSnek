@@ -1,4 +1,5 @@
 ﻿using DialogueManagement;
+using GameManagement;
 using Hub.UI;
 
 namespace Hub.Interaction
@@ -10,8 +11,8 @@ namespace Hub.Interaction
     {
         protected override void Interact()
         {
-            HubUiManager.Instance.OpenFountainBox();
-            HubUiManager.Instance.SetOccupied(true);
+            GameManager.Instance.uiHandler.hubUI.OpenFountainBox();
+            GameManager.Instance.uiHandler.hubUI.SetOccupied(true);
         }
     }
 }

@@ -37,6 +37,9 @@ namespace Cinematic
             {
                 InteractionManager.Instance.camTarget.actions++;
                 InteractionManager.Instance.playerController.actions++;  //////////////////
+
+                //Hide UI elements
+                GameManager.Instance.uiHandler.HideUIHub();
             }
             else if(GameManager.Instance.gameState.ActiveState == GameState.Run)
             {
@@ -46,6 +49,9 @@ namespace Cinematic
                     PlayerManager.Instance.currentController.playerRunSpirits.spiritChain[i].objectRenderer.SetActive(false);
                 }
                 PlayerManager.Instance.currentController.isInCutscene = true;
+
+                //Hide UI elements
+                GameManager.Instance.uiHandler.HideUIRun();
             }
 
             if(GameManager.Instance.gameState.ActiveState != GameState.Cinematic)
@@ -98,6 +104,14 @@ namespace Cinematic
                 //PlayerManager.Instance.currentController.isInCutscene = false;
 
                 PlayerManager.Instance.currentController.RespawnAfterCutscene(spiritCount);
+
+                //Show UI elements
+                GameManager.Instance.uiHandler.ShowUIRun();
+            }
+            if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
+            {
+                //Show UI elements
+                GameManager.Instance.uiHandler.ShowUIHub();
             }
         }
 

@@ -9,7 +9,7 @@ namespace PauseManagement
     /// <summary>
     /// Coco
     /// </summary>
-    public class PauseManager : Singleton<PauseManager>
+    public class PauseManager : MonoBehaviour
     {
         [SerializeField] GameObject pauseMenu, openPauseMenu;
         [SerializeField] GameObject[] qualityToggles;
@@ -17,13 +17,9 @@ namespace PauseManagement
         [SerializeField] Slider soundSlider, musicSlider;
         //bool occupied = false;
 
-        private void Awake()
-        {
-            CreateSingleton();
-        }
-
         void Start()
         {
+            GameManager.Instance.uiHandler.pauseUI = this;
             pauseMenu.transform.localScale = Vector3.zero;
             soundSlider.value = SaveManager.Instance.state.soundVolume;
             musicSlider.value = SaveManager.Instance.state.musicVolume;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DialogueManagement;
 using Hub.UI;
+using GameManagement;
 
 namespace Hub.Interaction
 {
@@ -10,8 +11,8 @@ namespace Hub.Interaction
     {
         protected override void Interact()
         {
-            HubUiManager.Instance.OpenLevelAccess();
-            HubUiManager.Instance.SetOccupied(true);
+            GameManager.Instance.uiHandler.hubUI.OpenLevelAccess();
+            GameManager.Instance.uiHandler.hubUI.SetOccupied(true);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using DialogueManagement;
+using GameManagement;
 
 namespace Hub.Interaction
 {
@@ -9,7 +10,7 @@ namespace Hub.Interaction
 
         protected override void Interact()
         {
-            StartCoroutine(DialogueManager.Instance.StartDialogue(dialogue, animator));
+            StartCoroutine(GameManager.Instance.uiHandler.dialogueUI.StartDialogue(dialogue, animator));
         }
     }
 }

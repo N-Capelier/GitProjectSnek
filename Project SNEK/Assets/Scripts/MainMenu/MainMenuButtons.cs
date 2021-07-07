@@ -32,8 +32,8 @@ namespace MainMenu
             AudioManager.Instance.PlaySoundEffect("UIClick");
             Debug.Log("Reseting Save");
             SaveManager.Instance.state = new SaveState();
-            PauseManager.Instance.SetSoundVolume(false);
-            PauseManager.Instance.SetSoundVolume(true);
+            GameManager.Instance.uiHandler.pauseUI.SetSoundVolume(false);
+            GameManager.Instance.uiHandler.pauseUI.SetSoundVolume(true);
             SaveManager.Instance.Save();
 
             LaunchGame();
