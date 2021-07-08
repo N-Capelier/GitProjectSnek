@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Player;
+using GameManagement;
 
 namespace Rendering.Hub
 {
@@ -74,7 +75,7 @@ namespace Rendering.Hub
         private void HandleStandaloneInputs()
         {
             lastPos = currentPos;
-            if(Input.GetMouseButton(0) && !DialogueManagement.DialogueManager.Instance.isRunningDialogue)
+            if(Input.GetMouseButton(0) && !GameManager.Instance.uiHandler.dialogueUI.isRunningDialogue)
             {
                 currentPos = Input.mousePosition;
 
@@ -113,7 +114,7 @@ namespace Rendering.Hub
             }
 
             lastPos = currentPos;
-            if (Input.touchCount == 1 && !DialogueManagement.DialogueManager.Instance.isRunningDialogue)
+            if (Input.touchCount == 1 && !GameManager.Instance.uiHandler.dialogueUI.isRunningDialogue)
             {
                 currentPos = Input.GetTouch(0).position;
 

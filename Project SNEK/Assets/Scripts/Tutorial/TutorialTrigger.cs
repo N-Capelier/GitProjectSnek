@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using Tutorial;
+using GameManagement;
 
 public class TutorialTrigger : MonoBehaviour
 {
@@ -9,7 +9,7 @@ public class TutorialTrigger : MonoBehaviour
     {
         if(other.gameObject.layer == LayerMask.NameToLayer("PlayerController"))
         {
-            TutorialUIManager.Instance.ActivateTutorialUI(tutoIndex);
+            GameManager.Instance.uiHandler.tutorialUI.ActivateTutorialUI(tutoIndex);
         }
     }
 }

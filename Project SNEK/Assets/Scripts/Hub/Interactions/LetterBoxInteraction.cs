@@ -1,4 +1,5 @@
-﻿using Hub.UI;
+﻿using GameManagement;
+using Hub.UI;
 using Saving;
 
 namespace Hub.Interaction
@@ -7,8 +8,8 @@ namespace Hub.Interaction
     {
         protected override void Interact()
         {
-            HubUiManager.Instance.OpenLetterBox();
-            HubUiManager.Instance.SetOccupied(true);
+            GameManager.Instance.uiHandler.hubUI.OpenLetterBox();
+            GameManager.Instance.uiHandler.hubUI.SetOccupied(true);
             //if (SaveManager.Instance.state.bergamotState == 3f)
             //{
             //    SaveManager.Instance.state.bergamotState = 4f;

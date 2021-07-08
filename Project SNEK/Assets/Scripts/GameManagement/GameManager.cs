@@ -10,6 +10,7 @@ namespace GameManagement
         [Header("References")]
         public StateMachine gameState = null;
         public InputHandler inputHandler = null;
+        public UIHandler uiHandler = null;
 
         [HideInInspector] public bool playedBossCinematic = false;
 

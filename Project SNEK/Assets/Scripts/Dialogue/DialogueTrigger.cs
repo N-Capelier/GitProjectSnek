@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using DialogueManagement;
+using GameManagement;
 
 /// <summary>
 /// Corentin
@@ -10,6 +11,6 @@ public class DialogueTrigger : MonoBehaviour
 
     public void TriggerDialogue()
     {
-        StartCoroutine(DialogueManager.Instance.StartDialogue(dialogue));
+        StartCoroutine(GameManager.Instance.uiHandler.dialogueUI.StartDialogue(dialogue));
     }
 }
