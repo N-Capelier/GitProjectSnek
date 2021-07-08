@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.8519697, y: 0.015594582}
   m_AnchorMax: {x: 0.9610003, y: 0.18200001}
-  m_AnchoredPosition: {x: -0.000030517578, y: 0.00012207031}
+  m_AnchoredPosition: {x: 0, y: 0.00012207031}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1482111815
@@ -557,9 +557,10 @@ MonoBehaviour:
   nameText: {fileID: 1725550853}
   dialogueText: {fileID: 1776065386}
   dialogueArrow: {fileID: 1482111814}
-  DialogueBox: {fileID: 8684498617547881776}
+  dialogueBox: {fileID: 8934077590302159365}
+  parentTransform: {fileID: 5784999129680336401}
   isRunningDialogue: 0
-  dialogBoxOffset: 2
+  dialogBoxOffset: 0
 --- !u!114 &864099010
 MonoBehaviour:
   m_ObjectHideFlags: 0
