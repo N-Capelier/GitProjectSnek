@@ -19,7 +19,7 @@ namespace GameManagement
 
                 yield return new WaitForEndOfFrame();
             }
-            SceneManager.LoadScene(_sceneName);
+            SceneManager.LoadSceneAsync(_sceneName);
         }
 
         public IEnumerator AlphaDown(float _speed)
