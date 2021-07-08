@@ -7,61 +7,63 @@ namespace Saving
 {
     public class ThistleHUB : NPCHUB
     {
-        [Space]
-        [Header("State1")]
+        #region old
+        //[Space]
+        //[Header("State1")]
         //[SerializeField] Transform waypointOutOfVillage;
-        [Space]
-        [Header("State2")]
-        [SerializeField] Dialogue dialogue2;
-        [SerializeField] Transform waypoint2;
-        [Space]
-        [Header("State3")]
-        [SerializeField] Dialogue dialogue3;
-        [SerializeField] Transform waypoint3;
-        [Space]
-        [Header("State4")]
-        [SerializeField] Dialogue dialogue4;
-        [SerializeField] Transform waypoint4;
-        [Space]
-        [Header("State6")]
-        [SerializeField] Dialogue dialogue6;
-        [SerializeField] Transform waypoint6;
-        [Space]
-        [Header("State7")]
-        [SerializeField] Dialogue dialogue7;
-        [SerializeField] Transform waypoint7;
-        [Space]
-        [Header("State8")]
-        [SerializeField] Dialogue dialogue8;
-        [SerializeField] Transform waypoint8;
-        [Space]
-        [Header("State9")]
-        [SerializeField] Dialogue dialogue9;
-        [SerializeField] Transform waypoint9;
-        [Space]
-        [Header("State10")]
-        [SerializeField] Dialogue dialogue10;
-        [SerializeField] Transform waypoint10;
-        [Space]
-        [Header("State11")]
-        [SerializeField] Dialogue dialogue11;
-        [SerializeField] Transform waypoint11;
-        [Space]
-        [Header("State12")]
-        [SerializeField] Dialogue dialogue12;
-        [SerializeField] Transform waypoint12;
-        [Space]
-        [Header("State13")]
-        [SerializeField] Dialogue dialogue13;
-        [SerializeField] Transform waypoint13;
-        [Space]
-        [Header("State14")]
-        [SerializeField] Dialogue dialogue14;
-        [SerializeField] Transform waypoint14;
-        [Space]
-        [Header("State15")]
-        [SerializeField] Dialogue dialogue15;
-        [SerializeField] Transform waypoint15;
+        //[Space]
+        //[Header("State2")]
+        //[SerializeField] Dialogue dialogue2;
+        //[SerializeField] Transform waypoint2;
+        //[Space]
+        //[Header("State3")]
+        //[SerializeField] Dialogue dialogue3;
+        //[SerializeField] Transform waypoint3;
+        //[Space]
+        //[Header("State4")]
+        //[SerializeField] Dialogue dialogue4;
+        //[SerializeField] Transform waypoint4;
+        //[Space]
+        //[Header("State6")]
+        //[SerializeField] Dialogue dialogue6;
+        //[SerializeField] Transform waypoint6;
+        //[Space]
+        //[Header("State7")]
+        //[SerializeField] Dialogue dialogue7;
+        //[SerializeField] Transform waypoint7;
+        //[Space]
+        //[Header("State8")]
+        //[SerializeField] Dialogue dialogue8;
+        //[SerializeField] Transform waypoint8;
+        //[Space]
+        //[Header("State9")]
+        //[SerializeField] Dialogue dialogue9;
+        //[SerializeField] Transform waypoint9;
+        //[Space]
+        //[Header("State10")]
+        //[SerializeField] Dialogue dialogue10;
+        //[SerializeField] Transform waypoint10;
+        //[Space]
+        //[Header("State11")]
+        //[SerializeField] Dialogue dialogue11;
+        //[SerializeField] Transform waypoint11;
+        //[Space]
+        //[Header("State12")]
+        //[SerializeField] Dialogue dialogue12;
+        //[SerializeField] Transform waypoint12;
+        //[Space]
+        //[Header("State13")]
+        //[SerializeField] Dialogue dialogue13;
+        //[SerializeField] Transform waypoint13;
+        //[Space]
+        //[Header("State14")]
+        //[SerializeField] Dialogue dialogue14;
+        //[SerializeField] Transform waypoint14;
+        //[Space]
+        //[Header("State15")]
+        //[SerializeField] Dialogue dialogue15;
+        //[SerializeField] Transform waypoint15;
+        #endregion
 
         public override void Refresh()
         {
@@ -72,6 +74,49 @@ namespace Saving
                 return;
             }
 
+            for (int i = 0; i < npcStates.Count; i++)
+            {
+                if (npcStates[i].stateID == SaveManager.Instance.state.thistleState)
+                {
+                    switch (npcStates[i].stateType)
+                    {
+                        case NPCStateType.None:
+                        default:
+                            break;
+                        case NPCStateType.Dialogue:
+                            SetDialogue(npcStates[i].dialogue);
+                            break;
+                        case NPCStateType.Cutscene:
+                            PlayCutscene(npcStates[i].cutscene);
+                            break;
+                    }
+
+                    if (npcStates[i].stateID == 2)
+                        started = false;
+
+                    if (npcStates[i].notInVillage)
+                        SetTransform(waypointOutOfVillage);
+                    else
+                        SetTransform(npcStates[i].waypoint);
+
+                    if (npcStates[i].setNewStates)
+                    {
+                        if (npcStates[i].newBergamotState != 0)
+                            SaveManager.Instance.state.bergamotState = npcStates[i].newBergamotState;
+                        if (npcStates[i].newPoppyState != 0)
+                            SaveManager.Instance.state.poppyState = npcStates[i].newPoppyState;
+                        if (npcStates[i].newThistleState != 0)
+                            SaveManager.Instance.state.thistleState = npcStates[i].newThistleState;
+                    }
+
+                    break;
+                }
+            }
+
+            started = true;
+
+            #region old
+            /*
             switch (SaveManager.Instance.state.thistleState)
             {
                 default:
@@ -138,7 +183,9 @@ namespace Saving
                     SetTransform(waypoint15);
                     break;
             }
-            started = true;
+            started = true;*/
+            #endregion
+
         }
     }
 }

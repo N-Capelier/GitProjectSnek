@@ -93,7 +93,7 @@ namespace Saving
 
         protected void SetTransform(Transform _transform)
         {
-            if (started)
+            if (started || _transform == null)
                 return;
             transform.position = _transform.position;
             transform.rotation = _transform.rotation;
