@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Player;
+using Rendering.Run;
 
 namespace GameManagement
 {
@@ -80,9 +81,9 @@ namespace GameManagement
             {
                 //tapTimer.StopWithoutEvent();
                 startPos = Input.mousePosition; // startPos = Input.touches[0].position - startPos;
-                if(GameManager.Instance.gameState.ActiveState == GameState.Run)
+                if (GameManager.Instance.gameState.ActiveState == GameState.Run)
                 {
-                    if(PlayerManager.Instance.currentController.playerRunAttack.isAttacking == false) 
+                    if (PlayerManager.Instance.currentController.playerRunAttack.isAttacking == false)
                     {
                         holding = true;
                         HoldInputReceived?.Invoke();
@@ -94,7 +95,7 @@ namespace GameManagement
             else if (Input.GetMouseButtonUp(0)/* || Input.touches[0].phase == TouchPhase.Ended || Input.touches[0].phase == TouchPhase.Canceled*/)
             {
                 holding = false;
-                if(holded)
+                if (holded)
                 {
                     holded = false;
                     InputReceived?.Invoke(InputType.Hold);
@@ -105,6 +106,11 @@ namespace GameManagement
                 }
                 startPos = currentPos = Vector2.zero;
 
+                if (GameManager.Instance.gameState.ActiveState == GameState.Run && RunCamController.Instance.feedbackObjects[RunCamController.Instance.index].isPlaying)
+                {
+                    RunCamController.Instance.feedbackObjects[RunCamController.Instance.index].Stop(true,ParticleSystemStopBehavior.StopEmitting);
+                    RunCamController.Instance.playing = false;
+                }
             }
 
             if (startPos != Vector2.zero)
@@ -119,7 +125,33 @@ namespace GameManagement
             {
                 float x = currentPos.x;
                 float y = currentPos.y;
-                if(Mathf.Abs(x) > Mathf.Abs(y))
+
+                //Add swipe trail feedback 
+                if (GameManager.Instance.gameState.ActiveState == GameState.Run)
+                {
+                    RunCamController controller = RunCamController.Instance;
+                    Camera tempCam = controller.cam;
+
+                    if(!controller.playing)
+                    {
+                        for (int i = 0; i < controller.feedbackObjects.Length; i++)
+                        {
+                            if (!controller.feedbackObjects[i].isPlaying)
+                            {
+                                controller.feedbackObjects[i].Play();
+                                controller.playing = true;
+                                controller.index = i;
+                                break;
+                            }
+                        }
+                    }
+
+                    controller.feedbackObjects[controller.index].transform.position = tempCam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
+                    controller.feedbackObjects[controller.index].transform.forward = tempCam.transform.forward;
+                }
+
+
+                if (Mathf.Abs(x) > Mathf.Abs(y))
                 {
                     if (x < 0)
                         InputReceived?.Invoke(InputType.SwipeLeft);
