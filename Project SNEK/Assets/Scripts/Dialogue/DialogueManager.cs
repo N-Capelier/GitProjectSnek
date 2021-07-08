@@ -23,7 +23,8 @@ namespace DialogueManagement
         [SerializeField] TextMeshProUGUI nameText;
         [SerializeField] TextMeshProUGUI dialogueText;
         [SerializeField] Image dialogueArrow;
-        [SerializeField] GameObject DialogueBox;
+        [SerializeField] RectTransform dialogueBox;
+        [SerializeField] RectTransform parentTransform;
         Dialogue currentDialogue;
         [HideInInspector] public bool isRunningDialogue = false;
         bool isSpeaking;
@@ -36,14 +37,12 @@ namespace DialogueManagement
 
         PauseManager pauseManager;
 
-        [SerializeField] float dialogBoxOffset;
-
         WaitForSeconds charDelay = new WaitForSeconds(0.05f);
 
         private void Start()
         {
             GameManager.Instance.uiHandler.dialogueUI = this;
-            DialogueBox.transform.localPosition = new Vector3(0, -Screen.height * dialogBoxOffset);
+            dialogueBox.anchoredPosition += new Vector2(0, (0 - dialogueBox.rect.height));
             InputHandler.InputReceived += OnTap;
 
             pauseManager = GameManager.Instance.uiHandler.pauseUI;
@@ -335,14 +334,12 @@ namespace DialogueManagement
 
         public void OpenDialogueBox()
         {
-            float dialogYPos = Screen.height * -0.05f;
-            DialogueBox.transform.LeanMoveLocalY(dialogYPos, 0.5f);
+            LeanTween.value(gameObject,dialogueBox.anchoredPosition, new Vector2(0,0), 0.5f).setOnUpdate((Vector2 val) => { dialogueBox.anchoredPosition = val;});
         }
-
         public void CloseDialogueBox(Dialogue currentDialogue)
         {
-            float dialogYPos = -Screen.height * dialogBoxOffset;
-            DialogueBox.transform.LeanMoveLocalY(dialogYPos, 0.5f);
+            LeanTween.value(gameObject, dialogueBox.anchoredPosition, new Vector2(0, 0 - dialogueBox.rect.height), 0.5f).setOnUpdate((Vector2 val) => { dialogueBox.anchoredPosition = val;});
+
             if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
             {
                 if(currentDialogue.sentences[currentDialogue.sentences.Length - 1].activateButtons == false)

@@ -16,6 +16,7 @@ namespace Rendering.Run
     /// </summary>
     public class RunCamController : Singleton<RunCamController>
     {
+        public Camera cam;
         public CinemachineVirtualCamera vcam;
         Animator animator;
         public CamState ActiveState { get; private set; }
@@ -24,6 +25,12 @@ namespace Rendering.Run
         [HideInInspector] public Rigidbody rb;
         public GameObject deathZone;
         [SerializeField] bool applyState;
+
+        [Header("Feedback")]
+        public ParticleSystem[] feedbackObjects;
+        [HideInInspector] public bool playing = false;
+        [HideInInspector] public int index;
+
 
         private void Awake()
         {
