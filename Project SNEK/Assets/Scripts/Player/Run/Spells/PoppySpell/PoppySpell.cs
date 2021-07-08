@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 using AudioManagement;
 
-
 namespace Player.Spells
 {
     /// <summary>
@@ -13,6 +12,7 @@ namespace Player.Spells
     {
         public GameObject bomb, kettleRenderer;
         public float animCooldown, throwSpeed, offset;
+
         public override IEnumerator SpellCast(PlayerDirection spellDirection)
         {
             if (PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits() < 3)
