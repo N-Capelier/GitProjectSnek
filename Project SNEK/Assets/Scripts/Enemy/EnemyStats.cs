@@ -33,13 +33,16 @@ namespace Enemy
         //[Space]
         //[SerializeField] [Range(0, 5)] int spiritLoot = 1;
 
+        private void Awake()
+        {
+            attackClock = new Clock(attackCooldown);
+            movementClock = new Clock(movementCooldown);
+        }
+
         void Start()
         {
             currentHp = maxHp;
             rb = GetComponent<Rigidbody>();
-
-            attackClock = new Clock(attackCooldown);
-            movementClock = new Clock(movementCooldown);
 
             attackClock.ClockEnded += onTimerAttackEnd;
             movementClock.ClockEnded += onTimerMovementEnd;

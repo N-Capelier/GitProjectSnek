@@ -3,6 +3,7 @@ using GameManagement;
 using Map;
 using AudioManagement;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 namespace Player.Controller
 {
@@ -23,6 +24,8 @@ namespace Player.Controller
 
         public PlayerRunFeebacks feedbacks;
 
+        bool spellAvailable = false;
+
         private void Start()
         {
             animator = objectRenderer.GetComponent<Animator>();
@@ -30,6 +33,18 @@ namespace Player.Controller
             currentDirection = PlayerDirection.Up;
             nextDirection = PlayerDirection.Up;
             nextNode = GetNextNode();
+
+            switch (SceneManager.GetActiveScene().name)
+            {
+                case "TutorialMap":
+                case "Level1_1":
+                case "Level1_2":
+                    break;
+                default:
+                    spellAvailable = true;
+                    break;
+            }
+
             InputHandler.InputReceived += HandleInput;
             InputHandler.HoldInputReceived += OnHold;
         }
@@ -168,8 +183,9 @@ namespace Player.Controller
 
         void OnHold()
         {
-            if (isInCutscene)
+            if (isInCutscene || !spellAvailable)
                 return;
+
             PlayerManager.Instance.currentController.animator.Play(Animator.StringToHash("Anim_PlayerRun_runCHARGE"));
             fadeToHoldCoroutine = StartCoroutine(FadeToHold());
         }
