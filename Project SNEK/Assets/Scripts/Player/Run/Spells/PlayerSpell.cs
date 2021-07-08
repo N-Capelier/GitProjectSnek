@@ -2,7 +2,7 @@
 using GameManagement;
 using System.Collections;
 using UnityEngine.SceneManagement;
-using Cinematic;
+using UnityEngine.UI;
 
 namespace Player.Spells
 {
@@ -15,6 +15,8 @@ namespace Player.Spells
 
         Clock spellCooldownTimer;
         bool canAttack = true;
+
+        [SerializeField] Image buttonImage;
 
         private void Start()
         {
@@ -29,6 +31,11 @@ namespace Player.Spells
             InputHandler.InputReceived -= HandleInput;
         }
 
+        public void SpellCastFromButton()
+        {
+            LaunchSpellCast(PlayerManager.Instance.currentController.currentDirection);
+        }
+
         void LaunchSpellCast(Controller.PlayerDirection spellDirection)
         {
             //////////////////////////////              TEMPORARY                                ////////////////////////////////////////
@@ -38,6 +45,7 @@ namespace Player.Spells
                 {
                     canAttack = false;
                     spellCooldownTimer.SetTime(spellCooldown);
+                    buttonImage.color = new Color(1f, 1f, 1f, .25f);
 
                     StartCoroutine(SpellCast(spellDirection));
                 }
@@ -48,6 +56,7 @@ namespace Player.Spells
         void OnCooldownEnded()
         {
             canAttack = true;
+            buttonImage.color = new Color(1f, 1f, 1f, 1f);
         }
 
         void HandleInput(InputType inputType)
