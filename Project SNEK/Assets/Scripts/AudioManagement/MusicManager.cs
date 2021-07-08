@@ -48,7 +48,8 @@ namespace AudioManagement
         // Start is called before the first frame update
         void Start()
         {
-            
+            playingMusicSource1 = gameObject.AddComponent<AudioSource>();
+            playingMusicSource2 = gameObject.AddComponent<AudioSource>();
         }
 
         // Update is called once per frame
@@ -57,13 +58,37 @@ namespace AudioManagement
 
         }
 
+        [ContextMenu("TestMusic")]
+        public void TestMusic()
+        {
+            StartCoroutine(ChangeMusic("FallVillage"));
+
+        }
+
+        public void Music(String music)
+        {
+            StartCoroutine(ChangeMusic(music));
+        }
+
+
         public IEnumerator ChangeMusic(String music)
         {
             if (isChangingMusic == false)
             {
                 isChangingMusic = true;
 
-                if (playingMusicSource1.isPlaying == false)
+                if(music == null)
+                {
+                    fadeOut = true;
+
+                    StartCoroutine(FadeOut(playingMusicSource1, defaultFadeTime));
+
+                    while (fadeOut == true)
+                    {
+                        yield return null;
+                    }
+                }
+                else if (playingMusicSource1.isPlaying == false)
                 {
                     AttributeMusic(playingMusicSource1, music);
 
@@ -121,7 +146,7 @@ namespace AudioManagement
             source.clip = m.clip;
             source.volume = m.volume;
 
-            source.loop = false;
+            source.loop = true;
 
             source.outputAudioMixerGroup = musicMixer;
 
@@ -134,7 +159,6 @@ namespace AudioManagement
             while (audioSource.volume > 0)
             {
                 audioSource.volume -= startVolume * Time.deltaTime / FadeTime;
-
                 yield return null;
             }
 
@@ -146,7 +170,7 @@ namespace AudioManagement
         //Fonction qui permet de FadeIn une audiosource.
         public IEnumerator FadeIn(AudioSource audioSource, float FadeTime)
         {
-
+            
             audioSource.volume = 0;
             audioSource.Play();
 
@@ -155,7 +179,6 @@ namespace AudioManagement
             while (audioSource.volume < FinalVolume)
             {
                 audioSource.volume += FinalVolume * Time.deltaTime / FadeTime;
-
                 yield return null;
             }
 

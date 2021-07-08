@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2190253072678773064}
   - component: {fileID: 26836668357739888}
+  - component: {fileID: 2338987732016229825}
   m_Layer: 0
   m_Name: Audio Manager
   m_TagString: Untagged
@@ -65,7 +66,6 @@ MonoBehaviour:
   - audioSource: {fileID: 0}
   - audioSource: {fileID: 0}
   sounds: []
-  musics: []
   soundsList: {fileID: 11400000, guid: 46599d7e5db6e244ea9e4a5e685dc0d4, type: 2}
   SoundEffectsVolume: 0.9
   MusicsVolume: 0.9
@@ -74,4 +74,28 @@ MonoBehaviour:
   musicMixer: {fileID: 7319545375936150602, guid: 2434f831039b1374284aac75f4c94ae7,
     type: 2}
   sfxMixer: {fileID: -3173978578768815238, guid: 2434f831039b1374284aac75f4c94ae7,
+    type: 2}
+--- !u!114 &2338987732016229825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7262371375306775063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0b7a360f303e924e84ebec4b7eb137a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentMusic:
+    name: 
+    clip: {fileID: 0}
+    source: {fileID: 0}
+    volume: 0
+  playingMusicSource1: {fileID: 0}
+  playingMusicSource2: {fileID: 0}
+  musicList: {fileID: 11400000, guid: af0d88b3466f2e441a36bce7ab680d50, type: 2}
+  defaultFadeTime: 1
+  soundsMixer: {fileID: 24100000, guid: 2434f831039b1374284aac75f4c94ae7, type: 2}
+  musicMixer: {fileID: 7319545375936150602, guid: 2434f831039b1374284aac75f4c94ae7,
     type: 2}

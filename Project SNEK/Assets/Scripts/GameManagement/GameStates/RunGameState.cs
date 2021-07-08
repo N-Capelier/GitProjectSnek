@@ -17,7 +17,6 @@ namespace GameManagement.GameStates
     public class RunGameState : StateMachineBehaviour
     {
         bool playedBossCinematic = false;
-        public static Source runMusic;
         
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -41,13 +40,10 @@ namespace GameManagement.GameStates
             {
                 RunCamController.Instance.Set(CamState.PlayerScrolling);
             }            
-            if (runMusic == null)
+            if(SceneManager.GetActiveScene().name != "Boss Anorexia")
             {
-                if(SceneManager.GetActiveScene().name != "Boss Anorexia")
-                {
-                    runMusic = AudioManager.Instance.PlayThisSoundEffect("LevelMusic", true);
-                }
-            }
+                MusicManager.Instance.Music("LevelMusic");
+            }           
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -67,11 +63,7 @@ namespace GameManagement.GameStates
 
             Destroy(PlayerManager.Instance.currentController.gameObject);
             Destroy(MapGrid.Instance.gameObject);
-            if (runMusic != null)
-            {
-                runMusic.audioSource.Stop();
-                runMusic = null;
-            }
+
             GameManager.Instance.playedBossCinematic = false;
         }
     }
