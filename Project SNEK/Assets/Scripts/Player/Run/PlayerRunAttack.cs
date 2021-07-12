@@ -156,7 +156,8 @@ namespace Player.Attack
             {
                 StartCoroutine(BeamAttack());
             }
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForFixedUpdate();
             Destroy(attack);
             yield return new WaitForSeconds(attackCooldown * 0.4f);
             isAttacking = false;
