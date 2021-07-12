@@ -39,6 +39,7 @@ namespace DialogueManagement
 
         WaitForSeconds charDelay = new WaitForSeconds(0.05f);
 
+
         private void Start()
         {
             GameManager.Instance.uiHandler.dialogueUI = this;
@@ -144,17 +145,20 @@ namespace DialogueManagement
                     dialogCount++;
                 }
 
-                strBuilder.Append(letter);
-                dialogueText.text = strBuilder.ToString();
-
-                if(!skipSentence)
+                if(letter == '\\')
                 {
-                    yield return charDelay;
+                    strBuilder.Append('\n');
+                    dialogueText.text = strBuilder.ToString();
                 }
                 else
                 {
-                    dialogueText.text = currentDialogue.sentences[sentenceIndex].sentence;
-                    break;
+                    strBuilder.Append(letter);
+                    dialogueText.text = strBuilder.ToString();
+                }
+
+                if (!skipSentence)
+                {
+                    yield return charDelay;
                 }
             }
 

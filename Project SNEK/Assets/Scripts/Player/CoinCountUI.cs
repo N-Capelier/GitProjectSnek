@@ -26,7 +26,8 @@ namespace CoinUI
         {
             if(GameManager.Instance.gameState.ActiveState == GameState.Hub && playerRenderer != null)
             {
-                transform.position = playerRenderer.transform.localPosition;
+                transform.position = new Vector3(playerRenderer.transform.position.x, transform.position.y, playerRenderer.transform.position.z) + new Vector3(-0.4f,0,1);
+                
             }
         }
 
