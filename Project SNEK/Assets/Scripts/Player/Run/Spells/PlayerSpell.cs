@@ -39,8 +39,8 @@ namespace Player.Spells
         void LaunchSpellCast(Controller.PlayerDirection spellDirection)
         {
             //////////////////////////////              TEMPORARY                                ////////////////////////////////////////
-            if (SceneManager.GetActiveScene().name == "Level1_3" || SceneManager.GetActiveScene().name == "Boss Anorexia")
-            {
+            //if (SceneManager.GetActiveScene().name == "Level1_3" || SceneManager.GetActiveScene().name == "Boss Anorexia" || SceneManager.GetActiveScene().name == "Level1_2V2")
+            //{
                 if (canAttack)
                 {
                     canAttack = false;
@@ -49,7 +49,7 @@ namespace Player.Spells
 
                     StartCoroutine(SpellCast(spellDirection));
                 }
-            }
+            //}
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         }
 
