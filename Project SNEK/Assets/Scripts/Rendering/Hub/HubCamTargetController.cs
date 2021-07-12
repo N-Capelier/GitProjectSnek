@@ -75,11 +75,11 @@ namespace Rendering.Hub
         private void HandleStandaloneInputs()
         {
             lastPos = currentPos;
-            if(Input.GetMouseButton(0) && !GameManager.Instance.uiHandler.dialogueUI.isRunningDialogue)
+            if (Input.GetMouseButton(0) && !GameManager.Instance.uiHandler.dialogueUI.isRunningDialogue)
             {
                 currentPos = Input.mousePosition;
 
-                if(currentPos != lastPos && lastPos != Vector3.zero)
+                if (currentPos != lastPos && lastPos != Vector3.zero)
                 {
                     isMovingCamera = true;
 
@@ -128,6 +128,7 @@ namespace Rendering.Hub
                 else
                 {
                     rb.velocity = Vector3.zero;
+                    currentPos = lastPos = Vector3.zero; //Testing for moving can during dialog bug
                 }
             }
             else

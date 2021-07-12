@@ -172,6 +172,8 @@ namespace Saving
 
             started = true;
 
+            GameManagement.GameManager.Instance.gameState.SetAlphaDown();
+
             #region old
             /*switch (SaveManager.Instance.state.poppyState)
             {
