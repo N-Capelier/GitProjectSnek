@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameManagement;
 using Enemy;
 using Player;
 using UnityEngine.Timeline;
@@ -37,6 +38,7 @@ namespace Boss
         public float feedbackPosSpeed;
         float moveSpeed = 2.5f;
         bool bombOver = false;
+        bool bossIsShooting = false;
         [SerializeField] bool canBeHit = false;
         [SerializeField] bool canDoPattern = true;
         bool isTaunt = false;
@@ -64,6 +66,7 @@ namespace Boss
 
         public TimelineAsset introCinematic;
         WaitForSeconds markerDelay = new WaitForSeconds(.1f);
+        WaitForSeconds shotsDelay = new WaitForSeconds(1.5f);
 
         private void Awake()
         {
@@ -75,7 +78,7 @@ namespace Boss
             rb = GetComponent<Rigidbody>();
             animator = GetComponent<Animator>();
             incomingBombs = new List<GameObject>();
-            currentHp = maxHp;
+            currentHp = SaveManager.Instance.state.bossAnorexiaHp * 10;
         }
 
         private void Update()
@@ -135,6 +138,7 @@ namespace Boss
         {
             animator.SetInteger("animPatternCount", 1);
             animator.SetBool("animIsAttacking", true);
+            bossIsShooting = true;
             targetFeedback.SetActive(true);
             targetFeedback.transform.localPosition = new Vector3(0, 0.3f, -1.5f); 
             timeToBomb = Random.Range(2, 4);
@@ -153,12 +157,11 @@ namespace Boss
             targetVec = new Vector3(PlayerManager.Instance.currentController.transform.position.x, targetFeedback.transform.position.y, gameObject.transform.position.z);
             targetVec = SnapPosition(targetVec);
             yield return new WaitForSeconds(0.2f);
-            StartCoroutine(TargetCell());            
-            yield return new WaitForSeconds(0.2f);
+            StartCoroutine(TargetCell());
+            yield return new WaitUntil(() => bossIsShooting == false);
+            //yield return new WaitForSeconds(0.2f);
             targetFeedback.SetActive(false);
-            yield return new WaitForSeconds(2f);
             animator.SetBool("animIsAttacking", false);
-            AudioManager.Instance.PlayThisSoundEffect("BossGrunt");
             yield return new WaitForSeconds(5);
             bombOver = false;
             canDoPattern = true;
@@ -188,22 +191,46 @@ namespace Boss
                 );
         }
 
+        int j;
         IEnumerator TargetCell()
         {
             incomingBombs = new List<GameObject>();
-            
-            for (int x = 0; x < pattern.row.Length; x++)
+
+            switch (currentHp)
             {
-                for (int y = 0; y < pattern.row[x].column.Length; y++)
+                case 30:
+                    j = 1;
+                    break;
+                case 20:
+                    j = 3;
+                    break;
+                case 10:
+                    j = 5;
+                    break;
+            }
+
+            for (int z = 0; z < j; z++)
+            {
+                targetVec = new Vector3(PlayerManager.Instance.currentController.transform.position.x, targetFeedback.transform.position.y, gameObject.transform.position.z);
+                targetVec = SnapPosition(targetVec);
+
+                for (int x = 0; x < pattern.row.Length; x++)
                 {
-                    if (pattern.row[x].column[y] == true)
+                    for (int y = 0; y < pattern.row[x].column.Length; y++)
                     {
-                        marker = Instantiate(targetMarker, (new Vector3(targetVec.x + y, targetVec.y, targetVec.z - x -1)), Quaternion.identity, gameObject.transform);
-                        incomingBombs.Add(marker);
-                        yield return markerDelay;
+                        if (pattern.row[x].column[y] == true)
+                        {
+                            marker = Instantiate(targetMarker, (new Vector3(targetVec.x + y, targetVec.y, targetVec.z - x - 1)), Quaternion.identity, gameObject.transform);
+                            incomingBombs.Add(marker);
+                            yield return markerDelay;
+                        }
                     }
                 }
+                yield return shotsDelay;
+                animator.Play("BossAno_RayOut");
+                AudioManager.Instance.PlayThisSoundEffect("BossGrunt");                
             }
+            bossIsShooting = false;
             patternCount++;            
         }
 
@@ -368,6 +395,8 @@ namespace Boss
             currentHp -= damage;
             print(currentHp);
             AudioManager.Instance.PlayThisSoundEffect("BossHit");
+            SaveManager.Instance.state.bossAnorexiaHp--;
+            SaveManager.Instance.Save();
 
             if (currentHp > 0)
             {

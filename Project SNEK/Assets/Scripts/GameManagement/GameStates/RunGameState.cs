@@ -32,6 +32,7 @@ namespace GameManagement.GameStates
                 if (!playedBossCinematic)
                 {
                     playedBossCinematic = true;
+                    SaveManager.Instance.state.bossAnorexiaHp = 3;
                     CutsceneManager.Instance.PlayCutscene(TestAnorexia.Instance.introCinematic);
                     GameManager.Instance.playedBossCinematic = true;
                 }
@@ -59,6 +60,7 @@ namespace GameManagement.GameStates
             {
                 playedBossCinematic = false;
                 GameManager.Instance.playedBossCinematic = false;
+                SaveManager.Instance.state.bossAnorexiaHp = 3;
             }
 
             Destroy(PlayerManager.Instance.currentController.gameObject);

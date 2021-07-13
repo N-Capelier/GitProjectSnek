@@ -50,5 +50,6 @@
 
 
         public bool isDemoFinished = false;
+        public int bossAnorexiaHp = 3;
     }
 }
