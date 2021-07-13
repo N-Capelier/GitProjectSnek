@@ -9,6 +9,7 @@ namespace DialogueManagement
     [CreateAssetMenu(fileName = "Dialogue", menuName = "Dialogue", order = 50)]
     public class Dialogue : ScriptableObject
     {
+        public Character mainCharacter;
         public bool getCoin;
         public short coinAmount;
         public bool isCutScene;

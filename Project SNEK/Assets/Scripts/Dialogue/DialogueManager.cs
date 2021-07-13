@@ -25,7 +25,12 @@ namespace DialogueManagement
         [SerializeField] Image dialogueArrow;
         [SerializeField] RectTransform dialogueBox;
         [SerializeField] RectTransform parentTransform;
+        [SerializeField] GameObject seeYouButton;
+        [SerializeField] GameObject keepTalkingButton;
+
         Dialogue currentDialogue;
+        [HideInInspector] public DialogueInteraction currentInteraction;
+
         [HideInInspector] public bool isRunningDialogue = false;
         bool isSpeaking;
         bool isTapped;
@@ -179,6 +184,14 @@ namespace DialogueManagement
             sentenceIndex++;
             isSpeaking = false;
             isTapped = false;
+
+            if(GameManager.Instance.gameState.ActiveState == GameState.Hub)
+            {
+                if(sentenceIndex == currentDialogue.sentences.Length)
+                {
+                    EndDialogue();
+                }
+            }
         }
 
         void OnTap(InputType input)
@@ -210,6 +223,20 @@ namespace DialogueManagement
 
         void EndDialogue()
         {
+            //Cache main character current state
+            float characterState = 0;
+            switch(currentDialogue.mainCharacter)
+            {
+                case Character.Bergamot:
+                    characterState = SaveManager.Instance.state.bergamotState;
+                    break;
+                case Character.Poppy:
+                    characterState = SaveManager.Instance.state.poppyState;
+                    break;
+                case Character.Thistle:
+                    characterState = SaveManager.Instance.state.thistleState;
+                    break;
+            }
 
             if(GameManager.Instance.gameState.ActiveState == GameState.Hub/* && CutsceneManager.Instance.mainDirector.playableAsset != null*/)
             {
@@ -313,25 +340,62 @@ namespace DialogueManagement
                 //    }
                 //}
             }
-            CloseDialogueBox(currentDialogue);
-            NPCFaceManager _face = animator.GetComponent<NPCFaceManager>();
-            _face.SetEyesExpression(0);
-            _face.SetMouthExpression(0);
+
+            bool change = false;
+            switch (currentDialogue.mainCharacter)
+            {
+                case Character.Poppy:
+                    if(characterState < SaveManager.Instance.state.poppyState)
+                    {
+                        change = true;
+                    }
+                    break;
+                case Character.Thistle:
+                    if (characterState < SaveManager.Instance.state.thistleState)
+                    {
+                        change = true;
+                    }
+                    break;
+                case Character.Bergamot:
+                    if (characterState < SaveManager.Instance.state.bergamotState)
+                    {
+                        change = true;
+                    }
+                    break;
+            }
+
+
+
+
             if (currentDialogue.getCoin == true)
             {
                 SaveManager.Instance.state.heartCoinAmount++;
                 PlayerManager.Instance.currentController.coinUI.UpdateCoinCount();
             }
-            currentDialogue = null;
-            animator = null;
-            isRunningDialogue = false;
-            isTapped = false;
 
             if(SaveManager.Instance.state.poppyState == 26f)
             {
                 NPCManager.Instance.poppy.transform.position = NPCManager.Instance.poppy.waypointOutOfVillage.position;
             }
 
+            if(!change)
+            {
+                CloseDialogueBox(currentDialogue);
+                NPCFaceManager _face = animator.GetComponent<NPCFaceManager>();
+                _face.SetEyesExpression(0);
+                _face.SetMouthExpression(0);
+                currentDialogue = null;
+                animator = null;
+                isRunningDialogue = false;
+                isTapped = false;
+            }
+            else
+            {
+                isRunningDialogue = false;
+                //show see you or keep talking buttons
+                keepTalkingButton.SetActive(true);
+                seeYouButton.SetActive(true);
+            }
             //                              Debug
             //Debug.Log($"Poppy state after dialog: {SaveManager.Instance.state.poppyState}");
         }
@@ -357,6 +421,9 @@ namespace DialogueManagement
                 {
                     GameManager.Instance.uiHandler.hubUI.OpenPnjLevelAccess(currentDialogue.sentences[currentDialogue.sentences.Length - 1].levelIndex);
                 }
+
+                keepTalkingButton.SetActive(false);
+                seeYouButton.SetActive(false);
             }
         }
 
@@ -372,6 +439,25 @@ namespace DialogueManagement
                 LeanTween.cancel(dialogueArrow.gameObject);
                 LeanTween.alphaCanvas(_canvasGroup, 0, 0f);
             }
+        }
+
+        public void KeepTalking()
+        {
+            keepTalkingButton.SetActive(false);
+            seeYouButton.SetActive(false);
+            StartCoroutine(StartDialogue(currentInteraction.dialogue, currentInteraction.animator));
+        }
+
+        public void SeeYouButton()
+        {
+            CloseDialogueBox(currentDialogue);
+            NPCFaceManager _face = animator.GetComponent<NPCFaceManager>();
+            _face.SetEyesExpression(0);
+            _face.SetMouthExpression(0);
+            currentDialogue = null;
+            animator = null;
+            isRunningDialogue = false;
+            isTapped = false;
         }
 
     }
