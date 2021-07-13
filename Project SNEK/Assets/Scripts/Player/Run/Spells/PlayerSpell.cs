@@ -3,6 +3,8 @@ using GameManagement;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 namespace Player.Spells
 {
@@ -17,9 +19,13 @@ namespace Player.Spells
         bool canAttack = true;
 
         [SerializeField] Image buttonImage;
+        [HideInInspector] public bool isSpellAccessible = false;
+
+        [SerializeField] GraphicRaycaster graphicRaycaster;
 
         private void Start()
         {
+            PlayerManager.Instance.currentController.playerRunSpell = this;
             spellCooldownTimer = new Clock();
             spellCooldownTimer.ClockEnded += OnCooldownEnded;
             InputHandler.InputReceived += HandleInput;
@@ -29,6 +35,26 @@ namespace Player.Spells
         {
             spellCooldownTimer.ClockEnded -= OnCooldownEnded;
             InputHandler.InputReceived -= HandleInput;
+        }
+
+        public bool RaySensorOnUI()
+        {
+            bool _rayHit = false;
+
+            PointerEventData _ped = new PointerEventData(GameManager.Instance.eventSystem);
+            _ped.position = Input.mousePosition;
+
+            List<RaycastResult> _results = new List<RaycastResult>();
+
+            graphicRaycaster.Raycast(_ped, _results);
+            foreach (RaycastResult result in _results)
+            {
+                if (result.gameObject.CompareTag("Interactable"))
+                {
+                    _rayHit = true;
+                }
+            }
+            return _rayHit;
         }
 
         public void SpellCastFromButton()

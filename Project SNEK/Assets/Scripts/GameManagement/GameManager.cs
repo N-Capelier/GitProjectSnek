@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace GameManagement
 {
@@ -11,6 +12,7 @@ namespace GameManagement
         public StateMachine gameState = null;
         public InputHandler inputHandler = null;
         public UIHandler uiHandler = null;
+        public EventSystem eventSystem = null;
 
         [HideInInspector] public bool playedBossCinematic = false;
 

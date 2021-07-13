@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using Player;
 using Rendering.Run;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
 namespace GameManagement
 {
@@ -86,7 +89,7 @@ namespace GameManagement
                     if (PlayerManager.Instance.currentController.playerRunAttack.isAttacking == false)
                     {
                         holding = true;
-                        HoldInputReceived?.Invoke();
+                        //HoldInputReceived?.Invoke();
                     }
                 }
                 holdTimer.SetTime(holdTimerDuration);
@@ -100,9 +103,13 @@ namespace GameManagement
                     holded = false;
                     InputReceived?.Invoke(InputType.Hold);
                 }
-                else if (currentPos.sqrMagnitude < sqrDeadzone)
+                else if (currentPos.sqrMagnitude < sqrDeadzone && PlayerManager.Instance.currentController != null)
                 {
-                    InputReceived?.Invoke(InputType.Tap);
+                    if(PlayerManager.Instance.currentController.playerRunSpell != null)
+                    {
+                        if (!PlayerManager.Instance.currentController.playerRunSpell.RaySensorOnUI())
+                            InputReceived?.Invoke(InputType.Tap);
+                    }
                 }
                 startPos = currentPos = Vector2.zero;
 
@@ -182,7 +189,7 @@ namespace GameManagement
                         if (PlayerManager.Instance.currentController.playerRunAttack.isAttacking == false)
                         {
                             holding = true;
-                            HoldInputReceived?.Invoke();
+                            //HoldInputReceived?.Invoke();
                         }
                     }
                     tapTimer.SetTime(tapTimerDuration);
@@ -235,9 +242,19 @@ namespace GameManagement
         void OnTapTimerEnded()
         {
 #if UNITY_EDITOR || UNITY_STANDALONE
-            if(!Input.GetMouseButton(0) && !swiped)
+            if(!Input.GetMouseButton(0) && !swiped && PlayerManager.Instance.currentController != null)
             {
-                InputReceived?.Invoke(InputType.Tap);
+                if(PlayerManager.Instance.currentController.playerRunSpell != null)
+                {
+                    if (!PlayerManager.Instance.currentController.playerRunSpell.RaySensorOnUI())
+                        InputReceived?.Invoke(InputType.Tap);
+                    else
+                        swiped = false;
+                }
+                else
+                {
+                    swiped = false;
+                }
             }
             else
             {
