@@ -9,6 +9,7 @@ using Rendering.Run;
 using AudioManagement;
 using CoinUI;
 using GameManagement;
+using Player.Spells;
 
 namespace Player.Controller
 {
@@ -26,6 +27,7 @@ namespace Player.Controller
     public abstract class PlayerController : MonoBehaviour
     {
         [HideInInspector] public PlayerRunAttack playerRunAttack;
+        [HideInInspector] public PlayerSpell playerRunSpell;
         public SpiritManager playerRunSpirits;
 
         public delegate void PlayerDeath();

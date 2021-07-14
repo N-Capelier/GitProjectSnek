@@ -436,6 +436,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellCooldown: 4
   buttonImage: {fileID: 4107595485501648665}
+  isSpellAccessible: 0
+  graphicRaycaster: {fileID: 8920380034232736572}
   bomb: {fileID: 6679387328982727670, guid: d2464c6438514734d9d95b3c77da392f, type: 3}
   kettleRenderer: {fileID: 0}
   animCooldown: 0.4
@@ -455,7 +457,7 @@ GameObject:
   - component: {fileID: 7821199237144804269}
   m_Layer: 8
   m_Name: Button
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1378,6 +1380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRunAttack: {fileID: 0}
+  playerRunSpell: {fileID: 0}
   playerRunSpirits: {fileID: 7253324390861353584}
   startingNode: {x: 5, y: 0, z: 0}
   currentDirection: 0
