@@ -34,6 +34,9 @@ namespace Hub.UI
         [SerializeField] List<GameObject> letterList;
         [SerializeField] TextMeshProUGUI letterText;
         WaitForSeconds charDelay = new WaitForSeconds(0.005f);
+        Coroutine letterCoroutine;
+        LetterMail currentContent;
+        bool skipText;
 
         [Space]
 
@@ -60,12 +63,12 @@ namespace Hub.UI
         [SerializeField] GameObject TutoBox;
 
 
-        PauseManager pauseMananger;
+        PauseManager pauseManager;
 
         void Start()
         {
             GameManager.Instance.uiHandler.hubUI = this;
-            pauseMananger = GameManager.Instance.uiHandler.pauseUI;
+            pauseManager = GameManager.Instance.uiHandler.pauseUI;
 
             levelAccessBox.transform.localScale = Vector3.zero;
             levelAccessBox.SetActive(false);
@@ -160,16 +163,18 @@ namespace Hub.UI
 
         public void OpenLetter(LetterMail letterContent)
         {
-            closeLetterButton.GetComponent<Button>().interactable = false;
+            currentContent = letterContent;
+            //closeLetterButton.GetComponent<Button>().interactable = false;
             letterBoxAnim.SetActive(true);
             letterBoxSelectMenu.LeanScale(Vector3.zero, 0.2f);
             letterBoxAnim.transform.localScale = Vector3.one;
             LeanTween.alphaCanvas(letterBoxAnim.GetComponent<CanvasGroup>(), 1f, 3f);
             // Couroutine de dialogue pour afficher le contenu de la lettre 
-            StartCoroutine(OpenLetterCoroutine(letterContent));
+            letterCoroutine = StartCoroutine(OpenLetterCoroutine(letterContent));
+
             // A la fin de la coroutine, affiché le feedback lettre done + clique = activé close letter 
             closeLetterButton.SetActive(true); // L'activer à la fin de l'affichage des lettres 
-            LeanTween.alphaCanvas(closeLetterButton.GetComponent<CanvasGroup>(), 1f, 1f).setLoopPingPong().setDelay(4f);
+            LeanTween.alphaCanvas(closeLetterButton.GetComponent<CanvasGroup>(), 1f, 1f).setLoopPingPong().setDelay(1f);
         }
 
         public void OpenDemoBox()
@@ -180,13 +185,22 @@ namespace Hub.UI
 
         public void CloseLetter()
         {
-            AudioManager.Instance.PlaySoundEffect("UINone");
-            LeanTween.cancel(closeLetterButton);
-            LeanTween.alphaCanvas(closeLetterButton.GetComponent<CanvasGroup>(), 0, 0f);
-            closeLetterButton.SetActive(false);
-            LeanTween.alphaCanvas(letterBoxAnim.GetComponent<CanvasGroup>(), 0f, 1f);
-            letterBoxSelectMenu.LeanScale(Vector3.one, 0.5f).setDelay(1.25f);
-            letterBoxAnim.LeanScale(Vector3.zero, 0.1f).setDelay(1f).setOnComplete(SetLetterAnimFalse);
+            if(letterText.text == currentContent.text)
+            {
+                FadeOutBackground(0.5f);
+
+                AudioManager.Instance.PlaySoundEffect("UINone");
+                LeanTween.cancel(closeLetterButton);
+                LeanTween.alphaCanvas(closeLetterButton.GetComponent<CanvasGroup>(), 0, 0f);
+                closeLetterButton.SetActive(false);
+                LeanTween.alphaCanvas(letterBoxAnim.GetComponent<CanvasGroup>(), 0f, 1f);
+                letterBoxSelectMenu.LeanScale(Vector3.one, 0.5f).setDelay(1.25f);
+                letterBoxAnim.LeanScale(Vector3.zero, 0.1f).setDelay(1f).setOnComplete(SetLetterAnimFalse);
+            }
+            else
+            {
+                skipText = true;
+            }
             //Reset Text ? No is ok
 
         }
@@ -194,11 +208,22 @@ namespace Hub.UI
         public IEnumerator OpenLetterCoroutine(LetterMail letterContent)
         {
             letterText.text = "";
-
+            skipText = false;
             foreach(char letter in letterContent.text.ToCharArray())
             {
-                letterText.text += letter;
-                yield return charDelay;
+                if (letter == '\\')
+                {
+                    letterText.text += "\n";
+                }
+                else
+                {
+                    letterText.text += letter;
+                }         
+
+                if(!skipText)
+                {
+                    yield return charDelay;
+                }
             }
             if(SaveManager.Instance.state.bergamotState == 3f)
             {
@@ -206,7 +231,7 @@ namespace Hub.UI
                 SaveManager.Instance.state.bergamotState = 4f;
                 NPCManager.Instance.RefreshNPCs();
             }
-            closeLetterButton.GetComponent<Button>().interactable = true;
+            //closeLetterButton.GetComponent<Button>().interactable = true;
         }
 
         public void OpenLetterBox()
@@ -387,11 +412,11 @@ namespace Hub.UI
         {
             if(state == true)
             {
-               pauseMananger.HideOpenMenuButton();
+               pauseManager.HideOpenMenuButton();
             }
             else
             {
-                pauseMananger.ShowOpenMenuButton();
+                pauseManager.ShowOpenMenuButton();
             }
 
         }

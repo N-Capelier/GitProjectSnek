@@ -16,6 +16,7 @@ namespace Map
         [SerializeField] Image fillMask;
         [SerializeField] Slider headSlider;
         [SerializeField] int levelLength;
+        [SerializeField] CanvasGroup canvasGroup;
 
         PlayerController player;
 
@@ -39,6 +40,7 @@ namespace Map
             player = PlayerManager.Instance.currentController;
 
             Initcheckpoints();
+            FadeOut();
         }
 
         void Update()
@@ -91,9 +93,26 @@ namespace Map
                     {
                         checkpoints[i].check = true;
                         checkpoints[i].gameObject.SetActive(false);
+                        FadeOut();
                     }
                 }
-               ;
+            }
+        }
+
+
+        public void FadeOut()
+        {
+            if(canvasGroup.alpha !=0)
+            {
+                if(canvasGroup.alpha <1)
+                {
+                    canvasGroup.LeanAlpha(1, 0.5f);
+                    canvasGroup.LeanAlpha(0.5f, 0.5f).setDelay(3f);
+                }
+                else
+                {
+                    canvasGroup.LeanAlpha(0.5f, 0.5f).setDelay(3f);
+                }
             }
         }
     }

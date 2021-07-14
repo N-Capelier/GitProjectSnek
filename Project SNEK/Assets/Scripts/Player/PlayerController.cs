@@ -8,6 +8,7 @@ using Player.Spirits;
 using Rendering.Run;
 using AudioManagement;
 using CoinUI;
+using GameManagement;
 
 namespace Player.Controller
 {
@@ -161,6 +162,9 @@ namespace Player.Controller
             //Camera reset
             RunCamController.Instance.Set(CamState.PlayerScrolling, true);
 
+            //Appear ProgressBar
+            GameManager.Instance.uiHandler.levelProgressUI.FadeOut();
+
             //Leave death "state"
             isDead = false;
 
@@ -205,6 +209,8 @@ namespace Player.Controller
             }
 
             transform.position = checkPoint.position;
+
+            GameManager.Instance.uiHandler.levelProgressUI.FadeOut();
 
             RunCamController.Instance.Set(CamState.PlayerScrolling, true);
 

@@ -8,7 +8,7 @@ namespace Hub.Interaction
     {
         [SerializeField] Transform cameraTargetTransform;
         [SerializeField] Transform playerTargetTransform;
-        [SerializeField] protected Animator animator;
+        [SerializeField] public Animator animator;
 
         [SerializeField] [Range(0f, 360f)] float orientation = 0f;
         //[SerializeField] float rotationSpeed = 0.1f;

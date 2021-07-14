@@ -201,6 +201,12 @@ namespace GameManagement
                         InputReceived?.Invoke(InputType.Tap);
                     }
                     startPos = currentPos = Vector2.zero;
+
+                    if (GameManager.Instance.gameState.ActiveState == GameState.Run && RunCamController.Instance.feedbackObjects[RunCamController.Instance.index].isPlaying)
+                    {
+                        RunCamController.Instance.feedbackObjects[RunCamController.Instance.index].Stop(true, ParticleSystemStopBehavior.StopEmitting);
+                        RunCamController.Instance.playing = false;
+                    }
                 }
 
                 if (startPos != Vector2.zero)
@@ -213,6 +219,32 @@ namespace GameManagement
                 {
                     float x = currentPos.x;
                     float y = currentPos.y;
+
+                    //Add swipe trail feedback 
+                    if (GameManager.Instance.gameState.ActiveState == GameState.Run)
+                    {
+                        RunCamController controller = RunCamController.Instance;
+                        Camera tempCam = controller.cam;
+
+                        if (!controller.playing)
+                        {
+                            for (int i = 0; i < controller.feedbackObjects.Length; i++)
+                            {
+                                if (!controller.feedbackObjects[i].isPlaying)
+                                {
+                                    controller.feedbackObjects[i].Play();
+                                    controller.playing = true;
+                                    controller.index = i;
+                                    break;
+                                }
+                            }
+                        }
+
+                        controller.feedbackObjects[controller.index].transform.position = tempCam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
+                        controller.feedbackObjects[controller.index].transform.forward = tempCam.transform.forward;
+                    }
+
+
                     if (Mathf.Abs(x) > Mathf.Abs(y))
                     {
                         if (x < 0)

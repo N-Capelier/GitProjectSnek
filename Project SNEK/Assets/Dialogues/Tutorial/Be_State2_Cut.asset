@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
   m_Name: Be_State2_Cut
   m_EditorClassIdentifier: 
+  mainCharacter: 3
   getCoin: 0
   coinAmount: 0
   isCutScene: 1
@@ -28,9 +29,11 @@ MonoBehaviour:
       not much but it's comfy!
     voiceLine: BeVoice
     activateButtons: 0
+    levelIndex: 0
   - character: 3
     anim: Anim_Bergamot_Emote_Haha
     sentence: There's an empty little house where you can settle in for the time
       of your stay.
     voiceLine: BeVoice
     activateButtons: 0
+    levelIndex: 0

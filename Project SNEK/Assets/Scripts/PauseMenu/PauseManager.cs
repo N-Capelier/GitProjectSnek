@@ -63,6 +63,7 @@ namespace PauseManagement
         public void HideOpenMenuButton()
         {
             //occupied = true;
+            openPauseMenu.GetComponent<CanvasGroup>().interactable = false;
             openPauseMenu.GetComponent<CanvasGroup>().LeanAlpha(0, 0.2f).setIgnoreTimeScale(true).setOnComplete(SetOpenPauseFalse);
 
         }
@@ -70,6 +71,7 @@ namespace PauseManagement
         public void ShowOpenMenuButton()
         {
             //occupied = false;
+            openPauseMenu.GetComponent<CanvasGroup>().interactable = true;
             openPauseMenu.SetActive(true);
             openPauseMenu.GetComponent<CanvasGroup>().LeanAlpha(1, 0.2f).setIgnoreTimeScale(true);
         }
