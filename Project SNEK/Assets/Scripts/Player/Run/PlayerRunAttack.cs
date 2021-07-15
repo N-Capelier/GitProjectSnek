@@ -25,7 +25,7 @@ namespace Player.Attack
         public GameObject attackCollision;
         [SerializeField] GameObject attackFx;
         [SerializeField] float fxOffSet = 0.15f;
-        [Space(20)]
+        [Space(10)]
         [Header("Beam Attack")]
         [SerializeField] [Range(0f, 100f)] float beamCooldown = 1f;
         [SerializeField] float beamSpeed;
@@ -43,7 +43,7 @@ namespace Player.Attack
             InputHandler.InputReceived += HandleInput;
             cooldownTimer.ClockEnded += OnCooldownEnded;
             PlayerController.PlayerDead += OnDeath;
-            PlayerRunController.PlayerChangedDirection += OnChangeDirection;
+            PlayerRunController.PlayerChangedDirectionForAttack += OnPlayerChangedDirection;
 
             if(SceneManager.GetActiveScene().name == "TutorialMap")
             {
@@ -68,7 +68,7 @@ namespace Player.Attack
             cooldownTimer.ClockEnded -= OnCooldownEnded;
             InputHandler.InputReceived -= HandleInput;
             PlayerController.PlayerDead -= OnDeath;
-            PlayerRunController.PlayerChangedDirection -= OnChangeDirection;
+            PlayerRunController.PlayerChangedDirectionForAttack -= OnPlayerChangedDirection;
         }
 
         Coroutine attackCoroutine;
@@ -102,6 +102,7 @@ namespace Player.Attack
             slashFx = Instantiate(attackFx, gameObject.transform.GetChild(0).gameObject.transform.position, Quaternion.identity);
             slashFx.gameObject.transform.localScale = new Vector3(rangeBonus + 0.2f, 1, rangeBonus + 0.2f);
             AudioManager.Instance.PlaySoundEffect("PlayerAttack01");
+
             switch (PlayerManager.Instance.currentController.currentDirection)
             {
                 case PlayerDirection.Up:
@@ -121,41 +122,44 @@ namespace Player.Attack
                     slashFx.transform.position += new Vector3(-fxOffSet, 0, 0);
                     break;
             }
+
             yield return new WaitForSeconds(0.1f);
             attack = Instantiate(attackCollision, transform.position, Quaternion.identity);
 
             switch (PlayerManager.Instance.currentController.currentDirection)
             {
                 // Ajouter un * par rapport à la range
-                case Controller.PlayerDirection.Up:
-                    attack.transform.localScale = new Vector3(2.9f * rangeBonus, 1, 2 * rangeBonus);
-                    attack.transform.position = transform.position + new Vector3(0, 0, 0.5f * rangeBonus * rangeBonusOffSet);
+                case PlayerDirection.Up:
+                    attack.transform.localScale = new Vector3(2.4f * rangeBonus, 1, 2 * rangeBonus);
+                    attack.transform.position = transform.position + new Vector3(0, 0, 0.5f * rangeBonus * rangeBonusOffSet * 2f);
                     //attack.GetComponent<BoxCollider>().size = new Vector3(3 * rangeBonus, 1, 2 * rangeBonus);
                     //attack.GetComponent<BoxCollider>().center = new Vector3(0, 0, 0.5f);
                     break;
-                case Controller.PlayerDirection.Down:
-                    attack.transform.localScale = new Vector3(2.9f * rangeBonus, 1, 2 * rangeBonus);
-                    attack.transform.position = transform.position + new Vector3(0, 0, -0.5f * rangeBonus * rangeBonusOffSet);
+                case PlayerDirection.Down:
+                    attack.transform.localScale = new Vector3(2.4f * rangeBonus, 1, 2 * rangeBonus);
+                    attack.transform.position = transform.position + new Vector3(0, 0, -0.5f * rangeBonus * rangeBonusOffSet * 2f);
                     //attack.GetComponent<BoxCollider>().size = new Vector3(3 * rangeBonus, 1, 2 * rangeBonus);
                     //attack.GetComponent<BoxCollider>().center = new Vector3(0, 0, -0.5f);
                     break;
-                case Controller.PlayerDirection.Left:
-                    attack.transform.localScale = new Vector3(2 * rangeBonus, 1, 2.9f * rangeBonus);
-                    attack.transform.position = transform.position + new Vector3(-0.5f * rangeBonus * rangeBonusOffSet, 0, 0);
+                case PlayerDirection.Left:
+                    attack.transform.localScale = new Vector3(2 * rangeBonus, 1, 2.4f * rangeBonus);
+                    attack.transform.position = transform.position + new Vector3(-0.5f * rangeBonus * rangeBonusOffSet * 2f, 0, 0);
                     //attack.GetComponent<BoxCollider>().size = new Vector3(2 * rangeBonus, 1, 3 * rangeBonus);
                     //attack.GetComponent<BoxCollider>().center = new Vector3(-0.5f, 0, 0);
                     break;
-                case Controller.PlayerDirection.Right:
-                    attack.transform.localScale = new Vector3(2 * rangeBonus, 1, 2.9f * rangeBonus);
-                    attack.transform.position = transform.position + new Vector3(0.5f * rangeBonus * rangeBonusOffSet, 0, 0);
+                case PlayerDirection.Right:
+                    attack.transform.localScale = new Vector3(2 * rangeBonus, 1, 2.4f * rangeBonus);
+                    attack.transform.position = transform.position + new Vector3(0.5f * rangeBonus * rangeBonusOffSet * 2f, 0, 0);
                     //attack.GetComponent<BoxCollider>().size = new Vector3(2 * rangeBonus, 1, 3 * rangeBonus);
                     //attack.GetComponent<BoxCollider>().center = new Vector3(0.5f, 0, 0);
                     break;
             }
+
             if(PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits() >= 5 && beamIsUp == true)
             {
                 StartCoroutine(BeamAttack());
             }
+
             yield return new WaitForSeconds(0.3f);
             yield return new WaitForFixedUpdate();
             Destroy(attack);
@@ -178,19 +182,19 @@ namespace Player.Attack
             AudioManager.Instance.PlaySoundEffect("SwordBeam");
             switch (PlayerManager.Instance.currentController.currentDirection)
             {
-                case Controller.PlayerDirection.Up:
+                case PlayerDirection.Up:
                     beam.GetComponent<Rigidbody>().velocity = Vector3.forward * beamSpeed;
                     beam.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
                     break;
-                case Controller.PlayerDirection.Down:
+                case PlayerDirection.Down:
                     beam.GetComponent<Rigidbody>().velocity = Vector3.back * beamSpeed;
                     beam.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
                     break;
-                case Controller.PlayerDirection.Right:
+                case PlayerDirection.Right:
                     beam.GetComponent<Rigidbody>().velocity = Vector3.right * beamSpeed;
                     beam.transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
                     break;
-                case Controller.PlayerDirection.Left:
+                case PlayerDirection.Left:
                     beam.GetComponent<Rigidbody>().velocity = Vector3.left * beamSpeed;
                     beam.transform.rotation = Quaternion.Euler(new Vector3(0, 270, 0));
                     break;
@@ -198,17 +202,19 @@ namespace Player.Attack
             yield return new WaitForSeconds(beamCooldown);
             beamIsUp = true;
         }
+
         void OnCooldownEnded()
         {
             canAttack = true;
         }
 
-        void OnChangeDirection(PlayerDirection _dir)
+        void OnPlayerChangedDirection()
         {
             if (attackCoroutine == null)
                 return;
 
             StopCoroutine(attackCoroutine);
+            print("Destroyed attack");
 
             if (slashFx != null)
                 Destroy(slashFx);
