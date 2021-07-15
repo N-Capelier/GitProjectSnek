@@ -18,6 +18,9 @@ namespace Player.Controller
         public delegate void PlayerChangingDirection(PlayerDirection direction);
         public static event PlayerChangingDirection PlayerChangedDirection;
 
+        public delegate void PlayerChangingDirectionForAttack();
+        public static event PlayerChangingDirectionForAttack PlayerChangedDirectionForAttack;
+
         float inputSpeed = 1f;
 
         public GameObject techniqueFx;
@@ -105,6 +108,7 @@ namespace Player.Controller
                 objectRenderer.transform.Rotate(0, 90, 0);
                 animator.Play(Animator.StringToHash("Anim_PlayerRun_TurnR"));
                 AudioManager.Instance.PlaySoundEffect("PlayerSwipe01");
+                PlayerChangedDirectionForAttack?.Invoke();
             }
             else if (currentDirection == PlayerDirection.Up && nextDirection == PlayerDirection.Left
                 || currentDirection == PlayerDirection.Right && nextDirection == PlayerDirection.Up
@@ -114,6 +118,7 @@ namespace Player.Controller
                 objectRenderer.transform.Rotate(0, -90, 0);
                 animator.Play(Animator.StringToHash("Anim_PlayerRun_TurnL"));
                 AudioManager.Instance.PlaySoundEffect("PlayerSwipe01");
+                PlayerChangedDirectionForAttack?.Invoke();
             }
 
             PlayerChangedDirection?.Invoke(currentDirection);
