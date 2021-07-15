@@ -103,19 +103,29 @@ namespace GameManagement
                     holded = false;
                     InputReceived?.Invoke(InputType.Hold);
                 }
-                else if (currentPos.sqrMagnitude < sqrDeadzone && PlayerManager.Instance.currentController != null)
+                else if (currentPos.sqrMagnitude < sqrDeadzone)
                 {
-                    if(PlayerManager.Instance.currentController.playerRunSpell != null)
+                    if (GameManager.Instance.gameState.ActiveState == GameState.Run)
                     {
-                        if (!PlayerManager.Instance.currentController.playerRunSpell.RaySensorOnUI())
-                            InputReceived?.Invoke(InputType.Tap);
+                        if (PlayerManager.Instance.currentController != null)
+                        {
+                            if (PlayerManager.Instance.currentController.playerRunSpell != null)
+                            {
+                                if (!PlayerManager.Instance.currentController.playerRunSpell.RaySensorOnUI())
+                                    InputReceived?.Invoke(InputType.Tap);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        InputReceived?.Invoke(InputType.Tap);
                     }
                 }
                 startPos = currentPos = Vector2.zero;
 
                 if (GameManager.Instance.gameState.ActiveState == GameState.Run && RunCamController.Instance.feedbackObjects[RunCamController.Instance.index].isPlaying)
                 {
-                    RunCamController.Instance.feedbackObjects[RunCamController.Instance.index].Stop(true,ParticleSystemStopBehavior.StopEmitting);
+                    RunCamController.Instance.feedbackObjects[RunCamController.Instance.index].Stop(true, ParticleSystemStopBehavior.StopEmitting);
                     RunCamController.Instance.playing = false;
                 }
             }
@@ -128,7 +138,7 @@ namespace GameManagement
                     currentPos = Input.touches[0].position - startPos;*/
             }
 
-            if(currentPos.sqrMagnitude > sqrDeadzone)
+            if (currentPos.sqrMagnitude > sqrDeadzone)
             {
                 float x = currentPos.x;
                 float y = currentPos.y;
@@ -139,7 +149,7 @@ namespace GameManagement
                     RunCamController controller = RunCamController.Instance;
                     Camera tempCam = controller.cam;
 
-                    if(!controller.playing)
+                    if (!controller.playing)
                     {
                         for (int i = 0; i < controller.feedbackObjects.Length; i++)
                         {
@@ -178,10 +188,10 @@ namespace GameManagement
 
         void HandleMobileTouchInput()
         {
-            if(Input.touchCount > 0)
+            if (Input.touchCount > 0)
             {
                 Touch _touch = Input.GetTouch(0);
-                if(_touch.phase == TouchPhase.Began)
+                if (_touch.phase == TouchPhase.Began)
                 {
                     startPos = _touch.position;
                     if (GameManager.Instance.gameState.ActiveState == GameState.Run)
@@ -195,15 +205,15 @@ namespace GameManagement
                     tapTimer.SetTime(tapTimerDuration);
                     holdTimer.SetTime(holdTimerDuration);
                 }
-                else if(_touch.phase == TouchPhase.Ended || _touch.phase == TouchPhase.Canceled)
+                else if (_touch.phase == TouchPhase.Ended || _touch.phase == TouchPhase.Canceled)
                 {
                     holding = false;
-                    if(holded)
+                    if (holded)
                     {
                         holded = false;
                         InputReceived?.Invoke(InputType.Hold);
                     }
-                    else if(currentPos.sqrMagnitude < sqrDeadzone)
+                    else if (currentPos.sqrMagnitude < sqrDeadzone)
                     {
                         InputReceived?.Invoke(InputType.Tap);
                     }
@@ -218,7 +228,7 @@ namespace GameManagement
 
                 if (startPos != Vector2.zero)
                 {
-                    if(_touch.phase == TouchPhase.Moved)
+                    if (_touch.phase == TouchPhase.Moved)
                         currentPos = _touch.position - startPos;
                 }
 
@@ -274,24 +284,29 @@ namespace GameManagement
         void OnTapTimerEnded()
         {
 #if UNITY_EDITOR || UNITY_STANDALONE
-            if(!Input.GetMouseButton(0) && !swiped && PlayerManager.Instance.currentController != null)
+            if (!Input.GetMouseButton(0) && !swiped)
             {
-                if(PlayerManager.Instance.currentController.playerRunSpell != null)
+                if (GameManager.Instance.gameState.ActiveState == GameState.Run)
                 {
-                    if (!PlayerManager.Instance.currentController.playerRunSpell.RaySensorOnUI())
-                        InputReceived?.Invoke(InputType.Tap);
-                    else
-                        swiped = false;
+                    if (PlayerManager.Instance.currentController != null)
+                    {
+                        if (PlayerManager.Instance.currentController.playerRunSpell != null)
+                        {
+                            if (!PlayerManager.Instance.currentController.playerRunSpell.RaySensorOnUI())
+                            {
+                                InputReceived?.Invoke(InputType.Tap);
+                                return;
+                            }
+                        }
+                    }
                 }
                 else
                 {
-                    swiped = false;
+                    InputReceived?.Invoke(InputType.Tap);
+                    return;
                 }
             }
-            else
-            {
-                swiped = false;
-            }
+            swiped = false;
 #elif UNITY_ANDROID || UNITY_IOS
             if(Input.touchCount <= 0  && !swiped)
             {
@@ -306,7 +321,7 @@ namespace GameManagement
 
         void OnHoldTimerEnded()
         {
-            if(holding)
+            if (holding)
             {
                 holding = false;
                 holded = true;

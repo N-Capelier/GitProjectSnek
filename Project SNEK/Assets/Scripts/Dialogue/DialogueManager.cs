@@ -36,6 +36,7 @@ namespace DialogueManagement
         bool isTapped;
         bool isCutSceneDialogue;
         bool skipSentence = false;
+        bool waitForClick = false;
         int sentenceIndex;
         Animator animator, cinematicAnimator;
         int dialogCount;
@@ -81,6 +82,7 @@ namespace DialogueManagement
             currentDialogue = dialogue;
             isRunningDialogue = true;
             isTapped = false;
+            skipSentence = false;
             sentenceIndex = 0;
 
             if (currentDialogue.isCutScene)
@@ -102,7 +104,7 @@ namespace DialogueManagement
 
         IEnumerator WriteNextLine()
         {
-            isSpeaking = true;
+           
             //charDelay = 0.05f; //////
             if(currentDialogue.sentences[sentenceIndex].character == Character.Object)
             {
@@ -122,7 +124,7 @@ namespace DialogueManagement
                 }
             }
 
-            NextLineFeedback();
+            HideNextLineFeedback();
 
             // Joue le SFX
             if (currentDialogue.sentences[sentenceIndex].activateButtons)
@@ -136,6 +138,7 @@ namespace DialogueManagement
             dialogueText.text = "";
             StringBuilder strBuilder = new StringBuilder("");
             skipSentence = false;
+            isSpeaking = true;
             foreach (char letter in currentDialogue.sentences[sentenceIndex].sentence.ToCharArray())
             {
                 if (dialogCount == 3)
@@ -166,8 +169,7 @@ namespace DialogueManagement
                     yield return charDelay;
                 }
             }
-
-            NextLineFeedback();
+            ShowNextLineFeedback();
             
             //if(currentDialogue.sentences[sentenceIndex].character == Character.Poppy
             //    || currentDialogue.sentences[sentenceIndex].character == Character.Bergamot
@@ -185,7 +187,7 @@ namespace DialogueManagement
             isSpeaking = false;
             isTapped = false;
 
-            if(GameManager.Instance.gameState.ActiveState == GameState.Hub)
+            if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
             {
                 if(sentenceIndex == currentDialogue.sentences.Length)
                 {
@@ -203,14 +205,22 @@ namespace DialogueManagement
             }
             if (input == InputType.Tap && isRunningDialogue)
             {
+                if(waitForClick)
+                {
+                    waitForClick = false;
+                    SeeYouButton();
+                    return;
+                }
+
                 if (isSpeaking)
                 {
-                    //charDelay = 0f; //////
-                    skipSentence = true;
+                    if(!skipSentence)
+                        skipSentence = true;
                 }
                 else if(sentenceIndex < currentDialogue.sentences.Length)
                 {
                     StartCoroutine(WriteNextLine());
+                    isTapped = false;
                     AudioManager.Instance.PlaySoundEffect("UIClick");
                 }
                 else
@@ -380,21 +390,27 @@ namespace DialogueManagement
 
             if(!change)
             {
-                CloseDialogueBox(currentDialogue);
-                NPCFaceManager _face = animator.GetComponent<NPCFaceManager>();
-                _face.SetEyesExpression(0);
-                _face.SetMouthExpression(0);
-                currentDialogue = null;
-                animator = null;
-                isRunningDialogue = false;
-                isTapped = false;
+                if(GameManager.Instance.gameState.ActiveState == GameState.Hub)
+                {
+                    //show see you or keep talking buttons
+                    isRunningDialogue = false;
+                    seeYouButton.SetActive(true);
+                    HideNextLineFeedback();
+                }
+                else
+                {
+                    waitForClick = true;
+                    HideNextLineFeedback();
+                }
+
             }
             else
             {
-                isRunningDialogue = false;
                 //show see you or keep talking buttons
+                isRunningDialogue = false;
                 keepTalkingButton.SetActive(true);
                 seeYouButton.SetActive(true);
+                HideNextLineFeedback();
             }
             //                              Debug
             //Debug.Log($"Poppy state after dialog: {SaveManager.Instance.state.poppyState}");
@@ -427,18 +443,17 @@ namespace DialogueManagement
             }
         }
 
-        public void NextLineFeedback()
+        public void ShowNextLineFeedback()
         {
             CanvasGroup _canvasGroup = dialogueArrow.GetComponent<CanvasGroup>();
-            if (_canvasGroup.alpha == 0)
-            {
-                LeanTween.alphaCanvas(_canvasGroup, 1, 0.5f).setLoopPingPong();
-            }
-            else
-            {
-                LeanTween.cancel(dialogueArrow.gameObject);
-                LeanTween.alphaCanvas(_canvasGroup, 0, 0f);
-            }
+            LeanTween.alphaCanvas(_canvasGroup, 1, 0.5f).setLoopPingPong();
+        }
+
+        void HideNextLineFeedback()
+        {
+            CanvasGroup _canvasGroup = dialogueArrow.GetComponent<CanvasGroup>();
+            LeanTween.cancel(dialogueArrow.gameObject);
+            LeanTween.alphaCanvas(_canvasGroup, 0, 0f);
         }
 
         public void KeepTalking()
