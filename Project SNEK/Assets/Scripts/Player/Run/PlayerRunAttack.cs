@@ -214,7 +214,6 @@ namespace Player.Attack
                 return;
 
             StopCoroutine(attackCoroutine);
-            print("Destroyed attack");
 
             if (slashFx != null)
                 Destroy(slashFx);

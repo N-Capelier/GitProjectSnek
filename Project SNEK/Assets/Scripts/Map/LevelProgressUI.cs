@@ -68,7 +68,7 @@ namespace Map
             for (int i = 0; i < checkpointPositions.Count; i++)
             {
                 float value = (float)checkpointPositions[i] / (float)levelLength;
-                print(value);
+                //print(value);
 
                 checkpoints[i].rectTransform.anchorMin = new Vector2(0, value);
                 checkpoints[i].rectTransform.anchorMax = new Vector2(1,value); 
