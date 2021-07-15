@@ -33,6 +33,7 @@ namespace GameManagement.GameStates
                 {
                     playedBossCinematic = true;
                     SaveManager.Instance.state.bossAnorexiaHp = 3;
+                    SaveManager.Instance.Save();
                     CutsceneManager.Instance.PlayCutscene(TestAnorexia.Instance.introCinematic);
                     GameManager.Instance.playedBossCinematic = true;
                 }

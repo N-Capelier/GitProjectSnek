@@ -9,6 +9,7 @@ using UnityEngine.Playables;
 using Cinematic;
 using AudioManagement;
 using Saving;
+using TMPro;
 
 namespace Boss
 {
@@ -68,6 +69,12 @@ namespace Boss
         WaitForSeconds markerDelay = new WaitForSeconds(.1f);
         WaitForSeconds shotsDelay = new WaitForSeconds(1.5f);
 
+        [SerializeField] GameObject hpUi;
+        [SerializeField] TextMeshProUGUI hpText;
+
+        [SerializeField] GameObject handsParticle;
+        [SerializeField] GameObject MouchouParticle;
+
         private void Awake()
         {
             CreateSingleton();
@@ -79,6 +86,11 @@ namespace Boss
             animator = GetComponent<Animator>();
             incomingBombs = new List<GameObject>();
             currentHp = SaveManager.Instance.state.bossAnorexiaHp * 10;
+        }
+
+        private void OnEnable()
+        {
+            StartCoroutine(DisplayHp());
         }
 
         private void Update()
@@ -266,20 +278,27 @@ namespace Boss
             patternCount++;
         }
 
+        int offset;
         IEnumerator SpawnMouchou()
         {
             animator.SetBool("animIsAttacking", true);
             animator.SetInteger("animPatternCount", 3);
-            yield return new WaitForSeconds(3f);
+            offset = Random.Range(-3, 3);
+            Instantiate(MouchouParticle, new Vector3(transform.position.x + offset, transform.position.y, transform.position.z - 1), Quaternion.identity, transform);
+            yield return new WaitForSeconds(2.5f);            
             AudioManager.Instance.PlayThisSoundEffect("SummonMouchou");
-            Instantiate(mouchou, new Vector3(transform.position.x + Random.Range(-3, 3), transform.position.y, transform.position.z -1), Quaternion.identity);
+            Instantiate(mouchou, new Vector3(transform.position.x + offset, transform.position.y, transform.position.z -1), Quaternion.identity);            
+            offset = Random.Range(-3, 3);
+            Instantiate(MouchouParticle, new Vector3(transform.position.x + offset, transform.position.y, transform.position.z - 1), Quaternion.identity, transform);
+            yield return new WaitForSeconds(2.5f);
+            AudioManager.Instance.PlayThisSoundEffect("SummonMouchou");
+            Instantiate(mouchou, new Vector3(transform.position.x + offset, transform.position.y, transform.position.z -1), Quaternion.identity);
+            offset = Random.Range(-3, 3);
             animator.SetBool("animIsAttacking", false);
+            Instantiate(MouchouParticle, new Vector3(transform.position.x + offset, transform.position.y, transform.position.z - 1), Quaternion.identity, transform);
             yield return new WaitForSeconds(2.5f);
             AudioManager.Instance.PlayThisSoundEffect("SummonMouchou");
-            Instantiate(mouchou, new Vector3(transform.position.x + Random.Range(-3, 3), transform.position.y, transform.position.z -1), Quaternion.identity);
-            yield return new WaitForSeconds(2.5f);
-            AudioManager.Instance.PlayThisSoundEffect("SummonMouchou");
-            Instantiate(mouchou, new Vector3(transform.position.x + Random.Range(-3, 3), transform.position.y, transform.position.z - 1), Quaternion.identity);            
+            Instantiate(mouchou, new Vector3(transform.position.x + offset, transform.position.y, transform.position.z - 1), Quaternion.identity);            
             yield return new WaitForSeconds(2);
             
             patternCount = 0;
@@ -402,6 +421,7 @@ namespace Boss
             {
                 StartCoroutine(HitFeedback());
                 StunReset();
+                StartCoroutine(DisplayHp());
                 //Instantiate(hitFx, transform.position, Quaternion.identity);
             }
             else if (currentHp <= 0)
@@ -434,6 +454,21 @@ namespace Boss
 
             bodyRenderer.material = defaultMatBody;
             handsRenderer.material = defaultMatHands;
+        }
+
+        void HitTheGround()
+        {
+            handsParticle.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
+            handsParticle.transform.GetChild(1).GetComponent<ParticleSystem>().Play();
+        }
+
+        IEnumerator DisplayHp()
+        {
+            hpUi.transform.LeanScale(Vector3.one, 0.4f);
+            hpText.text = (currentHp / 10).ToString();
+            yield return new WaitForSeconds(3f);
+            hpUi.transform.LeanScale(Vector3.zero, 0.2f);
+
         }
     }
 }
