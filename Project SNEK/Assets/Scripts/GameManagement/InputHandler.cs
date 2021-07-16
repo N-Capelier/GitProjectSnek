@@ -215,7 +215,21 @@ namespace GameManagement
                     }
                     else if (currentPos.sqrMagnitude < sqrDeadzone)
                     {
-                        InputReceived?.Invoke(InputType.Tap);
+                        if (GameManager.Instance.gameState.ActiveState == GameState.Run)
+                        {
+                            if (PlayerManager.Instance.currentController != null)
+                            {
+                                if (PlayerManager.Instance.currentController.playerRunSpell != null)
+                                {
+                                    if (!PlayerManager.Instance.currentController.playerRunSpell.RaySensorOnUI())
+                                        InputReceived?.Invoke(InputType.Tap);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            InputReceived?.Invoke(InputType.Tap);
+                        }
                     }
                     startPos = currentPos = Vector2.zero;
 
@@ -310,12 +324,27 @@ namespace GameManagement
 #elif UNITY_ANDROID || UNITY_IOS
             if(Input.touchCount <= 0  && !swiped)
             {
-                InputReceived?.Invoke(InputType.Tap);
+                if (GameManager.Instance.gameState.ActiveState == GameState.Run)
+                {
+                    if (PlayerManager.Instance.currentController != null)
+                    {
+                        if (PlayerManager.Instance.currentController.playerRunSpell != null)
+                        {
+                            if (!PlayerManager.Instance.currentController.playerRunSpell.RaySensorOnUI())
+                            {
+                                InputReceived?.Invoke(InputType.Tap);
+                                return;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    InputReceived?.Invoke(InputType.Tap);
+                    return;
+                }
             }
-            else
-            {
-                swiped = false;
-            }
+            swiped = false;
 #endif
         }
 
