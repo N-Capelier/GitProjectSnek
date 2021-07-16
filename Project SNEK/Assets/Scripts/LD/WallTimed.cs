@@ -30,5 +30,15 @@ namespace Wall
             yield return new WaitForSeconds(2);
             Destroy(gameObject);
         }
+
+        protected override void OnTriggerEnter(Collider other)
+        {
+            base.OnTriggerEnter(other);
+            
+            if(other.gameObject.layer == LayerMask.NameToLayer("Wall"))
+            {
+                StartCoroutine(GetDestroyed());
+            }
+        }
     }
 }

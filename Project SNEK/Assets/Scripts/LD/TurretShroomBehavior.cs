@@ -55,6 +55,11 @@ namespace SpecialLD
 
 			StartCoroutine(ShootingLoop());
 		}
+
+		public void GetDestroyed()
+        {
+			Destroy(gameObject);
+        }
 	}
 }
 
