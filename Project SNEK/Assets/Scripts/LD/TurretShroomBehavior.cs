@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Player.Controller;
+using Player;
 
 namespace SpecialLD
 {
@@ -14,17 +15,22 @@ namespace SpecialLD
 		//public ParticleSystem warmupFx;
 		[SerializeField] private PlayerDirection direction;
 		private Vector3 directionVector;
-		[SerializeField] private float bulletSpeed;
+		[SerializeField] private float bulletSpeed = 10;
 		[Range(1f, 10f)]
 		[SerializeField] private float shootingDelay;
 		[Range(.5f, 4f)]
 		[SerializeField] private float warmupTime; //must be lower than delay
+		[SerializeField] private float activationRange = 10;
+		private Transform playerTransform;
+		private Vector3 playerDistance;
 		#endregion
 
 		// Start is called before the first frame update
 		void Start()
 		{
-            switch (direction)
+			playerTransform = PlayerManager.Instance.currentController.transform;
+
+			switch (direction)
             {
 				case PlayerDirection.Up:
 					directionVector = Vector3.forward;
@@ -45,14 +51,23 @@ namespace SpecialLD
 
 		IEnumerator ShootingLoop()
         {
-			yield return new WaitForSeconds(shootingDelay);
+			playerDistance = playerTransform.position - transform.position;
 
-			//warmupFx.Play();
-			yield return new WaitForSeconds(warmupTime);
-			//warmupFx.Stop();
-			incomingBullet = Instantiate(bullet, bulletSpawn.position, Quaternion.identity);
-			incomingBullet.GetComponent<Rigidbody>().velocity = directionVector * bulletSpeed;
+			if(playerDistance.z > activationRange)
+            {
+				yield return new WaitForSeconds(0.1f);
+            }
+            else
+            {
+				yield return new WaitForSeconds(shootingDelay);
 
+				//warmupFx.Play();
+				yield return new WaitForSeconds(warmupTime);
+				//warmupFx.Stop();
+				incomingBullet = Instantiate(bullet, bulletSpawn.position, Quaternion.identity);
+				incomingBullet.GetComponent<Rigidbody>().velocity = directionVector * bulletSpeed;
+			}
+			
 			StartCoroutine(ShootingLoop());
 		}
 
