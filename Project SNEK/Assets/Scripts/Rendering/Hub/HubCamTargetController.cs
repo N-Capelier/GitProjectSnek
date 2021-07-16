@@ -38,6 +38,8 @@ namespace Rendering.Hub
                 return;
             }
 
+            print($"HubCamTargetController : {actions}");
+
 #if UNITY_STANDALONE || UNITY_EDITOR
             HandleStandaloneInputs();
 #elif UNITY_ANDROID || UNITY_IOS
@@ -128,7 +130,7 @@ namespace Rendering.Hub
                 else
                 {
                     rb.velocity = Vector3.zero;
-                    currentPos = lastPos = Vector3.zero; //Testing for moving can during dialog bug
+                    //currentPos = lastPos = Vector3.zero; //Testing for moving can during dialog bug
                 }
             }
             else
