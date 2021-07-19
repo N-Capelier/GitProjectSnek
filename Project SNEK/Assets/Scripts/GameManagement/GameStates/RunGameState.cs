@@ -34,6 +34,11 @@ namespace GameManagement.GameStates
                     playedBossCinematic = true;
                     SaveManager.Instance.state.bossAnorexiaHp = 3;
                     SaveManager.Instance.Save();
+
+                    //Set spellUI to UIHandler / Temporary ?? Thomas
+                    PlayerRunController temp = (PlayerRunController)PlayerManager.Instance.currentController;
+                    GameManager.Instance.uiHandler.spellUI = temp.spellUI;
+
                     CutsceneManager.Instance.PlayCutscene(TestAnorexia.Instance.introCinematic);
                     GameManager.Instance.playedBossCinematic = true;
                 }

@@ -19,6 +19,7 @@ namespace GameManagement
         [Header("Run UI")]
         public LevelProgressUI levelProgressUI;
         public TutorialUIManager tutorialUI;
+        public GameObject spellUI;
 
         [Header("Hub UI")]
         public HubUiManager hubUI;
@@ -32,12 +33,14 @@ namespace GameManagement
         {
             levelProgressUI.gameObject.SetActive(false);
             pauseUI.gameObject.SetActive(false);
+            spellUI.SetActive(false);
         }
 
         public void ShowUIRun()
         {
             levelProgressUI.gameObject.SetActive(true);
             pauseUI.gameObject.SetActive(true);
+            spellUI.SetActive(true);
         }
 
         public void HideUIHub()

@@ -29,6 +29,8 @@ namespace Player.Controller
 
         bool spellAvailable = false;
 
+        public GameObject spellUI;
+
         private void Start()
         {
             animator = objectRenderer.GetComponent<Animator>();
@@ -36,6 +38,8 @@ namespace Player.Controller
             currentDirection = PlayerDirection.Up;
             nextDirection = PlayerDirection.Up;
             nextNode = GetNextNode();
+
+            GameManager.Instance.uiHandler.spellUI = spellUI;
 
             switch (SceneManager.GetActiveScene().name)
             {
@@ -58,7 +62,7 @@ namespace Player.Controller
             nextDirection = PlayerDirection.Up;
             objectRenderer.transform.rotation = Quaternion.Euler(0, 0, 0);
             currentNode = respawnNode;
-            nextNode = GetNextNode();
+            nextNode = GetNextNode();            
         }
 
         private void OnDestroy()
