@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AudioManagement;
+using Player;
 
 namespace Enemy
 {
@@ -10,52 +12,73 @@ namespace Enemy
         IllusionisteMovement movement;
         public GameObject clone;
         public int cloneNumber;
-        public GameObject[] clonesList;
+        //public GameObject[] clonesList;
+        public List<GameObject> clonesList;
+        bool isStunned;
         /*[HideInInspector]*/ public bool isKillable = false;
 
         private void Start()
         {
-            clonesList = new GameObject[cloneNumber];
+            List<GameObject> clonesList = new List<GameObject>();
+            //clonesList = new GameObject[cloneNumber];
             stats = GetComponent<EnemyStats>();
             movement = GetComponent<IllusionisteMovement>();
-            stats.attackClock.ClockEnded += OnshouldAttack;
             movement.InstantiateClones();
         }
 
         private void Update()
         {
-            if(isKillable == true)
+            if(isKillable == true && isStunned == false)
             {
-                StartCoroutine(IsRegenerating());
+                IsStunned();
             }
         }
 
         int index = 0;
-
-        void OnshouldAttack()
+        public IEnumerator OnshouldAttack()
         {
+            yield return new WaitForSeconds(stats.attackCooldown);
+
             if(isKillable == false)
             {
-                index = Random.Range(0, clonesList.Length);
+                index = Random.Range(0, clonesList.Count);
                 StartCoroutine(clonesList[index].GetComponent<IllusionisteClone>().Fire());
             }
         }
 
-        public IEnumerator IsRegenerating()
+        public void IsStunned()
         {
-            MeshRenderer _cloneMeshRenderer = clonesList[0].GetComponentInChildren<MeshRenderer>();
-            IllusionisteClone _clone = clonesList[0].GetComponent<IllusionisteClone>();
-
-            _cloneMeshRenderer.material = _clone.killableMat;
-            yield return new WaitForSeconds(5);
-            _cloneMeshRenderer.material = _clone.defaultMat;
-            isKillable = false;
+            isStunned = true;
+            GetComponentInChildren<Animator>().SetBool("isStunned", true);
+            movement.StopAllCoroutines();
         }
 
         public void Death()
         {
-            stats.Death();
+            AudioManager.Instance.PlaySoundEffect("ObjectSpiritCollect");
+            PlayerManager.Instance.currentController.playerRunSpirits.AddSpirit();
+            Destroy(gameObject);
         }
 
+        public void CloneDeath(GameObject index)
+        {            
+            for (int i = 0; i < clonesList.Count; i++)
+            {
+
+                if(clonesList[i] == index)
+                {
+                    clonesList[i].GetComponent<IllusionisteClone>().StopAllCoroutines();
+                    clonesList.Remove(index);
+                    cloneNumber--;
+                    AudioManager.Instance.PlaySoundEffect("ObjectSpiritCollect");
+                    if(clonesList.Count.Equals(0))
+                    {
+                        PlayerManager.Instance.currentController.playerRunSpirits.AddSpirit();
+                    }
+                    Destroy(index);
+
+                }                
+            }
+        }
     }
 }

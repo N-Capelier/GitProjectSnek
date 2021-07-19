@@ -20,13 +20,17 @@ namespace Enemy
 
         private void Start()
         {
-            defaultMat = GetComponentInChildren<MeshRenderer>().material;
+            //defaultMat = GetComponentInChildren<MeshRenderer>().material;
         }
 
         private void LateUpdate()
         {
             playerPos = PlayerManager.Instance.currentController.transform.position;
             bulletDir = (playerPos - transform.position);
+            if (GetComponentInParent<IllusionisteBehaviour>().isKillable == false)
+            {
+                transform.LookAt(playerPos);
+            }            
         }
 
         public IEnumerator Fire()
@@ -37,10 +41,9 @@ namespace Enemy
             }
             else
             {
-                MeshRenderer _childMeshRenderer = GetComponentInChildren<MeshRenderer>();
-                _childMeshRenderer.material = chargingMat;
-                yield return new WaitForSeconds(1);
-                _childMeshRenderer.material = defaultMat;
+                GetComponentInChildren<Animator>().SetBool("isAttacking", true);
+                yield return new WaitForSeconds(1.2f);
+                GetComponentInChildren<Animator>().SetBool("isAttacking", false);
                 incomingBullet = Instantiate(bullet, gameObject.transform.position, Quaternion.identity);
                 incomingBullet.GetComponent<Rigidbody>().AddForce(bulletDir.normalized * bulletSpeed, ForceMode.Force);
             }

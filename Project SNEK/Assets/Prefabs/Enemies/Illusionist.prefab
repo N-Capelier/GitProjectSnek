@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1392311476}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: 0, z: 4}
+  m_LocalPosition: {x: -4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5984593686374655282}
@@ -110,7 +110,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clone: {fileID: 4376464454411805264, guid: 2c6e33025caa6d34d8b1ebef97c05a3b, type: 3}
   cloneNumber: 3
-  clonesList: []
+  clonesList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  isKillable: 0
 --- !u!114 &2125280306058151485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,8 +129,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patterns:
   - row:
-    - column: 000000000000000000
     - column: 000000000100000000
+    - column: 000000000000000000
     - column: 000000000000000000
     - column: 000000000000000000
     - column: 000000000000000000
@@ -146,7 +150,9 @@ MonoBehaviour:
     - column: 000000000000000000
   patternPos: {fileID: 1392311476}
   cloneParent: {fileID: 1840348233}
+  lifeTime: 6
   patternCount: 0
+  index: 0
 --- !u!114 &37738213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,8 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 891fd462e2d92af4dbdfdb4bc63a23c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCooldown: 10
-  movementCooldown: 10
+  attackCooldown: 2
+  movementCooldown: 0
   maxHp: 1
   currentHp: 0
   deathFx: {fileID: 3893877149857393849, guid: 776a358c2e98ba8409c4035d37f35e3f, type: 3}
@@ -170,6 +176,7 @@ MonoBehaviour:
   hitMaterial: {fileID: 2100000, guid: 49bd8cf0807c6c3408ac07b5ba52741e, type: 2}
   rb: {fileID: 0}
   moveSpeed: 1
+  isClone: 0
 --- !u!1001 &5984593686675270205
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -11,58 +11,51 @@ namespace Enemy
         public EnemyAttackPattern[] patterns;
         public GameObject patternPos;
         public GameObject cloneParent;
+        public int lifeTime;
         /*[HideInInspector]*/ public int patternCount = 0;
 
         void Start()
         {
             stats = GetComponent<EnemyStats>();
             behaviour = GetComponent<IllusionisteBehaviour>();
-            stats.movementClock.ClockEnded += OnShouldMove;
-            StartCoroutine(DelayStart());
-        }
-
-        IEnumerator DelayStart()
-        {
-            yield return new WaitForSeconds(1.5f);
-            stats.movementClock.SetTime(stats.movementCooldown);
-        }
-
-        void OnShouldMove()
-        {
-            /*if (patternCount > 2)
-            {
-                patternCount++;
-            }
-            else
-                patternCount = 0;*/
-
+            //stats.movementClock.ClockEnded += OnShouldMove;
             StartCoroutine(SpawnRoutine());
         }
+
 
 
         int remainClones;
         IEnumerator SpawnRoutine()
         {
-            if(behaviour.isKillable == false)
+            yield return new WaitForSeconds(lifeTime - 1.11f);
+
+            for (int i = 0; i < behaviour.clonesList.Count; i++)
+            {
+                behaviour.clonesList[i].GetComponentInChildren<Animator>().SetBool("despawned", true);
+            }
+
+            yield return new WaitForSeconds(1.11f);
+
+            if (behaviour.isKillable == false)
             {
                 remainClones = cloneParent.gameObject.transform.childCount;
-                for (int i = 0; i < behaviour.clonesList.Length; i++)
+                for (int i = 0; i < behaviour.clonesList.Count; i++)
                 {
                     if (behaviour.clonesList[i] != null)
                     {
                         Destroy(behaviour.clonesList[i]);
                     }
                 }
-                behaviour.clonesList = new GameObject[remainClones];
+                behaviour.clonesList = new List<GameObject>();
 
                 yield return new WaitForSeconds(0);
                 InstantiateClones();
-                if (behaviour.clonesList.Length <= 1 && behaviour.isKillable == false)
+                if (behaviour.clonesList.Count <= 1 && behaviour.isKillable == false)
                 {
                     behaviour.isKillable = true;                    
-                    StartCoroutine(behaviour.IsRegenerating());
                 }
-            }            
+            }
+            StartCoroutine(SpawnRoutine());
         }
 
         [SerializeField] int index = 0;
@@ -70,6 +63,8 @@ namespace Enemy
 
         public void InstantiateClones()
         {
+            StartCoroutine(behaviour.OnshouldAttack());
+
             index = 0;
             switch (patternCount)
             {
@@ -81,16 +76,16 @@ namespace Enemy
                             if (patterns[0].row[x].column[y] == true)
                             {
                                 clone = Instantiate(behaviour.clone, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x))),Quaternion.identity, cloneParent.transform);
-                                behaviour.clonesList[index] = clone;
+                                behaviour.clonesList.Add(clone);
                                 index++;
-                                if (index == behaviour.clonesList.Length)
+                                if (index == behaviour.cloneNumber)
                                 {
                                     
                                     break;
                                 }
                             }
                         }
-                        if (index == behaviour.clonesList.Length)
+                        if (index == behaviour.cloneNumber)
                         {
 
                             break;
@@ -106,15 +101,15 @@ namespace Enemy
                             if (patterns[1].row[x].column[y] == true)
                             {
                                 clone = Instantiate(behaviour.clone, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x))), Quaternion.identity, cloneParent.transform);
-                                behaviour.clonesList[index] = clone;
+                                behaviour.clonesList.Add(clone);
                                 index++;
-                                if (index == behaviour.clonesList.Length)
+                                if (index == behaviour.cloneNumber)
                                 {
                                     break;
                                 }
                             }
                         }
-                        if (index == behaviour.clonesList.Length)
+                        if (index == behaviour.cloneNumber)
                         {
 
                             break;

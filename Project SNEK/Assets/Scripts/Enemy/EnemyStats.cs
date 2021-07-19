@@ -2,6 +2,7 @@
 using Player;
 using AudioManagement;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Enemy
 {
@@ -99,17 +100,16 @@ namespace Enemy
         {
             if (isClone == true)
             {
-                if (GetComponentInParent<IllusionisteBehaviour>().clonesList.Length <= 1)
-                {
-                    GetComponentInParent<IllusionisteBehaviour>().Death();
-                    Destroy(gameObject);
-                }
+                Instantiate(hitFx, transform.position, Quaternion.identity);
+                GetComponentInParent<IllusionisteBehaviour>().CloneDeath(gameObject);          
             }
             else
+            {
                 AudioManager.Instance.PlaySoundEffect("ObjectSpiritCollect");
                 PlayerManager.Instance.currentController.playerRunSpirits.AddSpirit();
-            Instantiate(hitFx, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+                Instantiate(hitFx, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }                
         }
 
         private void OnDestroy()
