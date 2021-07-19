@@ -139,18 +139,22 @@ namespace DialogueManagement
             StringBuilder strBuilder = new StringBuilder("");
             skipSentence = false;
             isSpeaking = true;
+            dialogCount = 0;
             foreach (char letter in currentDialogue.sentences[sentenceIndex].sentence.ToCharArray())
             {
-                if (dialogCount == 3)
+                if(!skipSentence)
                 {
-                    if(currentDialogue.sentences[sentenceIndex].voiceLine != "")
-                    AudioManager.Instance.PlaySoundEffect(currentDialogue.sentences[sentenceIndex].voiceLine);
-                    animator.gameObject.GetComponent<NPCFaceManager>().RandomizeMouth();
-                    dialogCount = 0;
-                }
-                else
-                {
-                    dialogCount++;
+                    if (dialogCount == 3)
+                    {
+                        if(currentDialogue.sentences[sentenceIndex].voiceLine != "")
+                        AudioManager.Instance.PlaySoundEffect(currentDialogue.sentences[sentenceIndex].voiceLine);
+                        animator.gameObject.GetComponent<NPCFaceManager>().RandomizeMouth();
+                        dialogCount = 0;
+                    }
+                    else
+                    {
+                        dialogCount++;
+                    }
                 }
 
                 if(letter == '\\')
