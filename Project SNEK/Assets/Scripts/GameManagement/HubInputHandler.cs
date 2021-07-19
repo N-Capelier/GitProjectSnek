@@ -10,10 +10,10 @@ namespace GameManagement
 
         private void Update()
         {
-            OnTap();
+            InteractOnTouch();
         }
 
-        void OnTap(/*InputType _input*/)
+        void InteractOnTouch(/*InputType _input*/)
         {
             if (HubCamTargetController.Instance.movedCamera)
                 return;

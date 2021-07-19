@@ -65,7 +65,7 @@ namespace Player.Spells
             //////////////////////////////              TEMPORARY                                ////////////////////////////////////////
             //if (SceneManager.GetActiveScene().name == "Level1_3" || SceneManager.GetActiveScene().name == "Boss Anorexia" || SceneManager.GetActiveScene().name == "Level1_2V2")
             //{
-                if (canAttack)
+            if (canAttack && PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits() >= 3)
                 {
                     canAttack = false;
                     spellCooldownTimer.SetTime(spellCooldown);

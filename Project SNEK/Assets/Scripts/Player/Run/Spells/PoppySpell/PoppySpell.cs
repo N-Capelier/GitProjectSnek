@@ -15,10 +15,11 @@ namespace Player.Spells
 
         public override IEnumerator SpellCast(PlayerDirection spellDirection)
         {
-            if (PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits() < 3)
-            {
-                yield break;
-            }
+            /// Moved to PlayerSpell.cs
+            //if (PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits() < 3)
+            //{
+            //    yield break;
+            //}
             PlayerManager.Instance.currentController.spellMoveSpeedModifier = 0.01f;
             GameObject cauldron= Instantiate(bomb, transform.position, Quaternion.identity); ;
             PlayerManager.Instance.currentController.animator.Play(Animator.StringToHash("Anim_PlayerRun_Throw"));
