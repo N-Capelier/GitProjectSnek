@@ -16,7 +16,7 @@ namespace Wall
         [SerializeField] string soundName;
 
         public int deathIndex;
-        private void OnTriggerEnter(Collider other)
+        protected virtual void OnTriggerEnter(Collider other)
         {
 
             if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController"))
