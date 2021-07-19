@@ -49,7 +49,6 @@ namespace Player.Controller
             }
 
             InputHandler.InputReceived += HandleInput;
-            InputHandler.HoldInputReceived += OnHold;
         }
 
         private void OnEnable()
@@ -64,7 +63,6 @@ namespace Player.Controller
         private void OnDestroy()
         {
             InputHandler.InputReceived -= HandleInput;
-            InputHandler.HoldInputReceived -= OnHold;
         }
 
         private void Update()

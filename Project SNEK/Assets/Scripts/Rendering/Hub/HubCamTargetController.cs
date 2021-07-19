@@ -16,16 +16,29 @@ namespace Rendering.Hub
 
         [HideInInspector] public byte actions = 0;
 
+        Clock interactionTimer;
+        [HideInInspector] public bool movedCamera = false;
+        [SerializeField] float interactionCancelTime = 0.1f;
+
         float leftConfiner = -13.95685f;
         float rightConfiner = 11.03282f;
         float topConfiner = 13.97992f;
         float bottomConfiner = -11.68559f;
 
-        public bool isMovingCamera = false;
-
         private void Awake()
         {
             CreateSingleton();
+        }
+
+        private void Start()
+        {
+            interactionTimer = new Clock();
+            interactionTimer.ClockEnded += OnInteractionTimerEnded;
+        }
+
+        private void OnDestroy()
+        {
+            interactionTimer.ClockEnded -= OnInteractionTimerEnded;
         }
 
         private void FixedUpdate()
@@ -38,7 +51,7 @@ namespace Rendering.Hub
                 return;
             }
 
-            print($"HubCamTargetController : {actions}");
+            //print($"HubCamTargetController : {actions}");
 
 #if UNITY_STANDALONE || UNITY_EDITOR
             HandleStandaloneInputs();
@@ -83,7 +96,7 @@ namespace Rendering.Hub
 
                 if (currentPos != lastPos && lastPos != Vector3.zero)
                 {
-                    isMovingCamera = true;
+                    movedCamera = true;
 
                     float _dist = Mathf.Abs(lastPos.magnitude - currentPos.magnitude);
                     Vector3 _moveDir = new Vector3(lastPos.x - currentPos.x, 0, lastPos.y - currentPos.y).normalized;
@@ -92,15 +105,18 @@ namespace Rendering.Hub
                 }
                 else
                 {
-                    isMovingCamera = false;
                     rb.velocity = Vector3.zero;
+                    interactionTimer.SetTime(interactionCancelTime);
                 }
             }
             else
             {
-                isMovingCamera = false;
                 rb.velocity = Vector3.zero;
                 currentPos = lastPos = Vector3.zero;
+                if(interactionTimer.finished)
+                {
+                    interactionTimer.SetTime(interactionCancelTime);
+                }
             }
         }
 
@@ -122,6 +138,8 @@ namespace Rendering.Hub
 
                 if (currentPos != lastPos && lastPos != Vector3.zero)
                 {
+                    movedCamera = true;
+
                     float _dist = Mathf.Abs(lastPos.magnitude - currentPos.magnitude);
                     Vector3 _moveDir = new Vector3(lastPos.x - currentPos.x, 0, lastPos.y - currentPos.y).normalized;
                     _moveDir = new Vector3(_moveDir.x * horizontalSpeedModifier, _moveDir.y, _moveDir.z);
@@ -131,13 +149,25 @@ namespace Rendering.Hub
                 {
                     rb.velocity = Vector3.zero;
                     //currentPos = lastPos = Vector3.zero; //Testing for moving can during dialog bug
+
+                    interactionTimer.SetTime(interactionCancelTime);
                 }
             }
             else
             {
                 rb.velocity = Vector3.zero;
                 currentPos = lastPos = Vector3.zero;
+
+                if (interactionTimer.finished)
+                {
+                    interactionTimer.SetTime(interactionCancelTime);
+                }
             }
+        }
+
+        void OnInteractionTimerEnded()
+        {
+            movedCamera = false;
         }
     }
 }

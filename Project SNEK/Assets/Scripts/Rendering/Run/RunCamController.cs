@@ -5,8 +5,8 @@ namespace Rendering.Run
 {
     public enum CamState
     {
-        FreeScrolling,
         PlayerScrolling,
+        FreeScrolling,
         Fixed,
         SemiScrolling
     }
@@ -55,11 +55,13 @@ namespace Rendering.Run
 
         private void Update()
         {
-            if (applyState)
-            {
-                applyState = false;
-                Set(stateAutoApply);
-            }
+            //if (applyState)
+            //{
+            //    applyState = false;
+            //    Set(stateAutoApply);
+            //}
+            if(Input.GetKey(KeyCode.D))
+                Debug.Log(ActiveState.ToString());
         }
 
 #endif

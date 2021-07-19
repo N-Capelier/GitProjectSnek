@@ -201,6 +201,8 @@ namespace Player.Controller
                 PlayerManager.Instance.gameObject.SetActive(true);
             }
 
+            transform.position = checkPoint.position;
+
             playerRunSpirits.ResetSpiritsPositions();
             if (_spiritCount > 0)
             {
@@ -209,8 +211,6 @@ namespace Player.Controller
                     playerRunSpirits.AddSpirit();
                 }
             }
-
-            transform.position = checkPoint.position;
 
             GameManager.Instance.uiHandler.levelProgressUI.FadeOut();
 

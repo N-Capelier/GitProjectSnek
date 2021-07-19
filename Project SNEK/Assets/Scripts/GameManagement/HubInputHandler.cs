@@ -15,9 +15,12 @@ namespace GameManagement
 
         void OnTap(/*InputType _input*/)
         {
+            if (HubCamTargetController.Instance.movedCamera)
+                return;
+
             RaycastHit hit;
 
-            if(Input.GetMouseButtonUp(0) && HubCamTargetController.Instance.isMovingCamera == false)
+            if(Input.GetMouseButtonUp(0))
             {
                 Ray ray = hubCamera.ScreenPointToRay(Input.mousePosition);
 
