@@ -132,12 +132,16 @@ namespace Enemy
         private void OnDestroy()
         {
             stats.attackClock.ClockEnded -= OnShouldAttack;
-            for (int i = 0; i < incomingBombs.Count; i++)
+            if(incomingBombs != null)
             {
-                Destroy(incomingBombs[i]);
+                for (int i = 0; i < incomingBombs.Count; i++)
+                {
+                    if(incomingBombs[i] != null)
+                    {
+                        Destroy(incomingBombs[i]);
+                    }
+                }
             }
         }
-
     }
-
 }

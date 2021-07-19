@@ -28,6 +28,7 @@ namespace Wall
                 StartCoroutine(GetDestroyed());
             }
         }
+
         public IEnumerator GetDestroyed()
         {
             gameObject.GetComponent<BoxCollider>().enabled = false;
