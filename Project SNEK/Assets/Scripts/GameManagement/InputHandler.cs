@@ -92,18 +92,19 @@ namespace GameManagement
                         //HoldInputReceived?.Invoke();
                     }
                 }
-                holdTimer.SetTime(holdTimerDuration);
+                //holdTimer.SetTime(holdTimerDuration);
                 tapTimer.SetTime(tapTimerDuration);
             }
             else if (Input.GetMouseButtonUp(0)/* || Input.touches[0].phase == TouchPhase.Ended || Input.touches[0].phase == TouchPhase.Canceled*/)
             {
-                holding = false;
-                if (holded)
-                {
-                    holded = false;
-                    InputReceived?.Invoke(InputType.Hold);
-                }
-                else if (currentPos.sqrMagnitude < sqrDeadzone)
+                //holding = false;
+                //if (holded)
+                //{
+                //    holded = false;
+                //    InputReceived?.Invoke(InputType.Hold);
+                //}
+                //else
+                if (currentPos.sqrMagnitude < sqrDeadzone)
                 {
                     if (GameManager.Instance.gameState.ActiveState == GameState.Run)
                     {
@@ -203,17 +204,18 @@ namespace GameManagement
                         }
                     }
                     tapTimer.SetTime(tapTimerDuration);
-                    holdTimer.SetTime(holdTimerDuration);
+                    //holdTimer.SetTime(holdTimerDuration);
                 }
                 else if (_touch.phase == TouchPhase.Ended || _touch.phase == TouchPhase.Canceled)
                 {
-                    holding = false;
-                    if (holded)
-                    {
-                        holded = false;
-                        InputReceived?.Invoke(InputType.Hold);
-                    }
-                    else if (currentPos.sqrMagnitude < sqrDeadzone)
+                    //holding = false;
+                    //if (holded)
+                    //{
+                    //    holded = false;
+                    //    InputReceived?.Invoke(InputType.Hold);
+                    //}
+                    //else
+                    if (currentPos.sqrMagnitude < sqrDeadzone)
                     {
                         if (GameManager.Instance.gameState.ActiveState == GameState.Run)
                         {

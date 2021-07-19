@@ -28,13 +28,11 @@ namespace Player.Spells
             PlayerManager.Instance.currentController.playerRunSpell = this;
             spellCooldownTimer = new Clock();
             spellCooldownTimer.ClockEnded += OnCooldownEnded;
-            InputHandler.InputReceived += HandleInput;
         }
 
         private void OnDestroy()
         {
             spellCooldownTimer.ClockEnded -= OnCooldownEnded;
-            InputHandler.InputReceived -= HandleInput;
         }
 
         public bool RaySensorOnUI()
