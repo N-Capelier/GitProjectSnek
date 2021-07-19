@@ -150,7 +150,7 @@ namespace Player.Controller
                 case InputType.SwipeUp:
                     if (currentDirection != PlayerDirection.Down && currentDirection != PlayerDirection.Up)
                     {
-                        feedbacks.PlayAnimUp();
+                        //feedbacks.PlayAnimUp();
                         nextDirection = PlayerDirection.Up;
                         inputSpeed = bonusInputSpeed;                        
                     }
@@ -158,7 +158,7 @@ namespace Player.Controller
                 case InputType.SwipeRight:
                     if (currentDirection != PlayerDirection.Left && currentDirection != PlayerDirection.Right)
                     {
-                        feedbacks.PlayAnimRight();
+                        //feedbacks.PlayAnimRight();
                         nextDirection = PlayerDirection.Right;
                         inputSpeed = bonusInputSpeed;                        
 
@@ -167,7 +167,7 @@ namespace Player.Controller
                 case InputType.SwipeDown:
                     if (currentDirection != PlayerDirection.Up && currentDirection != PlayerDirection.Down)
                     {
-                        feedbacks.PlayAnimDown();
+                        //feedbacks.PlayAnimDown();
                         nextDirection = PlayerDirection.Down;
                         inputSpeed = bonusInputSpeed;                        
 
@@ -176,7 +176,7 @@ namespace Player.Controller
                 case InputType.SwipeLeft:
                     if (currentDirection != PlayerDirection.Right && currentDirection != PlayerDirection.Left)
                     {
-                        feedbacks.PlayAnimLeft();
+                        //feedbacks.PlayAnimLeft();
                         inputSpeed = bonusInputSpeed;
                         nextDirection = PlayerDirection.Left;                        
                     }
