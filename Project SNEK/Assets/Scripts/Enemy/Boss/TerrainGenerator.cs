@@ -16,7 +16,7 @@ namespace Boss
 
         [SerializeField] TileBase tile;
         [SerializeField] TileBase[] customTile;
-        [SerializeField] GameObject cliff;
+        [SerializeField] GameObject[] cliff;
 
         [SerializeField] GameObject deathZone;
 
@@ -55,8 +55,8 @@ namespace Boss
             Destroy(rightCliffs[0]);
             rightCliffs.RemoveAt(0);
 
-            leftCliffs.Add(Instantiate(cliff, new Vector3(0, 0, cliffIndex * 6.14f), Quaternion.identity, leftCliffParent.transform));
-            rightCliffs.Add(Instantiate(cliff, new Vector3(10, 0, cliffIndex * 6.14f), Quaternion.identity, rightCliffParent.transform));
+            leftCliffs.Add(Instantiate(cliff[Random.Range(0,14)], new Vector3(0, 0, cliffIndex * 6.14f), Quaternion.identity, leftCliffParent.transform));
+            rightCliffs.Add(Instantiate(cliff[Random.Range(0, 14)], new Vector3(10, 0, cliffIndex * 6.14f), Quaternion.identity, rightCliffParent.transform));
             rightCliffs[rightCliffs.Count - 1].transform.Rotate(0, 180, 0);
 
             cliffIndex++;
