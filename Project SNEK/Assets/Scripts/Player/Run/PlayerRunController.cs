@@ -29,6 +29,8 @@ namespace Player.Controller
 
         bool spellAvailable = false;
 
+        public GameObject spellUI;
+
         private void Start()
         {
             animator = objectRenderer.GetComponent<Animator>();
@@ -36,6 +38,8 @@ namespace Player.Controller
             currentDirection = PlayerDirection.Up;
             nextDirection = PlayerDirection.Up;
             nextNode = GetNextNode();
+
+            GameManager.Instance.uiHandler.spellUI = spellUI;
 
             switch (SceneManager.GetActiveScene().name)
             {
@@ -58,7 +62,7 @@ namespace Player.Controller
             nextDirection = PlayerDirection.Up;
             objectRenderer.transform.rotation = Quaternion.Euler(0, 0, 0);
             currentNode = respawnNode;
-            nextNode = GetNextNode();
+            nextNode = GetNextNode();            
         }
 
         private void OnDestroy()
@@ -150,7 +154,7 @@ namespace Player.Controller
                 case InputType.SwipeUp:
                     if (currentDirection != PlayerDirection.Down && currentDirection != PlayerDirection.Up)
                     {
-                        feedbacks.PlayAnimUp();
+                        //feedbacks.PlayAnimUp();
                         nextDirection = PlayerDirection.Up;
                         inputSpeed = bonusInputSpeed;                        
                     }
@@ -158,7 +162,7 @@ namespace Player.Controller
                 case InputType.SwipeRight:
                     if (currentDirection != PlayerDirection.Left && currentDirection != PlayerDirection.Right)
                     {
-                        feedbacks.PlayAnimRight();
+                        //feedbacks.PlayAnimRight();
                         nextDirection = PlayerDirection.Right;
                         inputSpeed = bonusInputSpeed;                        
 
@@ -167,7 +171,7 @@ namespace Player.Controller
                 case InputType.SwipeDown:
                     if (currentDirection != PlayerDirection.Up && currentDirection != PlayerDirection.Down)
                     {
-                        feedbacks.PlayAnimDown();
+                        //feedbacks.PlayAnimDown();
                         nextDirection = PlayerDirection.Down;
                         inputSpeed = bonusInputSpeed;                        
 
@@ -176,7 +180,7 @@ namespace Player.Controller
                 case InputType.SwipeLeft:
                     if (currentDirection != PlayerDirection.Right && currentDirection != PlayerDirection.Left)
                     {
-                        feedbacks.PlayAnimLeft();
+                        //feedbacks.PlayAnimLeft();
                         inputSpeed = bonusInputSpeed;
                         nextDirection = PlayerDirection.Left;                        
                     }

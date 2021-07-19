@@ -38,8 +38,6 @@ namespace Rendering.Hub
                 return;
             }
 
-            print($"HubCamTargetController : {actions}");
-
 #if UNITY_STANDALONE || UNITY_EDITOR
             HandleStandaloneInputs();
 #elif UNITY_ANDROID || UNITY_IOS

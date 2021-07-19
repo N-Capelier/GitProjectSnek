@@ -139,18 +139,22 @@ namespace DialogueManagement
             StringBuilder strBuilder = new StringBuilder("");
             skipSentence = false;
             isSpeaking = true;
+            dialogCount = 0;
             foreach (char letter in currentDialogue.sentences[sentenceIndex].sentence.ToCharArray())
             {
-                if (dialogCount == 3)
+                if(!skipSentence)
                 {
-                    if(currentDialogue.sentences[sentenceIndex].voiceLine != "")
-                    AudioManager.Instance.PlaySoundEffect(currentDialogue.sentences[sentenceIndex].voiceLine);
-                    animator.gameObject.GetComponent<NPCFaceManager>().RandomizeMouth();
-                    dialogCount = 0;
-                }
-                else
-                {
-                    dialogCount++;
+                    if (dialogCount == 3)
+                    {
+                        if(currentDialogue.sentences[sentenceIndex].voiceLine != "")
+                        AudioManager.Instance.PlaySoundEffect(currentDialogue.sentences[sentenceIndex].voiceLine);
+                        animator.gameObject.GetComponent<NPCFaceManager>().RandomizeMouth();
+                        dialogCount = 0;
+                    }
+                    else
+                    {
+                        dialogCount++;
+                    }
                 }
 
                 if(letter == '\\')
@@ -208,6 +212,8 @@ namespace DialogueManagement
                 if(waitForClick)
                 {
                     waitForClick = false;
+                    isRunningDialogue = false;
+                    CutsceneManager.Instance.ResumeCutscene();
                     SeeYouButton();
                     return;
                 }
@@ -252,10 +258,6 @@ namespace DialogueManagement
             {
                 InteractionManager.Instance.camTarget.actions--;
                 InteractionManager.Instance.playerController.actions--;
-            }
-            if (currentDialogue.isCutScene)
-            {
-                CutsceneManager.Instance.ResumeCutscene();
             }
 
             bool canChange = true;
@@ -390,9 +392,8 @@ namespace DialogueManagement
 
             if(!change)
             {
-                if(GameManager.Instance.gameState.ActiveState == GameState.Hub)
+                if(!currentDialogue.isCutScene)
                 {
-                    //show see you or keep talking buttons
                     isRunningDialogue = false;
                     seeYouButton.SetActive(true);
                     HideNextLineFeedback();
@@ -400,17 +401,23 @@ namespace DialogueManagement
                 else
                 {
                     waitForClick = true;
-                    HideNextLineFeedback();
                 }
 
             }
             else
             {
-                //show see you or keep talking buttons
-                isRunningDialogue = false;
-                keepTalkingButton.SetActive(true);
-                seeYouButton.SetActive(true);
-                HideNextLineFeedback();
+                if (!currentDialogue.isCutScene)
+                {
+                    //show see you or keep talking buttons
+                    isRunningDialogue = false;
+                    keepTalkingButton.SetActive(true);
+                    seeYouButton.SetActive(true);
+                    HideNextLineFeedback();
+                }
+                else
+                {
+                    waitForClick = true;
+                }
             }
             //                              Debug
             //Debug.Log($"Poppy state after dialog: {SaveManager.Instance.state.poppyState}");
