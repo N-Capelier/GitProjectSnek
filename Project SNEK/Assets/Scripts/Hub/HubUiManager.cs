@@ -37,6 +37,7 @@ namespace Hub.UI
         Coroutine letterCoroutine;
         LetterMail currentContent;
         bool skipText;
+        bool writingLetter;
 
         [Space]
 
@@ -108,6 +109,8 @@ namespace Hub.UI
             {
                 OpenBox(demoScreen);
             }
+
+
         }
 
         public void OpenBox(GameObject box)
@@ -171,10 +174,6 @@ namespace Hub.UI
             LeanTween.alphaCanvas(letterBoxAnim.GetComponent<CanvasGroup>(), 1f, 3f);
             // Couroutine de dialogue pour afficher le contenu de la lettre 
             letterCoroutine = StartCoroutine(OpenLetterCoroutine(letterContent));
-
-            // A la fin de la coroutine, affiché le feedback lettre done + clique = activé close letter 
-            closeLetterButton.SetActive(true); // L'activer à la fin de l'affichage des lettres 
-            LeanTween.alphaCanvas(closeLetterButton.GetComponent<CanvasGroup>(), 1f, 1f).setLoopPingPong().setDelay(1f);
         }
 
         public void OpenDemoBox()
@@ -185,8 +184,6 @@ namespace Hub.UI
 
         public void CloseLetter()
         {
-            if(letterText.text == currentContent.text)
-            {
                 FadeOutBackground(0.5f);
 
                 AudioManager.Instance.PlaySoundEffect("UINone");
@@ -196,12 +193,6 @@ namespace Hub.UI
                 LeanTween.alphaCanvas(letterBoxAnim.GetComponent<CanvasGroup>(), 0f, 1f);
                 letterBoxSelectMenu.LeanScale(Vector3.one, 0.5f).setDelay(1.25f);
                 letterBoxAnim.LeanScale(Vector3.zero, 0.1f).setDelay(1f).setOnComplete(SetLetterAnimFalse);
-            }
-            else
-            {
-                skipText = true;
-            }
-            //Reset Text ? No is ok
 
         }
 
@@ -209,7 +200,8 @@ namespace Hub.UI
         {
             letterText.text = "";
             skipText = false;
-            foreach(char letter in letterContent.text.ToCharArray())
+            writingLetter = true;
+            foreach (char letter in letterContent.text.ToCharArray())
             {
                 if (letter == '\\')
                 {
@@ -232,6 +224,11 @@ namespace Hub.UI
                 NPCManager.Instance.RefreshNPCs();
             }
             //closeLetterButton.GetComponent<Button>().interactable = true;
+
+            // A la fin de la coroutine, affiché le feedback lettre done + clique = activé close letter 
+            closeLetterButton.SetActive(true); // L'activer à la fin de l'affichage des lettres 
+            LeanTween.alphaCanvas(closeLetterButton.GetComponent<CanvasGroup>(), 1f, 1f).setLoopPingPong();
+            writingLetter = false;
         }
 
         public void OpenLetterBox()
@@ -459,6 +456,11 @@ namespace Hub.UI
         public void SetTutoBoxFalse()
         {
             TutoBox.SetActive(false);
+        }
+
+        public void Skip()
+        {
+            skipText = true;
         }
     }
 }
