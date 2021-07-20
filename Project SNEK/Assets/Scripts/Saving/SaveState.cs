@@ -1,4 +1,6 @@
-﻿namespace Saving
+﻿using System.Collections.Generic;
+
+namespace Saving
 {
     public class SaveState
     {
@@ -35,6 +37,7 @@
         public int equipedTechnic = 0;
 
         public int unlockedLetters = 1;
+        public List<int> readLetters = new List<int>();
 
         public int canvasCurrentState;
 

@@ -31,8 +31,13 @@ namespace Hub.UI
         [SerializeField] GameObject letterBoxSelectMenu;
         [SerializeField] GameObject letterBoxAnim;
         [SerializeField] GameObject closeLetterButton;
+        public GameObject newLetterFeedback;
         [SerializeField] List<GameObject> letterList;
+        [SerializeField] List<LetterMail> letterSOList;
         [SerializeField] TextMeshProUGUI letterText;
+        [SerializeField] Sprite readLetter;
+        [SerializeField] Sprite notReadLetter;
+
         WaitForSeconds charDelay = new WaitForSeconds(0.005f);
         Coroutine letterCoroutine;
         LetterMail currentContent;
@@ -95,10 +100,18 @@ namespace Hub.UI
                 box.SetActive(false);
             }
 
-            for (int i = 0; i < SaveManager.Instance.state.unlockedLetters; i++)
+            //Set read letter based on save state
+            for (int i = 0; i < letterSOList.Count; i++)
             {
-                letterList[i].SetActive(true);
+                letterSOList[i].read = false;
             }
+
+            for (int i = 0; i < SaveManager.Instance.state.readLetters.Count; i++)
+            {
+                letterSOList[SaveManager.Instance.state.readLetters[i]].read = true;
+            }
+
+
 
             //if(SaveManager.Instance.state.bergamotState == 2f)
             //{
@@ -111,6 +124,36 @@ namespace Hub.UI
             }
 
 
+        }
+
+        public void InitLetterBoxFeedback()
+        {            
+            //set active new message feedback
+            if (SaveManager.Instance.state.unlockedLetters > SaveManager.Instance.state.readLetters.Count)
+            {
+                newLetterFeedback.SetActive(true);
+            }
+            else
+            {
+                newLetterFeedback.SetActive(false);
+            }
+        }
+
+        public void UpdateLetterSprites()
+        {
+            //set Sprite of read letters
+            for (int i = 0; i < SaveManager.Instance.state.unlockedLetters; i++)
+            {
+                letterList[i].SetActive(true);
+                if (letterSOList[i].read)
+                {
+                    letterList[i].GetComponent<Image>().sprite = readLetter;
+                }
+                else
+                {
+                    letterList[i].GetComponent<Image>().sprite = notReadLetter;
+                }
+            }
         }
 
         public void OpenBox(GameObject box)
@@ -229,6 +272,14 @@ namespace Hub.UI
             closeLetterButton.SetActive(true); // L'activer à la fin de l'affichage des lettres 
             LeanTween.alphaCanvas(closeLetterButton.GetComponent<CanvasGroup>(), 1f, 1f).setLoopPingPong();
             writingLetter = false;
+
+            if(!letterContent.read)
+            {
+                SaveManager.Instance.state.readLetters.Add(letterContent.letterIndex);
+                letterContent.read = true;
+            }
+
+            UpdateLetterSprites();
         }
 
         public void OpenLetterBox()
@@ -236,6 +287,7 @@ namespace Hub.UI
             AudioManager.Instance.PlaySoundEffect("UIClick");
             letterBox.SetActive(true);
             letterBox.transform.LeanScale(Vector3.one, 0.2f);
+            UpdateLetterSprites();
         }
 
         public void OpenSwordBox()

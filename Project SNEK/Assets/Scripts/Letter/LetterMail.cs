@@ -6,6 +6,8 @@ namespace LetterMailManagement
     public class LetterMail : ScriptableObject
     {
         public string title;
+        public int letterIndex;
+        public bool read;
         [TextArea(3, 10)] public string text;
     }
 }
