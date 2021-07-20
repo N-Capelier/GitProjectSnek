@@ -1,5 +1,64 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1243017307
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1243017309}
+  - component: {fileID: 1243017308}
+  - component: {fileID: 1243017310}
+  m_Layer: 9
+  m_Name: SpawnTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1243017309
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243017307}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5984593686374655282}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1243017308
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243017307}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: -13}
+--- !u!114 &1243017310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243017307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da7b95072ccf9ce4c958845d2b967417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movement: {fileID: 2125280306058151485}
+  behaviour: {fileID: 37738212}
 --- !u!1 &1392311476
 GameObject:
   m_ObjectHideFlags: 0
@@ -72,7 +131,7 @@ GameObject:
   - component: {fileID: 37738212}
   - component: {fileID: 2125280306058151485}
   - component: {fileID: 37738213}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Illusionist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,6 +152,7 @@ Transform:
   - {fileID: 6090895558995496406}
   - {fileID: 1392311477}
   - {fileID: 1840348234}
+  - {fileID: 1243017309}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -110,10 +170,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clone: {fileID: 4376464454411805264, guid: 2c6e33025caa6d34d8b1ebef97c05a3b, type: 3}
   cloneNumber: 3
-  clonesList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  clonesList: []
+  spawnTrigger: {fileID: 1243017308}
+  isSpawned: 0
   isKillable: 0
 --- !u!114 &2125280306058151485
 MonoBehaviour:
@@ -166,7 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackCooldown: 2
-  movementCooldown: 0
+  movementCooldown: 10
   maxHp: 1
   currentHp: 0
   deathFx: {fileID: 3893877149857393849, guid: 776a358c2e98ba8409c4035d37f35e3f, type: 3}

@@ -19,23 +19,14 @@ namespace Enemy
             stats = GetComponent<EnemyStats>();
             behaviour = GetComponent<IllusionisteBehaviour>();
             //stats.movementClock.ClockEnded += OnShouldMove;
-            StartCoroutine(SpawnRoutine());
+            //StartCoroutine(SpawnRoutine());
         }
 
 
 
         int remainClones;
-        IEnumerator SpawnRoutine()
-        {
-            yield return new WaitForSeconds(lifeTime - 1.11f);
-
-            for (int i = 0; i < behaviour.clonesList.Count; i++)
-            {
-                behaviour.clonesList[i].GetComponentInChildren<Animator>().SetBool("despawned", true);
-            }
-
-            yield return new WaitForSeconds(1.11f);
-
+        public IEnumerator SpawnRoutine()
+        {         
             if (behaviour.isKillable == false)
             {
                 remainClones = cloneParent.gameObject.transform.childCount;
@@ -45,16 +36,35 @@ namespace Enemy
                     {
                         Destroy(behaviour.clonesList[i]);
                     }
-                }
-                behaviour.clonesList = new List<GameObject>();
+                }             
 
-                yield return new WaitForSeconds(0);
+                yield return new WaitForSeconds(0.2f);
                 InstantiateClones();
+                yield return new WaitForSeconds(0.2f);
+                for (int i = 0; i < behaviour.clonesList.Count; i++)
+                {
+                    if(behaviour.clonesList[i] != null)
+                    {
+                        behaviour.clonesList[i].SetActive(true);
+                        yield return new WaitForSeconds(0.15f);
+                    }
+                }
+
                 if (behaviour.clonesList.Count <= 1 && behaviour.isKillable == false)
                 {
                     behaviour.isKillable = true;                    
                 }
             }
+
+            yield return new WaitForSeconds(lifeTime - 1.3f);
+
+            for (int i = 0; i < behaviour.clonesList.Count; i++)
+            {
+                behaviour.clonesList[i].GetComponentInChildren<Animator>().SetBool("despawned", true);
+            }
+
+            yield return new WaitForSeconds(1.3f);
+
             StartCoroutine(SpawnRoutine());
         }
 
@@ -63,7 +73,7 @@ namespace Enemy
 
         public void InstantiateClones()
         {
-            StartCoroutine(behaviour.OnshouldAttack());
+            behaviour.clonesList = new List<GameObject>();
 
             index = 0;
             switch (patternCount)
@@ -76,6 +86,7 @@ namespace Enemy
                             if (patterns[0].row[x].column[y] == true)
                             {
                                 clone = Instantiate(behaviour.clone, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x))),Quaternion.identity, cloneParent.transform);
+                                clone.SetActive(false);
                                 behaviour.clonesList.Add(clone);
                                 index++;
                                 if (index == behaviour.cloneNumber)
@@ -101,7 +112,8 @@ namespace Enemy
                             if (patterns[1].row[x].column[y] == true)
                             {
                                 clone = Instantiate(behaviour.clone, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x))), Quaternion.identity, cloneParent.transform);
-                                behaviour.clonesList.Add(clone);
+                                clone.SetActive(false);
+                                behaviour.clonesList.Add(clone);                                
                                 index++;
                                 if (index == behaviour.cloneNumber)
                                 {
@@ -119,6 +131,8 @@ namespace Enemy
                     break;
 
             }
+
+            StartCoroutine(behaviour.OnshouldAttack());
         }
     }
 }

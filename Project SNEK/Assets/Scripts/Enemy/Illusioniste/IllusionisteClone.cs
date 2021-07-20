@@ -27,10 +27,16 @@ namespace Enemy
         {
             playerPos = PlayerManager.Instance.currentController.transform.position;
             bulletDir = (playerPos - transform.position);
-            if (GetComponentInParent<IllusionisteBehaviour>().isKillable == false)
+
+            if(GetComponentInParent<IllusionisteBehaviour>().isKillable == false)
             {
                 transform.LookAt(playerPos);
-            }            
+            }
+            else
+            {
+                transform.LookAt(new Vector3(5,0,0));
+            }
+            
         }
 
         public IEnumerator Fire()
