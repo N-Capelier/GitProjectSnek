@@ -33,6 +33,7 @@ namespace Boss
         public bool bossIsDead = false;
 
         int cliffIndex = 6;
+        public GameObject endEnviro;
 
         private void Awake()
         {
@@ -115,6 +116,27 @@ namespace Boss
                 }
                 secondIndex++;
             }            
+        }
+
+        public void GenerateEndTerrains()
+        {
+            for (int i = 0; i < 45; i++)
+            {
+                for (int x = -1; x < 10; x++)
+                {
+                    tilemap.SetTile(new Vector3Int(x, secondIndex, -20), tile);
+                    tilemap2.SetTile(new Vector3Int(x, secondIndex, -20), customTile[Random.Range(0, 9)]);
+                    //tilemap.SetTile(new Vector3Int(x, secondIndex - 45, 0), null);
+                    //tilemap2.SetTile(new Vector3Int(x, secondIndex - 45, 0), null);
+                }
+                secondIndex++;
+
+                leftCliffParent.transform.parent = endEnviro.transform;
+                rightCliffParent.transform.parent = endEnviro.transform;
+
+                leftCliffParent.transform.position += new Vector3(0, 0, -leftCliffParent.transform.GetChild(0).transform.position.z);
+                rightCliffParent.transform.position += new Vector3(0, 0, -rightCliffParent.transform.GetChild(0).transform.position.z);
+            }
         }
     }
 }

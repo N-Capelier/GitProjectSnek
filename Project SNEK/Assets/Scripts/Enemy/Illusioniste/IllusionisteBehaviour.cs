@@ -15,6 +15,8 @@ namespace Enemy
         //public GameObject[] clonesList;
         public List<GameObject> clonesList;
         bool isStunned;
+        [SerializeField] BoxCollider spawnTrigger;
+        public bool isSpawned = false;
         /*[HideInInspector]*/ public bool isKillable = false;
 
         private void Start()
@@ -23,7 +25,7 @@ namespace Enemy
             //clonesList = new GameObject[cloneNumber];
             stats = GetComponent<EnemyStats>();
             movement = GetComponent<IllusionisteMovement>();
-            movement.InstantiateClones();
+
         }
 
         private void Update()
@@ -80,5 +82,7 @@ namespace Enemy
                 }                
             }
         }
+
+        
     }
 }

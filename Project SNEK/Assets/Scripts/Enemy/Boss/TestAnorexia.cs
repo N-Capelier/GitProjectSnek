@@ -432,7 +432,7 @@ namespace Boss
                 bodyRenderer.enabled = false;
                 handsRenderer.enabled = false;
                 generator.bossIsDead = true;
-                generator.GenerateStartTerrain();
+                generator.GenerateEndTerrains();
                 endGraphs.SetActive(true);
                 cam.SetActive(false);
                 SaveManager.Instance.state.isDemoFinished = true;
