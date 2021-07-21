@@ -244,6 +244,5 @@ namespace Player.Controller
             }
             return _nextNode;
         }
-
     }
 }
