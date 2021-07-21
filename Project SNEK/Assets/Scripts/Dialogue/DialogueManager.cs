@@ -390,6 +390,13 @@ namespace DialogueManagement
                 NPCManager.Instance.poppy.transform.position = NPCManager.Instance.poppy.waypointOutOfVillage.position;
             }
 
+            if(currentDialogue.unlocksLevel)
+            {
+                SaveManager.Instance.state.unlockedLevels = currentDialogue.levelToUnlockIndex;
+                GameManager.Instance.uiHandler.hubUI.InitLevelAccessPanel();
+            }
+
+
             if(!change)
             {
                 if(!currentDialogue.isCutScene)

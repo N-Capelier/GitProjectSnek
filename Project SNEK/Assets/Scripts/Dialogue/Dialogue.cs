@@ -13,6 +13,8 @@ namespace DialogueManagement
         public bool getCoin;
         public short coinAmount;
         public bool isCutScene;
+        public bool unlocksLevel;
+        public int levelToUnlockIndex;
         [Space]
         [Tooltip("Leave to 0 if no change")]
         public float bergamotNewState;
