@@ -25,11 +25,17 @@ namespace Map
         [Header("Checkpoints")]
         [SerializeField] List<int> checkpointPositions;
         [SerializeField] List<CheckpointUI> checkpoints;
+        [SerializeField] Sprite defaultSprite;
+        [SerializeField] Sprite passedSprite;
 
         [Header("Cinematic")]
         [SerializeField] Image cinematicImage;
         [SerializeField] int minBound;
         [SerializeField] int maxBound;
+
+        [Header("Finish Line")]
+        [SerializeField] RectTransform finishLineTransform;
+        [SerializeField] Sprite finishLineSprite;
 
 
         void Start()
@@ -41,6 +47,8 @@ namespace Map
 
             Initcheckpoints();
             FadeOut();
+
+            finishLineTransform.pivot = finishLineSprite.pivot / finishLineSprite.rect.size;
         }
 
         void Update()
@@ -55,7 +63,6 @@ namespace Map
 
                 if(currentProgression != fillMask.fillAmount)
                 {
-                    fillMask.fillAmount = currentProgression;
                     headSlider.value = currentProgression;
                 }
                 CheckpointFeedback();
@@ -71,7 +78,11 @@ namespace Map
                 //print(value);
 
                 checkpoints[i].rectTransform.anchorMin = new Vector2(0, value);
-                checkpoints[i].rectTransform.anchorMax = new Vector2(1,value); 
+                checkpoints[i].rectTransform.anchorMax = new Vector2(1,value);
+
+                checkpoints[i].gameObject.GetComponent<Image>().sprite = defaultSprite;
+                checkpoints[i].gameObject.GetComponent<RectTransform>().pivot = defaultSprite.pivot / defaultSprite.rect.size;
+
             }
 
             cinematicImage.rectTransform.anchorMin = new Vector2(0, (float)minBound / (float)levelLength);
@@ -92,7 +103,9 @@ namespace Map
                     else
                     {
                         checkpoints[i].check = true;
-                        checkpoints[i].gameObject.SetActive(false);
+                        //checkpoints[i].gameObject.SetActive(false);
+                        checkpoints[i].gameObject.GetComponent<Image>().sprite = passedSprite;
+                        checkpoints[i].gameObject.GetComponent<RectTransform>().pivot = passedSprite.pivot / passedSprite.rect.size;
                         FadeOut();
                     }
                 }
@@ -102,9 +115,9 @@ namespace Map
 
         public void FadeOut()
         {
-            if(canvasGroup.alpha !=0)
+            if (canvasGroup.alpha != 0)
             {
-                if(canvasGroup.alpha <1)
+                if (canvasGroup.alpha < 1)
                 {
                     canvasGroup.LeanAlpha(1, 0.5f);
                     canvasGroup.LeanAlpha(0.5f, 0.5f).setDelay(3f);
