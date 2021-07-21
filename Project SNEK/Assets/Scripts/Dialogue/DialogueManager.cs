@@ -45,6 +45,25 @@ namespace DialogueManagement
 
         WaitForSeconds charDelay = new WaitForSeconds(0.05f);
 
+        [Header("Visuals")]
+        [SerializeField] Image nameImage;
+        [SerializeField] Image backgroundImage;
+
+        [SerializeField] Sprite anaelName;
+        [SerializeField] Sprite anaelBackground;
+
+        [SerializeField] Sprite poppyName;
+        [SerializeField] Sprite poppyBackground;
+
+        [SerializeField] Sprite thistleName;
+        [SerializeField] Sprite thistleBackground;
+
+        [SerializeField] Sprite bergamotName;
+        [SerializeField] Sprite bergamotBackground;
+
+        [SerializeField] Sprite darkAnaelName;
+        [SerializeField] Sprite darkAnaelBackground;
+
 
         private void Start()
         {
@@ -104,7 +123,33 @@ namespace DialogueManagement
 
         IEnumerator WriteNextLine()
         {
-           
+            switch (currentDialogue.sentences[sentenceIndex].character)
+            {
+                case Character.Anael:
+                    nameImage.sprite = anaelName;
+                    backgroundImage.sprite = anaelBackground;
+                    break;
+                case Character.Poppy:
+                    nameImage.sprite = poppyName;
+                    backgroundImage.sprite = poppyBackground;
+                    break;
+                case Character.Thistle:
+                    nameImage.sprite = thistleName;
+                    backgroundImage.sprite = thistleBackground;
+                    break;
+                case Character.Bergamot:
+                    nameImage.sprite = bergamotName;
+                    backgroundImage.sprite = bergamotBackground;
+                    break;
+                case Character.Object:
+                    nameImage.sprite = anaelName;
+                    backgroundImage.sprite = anaelBackground;
+                    break;
+                default:
+                    Debug.LogError("Missing character case in the switch");
+                    break;
+            }
+
             //charDelay = 0.05f; //////
             if(currentDialogue.sentences[sentenceIndex].character == Character.Object)
             {
