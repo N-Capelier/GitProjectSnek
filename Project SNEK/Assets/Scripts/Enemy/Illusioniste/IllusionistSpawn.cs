@@ -13,7 +13,6 @@ namespace Enemy
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController") && behaviour.isSpawned == false)
             {
-                print("Hello");
                 behaviour.isSpawned = true;
                 movement.InstantiateClones();
                 StartCoroutine(movement.SpawnRoutine());                
