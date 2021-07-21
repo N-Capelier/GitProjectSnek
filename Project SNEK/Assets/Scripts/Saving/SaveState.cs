@@ -1,4 +1,6 @@
-﻿namespace Saving
+﻿using System.Collections.Generic;
+
+namespace Saving
 {
     public class SaveState
     {
@@ -35,6 +37,7 @@
         public int equipedTechnic = 0;
 
         public int unlockedLetters = 1;
+        public List<int> readLetters = new List<int>();
 
         public int canvasCurrentState;
 
@@ -51,5 +54,15 @@
 
         public bool isDemoFinished = false;
         public int bossAnorexiaHp = 3;
+
+        /// <summary>
+        /// 0 = none
+        /// 1 = Level_1.1
+        /// 2 = Level_1.2
+        /// 3 = Level_1.3
+        /// 4 = Anorexia
+        /// ...
+        /// </summary>
+        public int unlockedLevels = 0;
     }
 }
