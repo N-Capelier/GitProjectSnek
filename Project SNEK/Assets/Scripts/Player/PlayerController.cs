@@ -192,14 +192,48 @@ namespace Player.Controller
         }
 
         bool bossLevel = false;
-        public void RespawnAfterCutscene(int _spiritCount)
+        public IEnumerator RespawnAfterCutscene(int _spiritCount)
         {
-            if (SceneManager.GetActiveScene().name != "Boss Anorexia")
-            {
-                PlayerManager.Instance.gameObject.SetActive(false);
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-                PlayerManager.Instance.gameObject.SetActive(true);
-            }
+            //yield return null;
+            ////print("starting coroutine");
+
+            //if (SceneManager.GetActiveScene().name != "Boss Anorexia")
+            //{
+            //    PlayerManager.Instance.gameObject.SetActive(false);
+            //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            //    PlayerManager.Instance.gameObject.SetActive(true);
+            //}
+
+            //transform.position = checkPoint.position;
+
+            //playerRunSpirits.ResetSpiritsPositions();
+            //if (_spiritCount > 0)
+            //{
+            //    for (int i = 0; i < _spiritCount; i++)
+            //    {
+            //        playerRunSpirits.AddSpirit();
+            //    }
+            //}
+
+
+            //GameManager.Instance.uiHandler.levelProgressUI.FadeOut();
+
+            //RunCamController.Instance.Set(CamState.PlayerScrolling, true);
+
+            ////Destroy(playerRunSpirits.gameObject);
+            ////GameObject _newSpiritChain = Instantiate(spiritChainPrefab, transform);
+            ////playerRunSpirits = _newSpiritChain.GetComponent<SpiritManager>();
+
+            //isInCutscene = false;
+
+            ////////////////////////////
+
+            isInCutscene = false;
+            yield return null;
+
+            PlayerManager.Instance.gameObject.SetActive(false);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            PlayerManager.Instance.gameObject.SetActive(true);
 
             transform.position = checkPoint.position;
 
@@ -212,15 +246,11 @@ namespace Player.Controller
                 }
             }
 
-            GameManager.Instance.uiHandler.levelProgressUI.FadeOut();
-
             RunCamController.Instance.Set(CamState.PlayerScrolling, true);
 
-            //Destroy(playerRunSpirits.gameObject);
-            //GameObject _newSpiritChain = Instantiate(spiritChainPrefab, transform);
-            //playerRunSpirits = _newSpiritChain.GetComponent<SpiritManager>();
+            GameManager.Instance.uiHandler.levelProgressUI.FadeOut();
 
-            isInCutscene = false;
+            isDead = false;
         }
 
         IEnumerator DisplayHp()

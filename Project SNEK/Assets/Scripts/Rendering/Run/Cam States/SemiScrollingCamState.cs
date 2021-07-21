@@ -15,7 +15,7 @@ namespace Rendering.Run
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            RunCamController.Instance.transform.position = new Vector3(0, 0, 0);
+            RunCamController.Instance.transform.position = new Vector3(5f, 0, 0);
             deathZone = Instantiate(RunCamController.Instance.deathZone, new Vector3(5f, 0.25f, -2f), Quaternion.identity, RunCamController.Instance.vcam.transform);
         }
 

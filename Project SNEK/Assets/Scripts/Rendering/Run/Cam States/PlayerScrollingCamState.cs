@@ -11,8 +11,11 @@ namespace Rendering.Run
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            Debug.Log("applying new state");
+            RunCamController.Instance.vcam.Follow = null;
+
             RunCamController.Instance.vcam.transform.position = RunCamController.Instance.vcam.transform.position.SetX(5);
-            RunCamController.Instance.cam.transform.position = RunCamController.Instance.vcam.transform.position.SetX(5);
+            //RunCamController.Instance.cam.transform.position = RunCamController.Instance.vcam.transform.position.SetX(5);
 
             RunCamController.Instance.vcam.Follow = PlayerManager.Instance.currentController.gameObject.transform;
         }

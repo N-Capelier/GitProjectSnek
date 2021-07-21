@@ -103,7 +103,7 @@ namespace Cinematic
 
                 //PlayerManager.Instance.currentController.isInCutscene = false;
 
-                PlayerManager.Instance.currentController.RespawnAfterCutscene(spiritCount);
+                GameManager.Instance.StartCoroutine(PlayerManager.Instance.currentController.RespawnAfterCutscene(spiritCount));
 
                 //Show UI elements
                 GameManager.Instance.uiHandler.ShowUIRun();

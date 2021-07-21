@@ -14,7 +14,7 @@ namespace Rendering.Run
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             Debug.Log("free scrolling");
-            RunCamController.Instance.transform.position = new Vector3(0, 0, 0);
+            RunCamController.Instance.transform.position = new Vector3(5f, 0, 0);
             RunCamController.Instance.rb.velocity = new Vector3(0, 0, RunCamController.Instance.scrollSpeed * 2.5f);
 
             deathZone = Instantiate(RunCamController.Instance.deathZone, new Vector3(5f, 0.25f, -4f), Quaternion.identity, RunCamController.Instance.vcam.transform);
