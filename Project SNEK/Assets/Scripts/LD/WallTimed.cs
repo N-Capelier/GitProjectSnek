@@ -36,7 +36,7 @@ namespace Wall
         {
             base.OnTriggerEnter(other);
             
-            if(other.gameObject.layer == LayerMask.NameToLayer("Wall") || other.gameObject.layer == LayerMask.NameToLayer("LaBuBulle")/*temporary*/)
+            if(other.gameObject.layer == LayerMask.NameToLayer("Wall") || other.gameObject.layer == LayerMask.NameToLayer("Shield")/*temporary*/)
             {
                 StartCoroutine(GetDestroyed());
             }
