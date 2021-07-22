@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using Player;
+using System.Collections.Generic;
+using DialogueManagement;
+using System.Collections;
 
 namespace Saving
 {
@@ -19,13 +22,42 @@ namespace Saving
         {
             get
             {
+                if(PlayerManager.Instance.currentController is null)
+                {
+                    return null;
+                }
                 return PlayerManager.Instance.currentController.animator;
             }
         }
 
+        public static Dictionary<CharacterAnimator, Animator> characterAnimatorDictionary = new Dictionary<CharacterAnimator, Animator>();
+
+
         private void Awake()
         {
             CreateSingleton();
+        }
+
+        private IEnumerator Start()
+        {
+            yield return new WaitForSeconds(.5f);
+            characterAnimatorDictionary.Add(CharacterAnimator.None, null);
+
+            if(anaelAnim != null)
+            {
+                characterAnimatorDictionary.Add(CharacterAnimator.AnaelController, anaelAnim);
+            }
+            characterAnimatorDictionary.Add(CharacterAnimator.AnaelCutscene, anaelCutscene);
+            characterAnimatorDictionary.Add(CharacterAnimator.AnaelRunCutscene, anaelRunCutscene);
+
+            characterAnimatorDictionary.Add(CharacterAnimator.BergamotHub, bergamotHubAnim);
+            characterAnimatorDictionary.Add(CharacterAnimator.BergamotCutscene, bergamotCutscene);
+
+            characterAnimatorDictionary.Add(CharacterAnimator.PoppyHub, poppyHubAnim);
+            characterAnimatorDictionary.Add(CharacterAnimator.PoppyCutscene, poppyCutscene);
+
+            characterAnimatorDictionary.Add(CharacterAnimator.ThistleHub, thistleHubAnim);
+            characterAnimatorDictionary.Add(CharacterAnimator.ThistleCutscene, thistleCutscene);
         }
 
         public void RefreshNPCs()

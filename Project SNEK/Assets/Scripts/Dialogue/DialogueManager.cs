@@ -37,7 +37,7 @@ namespace DialogueManagement
         bool skipSentence = false;
         bool waitForClick = false;
         int sentenceIndex;
-        Animator animator, cinematicAnimator;
+        Animator cinematicAnimator;
         int dialogCount;
 
         PauseManager pauseManager;
@@ -111,7 +111,6 @@ namespace DialogueManagement
                 StartCoroutine(CutsceneManager.Instance.PauseCutscene());
             }
 
-            this.animator = animator;
             OpenDialogueBox();
             //Mouvement de caméra
             dialogCount = 0;
@@ -161,13 +160,13 @@ namespace DialogueManagement
             {
 
                 nameText.text = currentDialogue.sentences[sentenceIndex].character.ToString();
-                if(animator != null && currentDialogue.sentences[sentenceIndex].anim != "")
+                if(NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator] != null && currentDialogue.sentences[sentenceIndex].anim != "")
                 {
-                    animator.Play(Animator.StringToHash(currentDialogue.sentences[sentenceIndex].anim));
+                    NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator].Play(Animator.StringToHash(currentDialogue.sentences[sentenceIndex].anim));
                 }
-                else if(animator != null)
+                else if(NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator] != null)
                 {
-                    animator.SetLayerWeight(animator.GetLayerIndex("Talk"), 1);
+                    NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator].SetLayerWeight(NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator].GetLayerIndex("Talk"), 1);
                 }
             }
 
@@ -195,7 +194,7 @@ namespace DialogueManagement
                     {
                         if(currentDialogue.sentences[sentenceIndex].voiceLine != "")
                         AudioManager.Instance.PlaySoundEffect(currentDialogue.sentences[sentenceIndex].voiceLine);
-                        animator.gameObject.GetComponent<NPCFaceManager>().RandomizeMouth();
+                        NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator].gameObject.GetComponent<NPCFaceManager>().RandomizeMouth();
                         dialogCount = 0;
                     }
                     else
@@ -229,9 +228,9 @@ namespace DialogueManagement
             //    animator.Play($"Anim_{currentDialogue.sentences[sentenceIndex].character}_idle");
             //}
 
-            if (animator != null)
+            if (NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator] != null)
             {
-                animator.SetLayerWeight(animator.GetLayerIndex("Talk"), 0);
+                NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator].SetLayerWeight(NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator].GetLayerIndex("Talk"), 0);
             }
 
             sentenceIndex++;
@@ -527,11 +526,11 @@ namespace DialogueManagement
         public void SeeYouButton()
         {
             CloseDialogueBox(currentDialogue);
-            NPCFaceManager _face = animator.GetComponent<NPCFaceManager>();
+            NPCFaceManager _face = NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator].GetComponent<NPCFaceManager>();
             _face.SetEyesExpression(0);
             _face.SetMouthExpression(0);
             currentDialogue = null;
-            animator = null;
+            NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator] = null;
             isRunningDialogue = false;
             isTapped = false;
         }
