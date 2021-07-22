@@ -494,7 +494,7 @@ namespace DialogueManagement
                 }
                 else
                 {
-                    GameManager.Instance.uiHandler.hubUI.OpenPnjLevelAccess(currentDialogue.sentences[currentDialogue.sentences.Length - 1].levelIndex);
+                    GameManager.Instance.uiHandler.hubUI.OpenPnjLevelAccess();
                 }
 
                 keepTalkingButton.SetActive(false);
