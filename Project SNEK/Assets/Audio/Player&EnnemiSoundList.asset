@@ -1,0 +1,168 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 478f42bd1387f5f4ebe524211716de68, type: 3}
+  m_Name: SoundList
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: LevelDestroyDefault
+    clip: {fileID: 8300000, guid: f0969e08fd683694aae37474bc32726e, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: ObjectSecretItemCollect
+    clip: {fileID: 8300000, guid: 1acbdd295af4511448d5e9e1bdb40967, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: ObjectSpiritCollect
+    clip: {fileID: 8300000, guid: ad83f64965096ad40b8d75adb05597c0, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: PlayerAttack01
+    clip: {fileID: 8300000, guid: 33d153b90acc710408665b38d0945d83, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: PlayerAttack02
+    clip: {fileID: 8300000, guid: 251fe886b09da074d831a608cc05a03f, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: PlayerHit
+    clip: {fileID: 8300000, guid: b88225ccd6ea0db4b9b2e676b4655c7e, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: PlayerSwipe01
+    clip: {fileID: 8300000, guid: 85b2695dd22c03f4f8212fca9d4db204, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: PlayerSwordHitNothing
+    clip: {fileID: 8300000, guid: 13062337652aef140af2fd6caeb9805f, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: PlayerSwordImpact
+    clip: {fileID: 8300000, guid: 1c1e2783100499f4289879e70aace831, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: UIClick
+    clip: {fileID: 8300000, guid: 6915dcea204b8aa4db7d4a907547e1be, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: UIConfirm
+    clip: {fileID: 8300000, guid: 88e4939b8969bdf478d34a0b0392b517, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: UINone
+    clip: {fileID: 8300000, guid: e6be635b0b6536b49a934caf0380982f, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: SwordBeam
+    clip: {fileID: 8300000, guid: ac74d6dc462db8d41ace8aabe184dc30, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: MarmiteLancer
+    clip: {fileID: 8300000, guid: c8676cdaeb0de9949ae107e07b61c638, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: MarmiteAspire
+    clip: {fileID: 8300000, guid: a3c50c74eba17b34d8c840e80be3f076, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: MarmiteEnd
+    clip: {fileID: 8300000, guid: 100dd78bcc0f9de47abcc9a741d1063e, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: GloutonAttack
+    clip: {fileID: 8300000, guid: b18508ab808a5ef47a2c61049604b94a, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: GloutonSpit
+    clip: {fileID: 8300000, guid: 73afe3efaf19d8241a0f371d48d0bb45, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: MouchouVomito
+    clip: {fileID: 8300000, guid: 0e7ef9dba616ecb429b20f9e9ba3889d, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: BeVoice
+    clip: {fileID: 8300000, guid: a4a2df84089b9fb4d929e781770f2833, type: 3}
+    source: {fileID: 0}
+    volume: 0.5
+  - name: PoVoice
+    clip: {fileID: 8300000, guid: aa8c520d6c3294f4185980a8bf54f9c8, type: 3}
+    source: {fileID: 0}
+    volume: 0.5
+  - name: ThVoice
+    clip: {fileID: 8300000, guid: c0f0e5a5270df3646a22430fd2b87d00, type: 3}
+    source: {fileID: 0}
+    volume: 0.5
+  - name: AnVoice
+    clip: {fileID: 8300000, guid: c7f6755d7cc000b45bc4da9cb0a37557, type: 3}
+    source: {fileID: 0}
+    volume: 0.5
+  - name: PuzzleClear
+    clip: {fileID: 8300000, guid: d3849c5bf786c07459f12ec5e5ef84f1, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: DestroyWood
+    clip: {fileID: 8300000, guid: 2ee558a51ac2491458504d0dbeaa0123, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: DestroyLeaf
+    clip: {fileID: 8300000, guid: aeb1000914c801549acaa7f556edd965, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: ChargeAttackDone
+    clip: {fileID: 8300000, guid: 07f139028588411409d01bb929a039a2, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: LevelCheckpoint
+    clip: {fileID: 8300000, guid: ab9495816fe42054c8dc4bed650bc1e8, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: BossGrunt
+    clip: {fileID: 8300000, guid: 5026c8c6bddb1da488e9a41ee274c282, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: BossHit
+    clip: {fileID: 8300000, guid: 1e2e8ae322cc8e94f980af71b7a1322d, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: StartPoisonRain
+    clip: {fileID: 8300000, guid: 66f6c4877556d4e43b9759351c713d23, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: SummonMouchou
+    clip: {fileID: 8300000, guid: 4223da13ebdffb942acc37a42c8ea906, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: PlayerLevelUp
+    clip: {fileID: 8300000, guid: 3ffe296c61da62f4c90f69d65f6274c3, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  musics:
+  - name: LevelMusic
+    clip: {fileID: 8300000, guid: 80e5ca09f66ab5649813bb4736dd096a, type: 3}
+    source: {fileID: 0}
+    volume: 0.5
+  - name: HubMusic
+    clip: {fileID: 8300000, guid: f901c4dff34b2f54ea44537cb090ed54, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: BossMusic
+    clip: {fileID: 8300000, guid: 456c8a0452c843445a3fd6bac721c97b, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: EndLevelMusic
+    clip: {fileID: 8300000, guid: 0152d8e8ca004944ca4911e20cd592af, type: 3}
+    source: {fileID: 0}
+    volume: 1
+  - name: MainMenuMusic
+    clip: {fileID: 8300000, guid: cce37fa2efa0c3142a71984e50253d52, type: 3}
+    source: {fileID: 0}
+    volume: 1
