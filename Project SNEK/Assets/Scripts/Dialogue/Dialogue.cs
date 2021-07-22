@@ -34,12 +34,12 @@ namespace DialogueManagement
     public struct Sentence
     {
         public Character character;
+        public CharacterAnimator characterAnimator;
         public string anim;
         [TextArea(3, 10)]
         public string sentence;
         public string voiceLine;
         public bool activateButtons;
-        public int levelIndex;
     }
     public enum Character
     {
@@ -48,5 +48,19 @@ namespace DialogueManagement
         Thistle,
         Bergamot,
         Object
+    }
+
+    public enum CharacterAnimator
+    {
+        None,
+        AnaelController,
+        AnaelCutscene,
+        AnaelRunCutscene,
+        BergamotHub,
+        BergamotCutscene,
+        PoppyHub,
+        PoppyCutscene,
+        ThistleHub,
+        ThistleCutscene
     }
 }

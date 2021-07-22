@@ -25,7 +25,7 @@ namespace Hub.UI
         [SerializeField] List<GameObject> levels = new List<GameObject>();
 
         [Header("PNJ Level Access")]
-        [SerializeField] GameObject[] levelBoxPNJ;
+        [SerializeField] GameObject levelBoxPNJ;
         [Space]
 
         [Header("Letter Animation and Menu")]
@@ -96,11 +96,11 @@ namespace Hub.UI
             swordBox.SetActive(false);
             TutoBox.transform.localScale = Vector3.zero;
             TutoBox.SetActive(false);
-            foreach(GameObject box in levelBoxPNJ)
-            {
-                box.transform.localScale = Vector3.zero;
-                box.SetActive(false);
-            }
+
+
+            levelBoxPNJ.transform.localScale = Vector3.zero;
+            levelBoxPNJ.SetActive(false);
+
 
             //Set read letter based on save state
             for (int i = 0; i < letterSOList.Count; i++)
@@ -194,12 +194,12 @@ namespace Hub.UI
             levelAccessBox.transform.LeanScale(Vector3.one, 0.2f);
         }
 
-        public void OpenPnjLevelAccess(int boxIndex)
+        public void OpenPnjLevelAccess()
         {
             AudioManager.Instance.PlaySoundEffect("UIClick");
             FadeInBackground(.2f);
-            levelBoxPNJ[boxIndex].SetActive(true);
-            levelBoxPNJ[boxIndex].transform.LeanScale(Vector3.one, 0.2f);
+            levelBoxPNJ.SetActive(true);
+            levelBoxPNJ.transform.LeanScale(Vector3.one, 0.2f);
         }
 
         public void CloseLevelAcces()

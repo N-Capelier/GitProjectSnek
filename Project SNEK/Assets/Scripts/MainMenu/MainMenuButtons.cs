@@ -12,6 +12,23 @@ namespace MainMenu
     /// </summary>
     public class MainMenuButtons : MonoBehaviour
     {
+
+        [SerializeField] GameObject continueButton;
+        public void Start()
+        {
+            if(SaveManager.Instance.state.bergamotState == 1)
+            {
+                //set active false continue
+                continueButton.SetActive(false);
+            }
+            else
+            {
+                //set active true continue
+                continueButton.SetActive(true);
+            }
+        }
+
+
         public void LaunchGame()
         {
             AudioManager.Instance.PlaySoundEffect("UIConfirm");
@@ -46,9 +63,16 @@ namespace MainMenu
 
         public void OpenBox(GameObject box)
         {
-            box.SetActive(true);
-            box.transform.localScale = Vector3.zero;
-            box.transform.LeanScale(Vector3.one, 0.2f);
+            if (SaveManager.Instance.state.bergamotState > 1)
+            {
+                box.SetActive(true);
+                box.transform.localScale = Vector3.zero;
+                box.transform.LeanScale(Vector3.one, 0.2f);
+            }
+            else
+            {
+                ResetSave();
+            }
         }
         public void CloseBox(GameObject box)
         {

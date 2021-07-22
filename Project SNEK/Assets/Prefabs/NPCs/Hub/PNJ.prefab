@@ -146,6 +146,14 @@ MonoBehaviour:
   bergamot: {fileID: 4548820583838524401}
   poppy: {fileID: 7588686927911454979}
   thistle: {fileID: 7645547067179460837}
+  bergamotHubAnim: {fileID: 761270440662651379}
+  poppyHubAnim: {fileID: 761270441278293086}
+  thistleHubAnim: {fileID: 761270440800107365}
+  anaelCutscene: {fileID: 0}
+  bergamotCutscene: {fileID: 0}
+  poppyCutscene: {fileID: 0}
+  thistleCutscene: {fileID: 0}
+  anaelRunCutscene: {fileID: 0}
 --- !u!1 &761270440392642479
 GameObject:
   m_ObjectHideFlags: 0
@@ -1229,6 +1237,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f42ad0832168a14680fb9e9aba3c92d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &761270440662651379 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 352774375816497349, guid: 2cfd9ee5c40677549880f36f205e5c3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1041981890771605814}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2762359700709366916
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1744,6 +1758,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56249cd3668382f40993346db3f67bb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &761270440800107365 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3226069291678296033, guid: b491ee12bf6fe70498ab724d88c9f05b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2762359700709366916}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8095820256903539225
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2724,3 +2744,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ea68462083673c4aa38ee7e409142d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &761270441278293086 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8848081022269550151, guid: bb1172ee930733b489d98f82cef1a795,
+    type: 3}
+  m_PrefabInstance: {fileID: 8095820256903539225}
+  m_PrefabAsset: {fileID: 0}

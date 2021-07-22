@@ -19,7 +19,6 @@ namespace DialogueManagement
     /// </summary>
     public class DialogueManager : MonoBehaviour
     {
-
         [SerializeField] TextMeshProUGUI nameText;
         [SerializeField] TextMeshProUGUI dialogueText;
         [SerializeField] Image dialogueArrow;
@@ -38,12 +37,31 @@ namespace DialogueManagement
         bool skipSentence = false;
         bool waitForClick = false;
         int sentenceIndex;
-        Animator animator, cinematicAnimator;
+        Animator cinematicAnimator;
         int dialogCount;
 
         PauseManager pauseManager;
 
         WaitForSeconds charDelay = new WaitForSeconds(0.05f);
+
+        [Header("Visuals")]
+        [SerializeField] Image nameImage;
+        [SerializeField] Image backgroundImage;
+
+        [SerializeField] Sprite anaelName;
+        [SerializeField] Sprite anaelBackground;
+
+        [SerializeField] Sprite poppyName;
+        [SerializeField] Sprite poppyBackground;
+
+        [SerializeField] Sprite thistleName;
+        [SerializeField] Sprite thistleBackground;
+
+        [SerializeField] Sprite bergamotName;
+        [SerializeField] Sprite bergamotBackground;
+
+        [SerializeField] Sprite darkAnaelName;
+        [SerializeField] Sprite darkAnaelBackground;
 
 
         private void Start()
@@ -54,14 +72,17 @@ namespace DialogueManagement
 
             pauseManager = GameManager.Instance.uiHandler.pauseUI;
         }
+
         public void SetCinematicDialogueAnimator(Animator animator)
         {
             cinematicAnimator = animator;
         }
+
         public void StartDialogueInCinematic(Dialogue dialogue)
         {
             StartCoroutine(StartDialogue(dialogue,cinematicAnimator));
         }
+
         public IEnumerator StartDialogue(Dialogue dialogue, Animator animator = null)
         {
             if (isRunningDialogue)
@@ -90,7 +111,6 @@ namespace DialogueManagement
                 StartCoroutine(CutsceneManager.Instance.PauseCutscene());
             }
 
-            this.animator = animator;
             OpenDialogueBox();
             //Mouvement de caméra
             dialogCount = 0;
@@ -104,7 +124,33 @@ namespace DialogueManagement
 
         IEnumerator WriteNextLine()
         {
-           
+            switch (currentDialogue.sentences[sentenceIndex].character)
+            {
+                case Character.Anael:
+                    nameImage.sprite = anaelName;
+                    backgroundImage.sprite = anaelBackground;
+                    break;
+                case Character.Poppy:
+                    nameImage.sprite = poppyName;
+                    backgroundImage.sprite = poppyBackground;
+                    break;
+                case Character.Thistle:
+                    nameImage.sprite = thistleName;
+                    backgroundImage.sprite = thistleBackground;
+                    break;
+                case Character.Bergamot:
+                    nameImage.sprite = bergamotName;
+                    backgroundImage.sprite = bergamotBackground;
+                    break;
+                case Character.Object:
+                    nameImage.sprite = anaelName;
+                    backgroundImage.sprite = anaelBackground;
+                    break;
+                default:
+                    Debug.LogError("Missing character case in the switch");
+                    break;
+            }
+
             //charDelay = 0.05f; //////
             if(currentDialogue.sentences[sentenceIndex].character == Character.Object)
             {
@@ -114,13 +160,13 @@ namespace DialogueManagement
             {
 
                 nameText.text = currentDialogue.sentences[sentenceIndex].character.ToString();
-                if(animator != null && currentDialogue.sentences[sentenceIndex].anim != "")
+                if(NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator] != null && currentDialogue.sentences[sentenceIndex].anim != "")
                 {
-                    animator.Play(Animator.StringToHash(currentDialogue.sentences[sentenceIndex].anim));
+                    NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator].Play(Animator.StringToHash(currentDialogue.sentences[sentenceIndex].anim));
                 }
-                else if(animator != null)
+                else if(NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator] != null)
                 {
-                    animator.SetLayerWeight(animator.GetLayerIndex("Talk"), 1);
+                    NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator].SetLayerWeight(NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator].GetLayerIndex("Talk"), 1);
                 }
             }
 
@@ -148,7 +194,7 @@ namespace DialogueManagement
                     {
                         if(currentDialogue.sentences[sentenceIndex].voiceLine != "")
                         AudioManager.Instance.PlaySoundEffect(currentDialogue.sentences[sentenceIndex].voiceLine);
-                        animator.gameObject.GetComponent<NPCFaceManager>().RandomizeMouth();
+                        NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator].gameObject.GetComponent<NPCFaceManager>().RandomizeMouth();
                         dialogCount = 0;
                     }
                     else
@@ -182,9 +228,9 @@ namespace DialogueManagement
             //    animator.Play($"Anim_{currentDialogue.sentences[sentenceIndex].character}_idle");
             //}
 
-            if (animator != null)
+            if (NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator] != null)
             {
-                animator.SetLayerWeight(animator.GetLayerIndex("Talk"), 0);
+                NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator].SetLayerWeight(NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator].GetLayerIndex("Talk"), 0);
             }
 
             sentenceIndex++;
@@ -449,7 +495,7 @@ namespace DialogueManagement
                 }
                 else
                 {
-                    GameManager.Instance.uiHandler.hubUI.OpenPnjLevelAccess(currentDialogue.sentences[currentDialogue.sentences.Length - 1].levelIndex);
+                    GameManager.Instance.uiHandler.hubUI.OpenPnjLevelAccess();
                 }
 
                 keepTalkingButton.SetActive(false);
@@ -480,11 +526,11 @@ namespace DialogueManagement
         public void SeeYouButton()
         {
             CloseDialogueBox(currentDialogue);
-            NPCFaceManager _face = animator.GetComponent<NPCFaceManager>();
+            NPCFaceManager _face = NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator].GetComponent<NPCFaceManager>();
             _face.SetEyesExpression(0);
             _face.SetMouthExpression(0);
             currentDialogue = null;
-            animator = null;
+            NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator] = null;
             isRunningDialogue = false;
             isTapped = false;
         }
