@@ -464,8 +464,20 @@ namespace Boss
 
         IEnumerator DisplayHp()
         {
+            yield return new WaitForSeconds(0.5f);
             hpUi.transform.LeanScale(Vector3.one, 0.4f);
-            hpText.text = (currentHp / 10).ToString();
+            switch (currentHp)
+            {
+                case 30:
+                    hpText.text = 3.ToString();
+                    break;
+                case 20:
+                    hpText.text = 2.ToString();
+                    break;
+                case 10:
+                    hpText.text = 1.ToString();
+                    break;
+            }
             yield return new WaitForSeconds(3f);
             hpUi.transform.LeanScale(Vector3.zero, 0.2f);
 
