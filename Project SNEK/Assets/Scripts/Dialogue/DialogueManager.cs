@@ -19,7 +19,6 @@ namespace DialogueManagement
     /// </summary>
     public class DialogueManager : MonoBehaviour
     {
-
         [SerializeField] TextMeshProUGUI nameText;
         [SerializeField] TextMeshProUGUI dialogueText;
         [SerializeField] Image dialogueArrow;
@@ -54,14 +53,17 @@ namespace DialogueManagement
 
             pauseManager = GameManager.Instance.uiHandler.pauseUI;
         }
+
         public void SetCinematicDialogueAnimator(Animator animator)
         {
             cinematicAnimator = animator;
         }
+
         public void StartDialogueInCinematic(Dialogue dialogue)
         {
             StartCoroutine(StartDialogue(dialogue,cinematicAnimator));
         }
+
         public IEnumerator StartDialogue(Dialogue dialogue, Animator animator = null)
         {
             if (isRunningDialogue)
