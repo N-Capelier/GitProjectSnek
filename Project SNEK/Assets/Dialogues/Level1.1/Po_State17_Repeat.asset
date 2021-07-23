@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 0
   poppyNewState: 18
   thistleNewState: 0
@@ -29,18 +31,15 @@ MonoBehaviour:
       mad about that."
     voiceLine: PoVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 1
     anim: 
     sentence: "You\u2019re a newcomer, how could you have known about the monsters?
       You could have refused to help, and you didn\u2019t! "
     voiceLine: PoVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 1
     anim: 
     sentence: "Bergamot is always so nice. She\u2019s like a mom to everyone, you
       know that kind of person? Always there and ready to help!"
     voiceLine: PoVoice
-    activateButtons: 1
-    levelIndex: 1
+    activateButtons: 0

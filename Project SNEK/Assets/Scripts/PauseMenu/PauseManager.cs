@@ -15,6 +15,7 @@ namespace PauseManagement
         [SerializeField] GameObject[] qualityToggles;
         [SerializeField] GameObject background;
         [SerializeField] Slider soundSlider, musicSlider;
+        [SerializeField] GameObject leftHandToggle;
         //bool occupied = false;
 
         void Start()
@@ -26,6 +27,15 @@ namespace PauseManagement
             pauseMenu.SetActive(false);
             ManageQualitySettings(SaveManager.Instance.state.quality);
             FadeBackground(false);
+
+            if(SaveManager.Instance.state.leftHanded == 0)
+            {
+                leftHandToggle.SetActive(false);
+            }
+            else
+            {
+                leftHandToggle.SetActive(true);
+            }
         }
 
         public void OpenPauseMenu()
@@ -143,6 +153,26 @@ namespace PauseManagement
                 AudioManager.Instance.soundsMixer.SetFloat("sfxVolume", (Mathf.Log10(soundSlider.value * 10) * 100) - 80);
             }
             SaveManager.Instance.Save();
+        }
+
+
+        public void ToggleLeftHand()
+        {
+            if(leftHandToggle.activeSelf)
+            {
+                leftHandToggle.SetActive(false);
+                SaveManager.Instance.state.leftHanded = 0; 
+            }
+            else
+            {
+                leftHandToggle.SetActive(true);
+                SaveManager.Instance.state.leftHanded = 1;
+            }
+
+            if(GameManager.Instance.gameState.ActiveState == GameState.Run)
+            {
+                GameManager.Instance.uiHandler.SwapHand(SaveManager.Instance.state.leftHanded);
+            }
         }
 
         public void QuitApp()

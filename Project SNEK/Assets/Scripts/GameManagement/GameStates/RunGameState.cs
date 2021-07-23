@@ -37,7 +37,7 @@ namespace GameManagement.GameStates
 
                     //Set spellUI to UIHandler / Temporary ?? Thomas
                     PlayerRunController temp = (PlayerRunController)PlayerManager.Instance.currentController;
-                    GameManager.Instance.uiHandler.spellUI = temp.spellUI;
+                    GameManager.Instance.uiHandler.spellUI = temp.spellUIContainer;
 
                     CutsceneManager.Instance.PlayCutscene(TestAnorexia.Instance.introCinematic);
                     GameManager.Instance.playedBossCinematic = true;

@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 0
   poppyNewState: 14
   thistleNewState: 0
@@ -30,18 +32,15 @@ MonoBehaviour:
       secret, friend?"
     voiceLine: PoVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 1
     anim: 
     sentence: "I\u2019ve never been a huge fan of eating fancy meals. I\u2019d rather
       have a salad or a simple rice bowl, ha."
     voiceLine: PoVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 1
     anim: 
     sentence: "Still, I enjoyed cooking with my dad. That\u2019s why today I love
       to cook for other people! "
     voiceLine: PoVoice
-    activateButtons: 1
-    levelIndex: 1
+    activateButtons: 0

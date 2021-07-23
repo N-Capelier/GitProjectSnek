@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 0
   poppyNewState: 16
   thistleNewState: 0
@@ -28,17 +30,14 @@ MonoBehaviour:
     sentence: 'How are you feeling, friend? '
     voiceLine: PoVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 1
     anim: 
     sentence: The fountain is so soothing to watch. Don't you agree ? I love how
       the coins shines when we throw them inside!
     voiceLine: PoVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 1
     anim: 
     sentence: You should try to throw one when you get the chance!
     voiceLine: PoVoice
-    activateButtons: 1
-    levelIndex: 1
+    activateButtons: 0

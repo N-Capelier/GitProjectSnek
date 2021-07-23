@@ -37,6 +37,7 @@ namespace DialogueManagement
         bool isCutSceneDialogue;
         bool skipSentence = false;
         bool waitForClick = false;
+        bool levelUnlocked = false;
         int sentenceIndex;
         Animator cinematicAnimator;
         int dialogCount;
@@ -438,10 +439,11 @@ namespace DialogueManagement
                 NPCManager.Instance.poppy.transform.position = NPCManager.Instance.poppy.waypointOutOfVillage.position;
             }
 
-            if(currentDialogue.unlocksLevel)
+            if(currentDialogue.unlocksLevel && currentDialogue.levelToUnlockIndex > SaveManager.Instance.state.unlockedLevels)
             {
                 SaveManager.Instance.state.unlockedLevels = currentDialogue.levelToUnlockIndex;
                 GameManager.Instance.uiHandler.hubUI.InitLevelAccessPanel();
+                levelUnlocked = true;
             }
 
 
@@ -488,17 +490,20 @@ namespace DialogueManagement
 
             if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
             {
-                if(currentDialogue.sentences[currentDialogue.sentences.Length - 1].activateButtons == false)
+
+                if(levelUnlocked && currentDialogue.sentences[currentDialogue.sentences.Length - 1].activateButtons)
+                {
+                    GameManager.Instance.uiHandler.hubUI.OpenPnjLevelAccess();
+                    levelUnlocked = false;
+                }
+                else
                 {
                     InteractionManager.Instance.EndInteraction();
                     if (pauseManager is null)
                         return;
                     pauseManager.ShowOpenMenuButton();
                 }
-                else
-                {
-                    GameManager.Instance.uiHandler.hubUI.OpenPnjLevelAccess();
-                }
+
 
                 keepTalkingButton.SetActive(false);
                 seeYouButton.SetActive(false);
