@@ -4,6 +4,7 @@ using Map;
 using AudioManagement;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using Saving;
 
 namespace Player.Controller
 {
@@ -29,7 +30,9 @@ namespace Player.Controller
 
         bool spellAvailable = false;
 
-        public GameObject spellUI;
+        public GameObject spellUIContainer;
+        public GameObject spellUILeft;
+        public GameObject spellUIRight;
 
         private void Start()
         {
@@ -39,7 +42,18 @@ namespace Player.Controller
             nextDirection = PlayerDirection.Up;
             nextNode = GetNextNode();
 
-            GameManager.Instance.uiHandler.spellUI = spellUI;
+            GameManager.Instance.uiHandler.spellUI = spellUIContainer;
+            GameManager.Instance.uiHandler.spellLeft = spellUILeft;
+            GameManager.Instance.uiHandler.spellRight = spellUIRight;
+
+            if(SaveManager.Instance.state.leftHanded == 0)
+            {
+                GameManager.Instance.uiHandler.SwapHand(0);
+            }
+            else
+            {
+                GameManager.Instance.uiHandler.SwapHand(1);
+            }
 
             switch (SceneManager.GetActiveScene().name)
             {

@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 0
   poppyNewState: 19
   thistleNewState: 0
@@ -29,11 +31,9 @@ MonoBehaviour:
       whole story with Jack and Emily.
     voiceLine: PoVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 1
     anim: 
     sentence: "I think it got us closer to being real \u201Cfriends\u201D, right,
       friend?"
     voiceLine: PoVoice
-    activateButtons: 1
-    levelIndex: 1
+    activateButtons: 0

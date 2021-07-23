@@ -20,6 +20,8 @@ namespace GameManagement
         public LevelProgressUI levelProgressUI;
         public TutorialUIManager tutorialUI;
         public GameObject spellUI;
+        public GameObject spellLeft;
+        public GameObject spellRight;
 
         [Header("Hub UI")]
         public HubUiManager hubUI;
@@ -51,6 +53,25 @@ namespace GameManagement
         public void ShowUIHub()
         {
             pauseUI.gameObject.SetActive(true);
+        }
+
+        /// <summary>
+        /// 0 = right
+        /// 1 = left
+        /// </summary>
+        /// <param name="hand"></param>
+        public void SwapHand(int hand)
+        {
+            if(hand == 1)
+            {
+                spellLeft.SetActive(false);
+                spellRight.SetActive(true);
+            }
+            else if(hand == 0)
+            {
+                spellLeft.SetActive(true);
+                spellRight.SetActive(false);
+            }
         }
     }
 

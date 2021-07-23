@@ -64,5 +64,11 @@ namespace Saving
         /// ...
         /// </summary>
         public int unlockedLevels = 0;
+
+        /// <summary>
+        /// 0 = false
+        /// 1 = true
+        /// </summary>
+        public int leftHanded = 0;
     }
 }

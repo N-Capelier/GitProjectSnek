@@ -23,6 +23,7 @@ namespace Hub.UI
         [SerializeField] RectTransform scrollviewContent;
         [SerializeField] TextMeshProUGUI CoinCountText;
         [SerializeField] List<GameObject> levels = new List<GameObject>();
+        [SerializeField] GameObject slider;
 
         [Header("PNJ Level Access")]
         [SerializeField] GameObject levelBoxPNJ;
@@ -143,12 +144,23 @@ namespace Hub.UI
 
         public void InitLevelAccessPanel()
         {
+            
+
             for (int i = 0; i < levels.Count; i++)
             {
                 levels[i].SetActive(false);
             }
 
             int temp = SaveManager.Instance.state.unlockedLevels;
+
+            if (temp == 1)
+            {
+                slider.SetActive(false);
+            }
+            else
+            {
+                slider.SetActive(false);
+            }
 
             for (int i = 0; i < temp; i++)
             {
