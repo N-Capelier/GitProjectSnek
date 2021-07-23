@@ -40,6 +40,11 @@ namespace Saving
 
         private IEnumerator Start()
         {
+            if(characterAnimatorDictionary.ContainsKey(CharacterAnimator.None))
+            {
+                yield break;
+            }
+
             yield return new WaitForSeconds(.5f);
             characterAnimatorDictionary.Add(CharacterAnimator.None, null);
 

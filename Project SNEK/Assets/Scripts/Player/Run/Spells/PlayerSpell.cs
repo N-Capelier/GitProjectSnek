@@ -35,6 +35,11 @@ namespace Player.Spells
             spellCooldownTimer.ClockEnded -= OnCooldownEnded;
         }
 
+        private void Update()
+        {
+            buttonImage.fillAmount = 1 - spellCooldownTimer.time.Remap(0, spellCooldown, 0, 1);
+        }
+
         public bool RaySensorOnUI()
         {
             bool _rayHit = false;

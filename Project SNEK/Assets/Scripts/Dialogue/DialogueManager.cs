@@ -11,6 +11,7 @@ using PauseManagement;
 using FaceManager;
 using Player;
 using System.Text;
+using System.Collections.Generic;
 
 namespace DialogueManagement
 {
@@ -194,7 +195,8 @@ namespace DialogueManagement
                     {
                         if(currentDialogue.sentences[sentenceIndex].voiceLine != "")
                         AudioManager.Instance.PlaySoundEffect(currentDialogue.sentences[sentenceIndex].voiceLine);
-                        NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator].gameObject.GetComponent<NPCFaceManager>().RandomizeMouth();
+                        if(currentDialogue.sentences[sentenceIndex].characterAnimator != CharacterAnimator.None)
+                            NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator].gameObject.GetComponent<NPCFaceManager>().RandomizeMouth();
                         dialogCount = 0;
                     }
                     else
@@ -526,11 +528,19 @@ namespace DialogueManagement
         public void SeeYouButton()
         {
             CloseDialogueBox(currentDialogue);
-            NPCFaceManager _face = NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator].GetComponent<NPCFaceManager>();
-            _face.SetEyesExpression(0);
-            _face.SetMouthExpression(0);
+
+            NPCFaceManager _face;
+            foreach(KeyValuePair<CharacterAnimator, Animator> entry in NPCManager.characterAnimatorDictionary)
+            {
+                if (entry.Key == CharacterAnimator.None || entry.Value.GetComponent<NPCFaceManager>() == null)
+                    continue;
+
+                _face = entry.Value.GetComponent<NPCFaceManager>();
+                _face.SetEyesExpression(0);
+                _face.SetMouthExpression(0);
+            }
+
             currentDialogue = null;
-            NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator] = null;
             isRunningDialogue = false;
             isTapped = false;
         }
