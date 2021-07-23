@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 0
   poppyNewState: 15
   thistleNewState: 0
@@ -29,11 +31,9 @@ MonoBehaviour:
       Funny isn\u2019t it, friend? "
     voiceLine: PoVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 1
     anim: 
     sentence: But this place really is home to me now. I hope it gets to be home
       to you too!
     voiceLine: PoVoice
-    activateButtons: 1
-    levelIndex: 1
+    activateButtons: 0
