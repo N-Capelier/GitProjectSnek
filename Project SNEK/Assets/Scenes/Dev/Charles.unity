@@ -178,6 +178,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb5400d7dfc5a4447a2a8557800fad02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lanterFlameParticules: []
+  lanterGlowParticules: []
+  conffeti: {fileID: 0}
+  useOtherPos: 0
+  otherPos: {fileID: 0}
+  cutscene: {fileID: 0}
 --- !u!1 &2697187
 GameObject:
   m_ObjectHideFlags: 0
@@ -16099,6 +16105,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &131420357
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26036,6 +26044,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &183587430
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26210,6 +26220,8 @@ MonoBehaviour:
   isDestroyable: 1
   objectRenderer: {fileID: 2697187}
   fx: {fileID: 1844003706}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &203159097
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26379,6 +26391,8 @@ MonoBehaviour:
   isDestroyable: 1
   objectRenderer: {fileID: 1071887773}
   fx: {fileID: 120011532}
+  soundName: 
+  deathIndex: 0
 --- !u!1 &222279687
 GameObject:
   m_ObjectHideFlags: 0
@@ -26441,6 +26455,8 @@ MonoBehaviour:
   isDestroyable: 1
   objectRenderer: {fileID: 1868501215}
   fx: {fileID: 1403448417}
+  soundName: 
+  deathIndex: 0
 --- !u!1 &233267403
 GameObject:
   m_ObjectHideFlags: 0
@@ -36160,6 +36176,8 @@ MonoBehaviour:
   isDestroyable: 1
   objectRenderer: {fileID: 1543608418}
   fx: {fileID: 1171818083}
+  soundName: 
+  deathIndex: 0
 --- !u!1 &245724872
 GameObject:
   m_ObjectHideFlags: 0
@@ -36222,6 +36240,8 @@ MonoBehaviour:
   isDestroyable: 1
   objectRenderer: {fileID: 1989918255}
   fx: {fileID: 241176094}
+  soundName: 
+  deathIndex: 0
 --- !u!1 &266913237
 GameObject:
   m_ObjectHideFlags: 0
@@ -36269,6 +36289,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &266913240
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -41333,6 +41355,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &356923781
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -46537,6 +46561,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &414524005
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -47135,6 +47161,8 @@ MonoBehaviour:
   isDestroyable: 1
   objectRenderer: {fileID: 747055637}
   fx: {fileID: 34815405}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &458078419
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -47400,6 +47428,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &485267522
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -47494,6 +47524,8 @@ MonoBehaviour:
   isDestroyable: 1
   objectRenderer: {fileID: 312872746}
   fx: {fileID: 860127771}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &492929493
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -47810,6 +47842,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &585051290
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -47870,6 +47904,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &591412902
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -47932,6 +47968,8 @@ MonoBehaviour:
   isDestroyable: 1
   objectRenderer: {fileID: 463707962}
   fx: {fileID: 624329803}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &617315500
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -52983,6 +53021,8 @@ MonoBehaviour:
   isDestroyable: 1
   objectRenderer: {fileID: 1054486044}
   fx: {fileID: 956765878}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &665629471
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -53696,6 +53736,8 @@ MonoBehaviour:
   isDestroyable: 1
   objectRenderer: {fileID: 912450754}
   fx: {fileID: 362609785}
+  soundName: 
+  deathIndex: 0
 --- !u!1 &784257966
 GameObject:
   m_ObjectHideFlags: 0
@@ -53967,6 +54009,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &831898614
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -54169,6 +54213,8 @@ MonoBehaviour:
   isDestroyable: 1
   objectRenderer: {fileID: 1540018870}
   fx: {fileID: 148418607}
+  soundName: 
+  deathIndex: 0
 --- !u!1 &854147112
 GameObject:
   m_ObjectHideFlags: 0
@@ -54216,6 +54262,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &854147115
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -63906,6 +63954,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &872299279
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -63966,6 +64016,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &875277816
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -64026,6 +64078,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &882038567
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -64086,6 +64140,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &888812585
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -64657,6 +64713,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &951871644
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -79510,6 +79568,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &1045060944
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -80244,6 +80304,8 @@ MonoBehaviour:
   isDestroyable: 1
   objectRenderer: {fileID: 383352843}
   fx: {fileID: 982622552}
+  soundName: 
+  deathIndex: 0
 --- !u!1 &1161769668
 GameObject:
   m_ObjectHideFlags: 0
@@ -80400,6 +80462,8 @@ MonoBehaviour:
   isDestroyable: 1
   objectRenderer: {fileID: 1255321180}
   fx: {fileID: 1204078870}
+  soundName: 
+  deathIndex: 0
 --- !u!1 &1171818080
 GameObject:
   m_ObjectHideFlags: 0
@@ -85274,6 +85338,8 @@ MonoBehaviour:
   isDestroyable: 1
   objectRenderer: {fileID: 1192806572}
   fx: {fileID: 859616286}
+  soundName: 
+  deathIndex: 0
 --- !u!1 &1181334851
 GameObject:
   m_ObjectHideFlags: 0
@@ -85668,6 +85734,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &1200571888
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -91065,6 +91133,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &1268930009
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -96821,6 +96891,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RunCam Controller
       objectReference: {fileID: 0}
+    - target: {fileID: 4801665362650951140, guid: 1fcaf01ca1ef8eb499becf4b967a2127,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.375
+      objectReference: {fileID: 0}
     - target: {fileID: 6085007838338155285, guid: 1fcaf01ca1ef8eb499becf4b967a2127,
         type: 3}
       propertyPath: startingState
@@ -97029,6 +97104,8 @@ MonoBehaviour:
   isDestroyable: 1
   objectRenderer: {fileID: 49778954}
   fx: {fileID: 975539562}
+  soundName: 
+  deathIndex: 0
 --- !u!1 &1403448414
 GameObject:
   m_ObjectHideFlags: 0
@@ -101888,6 +101965,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &1405992131
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -102042,6 +102121,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &1433156585
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -102181,6 +102262,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &1443474656
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -102256,6 +102339,8 @@ MonoBehaviour:
   isDestroyable: 1
   objectRenderer: {fileID: 1604178764}
   fx: {fileID: 2043619296}
+  soundName: 
+  deathIndex: 0
 --- !u!1 &1464412109
 GameObject:
   m_ObjectHideFlags: 0
@@ -102588,6 +102673,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &1510430587
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -102648,6 +102735,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &1511526040
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -102960,6 +103049,8 @@ MonoBehaviour:
   isDestroyable: 1
   objectRenderer: {fileID: 335218717}
   fx: {fileID: 2146181922}
+  soundName: 
+  deathIndex: 0
 --- !u!1 &1552808743
 GameObject:
   m_ObjectHideFlags: 0
@@ -103101,6 +103192,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &1554705291
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -103342,6 +103435,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &1577328367
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -103412,6 +103507,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb5400d7dfc5a4447a2a8557800fad02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lanterFlameParticules: []
+  lanterGlowParticules: []
+  conffeti: {fileID: 0}
+  useOtherPos: 0
+  otherPos: {fileID: 0}
+  cutscene: {fileID: 0}
 --- !u!1 &1604178764
 GameObject:
   m_ObjectHideFlags: 0
@@ -103576,6 +103677,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &1612267765
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -103636,6 +103739,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &1615342610
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -103887,6 +103992,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &1634252107
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -103980,6 +104087,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &1651981989
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -104243,6 +104352,8 @@ MonoBehaviour:
   isDestroyable: 1
   objectRenderer: {fileID: 1788220325}
   fx: {fileID: 1298802335}
+  soundName: 
+  deathIndex: 0
 --- !u!1 &1665319071
 GameObject:
   m_ObjectHideFlags: 0
@@ -104480,6 +104591,8 @@ MonoBehaviour:
   isDestroyable: 1
   objectRenderer: {fileID: 1207508188}
   fx: {fileID: 2035470998}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &1709580656
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -104904,6 +105017,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &1781314690
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -110223,6 +110338,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &1819026153
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -115971,6 +116088,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb5400d7dfc5a4447a2a8557800fad02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lanterFlameParticules: []
+  lanterGlowParticules: []
+  conffeti: {fileID: 0}
+  useOtherPos: 0
+  otherPos: {fileID: 0}
+  cutscene: {fileID: 0}
 --- !u!1 &1884988154
 GameObject:
   m_ObjectHideFlags: 0
@@ -116020,6 +116143,8 @@ MonoBehaviour:
   isDestroyable: 1
   objectRenderer: {fileID: 1309438741}
   fx: {fileID: 81486610}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &1884988157
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -116737,6 +116862,8 @@ MonoBehaviour:
   isDestroyable: 1
   objectRenderer: {fileID: 1895424336}
   fx: {fileID: 233267405}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &2017816685
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -116812,6 +116939,8 @@ MonoBehaviour:
   isDestroyable: 1
   objectRenderer: {fileID: 1370679671}
   fx: {fileID: 1810860019}
+  soundName: 
+  deathIndex: 0
 --- !u!1 &2022890037
 GameObject:
   m_ObjectHideFlags: 0
@@ -116874,6 +117003,8 @@ MonoBehaviour:
   isDestroyable: 1
   objectRenderer: {fileID: 491617760}
   fx: {fileID: 142476993}
+  soundName: 
+  deathIndex: 0
 --- !u!1 &2035470996
 GameObject:
   m_ObjectHideFlags: 0
@@ -121735,6 +121866,8 @@ MonoBehaviour:
   isDestroyable: 1
   objectRenderer: {fileID: 426608627}
   fx: {fileID: 335631368}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &2040095935
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -126907,6 +127040,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &2065203824
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -127273,6 +127408,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &2100222314
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -127491,6 +127628,8 @@ MonoBehaviour:
   isDestroyable: 0
   objectRenderer: {fileID: 0}
   fx: {fileID: 0}
+  soundName: 
+  deathIndex: 0
 --- !u!65 &2119589450
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -132791,6 +132930,80 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2949071245284493007}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5543506728540512826
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 536781994359028579, guid: 509b5b533f606a44780c5f304bea95a5,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 536781994359028579, guid: 509b5b533f606a44780c5f304bea95a5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 536781994359028579, guid: 509b5b533f606a44780c5f304bea95a5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 536781994359028579, guid: 509b5b533f606a44780c5f304bea95a5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 536781994359028579, guid: 509b5b533f606a44780c5f304bea95a5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 536781994359028579, guid: 509b5b533f606a44780c5f304bea95a5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 536781994359028579, guid: 509b5b533f606a44780c5f304bea95a5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 536781994359028579, guid: 509b5b533f606a44780c5f304bea95a5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 536781994359028579, guid: 509b5b533f606a44780c5f304bea95a5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 536781994359028579, guid: 509b5b533f606a44780c5f304bea95a5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 536781994359028579, guid: 509b5b533f606a44780c5f304bea95a5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065467426048324002, guid: 509b5b533f606a44780c5f304bea95a5,
+        type: 3}
+      propertyPath: m_Name
+      value: TurretFlower
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065467426048324002, guid: 509b5b533f606a44780c5f304bea95a5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 509b5b533f606a44780c5f304bea95a5, type: 3}
 --- !u!1001 &5849842334741548190
 PrefabInstance:
   m_ObjectHideFlags: 0
