@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 28
   poppyNewState: 0
   thistleNewState: 0
@@ -24,15 +26,15 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 3
+    characterAnimator: 4
     anim: 
-    sentence: "Flying away, you\u2019re gone\r\nI feel your absence leaning on\r\nWhy
-      can\u2019t I seem to find\r\nMy own will to fly, resigned"
+    sentence: "\\Flying away, you\u2019re gone\r\n\\I feel your absence leaning on\r\n\\Why
+      can\u2019t I seem to find\r\n\\My own will to fly, resigned"
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 3
-    anim: 
+    characterAnimator: 4
+    anim: Anim_Bergamot_Emote_haha
     sentence: "\u2026 My poems are getting worse with time, haha. "
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0

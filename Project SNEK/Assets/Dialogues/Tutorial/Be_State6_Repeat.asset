@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 7
   poppyNewState: 0
   thistleNewState: 0
@@ -24,9 +26,9 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 3
+    characterAnimator: 4
     anim: 
     sentence: Are you shy? You know, they won't eat you! They're the loveliest persons
       I know.
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0

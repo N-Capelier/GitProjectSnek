@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 0
   poppyNewState: 0
   thistleNewState: 0
@@ -24,8 +26,8 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 3
+    characterAnimator: 4
     anim: 
     sentence: "Please Ana\xEBl, find Poppy!"
     voiceLine: BeVoice
     activateButtons: 1
-    levelIndex: 2

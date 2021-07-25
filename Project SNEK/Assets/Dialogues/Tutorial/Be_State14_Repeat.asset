@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 15
   poppyNewState: 0
   thistleNewState: 0
@@ -24,9 +26,9 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 3
-    anim: 
+    characterAnimator: 4
+    anim: Anim_Bergamote_Emote_Think
     sentence: "Something about me? Mmmh\u2026 I write poems in my free time, haha.
       Silly, I know! Maybe I\u2019ll show you sometime."
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0

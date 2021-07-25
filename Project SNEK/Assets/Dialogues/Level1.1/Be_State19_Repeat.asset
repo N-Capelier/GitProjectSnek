@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 20
   poppyNewState: 0
   thistleNewState: 0
@@ -24,16 +26,16 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 3
+    characterAnimator: 4
     anim: 
     sentence: "Looks like Poppy took care of her garden! There\u2019s new flowers
       everywhere. She never found time for that before."
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 3
+    characterAnimator: 4
     anim: 
     sentence: "She\u2019s always busy with sport or making her healthy meals. The
       village is getting more colorful with you around! "
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0

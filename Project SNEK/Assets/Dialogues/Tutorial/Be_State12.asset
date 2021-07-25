@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 13
   poppyNewState: 0
   thistleNewState: 0
@@ -24,17 +26,17 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 3
+    characterAnimator: 4
     anim: 
     sentence: Poppy is probably still around her house doing some warm up exercises?
       She shouldn't be harder to find than before. Thistle... II don't know. She
       may be a bit scared at first...
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 3
+    characterAnimator: 4
     anim: 
     sentence: Don't be mad at Thistle for being so shy. It doesn't mean that she
       won't like you, she just needs some time.
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0

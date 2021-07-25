@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 1
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 0
   poppyNewState: 0
   thistleNewState: 0
@@ -24,16 +26,16 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 3
+    characterAnimator: 5
     anim: Anim_Bergamot_Emote_Approve
     sentence: There we are! Welcome to Fall Garden, our nest in the forest. It's
       not much but it's comfy!
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 3
-    anim: Anim_Bergamot_Emote_Haha
+    characterAnimator: 5
+    anim: 
     sentence: There's an empty little house where you can settle in for the time
       of your stay.
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0

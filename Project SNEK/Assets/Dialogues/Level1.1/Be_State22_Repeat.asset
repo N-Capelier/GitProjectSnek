@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 17
   poppyNewState: 0
   thistleNewState: 0
@@ -24,35 +26,35 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 3
+    characterAnimator: 4
     anim: 
     sentence: 'Oh, the poem? It starts like that: '
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 3
+    characterAnimator: 4
     anim: 
     sentence: "Autumn, the robin birds sing a song\r. \\The flowing leaves sing along\r
       \\But do you hear them as I do\r \\A numb whistling with colorless hue."
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 3
+    characterAnimator: 4
     anim: 
     sentence: "What do you think? I don\u2019t know what I should add next. I always
       have inspiration for a first paragraph but I can\u2019t seem to finish it."
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 3
-    anim: 
+    characterAnimator: 4
+    anim: Anim_Bergamote_Emote_Think
     sentence: "Maybe I should leave it as a short poem\u2026?"
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 3
+    characterAnimator: 4
     anim: 
     sentence: "Oh I know it\u2019s a bit melancholic, but autumn is such a nostalgic
       season haha. I think it goes along well with it don\u2019t you think?"
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0

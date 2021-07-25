@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 1
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 0
   poppyNewState: 0
   thistleNewState: 0
@@ -24,28 +26,28 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 1
+    characterAnimator: 7
     anim: 
     sentence: "Oh, here goes another room for resting! How are you holding on, Ana\xEBl?
       I\u2019m getting hungry with the time spent here!"
     voiceLine: PoVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 1
+    characterAnimator: 7
     anim: 
     sentence: "Honestly, when I talk to the others, I tell it like it\u2019s so easy.
       But, just between us, this forest really is hell to get through."
     voiceLine: PoVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 1
-    anim: 
+    characterAnimator: 7
+    anim: Anim_Poppy_Emote_Hungry
     sentence: "Isn\u2019t it just so scary, or is it just me? "
     voiceLine: PoVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 1
-    anim: 
+    characterAnimator: 7
+    anim: Anim_Poppy_Emote_Cheer
     sentence: Even more reasons to be thankful for your help, friend!
     voiceLine: PoVoice
     activateButtons: 0
-    levelIndex: 0

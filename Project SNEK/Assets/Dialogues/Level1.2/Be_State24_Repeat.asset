@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 23
   poppyNewState: 0
   thistleNewState: 0
@@ -24,9 +26,9 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 3
+    characterAnimator: 4
     anim: 
     sentence: "I\u2019m worried about Poppy. We should look for her. What happened
       in the forest?"
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0

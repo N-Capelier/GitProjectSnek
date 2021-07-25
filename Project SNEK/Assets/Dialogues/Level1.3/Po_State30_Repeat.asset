@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 0
   poppyNewState: 31
   thistleNewState: 0
@@ -24,22 +26,22 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 1
+    characterAnimator: 6
     anim: 
     sentence: "I know the others are worried about me. I\u2019m sorry for making
       them go through this again\u2026 And I\u2019m sorry for implying you too. "
     voiceLine: PoVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 0
+    characterAnimator: 0
     anim: 
     sentence: "Don\u2019t be sorry for me. I want to help you!"
     voiceLine: AnVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 1
+    characterAnimator: 6
     anim: 
     sentence: "Well\u2026 Thank you, friend. If you ever need help, I\u2019ll be
       there for you too."
     voiceLine: PoVoice
     activateButtons: 0
-    levelIndex: 0

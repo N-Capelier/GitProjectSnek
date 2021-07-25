@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 0
   poppyNewState: 3
   thistleNewState: 0
@@ -24,9 +26,9 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 1
+    characterAnimator: 6
     anim: 
     sentence: "Oh, isn\u2019t Bergamot looking for you? We can talk any time you
       want, friend! But you shouldn\u2019t make her wait so long. "
     voiceLine: PoVoice
     activateButtons: 0
-    levelIndex: 0

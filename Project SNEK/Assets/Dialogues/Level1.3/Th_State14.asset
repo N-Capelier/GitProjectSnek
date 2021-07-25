@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 0
   poppyNewState: 0
   thistleNewState: 15
@@ -24,9 +26,9 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 2
+    characterAnimator: 8
     anim: 
     sentence: "Poppy is back, right? She won\u2019t go again? Please make sure she
       doesn\u2019t go again. I can\u2019t\u2026 do it myself. Please do it for me."
     voiceLine: ThVoice
     activateButtons: 0
-    levelIndex: 0

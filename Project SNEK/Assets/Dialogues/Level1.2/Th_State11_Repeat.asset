@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 0
   poppyNewState: 0
   thistleNewState: 12
@@ -24,9 +26,9 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 2
-    anim: 
+    characterAnimator: 8
+    anim: Anim_Thistle_LookAround_WithIdle
     sentence: "I am worried about Poppy. You counted a lot for her\u2026 Please find
       her."
     voiceLine: ThVoice
     activateButtons: 0
-    levelIndex: 0
