@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
+  m_Name: Po_State47_Repeat
+  m_EditorClassIdentifier: 
+  mainCharacter: 1
+  getCoin: 0
+  coinAmount: 0
+  isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
+  bergamotNewState: 0
+  poppyNewState: 43
+  thistleNewState: 0
+  bergamotMinimumState: 0
+  poppyMinimumState: 0
+  thistleMinimumState: 0
+  sentences:
+  - character: 1
+    characterAnimator: 6
+    anim: 
+    sentence: "You\u2019re not very talkative, are you, friend? But I feel like you
+      started opening up to me, with our adventures in the forest. I think that this
+      is also what makes your charm work on me. "
+    voiceLine: PoVoice
+    activateButtons: 0
+  - character: 1
+    characterAnimator: 6
+    anim: 
+    sentence: 'I think a good way to get someone to open up is to open up yourself,
+      so the relationship is bound by reciprocity. '
+    voiceLine: PoVoice
+    activateButtons: 0
+  - character: 0
+    characterAnimator: 1
+    anim: 
+    sentence: But you need to be careful to not open up to the wrong person. It can
+      be hard to tell.
+    voiceLine: AnVoice
+    activateButtons: 0
+  - character: 1
+    characterAnimator: 6
+    anim: 
+    sentence: "That\u2019s right, that\u2019s why it needs to be progressive! "
+    voiceLine: PoVoice
+    activateButtons: 0
+  - character: 1
+    characterAnimator: 6
+    anim: 
+    sentence: "I tend to have too high expectations from people I just met that were
+      simply nice to me. And then I just talk too much and the other person wasn\u2019t
+      as invested as I was. That\u2019s a hurtful mistake to make. "
+    voiceLine: PoVoice
+    activateButtons: 0
+  - character: 1
+    characterAnimator: 6
+    anim: 
+    sentence: Balance is important, just as in everything!
+    voiceLine: PoVoice
+    activateButtons: 0

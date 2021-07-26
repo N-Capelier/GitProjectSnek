@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
+  m_Name: Th_State27_Repeat
+  m_EditorClassIdentifier: 
+  mainCharacter: 2
+  getCoin: 0
+  coinAmount: 0
+  isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
+  bergamotNewState: 0
+  poppyNewState: 0
+  thistleNewState: 26
+  bergamotMinimumState: 0
+  poppyMinimumState: 0
+  thistleMinimumState: 0
+  sentences:
+  - character: 2
+    characterAnimator: 8
+    anim: 
+    sentence: 'My first mineral was a brown tiger eye. I got it during a trip a long
+      time ago. There was this tourist trap shop with a lot of pretty stones, and
+      I asked my parents for one. '
+    voiceLine: ThVoice
+    activateButtons: 0
+  - character: 2
+    characterAnimator: 8
+    anim: 
+    sentence: "I learned later that its meaning was insight, confidence, and balance.
+      Which is\u2026 Completely unrelated to me. I still kept it though, in hopes
+      that it would help me towards that."
+    voiceLine: ThVoice
+    activateButtons: 0

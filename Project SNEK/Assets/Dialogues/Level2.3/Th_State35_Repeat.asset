@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
+  m_Name: Th_State35_Repeat
+  m_EditorClassIdentifier: 
+  mainCharacter: 2
+  getCoin: 0
+  coinAmount: 0
+  isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
+  bergamotNewState: 0
+  poppyNewState: 0
+  thistleNewState: 33
+  bergamotMinimumState: 0
+  poppyMinimumState: 0
+  thistleMinimumState: 0
+  sentences:
+  - character: 2
+    characterAnimator: 8
+    anim: 
+    sentence: "You know, a minerals collection is never quite complete. Now that
+      you recovered every stone I had lost\u2026 I can only look out for new stones!"
+    voiceLine: ThVoice
+    activateButtons: 0
+  - character: 0
+    characterAnimator: 1
+    anim: 
+    sentence: "I\u2019m looking forward to a minerals auction nearby. Maybe I can
+      find a bismuth here\u2026? "
+    voiceLine: ThVoice
+    activateButtons: 0
+  - character: 2
+    characterAnimator: 8
+    anim: 
+    sentence: "It\u2019s a very pretty kind of stone, and very colorful. It\u2019s
+      supposed to help recovering from isolation, and when a grand reorganization
+      of your life is in place. \u2026 I think it would suit me at the moment."
+    voiceLine: ThVoice
+    activateButtons: 0

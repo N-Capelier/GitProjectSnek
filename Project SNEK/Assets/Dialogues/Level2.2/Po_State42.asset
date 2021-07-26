@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
+  m_Name: Po_State42
+  m_EditorClassIdentifier: 
+  mainCharacter: 1
+  getCoin: 0
+  coinAmount: 0
+  isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
+  bergamotNewState: 0
+  poppyNewState: 43
+  thistleNewState: 0
+  bergamotMinimumState: 0
+  poppyMinimumState: 0
+  thistleMinimumState: 0
+  sentences:
+  - character: 1
+    characterAnimator: 6
+    anim: 
+    sentence: "Lately, I felt like Thistle was watching me. You know, like she wanted
+      to tell something, but didn\u2019t know how to, and waited for the moment."
+    voiceLine: PoVoice
+    activateButtons: 0
+  - character: 0
+    characterAnimator: 1
+    anim: 
+    sentence: 'But I know her, so I know what to do on these occasions: I asked her
+      to help me with the garden. She seemed happy about that, and we worked a lot
+      on the pumpkin crops! '
+    voiceLine: AnVoice
+    activateButtons: 0
+  - character: 0
+    characterAnimator: 1
+    anim: 
+    sentence: 'Friendship is amazing, right, friend? You helped me and now I can
+      help someone else too. '
+    voiceLine: AnVoice
+    activateButtons: 0

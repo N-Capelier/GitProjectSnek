@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
+  m_Name: Th_State25_Unlock
+  m_EditorClassIdentifier: 
+  mainCharacter: 2
+  getCoin: 0
+  coinAmount: 0
+  isCutScene: 0
+  unlocksLevel: 1
+  levelToUnlockIndex: 6
+  bergamotNewState: 0
+  poppyNewState: 0
+  thistleNewState: 26
+  bergamotMinimumState: 0
+  poppyMinimumState: 0
+  thistleMinimumState: 0
+  sentences:
+  - character: 2
+    characterAnimator: 8
+    anim: 
+    sentence: "Hi Ana\xEBl! I\u2019ve been looking for you!"
+    voiceLine: ThVoice
+    activateButtons: 0
+  - character: 2
+    characterAnimator: 8
+    anim: 
+    sentence: "I want to go into the forest with you. There is something between
+      these monsters and me that I want to set straight. I need you for that\u2026
+      -Can you help me?"
+    voiceLine: ThVoice
+    activateButtons: 0
+  - character: 2
+    characterAnimator: 8
+    anim: 
+    sentence: "Thank you Ana\xEBl. We can go whenever you decide!"
+    voiceLine: ThVoice
+    activateButtons: 0

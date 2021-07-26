@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
+  m_Name: Be_State32
+  m_EditorClassIdentifier: 
+  mainCharacter: 3
+  getCoin: 0
+  coinAmount: 0
+  isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
+  bergamotNewState: 33
+  poppyNewState: 0
+  thistleNewState: 0
+  bergamotMinimumState: 0
+  poppyMinimumState: 0
+  thistleMinimumState: 0
+  sentences:
+  - character: 3
+    characterAnimator: 4
+    anim: Anim_Bergamot_Emote_Approve
+    sentence: 'Poppy now spends more time in her garden than running around. You
+      know, I was always worried about that. She was doing so much exercise. '
+    voiceLine: BeVoice
+    activateButtons: 0
+  - character: 3
+    characterAnimator: 4
+    anim: 
+    sentence: "I saw her garden project too. She wants to grow nice vegetables and
+      cook them with everyone. It\u2019s so nice to see her so lively! "
+    voiceLine: BeVoice
+    activateButtons: 0
+  - character: 3
+    characterAnimator: 4
+    anim: 
+    sentence: "The flowers blooming everywhere make me feel like it\u2019s spring.
+      I like spring, the soft rainy days, the days slowly getting warmer, and everything
+      covered in green..."
+    voiceLine: BeVoice
+    activateButtons: 0
+  - character: 3
+    characterAnimator: 4
+    anim: Anim_Bergamot_Emote_haha
+    sentence: "My birthday is just at the beginning of spring, haha. My dad always
+      made me carrot cake for the occasion. But I didn\u2019t see him in a while
+      now\u2026"
+    voiceLine: BeVoice
+    activateButtons: 0

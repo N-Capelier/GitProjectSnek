@@ -10,31 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
-  m_Name: Be_State29_Repeat
+  m_Name: Po_State46_Repeat
   m_EditorClassIdentifier: 
-  mainCharacter: 3
+  mainCharacter: 1
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
   unlocksLevel: 0
   levelToUnlockIndex: 0
-  bergamotNewState: 30
-  poppyNewState: 0
+  bergamotNewState: 0
+  poppyNewState: 47
   thistleNewState: 0
   bergamotMinimumState: 0
   poppyMinimumState: 0
   thistleMinimumState: 0
   sentences:
-  - character: 3
-    characterAnimator: 4
+  - character: 1
+    characterAnimator: 6
     anim: 
-    sentence: "\\Flying away, you\u2019re gone\r\n\\I feel your absence leaning on\r\n\\Why
-      can\u2019t I seem to find\r\n\\My own will to fly, resigned"
-    voiceLine: BeVoice
+    sentence: "Bergamot didn\u2019t want to participate in the pumpkin garden. She
+      said she was writing poems. But honestly, as a loyal follower of her blog,
+      I know she didn\u2019t write any in a while."
+    voiceLine: PoVoice
     activateButtons: 0
-  - character: 3
-    characterAnimator: 4
-    anim: Anim_Bergamot_Emote_haha
-    sentence: "\u2026 My poems are getting worse with time, haha. "
-    voiceLine: BeVoice
+  - character: 1
+    characterAnimator: 6
+    anim: 
+    sentence: "Maybe she\u2019s onto a big writing project\u2026 But I suspect there
+      might be something else. What do you think, friend?"
+    voiceLine: PoVoice
     activateButtons: 0

@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
+  m_Name: Be_State36_Repeat
+  m_EditorClassIdentifier: 
+  mainCharacter: 3
+  getCoin: 0
+  coinAmount: 0
+  isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
+  bergamotNewState: 33
+  poppyNewState: 0
+  thistleNewState: 0
+  bergamotMinimumState: 0
+  poppyMinimumState: 0
+  thistleMinimumState: 0
+  sentences:
+  - character: 3
+    characterAnimator: 4
+    anim: Anim_Bergamot_Emote_haha
+    sentence: "My poem blog has visitors from time to time. It\u2019s nice to feel
+      appreciated. But now I feel pressured to deliver something good, haha."
+    voiceLine: BeVoice
+    activateButtons: 0
+  - character: 3
+    characterAnimator: 4
+    anim: 
+    sentence: 'My greatest inspiration is Guillaume Apollinaire. He has a gift to
+      set a mood in just a few lines. My favorite is the beginning of Going faster:'
+    voiceLine: BeVoice
+    activateButtons: 0
+  - character: 3
+    characterAnimator: 4
+    anim: 
+    sentence: '\And the evening comes and the lilies die
+
+      \Look at the painful
+      and beautiful sky that sends me
+
+      \A night of melancholy'
+    voiceLine: BeVoice
+    activateButtons: 0
+  - character: 3
+    characterAnimator: 4
+    anim: Anim_Bergamot_Emote_Think
+    sentence: "Just by reciting that, I already feel the night falling. \r\n"
+    voiceLine: BeVoice
+    activateButtons: 0
