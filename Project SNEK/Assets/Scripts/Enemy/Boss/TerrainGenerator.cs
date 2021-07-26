@@ -17,6 +17,7 @@ namespace Boss
         [SerializeField] TileBase tile;
         [SerializeField] TileBase[] customTile;
         [SerializeField] GameObject[] cliff;
+        [SerializeField] GameObject[] invertedCliff;
 
         [SerializeField] GameObject deathZone;
 
@@ -56,8 +57,8 @@ namespace Boss
             Destroy(rightCliffs[0]);
             rightCliffs.RemoveAt(0);
 
-            leftCliffs.Add(Instantiate(cliff[Random.Range(0,14)], new Vector3(0, 0, cliffIndex * 6.14f), Quaternion.identity, leftCliffParent.transform));
-            rightCliffs.Add(Instantiate(cliff[Random.Range(0, 14)], new Vector3(10, 0, cliffIndex * 6.14f), Quaternion.identity, rightCliffParent.transform));
+            leftCliffs.Add(Instantiate(cliff[Random.Range(0,cliff.Length)], new Vector3(0, 0, cliffIndex * 6.14f), Quaternion.identity, leftCliffParent.transform));
+            rightCliffs.Add(Instantiate(invertedCliff[Random.Range(0, invertedCliff.Length)], new Vector3(10, 0, cliffIndex * 6.14f), Quaternion.identity, rightCliffParent.transform));
             rightCliffs[rightCliffs.Count - 1].transform.Rotate(0, 180, 0);
 
             cliffIndex++;
@@ -95,7 +96,7 @@ namespace Boss
             for (int x = -1; x < 10; x++)
             {
                 tilemap.SetTile(new Vector3Int(x, currentIndex, 0), tile);
-                tilemap2.SetTile(new Vector3Int(x, currentIndex, 0), customTile[Random.Range(0,9)]);
+                tilemap2.SetTile(new Vector3Int(x, currentIndex, 0), customTile[Random.Range(0,customTile.Length)]);
                 tilemap.SetTile(new Vector3Int(x, currentIndex - 35, 0), null);
                 tilemap2.SetTile(new Vector3Int(x, currentIndex - 35, 0), null);
             }
