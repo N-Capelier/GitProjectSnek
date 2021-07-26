@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 0
   poppyNewState: 5
   thistleNewState: 0
@@ -24,9 +26,9 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 1
+    characterAnimator: 6
     anim: 
     sentence: "Would you like to run with me sometime, friend? It\u2019s always energizing
       to take care of your own body!"
     voiceLine: PoVoice
     activateButtons: 0
-    levelIndex: 0

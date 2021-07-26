@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 0
   poppyNewState: 7
   thistleNewState: 0
@@ -24,10 +26,10 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 1
+    characterAnimator: 6
     anim: 
     sentence: "Honestly I\u2019m not much into cakes myself, but I love to make them
       with the people I like! Cooking with someone is a sweet feeling isn\u2019t
       it, friend?"
     voiceLine: PoVoice
     activateButtons: 0
-    levelIndex: 0

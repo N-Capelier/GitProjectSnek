@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
+  m_Name: Po_State32_Repeat
+  m_EditorClassIdentifier: 
+  mainCharacter: 1
+  getCoin: 0
+  coinAmount: 0
+  isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
+  bergamotNewState: 0
+  poppyNewState: 33
+  thistleNewState: 0
+  bergamotMinimumState: 0
+  poppyMinimumState: 0
+  thistleMinimumState: 0
+  sentences:
+  - character: 1
+    characterAnimator: 6
+    anim: 
+    sentence: 'Emily? I never actually talked to her. I only knew what Jack told
+      me. But she looked like a very nice person. '
+    voiceLine: PoVoice
+    activateButtons: 0

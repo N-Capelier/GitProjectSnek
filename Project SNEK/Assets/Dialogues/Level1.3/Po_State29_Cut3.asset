@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 1
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 27
   poppyNewState: 30
   thistleNewState: 14
@@ -24,47 +26,47 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 2
+    characterAnimator: 9
     anim: 
     sentence: What happened?
     voiceLine: ThVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 1
-    anim: 
+    characterAnimator: 7
+    anim: Anim_Poppy_Idle_Calm
     sentence: "That\u2019s a long story, but now, I feel much better than before,
       Thistle."
     voiceLine: PoVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 3
-    anim: 
+    characterAnimator: 5
+    anim: Anim_Bergamot_Emote_Approve
     sentence: "That\u2019s amazing! I\u2019m so happy for you Poppy."
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 2
+    characterAnimator: 9
     anim: 
     sentence: "It\u2019s because of Ana\xEBl, right?"
     voiceLine: ThVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 1
+    characterAnimator: 7
     anim: 
     sentence: 'Yes, she helped me a lot. '
     voiceLine: PoVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 3
+    characterAnimator: 5
     anim: 
     sentence: "We can\u2019t thank you enough, Ana\xEBl. Well, Poppy, what about
       a nice tea together to cool down after these events? So you can tell us all
       about it. "
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 1
+    characterAnimator: 7
     anim: 
     sentence: Sure!
     voiceLine: PoVoice
     activateButtons: 0
-    levelIndex: 0

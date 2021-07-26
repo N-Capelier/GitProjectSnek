@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 17
   poppyNewState: 0
   thistleNewState: 0
@@ -24,10 +26,10 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 3
-    anim: 
+    characterAnimator: 4
+    anim: Anim_Bergamot_Emote_Approve
     sentence: "Congratulations Ana\xEBl! You made it! Poppy is so much happier now.
       I didn\u2019t think it was possible to get more cheerful than she already was,
       haha!"
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0

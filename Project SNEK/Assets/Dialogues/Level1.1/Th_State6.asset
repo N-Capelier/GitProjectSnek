@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 0
   poppyNewState: 0
   thistleNewState: 7
@@ -24,8 +26,8 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 2
+    characterAnimator: 8
     anim: 
     sentence: 'Hello... Sorry for hiding after I talked to you earlier. '
     voiceLine: ThVoice
     activateButtons: 0
-    levelIndex: 0

@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 13
   poppyNewState: 0
   thistleNewState: 0
@@ -24,16 +26,16 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 3
+    characterAnimator: 4
     anim: 
     sentence: 'Oh, your face right now, it just gave me an idea! I need to write
       it down. '
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 3
-    anim: 
+    characterAnimator: 4
+    anim: Anim_Bergamot_Emote_haha
     sentence: "I love to get inspiration on random moments like that! But I need
       to take note quickly, because I\u2019m so forgetful, haha."
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0
