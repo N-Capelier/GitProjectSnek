@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 9
   poppyNewState: 0
   thistleNewState: 0
@@ -24,9 +26,9 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 3
-    anim: 
+    characterAnimator: 4
+    anim: Anim_Bergamot_Emote_Approve
     sentence: 'I am very happy to have a new face here! I hope we''ll all get along
       well haha. '
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0

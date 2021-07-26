@@ -28,7 +28,7 @@ namespace SpecialLD
 		// Start is called before the first frame update
 		void Start()
 		{
-			playerTransform = PlayerManager.Instance.currentController.transform;
+			StartCoroutine(GetPlayer());
 
 			switch (direction)
             {
@@ -45,8 +45,6 @@ namespace SpecialLD
 					directionVector = Vector3.right;
 					break;
 			}
-
-			StartCoroutine(ShootingLoop());
 		}
 
 		IEnumerator ShootingLoop()
@@ -71,10 +69,17 @@ namespace SpecialLD
 			StartCoroutine(ShootingLoop());
 		}
 
-		public void GetDestroyed()
+		IEnumerator GetPlayer()
         {
-			Destroy(gameObject);
-        }
+			yield return new WaitWhile(() => PlayerManager.Instance.currentController == null);
+
+			while (playerTransform == null)
+            {
+				playerTransform = PlayerManager.Instance.currentController.transform;
+			}
+
+			StartCoroutine(ShootingLoop());
+		}
 	}
 }
 

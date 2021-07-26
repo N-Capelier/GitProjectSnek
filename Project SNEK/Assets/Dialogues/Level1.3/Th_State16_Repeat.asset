@@ -10,29 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
-  m_Name: Be_State27
+  m_Name: Th_State16_Repeat
   m_EditorClassIdentifier: 
-  mainCharacter: 3
+  mainCharacter: 2
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
-  bergamotNewState: 28
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
+  bergamotNewState: 0
   poppyNewState: 0
-  thistleNewState: 0
+  thistleNewState: 14
   bergamotMinimumState: 0
   poppyMinimumState: 0
   thistleMinimumState: 0
   sentences:
-  - character: 3
+  - character: 2
+    characterAnimator: 8
     anim: 
-    sentence: "Thank god you found her. I don\u2019t know what we would do without
-      you, Ana\xEBl."
-    voiceLine: BeVoice
+    sentence: How is it in the forest...?
+    voiceLine: ThVoice
     activateButtons: 0
-    levelIndex: 0
-  - character: 3
-    anim: 
-    sentence: "You\u2019re such a good friend to Poppy now. Please take care of her. "
-    voiceLine: BeVoice
-    activateButtons: 0
-    levelIndex: 0

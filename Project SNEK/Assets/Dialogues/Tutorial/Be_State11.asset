@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 12
   poppyNewState: 10
   thistleNewState: 5
@@ -24,50 +26,50 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 3
-    anim: 
+    characterAnimator: 4
+    anim: Anim_Bergamot_Emote_Approve
     sentence: I'm glad you met them! It wasn't that bad wasn't it? They're really
       nice persons.
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 3
-    anim: 
+    characterAnimator: 4
+    anim: Anim_Bergamote_Emote_Think
     sentence: Mmh, listen Anael, it's a bit awkward to say but... I'd like to ask
       you a favor.
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 3
+    characterAnimator: 4
     anim: 
     sentence: The forest has been rather dangerous for a while now, and Poppy and
       Thistle are scared by the monsters.
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 3
+    characterAnimator: 4
     anim: 
     sentence: 'But... Since you have a sword and all... I was thinking that maybe
       you could help them. '
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 3
-    anim: 
+    characterAnimator: 4
+    anim: Anim_Bergamot_Emote_haha
     sentence: I know it's a lot to ask, haha! No worries if you're afraid too, I
       totally get that.
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 3
+    characterAnimator: 4
     anim: 
     sentence: You...You're accepting?
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 3
-    anim: 
+    characterAnimator: 4
+    anim: Anim_Bergamot_Emote_Approve
     sentence: Wonderful! Well... Just talk to one of them and help them through the
       forest then. That'll be a start!
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0

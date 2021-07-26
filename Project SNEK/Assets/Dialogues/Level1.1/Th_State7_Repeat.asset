@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 0
   poppyNewState: 0
   thistleNewState: 8
@@ -24,9 +26,9 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 2
+    characterAnimator: 8
     anim: 
     sentence: "You\u2019re friends with Poppy, right? I\u2019m happy that you\u2019re
       helping her. Really!"
     voiceLine: ThVoice
     activateButtons: 0
-    levelIndex: 0

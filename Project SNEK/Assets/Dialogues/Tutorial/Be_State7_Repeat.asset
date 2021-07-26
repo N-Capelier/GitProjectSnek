@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 8
   poppyNewState: 0
   thistleNewState: 0
@@ -24,11 +26,9 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 3
+    characterAnimator: 4
     anim: 
-    sentence: 'You can probably find them around their houses. They''re just down
-      the village, you''ll find them easily!
-
-'
+    sentence: You can probably find them around their houses. They're just down the
+      village, you'll find them easily!
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0

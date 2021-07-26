@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 0
   poppyNewState: 3
   thistleNewState: 0
@@ -24,24 +26,24 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 1
+    characterAnimator: 6
     anim: Anim_Poppy_Emote_Cheer
     sentence: 'Oh hey there! Who are you, friend?
 
 '
     voiceLine: PoVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 1
-    anim: Anim_Poppy_Emote_Hungry
+    characterAnimator: 6
+    anim: 
     sentence: "Ana\xEBl? What a lovely name! Mine is Poppy. I was going to do my
       daily jogging right before you arrived. It's important to stay in shape!"
     voiceLine: PoVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 1
+    characterAnimator: 6
     anim: 
     sentence: 'I''m glad to meet you friend! I hope we''ll get to know each other
       better. I''m the best cook in town and super motivational sports coach! '
     voiceLine: PoVoice
     activateButtons: 0
-    levelIndex: 0

@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 1
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 0
   poppyNewState: 0
   thistleNewState: 0
@@ -24,17 +26,17 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 1
-    anim: 
+    characterAnimator: 7
+    anim: Anim_Poppy_Emote_Hungry
     sentence: "That was\u2026 Quite intense to watch, even from a distance. Are you
       alright?"
     voiceLine: PoVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 1
-    anim: 
+    characterAnimator: 7
+    anim: Anim_Poppy_Emote_Cheer
     sentence: "I\u2019m glad you\u2019re keeping up, friend! Take care of the monsters,
       I take care of the emotional support. We\u2019re getting there. Just a little
       longer! "
     voiceLine: PoVoice
     activateButtons: 0
-    levelIndex: 0

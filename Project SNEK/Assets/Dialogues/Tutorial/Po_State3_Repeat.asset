@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 0
   poppyNewState: 4
   thistleNewState: 0
@@ -24,10 +26,10 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 1
+    characterAnimator: 6
     anim: 
     sentence: Oh, you're looking for Thistle? Her house is just there on the left.
       You can't miss her, she has super cute cat ears with pink ribbons poking out
       of the leaves.
     voiceLine: PoVoice
     activateButtons: 0
-    levelIndex: 0

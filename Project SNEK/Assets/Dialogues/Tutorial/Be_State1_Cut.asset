@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 1
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 0
   poppyNewState: 0
   thistleNewState: 0
@@ -24,27 +26,27 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 3
+    characterAnimator: 5
     anim: Anim_Bergamot_Emote_Approve
     sentence: Oh hey there! What are you doing here?
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 3
+    characterAnimator: 5
     anim: 
     sentence: These woods can be dangerous. I can guide you to a safer place.
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 3
+    characterAnimator: 5
     anim: Anim_Bergamot_Emote_Haha
     sentence: Oh but I'm just a stranger to you ahah! Let me introduce myself. My
       name is Bergamot. What is your name?
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0
   - character: 3
+    characterAnimator: 5
     anim: 
     sentence: Anael? How sweet! Now follow me Anael, we can talk when we get there.
     voiceLine: BeVoice
     activateButtons: 0
-    levelIndex: 0

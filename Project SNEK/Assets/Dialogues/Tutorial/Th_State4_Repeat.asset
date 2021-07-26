@@ -16,6 +16,8 @@ MonoBehaviour:
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
   bergamotNewState: 0
   poppyNewState: 0
   thistleNewState: 3
@@ -24,10 +26,10 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 2
-    anim: 
+    characterAnimator: 8
+    anim: Anim_Thistle_Emote_NoTalk_Loop
     sentence: '...
 
 '
     voiceLine: ThVoice
     activateButtons: 0
-    levelIndex: 0
