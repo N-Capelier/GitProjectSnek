@@ -48,6 +48,8 @@ namespace Saving
         [Space]
         [SerializeField] protected List<NPCState> npcStates = new List<NPCState>();
 
+        [Header("Feedback")]
+        public GameObject exclamationMark;
         public virtual IEnumerator Start()
         {
             yield return new WaitForSeconds(0.1f);

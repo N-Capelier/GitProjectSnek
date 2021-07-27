@@ -23,7 +23,7 @@ namespace DialogueManagement
         [SerializeField] TextMeshProUGUI nameText;
         [SerializeField] TextMeshProUGUI dialogueText;
         [SerializeField] Image dialogueArrow;
-        [SerializeField] RectTransform dialogueBox;
+        [SerializeField] public RectTransform dialogueBox;
         [SerializeField] RectTransform parentTransform;
         [SerializeField] GameObject seeYouButton;
         [SerializeField] GameObject keepTalkingButton;
