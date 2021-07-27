@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
+  m_Name: Po_State53_Repeat
+  m_EditorClassIdentifier: 
+  mainCharacter: 1
+  getCoin: 0
+  coinAmount: 0
+  isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
+  bergamotNewState: 0
+  poppyNewState: 54
+  thistleNewState: 0
+  bergamotMinimumState: 0
+  poppyMinimumState: 0
+  thistleMinimumState: 0
+  sentences:
+  - character: 1
+    characterAnimator: 6
+    anim: 
+    sentence: "I\u2019d like to know how the monsters in the forest work. When are
+      they created? What can we do to avoid it? "
+    voiceLine: PoVoice
+    activateButtons: 0
+  - character: 1
+    characterAnimator: 6
+    anim: 
+    sentence: "My theory is that we need to fight them while they are inside us,
+      instead of avoiding them. Avoiding them makes them grow up so much that we
+      can\u2019t handle them anymore, thus creating the monsters."
+    voiceLine: PoVoice
+    activateButtons: 0
+  - character: 1
+    characterAnimator: 6
+    anim: 
+    sentence: "\u2026 I should talk about it with Thistle. Maybe together we can
+      understand more about it."
+    voiceLine: PoVoice
+    activateButtons: 0

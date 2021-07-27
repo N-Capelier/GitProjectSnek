@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
-  m_Name: Be_State42_Repeat
+  m_Name: Be_State55_Repeat
   m_EditorClassIdentifier: 
   mainCharacter: 3
   getCoin: 0
   coinAmount: 0
-  isCutScene: 0
+  isCutScene: 1
   unlocksLevel: 0
   levelToUnlockIndex: 0
-  bergamotNewState: 40
+  bergamotNewState: 53
   poppyNewState: 0
   thistleNewState: 0
   bergamotMinimumState: 0
@@ -27,15 +27,9 @@ MonoBehaviour:
   sentences:
   - character: 3
     characterAnimator: 4
-    anim: Anim_Bergamot_Emote_haha
-    sentence: "My poems haven\u2019t been doing quite well on the web lately, haha.
-      I guess there must be ups and downs."
-    voiceLine: BeVoice
-    activateButtons: 0
-  - character: 3
-    characterAnimator: 4
     anim: 
-    sentence: "I should try harder, but I can\u2019t find inspiration at the moment.
-      It will come back, eventually, haha."
+    sentence: "Poppy told me she likes my poems, and Thistle offered me a wooden
+      box to store my pens. I can\u2019t help but think they\u2019re doing that just
+      to make me feel better\u2026 "
     voiceLine: BeVoice
     activateButtons: 0
