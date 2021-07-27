@@ -50,10 +50,10 @@ namespace Enemy
                     }
                 }
 
-                if (behaviour.clonesList.Count <= 1 && behaviour.isKillable == false)
+                /*if (behaviour.clonesList.Count <= 1 && behaviour.isKillable == false)
                 {
                     behaviour.isKillable = true;                    
-                }
+                }*/
             }
 
             yield return new WaitForSeconds(lifeTime - 1.3f);

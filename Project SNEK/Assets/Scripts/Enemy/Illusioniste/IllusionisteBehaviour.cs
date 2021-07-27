@@ -30,10 +30,10 @@ namespace Enemy
 
         private void Update()
         {
-            if(isKillable == true && isStunned == false)
+            /*if(isKillable == true && isStunned == false)
             {
                 IsStunned();
-            }
+            }*/
         }
 
         int index = 0;
@@ -48,12 +48,12 @@ namespace Enemy
             }
         }
 
-        public void IsStunned()
+        /*public void IsStunned()
         {
             isStunned = true;
             GetComponentInChildren<Animator>().SetBool("isStunned", true);
             movement.StopAllCoroutines();
-        }
+        }*/
 
         public void Death()
         {
