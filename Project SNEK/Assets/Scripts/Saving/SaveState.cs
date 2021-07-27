@@ -70,5 +70,15 @@ namespace Saving
         /// 1 = true
         /// </summary>
         public int leftHanded = 0;
+
+        public bool isTutorialFinished = false;
+
+        /// <summary>
+        /// 0 : Déplacement dans le hub
+        /// 1 : Interaction avec les PNJ
+        /// 2 : Boite aux lettres
+        /// 3 : La fontaine
+        /// </summary>
+        public int tutorialState = 0; 
     }
 }

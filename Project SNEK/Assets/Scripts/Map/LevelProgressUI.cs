@@ -120,11 +120,11 @@ namespace Map
                 if (canvasGroup.alpha < 1)
                 {
                     canvasGroup.LeanAlpha(1, 0.5f);
-                    canvasGroup.LeanAlpha(0.5f, 0.5f).setDelay(3f);
+                    canvasGroup.LeanAlpha(0.001f, 0.5f).setDelay(3f);
                 }
                 else
                 {
-                    canvasGroup.LeanAlpha(0.5f, 0.5f).setDelay(3f);
+                    canvasGroup.LeanAlpha(0.001f, 0.5f).setDelay(3f);
                 }
             }
         }
