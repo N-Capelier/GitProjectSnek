@@ -21,7 +21,7 @@ namespace Boss
         float moveSpeed = 2.5f;
 
         Rigidbody rb;
-        Animator animator;
+        [SerializeField] Animator animator;        
 
         [Space]
         [InspectorName("Stats")]
@@ -30,6 +30,7 @@ namespace Boss
         [SerializeField] Transform patternPos;
 
         int patternCount = 0;
+        bool canDoPattern = true;
 
         [Space]
         [InspectorName("Pattern Wave")]
@@ -38,7 +39,11 @@ namespace Boss
         List<GameObject> incomingBombs;
         GameObject bullet;
         Vector3 bulletDir;
-        
+        bool canSpawnWave = false;
+        bool isWaveEnded = false;
+        bool isShootingWave = false;
+        bool isPatternWaveEnded = false;
+
 
         [Space]
         [InspectorName("UI")] 
@@ -53,8 +58,7 @@ namespace Boss
         void Start()
         {
             rb = GetComponent<Rigidbody>();
-            animator = GetComponent<Animator>();
-
+            currentHp = maxHp;
             StartCoroutine(PatternWave());
         }
 
@@ -66,10 +70,12 @@ namespace Boss
         private void FixedUpdate()
         {
             UpdateMovement();
+            UpdateBulletsMovement();
         }
 
         void UpdateMovement()
-        {
+        {           
+
             if ((gameObject.transform.position.z - cam.transform.position.z) < camDistance)
             {
                 rb.velocity = new Vector3(0, 0, moveSpeed);
@@ -82,12 +88,21 @@ namespace Boss
             }
         }
 
-        int wavesIndex;
-        IEnumerator PatternWave()
+        public void UpdateBulletsMovement()
         {
-            animator.SetInteger("animPatternCount", 1);
-            animator.SetBool("animIsAttacking", true);
+            if (canSpawnWave == true && isShootingWave == false)
+            {
+                for (int i = 0; i < incomingBombs.Count; i++)
+                {
+                    incomingBombs[i].GetComponent<Rigidbody>().velocity = rb.velocity;
+                }
+            }
+        }
 
+        int wavesIndex;
+        int waveCount;
+        IEnumerator PatternWave()
+        {           
             bulletDir = new Vector3(0, 0, -1);
             incomingBombs = new List<GameObject>();
 
@@ -95,32 +110,180 @@ namespace Boss
             {
                 case 30:
                     wavesIndex = 0;
+                    animator.SetBool("rightSide", true);
                     break;
                 case 20:
-                    wavesIndex = 1;
+                    if (waveCount == 0)
+                    {
+                        wavesIndex = 1;
+                        animator.SetBool("rightSide", false);
+                    }
+                    else
+                        wavesIndex = 2;
+                    animator.SetBool("rightSide", true);
                     break;
                 case 10:
-                    wavesIndex = 2;
+                    if (waveCount == 0)
+                    {
+                        wavesIndex = 0;
+                        animator.SetBool("rightSide", true);
+                    }
+                    else if(waveCount == 1)
+                    {
+                        wavesIndex = 1;
+                        animator.SetBool("rightSide", false);
+                    }
+                    else if (waveCount == 2)
+                    {
+                        wavesIndex = 2;
+                        animator.SetBool("rightSide", true);
+                    }
                     break;
             }
 
+            yield return new WaitForEndOfFrame();
+            animator.SetInteger("animPatternCount", 1);
+            animator.SetBool("animIsAttacking", true);
+
+            yield return new WaitUntil(() => canSpawnWave);
+
+            StartCoroutine(SpawnWave());
+
+            yield return new WaitUntil(() => isShootingWave);
+
+            StartCoroutine(ShootWave());
+
+            yield return new WaitUntil(() => isPatternWaveEnded);
+
+            ResetPatternWave();                  
+        }
+
+        private IEnumerator SpawnWave()
+        {
             for (int x = 0; x < waves[wavesIndex].row.Length; x++)
             {
                 for (int y = 0; y < waves[wavesIndex].row[x].column.Length; y++)
                 {
-                    if (waves[wavesIndex].row[x].column[y] == false)
+                    if (waves[wavesIndex].row[x].column[y] == true)
                     {
-                        bullet = Instantiate(projectile, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x))), Quaternion.identity, gameObject.transform);
+                        bullet = Instantiate(projectile, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x - 2))), Quaternion.identity, patternPos);
                         incomingBombs.Add(bullet);
-                        bullet.GetComponent<Rigidbody>().AddForce(bulletDir * bulletSpeed, ForceMode.Force);
-                        yield return new WaitForSeconds(0.3f);
+                        yield return new WaitForSeconds(0.07f);
                     }
                 }
             }
-            patternCount++;
-
-            yield return new WaitForSeconds(1f);
+            waveCount++;
         }
+
+        public IEnumerator ShootWave()
+        {
+            /*for (int j = 0; j < incomingBombs.Count; j++)
+            {
+                incomingBombs[j].GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+            }*/
+
+            switch (wavesIndex)
+            {
+                case 0:
+                    for (int i = incomingBombs.Count - 1; i >= 0; i--)
+                    {
+                        incomingBombs[i].GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                        incomingBombs[i].GetComponent<Rigidbody>().AddForce(bulletDir.normalized * bulletSpeed, ForceMode.Force);
+                        yield return new WaitForSeconds(0.25f);
+                    }
+                    break;
+                case 1:
+                    for (int i = 0; i < incomingBombs.Count; i++)
+                    {
+                        incomingBombs[i].GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                        incomingBombs[i].GetComponent<Rigidbody>().AddForce(bulletDir.normalized * bulletSpeed, ForceMode.Force);
+                        yield return new WaitForSeconds(0.25f);
+                    }
+                    break;
+                case 2:
+                    for (int i = incomingBombs.Count - 1; i >= 0; i--)
+                    {
+                        incomingBombs[i].GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                        incomingBombs[i].GetComponent<Rigidbody>().AddForce(bulletDir.normalized * bulletSpeed, ForceMode.Force);
+                        yield return new WaitForSeconds(0.25f);
+                    }
+                    break;
+            }
+
+            animator.SetBool("animIsAttacking", false);
+
+            isPatternWaveEnded = true;
+
+        }
+
+        public void CanSpawnWave()
+        {
+            canSpawnWave = true;
+        }
+        public void AnimShootWave()
+        {
+            isShootingWave = true;
+        }
+
+        private void ResetPatternWave()
+        {
+            switch (currentHp)
+            {
+                case 30:
+                   if(waveCount == 1)
+                    {
+                        patternCount++;
+                        canDoPattern = true;
+                        isShootingWave = false;
+                        isPatternWaveEnded = false;
+                        isWaveEnded = false;
+                        canSpawnWave = false;
+                        waveCount = 0;
+                    }
+                    break;
+                case 20:
+                    if (waveCount == 2)
+                    {
+                        patternCount++;
+                        canDoPattern = true;
+                        isShootingWave = false;
+                        isPatternWaveEnded = false;
+                        isWaveEnded = false;
+                        canSpawnWave = false;
+                        waveCount = 0;
+                    }
+                    else
+                    {
+                        isShootingWave = false;
+                        isPatternWaveEnded = false;
+                        isWaveEnded = false;
+                        canSpawnWave = false;
+                        StartCoroutine(PatternWave());
+                    }                        
+                    break;
+                case 10:
+                    if (waveCount == 3)
+                    {
+                        patternCount++;
+                        canDoPattern = true;
+                        isShootingWave = false;
+                        isPatternWaveEnded = false;
+                        isWaveEnded = false;
+                        canSpawnWave = false;
+                        waveCount = 0;
+                    }
+                    else
+                    {
+                        isShootingWave = false;
+                        isPatternWaveEnded = false;
+                        isWaveEnded = false;
+                        canSpawnWave = false;
+                        StartCoroutine(PatternWave());
+                    }
+                    break;
+            }
+        }
+
 
 
         IEnumerator DisplayHp()
