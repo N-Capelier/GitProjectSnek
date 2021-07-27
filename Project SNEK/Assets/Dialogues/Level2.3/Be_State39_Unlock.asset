@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
-  m_Name: Be_State29_Repeat
+  m_Name: Be_State39_Unlock
   m_EditorClassIdentifier: 
   mainCharacter: 3
   getCoin: 0
   coinAmount: 0
   isCutScene: 0
-  unlocksLevel: 0
-  levelToUnlockIndex: 0
-  bergamotNewState: 30
+  unlocksLevel: 1
+  levelToUnlockIndex: 7
+  bergamotNewState: 40
   poppyNewState: 0
   thistleNewState: 0
   bergamotMinimumState: 0
@@ -27,14 +27,27 @@ MonoBehaviour:
   sentences:
   - character: 3
     characterAnimator: 4
-    anim: 
-    sentence: "\\Flying away, you\u2019re gone\r\n\\I feel your absence leaning on\r\n\\Why
-      can\u2019t I seem to find\r\n\\My own will to fly, resigned"
+    anim: Anim_Bergamot_Emote_Approve
+    sentence: "Hi Ana\xEBl! What brings you here?\r\n"
     voiceLine: BeVoice
     activateButtons: 0
   - character: 3
     characterAnimator: 4
-    anim: Anim_Bergamot_Emote_haha
-    sentence: "\u2026 My poems are getting worse with time, haha. "
+    anim: 
+    sentence: "My\u2026 Help? You need me? How so?"
+    voiceLine: BeVoice
+    activateButtons: 0
+  - character: 3
+    characterAnimator: 4
+    anim: 
+    sentence: "Oh\u2026 Well then, I didn\u2019t expect someone here to need my help
+      since you arrived, haha. Looks like I forgot you could need help too. "
+    voiceLine: BeVoice
+    activateButtons: 0
+  - character: 3
+    characterAnimator: 4
+    anim: 
+    sentence: I would be delighted to accompany you. Just tell me when you want to
+      go!
     voiceLine: BeVoice
     activateButtons: 0

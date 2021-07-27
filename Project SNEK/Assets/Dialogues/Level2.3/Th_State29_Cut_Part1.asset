@@ -10,31 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
-  m_Name: Be_State29_Repeat
+  m_Name: Th_State29_Cut_Part1
   m_EditorClassIdentifier: 
-  mainCharacter: 3
+  mainCharacter: 2
   getCoin: 0
   coinAmount: 0
-  isCutScene: 0
+  isCutScene: 1
   unlocksLevel: 0
   levelToUnlockIndex: 0
-  bergamotNewState: 30
+  bergamotNewState: 0
   poppyNewState: 0
   thistleNewState: 0
   bergamotMinimumState: 0
   poppyMinimumState: 0
   thistleMinimumState: 0
   sentences:
-  - character: 3
-    characterAnimator: 4
+  - character: 2
+    characterAnimator: 9
     anim: 
-    sentence: "\\Flying away, you\u2019re gone\r\n\\I feel your absence leaning on\r\n\\Why
-      can\u2019t I seem to find\r\n\\My own will to fly, resigned"
-    voiceLine: BeVoice
-    activateButtons: 0
-  - character: 3
-    characterAnimator: 4
-    anim: Anim_Bergamot_Emote_haha
-    sentence: "\u2026 My poems are getting worse with time, haha. "
-    voiceLine: BeVoice
+    sentence: "So that was the kind of big monster Poppy was talking about. It was
+      there all this time, right? \u2026 I was there all this time."
+    voiceLine: ThVoice
     activateButtons: 0

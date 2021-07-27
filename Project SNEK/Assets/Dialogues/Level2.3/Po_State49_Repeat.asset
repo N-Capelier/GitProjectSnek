@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
+  m_Name: Po_State49_Repeat
+  m_EditorClassIdentifier: 
+  mainCharacter: 1
+  getCoin: 0
+  coinAmount: 0
+  isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
+  bergamotNewState: 0
+  poppyNewState: 50
+  thistleNewState: 0
+  bergamotMinimumState: 0
+  poppyMinimumState: 0
+  thistleMinimumState: 0
+  sentences:
+  - character: 1
+    characterAnimator: 6
+    anim: 
+    sentence: "I feel guilty for Bergamot\u2026 I always saw she had problems sometimes.
+      But I chose to believe her when she said it was fine. I could have done something\u2026 "
+    voiceLine: PoVoice
+    activateButtons: 0
+  - character: 1
+    characterAnimator: 6
+    anim: 
+    sentence: "But I was so focused on myself that I didn\u2019t extend my help more,
+      further than what she was hiding behind. "
+    voiceLine: PoVoice
+    activateButtons: 0
+  - character: 0
+    characterAnimator: 1
+    anim: 
+    sentence: "Now that I\u2019m on the right track to make progress with myself,
+      I want to do my best to help others be on the right track too. "
+    voiceLine: AnVoice
+    activateButtons: 0
+  - character: 0
+    characterAnimator: 1
+    anim: 
+    sentence: Try not to lose yourself to it. Let me handle this, Poppy.
+    voiceLine: PoVoice
+    activateButtons: 0
+  - character: 1
+    characterAnimator: 6
+    anim: 
+    sentence: "Of course, of course. I\u2019ll be careful."
+    voiceLine: PoVoice
+    activateButtons: 0

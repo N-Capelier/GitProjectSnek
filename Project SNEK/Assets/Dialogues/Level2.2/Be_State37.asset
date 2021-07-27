@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
-  m_Name: Be_State29_Repeat
+  m_Name: Be_State37
   m_EditorClassIdentifier: 
   mainCharacter: 3
   getCoin: 0
@@ -18,7 +18,7 @@ MonoBehaviour:
   isCutScene: 0
   unlocksLevel: 0
   levelToUnlockIndex: 0
-  bergamotNewState: 30
+  bergamotNewState: 38
   poppyNewState: 0
   thistleNewState: 0
   bergamotMinimumState: 0
@@ -27,14 +27,20 @@ MonoBehaviour:
   sentences:
   - character: 3
     characterAnimator: 4
-    anim: 
-    sentence: "\\Flying away, you\u2019re gone\r\n\\I feel your absence leaning on\r\n\\Why
-      can\u2019t I seem to find\r\n\\My own will to fly, resigned"
+    anim: Anim_Bergamot_Emote_Approve
+    sentence: "Oh, hey Ana\xEBl. How are you doing?"
     voiceLine: BeVoice
     activateButtons: 0
   - character: 3
     characterAnimator: 4
-    anim: Anim_Bergamot_Emote_haha
-    sentence: "\u2026 My poems are getting worse with time, haha. "
+    anim: 
+    sentence: "You\u2019ve been running around a lot with everything going on with
+      Poppy and Thistle. "
+    voiceLine: BeVoice
+    activateButtons: 0
+  - character: 3
+    characterAnimator: 4
+    anim: 
+    sentence: You deserve a little rest. You can sit by if you want.
     voiceLine: BeVoice
     activateButtons: 0

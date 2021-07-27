@@ -10,31 +10,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
-  m_Name: Be_State29_Repeat
+  m_Name: Th_State28_Cut
   m_EditorClassIdentifier: 
-  mainCharacter: 3
+  mainCharacter: 2
   getCoin: 0
   coinAmount: 0
-  isCutScene: 0
+  isCutScene: 1
   unlocksLevel: 0
   levelToUnlockIndex: 0
-  bergamotNewState: 30
+  bergamotNewState: 0
   poppyNewState: 0
   thistleNewState: 0
   bergamotMinimumState: 0
   poppyMinimumState: 0
   thistleMinimumState: 0
   sentences:
-  - character: 3
-    characterAnimator: 4
+  - character: 2
+    characterAnimator: 9
     anim: 
-    sentence: "\\Flying away, you\u2019re gone\r\n\\I feel your absence leaning on\r\n\\Why
-      can\u2019t I seem to find\r\n\\My own will to fly, resigned"
-    voiceLine: BeVoice
+    sentence: "We\u2019re getting closer to something very scary\u2026 "
+    voiceLine: ThVoice
     activateButtons: 0
-  - character: 3
-    characterAnimator: 4
-    anim: Anim_Bergamot_Emote_haha
-    sentence: "\u2026 My poems are getting worse with time, haha. "
-    voiceLine: BeVoice
+  - character: 0
+    characterAnimator: 2
+    anim: 
+    sentence: "Don\u2019t turn back, Thistle. We\u2019re almost there. I\u2019m with
+      you."
+    voiceLine: AnVoice
+    activateButtons: 0
+  - character: 2
+    characterAnimator: 9
+    anim: 
+    sentence: "\u2026 Thank you Ana\xEBl. Let\u2019s do this. "
+    voiceLine: ThVoice
     activateButtons: 0

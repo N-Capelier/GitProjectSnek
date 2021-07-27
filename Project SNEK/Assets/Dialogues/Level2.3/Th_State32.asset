@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
+  m_Name: Th_State32
+  m_EditorClassIdentifier: 
+  mainCharacter: 2
+  getCoin: 0
+  coinAmount: 0
+  isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
+  bergamotNewState: 0
+  poppyNewState: 0
+  thistleNewState: 33
+  bergamotMinimumState: 0
+  poppyMinimumState: 0
+  thistleMinimumState: 0
+  sentences:
+  - character: 2
+    characterAnimator: 8
+    anim: 
+    sentence: You know, I feel stupid for not accepting help when it was offered
+      to me before. When I saw you went to the forest anyway, with or without me,
+      it was so unexpected for me.
+    voiceLine: ThVoice
+    activateButtons: 0
+  - character: 2
+    characterAnimator: 8
+    anim: 
+    sentence: "No one had ever come out of their way to help me like that. That\u2019s
+      why I followed you."
+    voiceLine: ThVoice
+    activateButtons: 0
+  - character: 2
+    characterAnimator: 8
+    anim: 
+    sentence: "Seeing Bergamot being the same way as I was\u2026 It makes me want
+      to help her more."
+    voiceLine: ThVoice
+    activateButtons: 0
+  - character: 0
+    characterAnimator: 1
+    anim: 
+    sentence: "Focus on yourself, Thistle. I\u2019ll help Bergamot. You were a great
+      help to get me started, but now I\u2019ll handle it."
+    voiceLine: AnVoice
+    activateButtons: 0
+  - character: 2
+    characterAnimator: 8
+    anim: 
+    sentence: "\u2026 Thank you Ana\xEBl."
+    voiceLine: ThVoice
+    activateButtons: 0

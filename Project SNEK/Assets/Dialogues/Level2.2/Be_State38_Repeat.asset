@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
+  m_Name: Be_State38_Repeat
+  m_EditorClassIdentifier: 
+  mainCharacter: 3
+  getCoin: 0
+  coinAmount: 0
+  isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
+  bergamotNewState: 37
+  poppyNewState: 0
+  thistleNewState: 0
+  bergamotMinimumState: 0
+  poppyMinimumState: 0
+  thistleMinimumState: 0
+  sentences:
+  - character: 3
+    characterAnimator: 4
+    anim: Anim_Bergamot_Emote_haha
+    sentence: "My eyes can\u2019t settle on the words I try to read, haha. My mind
+      just wanders off."
+    voiceLine: BeVoice
+    activateButtons: 0
+  - character: 3
+    characterAnimator: 4
+    anim: 
+    sentence: "You know, with you coming here, I\u2019ve had a lot to do. I tried
+      to make you feel good here, and befriend your neighbours, and you did so much
+      more than I expected. You even replaced me somehow."
+    voiceLine: BeVoice
+    activateButtons: 0
+  - character: 3
+    characterAnimator: 4
+    anim: 
+    sentence: "But now I feel the backlash of all these efforts. I can\u2019t even
+      sit down and write a poem without my head spinning, haha. "
+    voiceLine: BeVoice
+    activateButtons: 0
+  - character: 3
+    characterAnimator: 4
+    anim: 
+    sentence: "I\u2019ll need a few naps to feel better, but it will be okay."
+    voiceLine: BeVoice
+    activateButtons: 0

@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
+  m_Name: Po_State39_Repeat
+  m_EditorClassIdentifier: 
+  mainCharacter: 1
+  getCoin: 0
+  coinAmount: 0
+  isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
+  bergamotNewState: 0
+  poppyNewState: 40
+  thistleNewState: 0
+  bergamotMinimumState: 0
+  poppyMinimumState: 0
+  thistleMinimumState: 0
+  sentences:
+  - character: 1
+    characterAnimator: 6
+    anim: 
+    sentence: "What is your opinion on waffles, friend?\r"
+    voiceLine: PoVoice
+    activateButtons: 0
+  - character: 1
+    characterAnimator: 6
+    anim: Anim_Poppy_Emote_Cheer
+    sentence: "They\u2019re amazing right?! I used to eat them when I was a kid,
+      but now I miss it. A waffle with icing sugar on top\u2026 Aw, now I can\u2019t
+      stop thinking about it. "
+    voiceLine: PoVoice
+    activateButtons: 0
+  - character: 1
+    characterAnimator: 6
+    anim: 
+    sentence: "I also think Waffle makes a great name for a dog. If I had one, I\u2019d
+      name it Waffle. "
+    voiceLine: PoVoice
+    activateButtons: 0
