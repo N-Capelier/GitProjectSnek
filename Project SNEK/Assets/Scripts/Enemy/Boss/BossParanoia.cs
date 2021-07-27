@@ -110,37 +110,38 @@ namespace Boss
             {
                 case 30:
                     wavesIndex = 0;
-                    animator.SetBool("Right", true);
+                    animator.SetBool("rightSide", true);
                     break;
                 case 20:
                     if (waveCount == 0)
                     {
                         wavesIndex = 1;
-                        animator.SetBool("Right", false);
+                        animator.SetBool("rightSide", false);
                     }
                     else
                         wavesIndex = 2;
-                    animator.SetBool("Right", true);
+                    animator.SetBool("rightSide", true);
                     break;
                 case 10:
                     if (waveCount == 0)
                     {
                         wavesIndex = 0;
-                        animator.SetBool("Right", true);
+                        animator.SetBool("rightSide", true);
                     }
                     else if(waveCount == 1)
                     {
                         wavesIndex = 1;
-                        animator.SetBool("Right", false);
+                        animator.SetBool("rightSide", false);
                     }
                     else if (waveCount == 2)
                     {
                         wavesIndex = 2;
-                        animator.SetBool("Right", true);
+                        animator.SetBool("rightSide", true);
                     }
                     break;
             }
 
+            yield return new WaitForEndOfFrame();
             animator.SetInteger("animPatternCount", 1);
             animator.SetBool("animIsAttacking", true);
 
@@ -176,35 +177,40 @@ namespace Boss
 
         public IEnumerator ShootWave()
         {
-            for (int j = 0; j < incomingBombs.Count; j++)
+            /*for (int j = 0; j < incomingBombs.Count; j++)
             {
                 incomingBombs[j].GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-            }
+            }*/
 
             switch (wavesIndex)
             {
                 case 0:
                     for (int i = incomingBombs.Count - 1; i >= 0; i--)
                     {
+                        incomingBombs[i].GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
                         incomingBombs[i].GetComponent<Rigidbody>().AddForce(bulletDir.normalized * bulletSpeed, ForceMode.Force);
-                        yield return new WaitForSeconds(0.3f);
+                        yield return new WaitForSeconds(0.25f);
                     }
                     break;
                 case 1:
                     for (int i = 0; i < incomingBombs.Count; i++)
                     {
+                        incomingBombs[i].GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
                         incomingBombs[i].GetComponent<Rigidbody>().AddForce(bulletDir.normalized * bulletSpeed, ForceMode.Force);
-                        yield return new WaitForSeconds(0.3f);
+                        yield return new WaitForSeconds(0.25f);
                     }
                     break;
                 case 2:
                     for (int i = incomingBombs.Count - 1; i >= 0; i--)
                     {
+                        incomingBombs[i].GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
                         incomingBombs[i].GetComponent<Rigidbody>().AddForce(bulletDir.normalized * bulletSpeed, ForceMode.Force);
-                        yield return new WaitForSeconds(0.3f);
+                        yield return new WaitForSeconds(0.25f);
                     }
                     break;
             }
+
+            animator.SetBool("animIsAttacking", false);
 
             isPatternWaveEnded = true;
 
