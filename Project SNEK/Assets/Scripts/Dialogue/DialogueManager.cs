@@ -162,14 +162,14 @@ namespace DialogueManagement
             {
 
                 nameText.text = currentDialogue.sentences[sentenceIndex].character.ToString();
-                if(NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator] != null && currentDialogue.sentences[sentenceIndex].anim != "")
+               /* if(NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator] != null && currentDialogue.sentences[sentenceIndex].anim != "")
                 {
                     NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator].Play(Animator.StringToHash(currentDialogue.sentences[sentenceIndex].anim));
                 }
                 else if(NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator] != null)
                 {
                     NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator].SetLayerWeight(NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator].GetLayerIndex("Talk"), 1);
-                }
+                }*/
             }
 
             HideNextLineFeedback();
@@ -196,8 +196,8 @@ namespace DialogueManagement
                     {
                         if(currentDialogue.sentences[sentenceIndex].voiceLine != "")
                         AudioManager.Instance.PlaySoundEffect(currentDialogue.sentences[sentenceIndex].voiceLine);
-                        if(currentDialogue.sentences[sentenceIndex].characterAnimator != CharacterAnimator.None)
-                            NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator].gameObject.GetComponent<NPCFaceManager>().RandomizeMouth();
+                        /*if(currentDialogue.sentences[sentenceIndex].characterAnimator != CharacterAnimator.None)
+                            NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator].gameObject.GetComponent<NPCFaceManager>().RandomizeMouth();*/
                         dialogCount = 0;
                     }
                     else
@@ -231,10 +231,10 @@ namespace DialogueManagement
             //    animator.Play($"Anim_{currentDialogue.sentences[sentenceIndex].character}_idle");
             //}
 
-            if (NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator] != null)
+           /* if (NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator] != null)
             {
                 NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator].SetLayerWeight(NPCManager.characterAnimatorDictionary[currentDialogue.sentences[sentenceIndex].characterAnimator].GetLayerIndex("Talk"), 0);
-            }
+            }*/
 
             sentenceIndex++;
             isSpeaking = false;

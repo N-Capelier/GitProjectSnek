@@ -11,8 +11,15 @@ namespace Hub.Interaction
     {
         protected override void Interact()
         {
-            GameManager.Instance.uiHandler.hubUI.OpenFountainBox();
-            GameManager.Instance.uiHandler.hubUI.SetOccupied(true);
+            if(!GameManager.Instance.uiHandler.pauseUI.opened)
+            {
+                GameManager.Instance.uiHandler.hubUI.OpenFountainBox();
+                GameManager.Instance.uiHandler.hubUI.SetOccupied(true);
+            }
+            else
+            {
+                InteractionManager.Instance.EndInteraction();
+            }
         }
     }
 }

@@ -69,7 +69,7 @@ namespace Hub.UI
         [SerializeField] GameObject swordBox;
 
         [Header("Hub Tuto UI")]
-        [SerializeField] GameObject TutoBox;
+        [SerializeField] List<GameObject> tutoBoxes = new List<GameObject>();
 
 
         PauseManager pauseManager;
@@ -95,8 +95,13 @@ namespace Hub.UI
             letterBoxAnim.SetActive(false);
             swordBox.transform.localScale = Vector3.zero;
             swordBox.SetActive(false);
-            TutoBox.transform.localScale = Vector3.zero;
-            TutoBox.SetActive(false);
+
+            for (int i = 0; i < tutoBoxes.Count; i++)
+            {
+                tutoBoxes[i].transform.localScale = Vector3.zero;
+                tutoBoxes[i].SetActive(false);
+            }
+
 
 
             levelBoxPNJ.transform.localScale = Vector3.zero;
@@ -335,15 +340,15 @@ namespace Hub.UI
 
         }
 
-        public void OpenTutoBox()
+        public void OpenTutoBox(int index)
         {
-            TutoBox.SetActive(true);
-            TutoBox.transform.LeanScale(Vector3.one, 0.2f);
+            tutoBoxes[index].SetActive(true);
+            tutoBoxes[index].transform.LeanScale(Vector3.one, 0.2f);
         }
 
-        public void CloseTutoBox()
+        public void CloseTutoBox(int index)
         {
-            TutoBox.LeanScale(Vector3.zero, 0.2f).setOnComplete(SetTutoBoxFalse);
+            tutoBoxes[index].LeanScale(Vector3.zero, 0.2f).setOnComplete(SetTutoBoxFalse);
         }
 
         public void CloseLetterBox()
@@ -537,7 +542,10 @@ namespace Hub.UI
 
         public void SetTutoBoxFalse()
         {
-            TutoBox.SetActive(false);
+            for (int i = 0; i < tutoBoxes.Count; i++)
+            {
+                tutoBoxes[i].SetActive(false);
+            }
         }
 
         public void Skip()

@@ -16,6 +16,7 @@ namespace PauseManagement
         [SerializeField] GameObject background;
         [SerializeField] Slider soundSlider, musicSlider;
         [SerializeField] GameObject leftHandToggle;
+        [HideInInspector] public bool opened;
         //bool occupied = false;
 
         void Start()
@@ -40,6 +41,7 @@ namespace PauseManagement
 
         public void OpenPauseMenu()
         {
+            opened = true;
             pauseMenu.SetActive(true);
             pauseMenu.LeanScale(Vector3.one, 0.2f).setIgnoreTimeScale(true);
             openPauseMenu.GetComponent<CanvasGroup>().LeanAlpha(0, 0.2f).setIgnoreTimeScale(true).setOnComplete(SetOpenPauseFalse);
@@ -48,6 +50,7 @@ namespace PauseManagement
 
         public void ClosePauseMenu()
         {
+            opened = false;
             Time.timeScale = 1f;
             pauseMenu.LeanScale(Vector3.zero, 0.2f).setIgnoreTimeScale(true).setOnComplete(SetPauseMenuFalse);
             if (GameManager.Instance.gameState.ActiveState != GameManagement.GameState.MainMenu)

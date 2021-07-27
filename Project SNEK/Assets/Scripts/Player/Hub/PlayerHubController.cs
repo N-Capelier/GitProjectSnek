@@ -22,6 +22,10 @@ namespace Player.Controller
 
         [HideInInspector] public byte actions = 0;
 
+        [Header("Tutorial Feedback")]
+        public GameObject directionArrow;
+        public Transform tutorlalTarget;
+
         IEnumerator Start()
         {
             baseMoveSpeed = agent.speed;

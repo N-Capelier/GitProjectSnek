@@ -16,8 +16,15 @@ namespace Hub.Interaction
 
         protected override void Interact()
         {
-            GameManager.Instance.uiHandler.hubUI.OpenLetterBox();
-            GameManager.Instance.uiHandler.hubUI.SetOccupied(true);
+            if(!GameManager.Instance.uiHandler.pauseUI.opened)
+            {
+                GameManager.Instance.uiHandler.hubUI.OpenLetterBox();
+                GameManager.Instance.uiHandler.hubUI.SetOccupied(true);
+            }
+            else
+            {
+                InteractionManager.Instance.EndInteraction();
+            }
             //if (SaveManager.Instance.state.bergamotState == 3f)
             //{
             //    SaveManager.Instance.state.bergamotState = 4f;

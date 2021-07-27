@@ -10,8 +10,15 @@ namespace Hub.Interaction
 
         protected override void Interact()
         {
-            StartCoroutine(GameManager.Instance.uiHandler.dialogueUI.StartDialogue(dialogue, animator));
-            GameManager.Instance.uiHandler.dialogueUI.currentInteraction = this;
+            if(!GameManager.Instance.uiHandler.pauseUI.opened)
+            {
+                StartCoroutine(GameManager.Instance.uiHandler.dialogueUI.StartDialogue(dialogue, animator));
+                GameManager.Instance.uiHandler.dialogueUI.currentInteraction = this;
+            }
+            else
+            {
+                InteractionManager.Instance.EndInteraction();
+            }
         }
     }
 }
