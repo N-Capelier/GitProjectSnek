@@ -19,7 +19,7 @@ namespace Map
 
         [SerializeField] bool useOtherPos = false;
         public Transform otherPos = null;
-        [SerializeField] TimelineAsset cutscene;    
+        [SerializeField] TimelineAsset cutscene;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -31,6 +31,8 @@ namespace Map
                 {
                     PlayerManager.Instance.currentController.checkPoint = otherPos.transform;
                     PlayerManager.Instance.currentController.respawnNode = otherPos.transform.position;
+
+                    PlayerManager.Instance.currentController.moveSpeed = 0f;
 
                     //start cinematic
                     CutsceneManager.Instance.PlayCutscene(cutscene);

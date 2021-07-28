@@ -43,6 +43,7 @@ namespace Player.Controller
         [Range(0, 400)] public float moveSpeed = 50;
         [HideInInspector] public float attackMoveSpeedModifier = 1f;
         [HideInInspector] public float spellMoveSpeedModifier = 1f;
+        [HideInInspector] public float cachedMoveSpeed;
 
         [Space]
         [SerializeField] [Range(0, 10)] int baseHP = 4;
@@ -68,6 +69,7 @@ namespace Player.Controller
         public virtual void Awake()
         {
             rb = GetComponent<Rigidbody>();
+            cachedMoveSpeed = moveSpeed;
         }
 
         public IEnumerator Init(int _bonusHP, float _bonusRange, int _bonusPower)
@@ -234,6 +236,7 @@ namespace Player.Controller
             PlayerManager.Instance.gameObject.SetActive(false);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             PlayerManager.Instance.gameObject.SetActive(true);
+            moveSpeed = cachedMoveSpeed;
 
             transform.position = checkPoint.position;
 

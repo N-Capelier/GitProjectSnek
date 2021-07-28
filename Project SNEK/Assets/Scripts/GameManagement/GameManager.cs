@@ -26,12 +26,7 @@ namespace GameManagement
 #if UNITY_EDITOR
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Keypad7))
-            {
-                RunCamController.Instance.vcam.transform.position = RunCamController.Instance.vcam.transform.position.SetX(10f);
-            }
 
-            //Debug.Log(RunCamController.Instance.vcam.Follow.ToString());
         }
 #endif
     }
