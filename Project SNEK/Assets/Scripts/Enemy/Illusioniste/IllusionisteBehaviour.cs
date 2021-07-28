@@ -76,6 +76,7 @@ namespace Enemy
                     if(clonesList.Count.Equals(0))
                     {
                         PlayerManager.Instance.currentController.playerRunSpirits.AddSpirit();
+                        Destroy(gameObject);
                     }
                     Destroy(index);
 
