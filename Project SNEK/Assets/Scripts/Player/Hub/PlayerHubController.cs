@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Rendering.Hub;
 using Hub.Interaction;
+using Hub;
 
 namespace Player.Controller
 {
@@ -24,7 +25,7 @@ namespace Player.Controller
 
         [Header("Tutorial Feedback")]
         public GameObject directionArrow;
-        public Transform tutorlalTarget;
+        public Transform tutorialTarget;
 
         IEnumerator Start()
         {
@@ -35,9 +36,11 @@ namespace Player.Controller
             actions++;
             yield return new WaitForSeconds(0.5f);
             yield return new WaitUntil(() => HubCamTargetController.Instance != null);
-            target = HubCamTargetController.Instance.transform;  ////////////////////////////////////////////////////////////////////////
+            target = HubCamTargetController.Instance.transform; 
             InteractionManager.Instance.playerController = this;
             actions--;
+
+            HubTutorial.Instance.Init();
         }
 
         private void FixedUpdate()
@@ -82,6 +85,18 @@ namespace Player.Controller
                 else
                 {
                     animator.SetFloat("Distance", 0);
+                }
+            }
+
+            if(directionArrow.activeSelf)
+            {
+                //Rotate arrow to target
+                if(target != null)
+                {
+                    Vector3 direction = tutorialTarget.position - directionArrow.transform.position;
+
+                    directionArrow.transform.position = objectRenderer.transform.position + new Vector3(0, 0.5f, 0) + direction.normalized * 1f;
+                    directionArrow.transform.forward = direction.normalized;
                 }
             }
         }

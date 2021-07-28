@@ -30,7 +30,7 @@ namespace Hub.UI
         [Space]
 
         [Header("Letter Animation and Menu")]
-        [SerializeField] GameObject letterBox;
+        [SerializeField] public GameObject letterBox;
         [SerializeField] GameObject letterBoxSelectMenu;
         [SerializeField] GameObject letterBoxAnim;
         [SerializeField] GameObject closeLetterButton;
