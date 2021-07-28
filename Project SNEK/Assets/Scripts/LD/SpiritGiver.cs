@@ -10,8 +10,8 @@ namespace Door
 	{
 		#region Variables
 		public int spiritCeiling;
-		private int spiritsToGive;
-        //bool alreadyTriggered = false;
+		private int spiritsValue;
+        public bool give;
         #endregion
 
         private void OnTriggerEnter(Collider other)
@@ -24,21 +24,27 @@ namespace Door
 
         private void GiveSpiritToAmount()
         {
-            int playerSpirits = PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits(); ;
-            
-            if (playerSpirits < spiritCeiling)
+            if(give == true)
             {
-                spiritsToGive = spiritCeiling - playerSpirits;
+                int playerSpirits = PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits(); ;
 
-                while(spiritsToGive > 0)
+                if (playerSpirits < spiritCeiling)
                 {
-                    PlayerManager.Instance.currentController.playerRunSpirits.AddSpirit();
-                    spiritsToGive--;
-                    print("gate spirit +1");
-                }
+                    spiritsValue = spiritCeiling - playerSpirits;
 
-                enabled = false;
+                    while (spiritsValue > 0)
+                    {
+                        PlayerManager.Instance.currentController.playerRunSpirits.AddSpirit();
+                        spiritsValue--;
+                    }
+                }
             }
+            else if (give == false)
+            {
+                int playerSpirits = PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits(); ;
+                PlayerManager.Instance.currentController.playerRunSpirits.ConsumeSpirits(playerSpirits);
+            }
+
         }
     }
 }
