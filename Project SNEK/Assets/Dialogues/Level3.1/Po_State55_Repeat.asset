@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
+  m_Name: Po_State55_Repeat
+  m_EditorClassIdentifier: 
+  mainCharacter: 1
+  getCoin: 0
+  coinAmount: 0
+  isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
+  bergamotNewState: 0
+  poppyNewState: 56
+  thistleNewState: 0
+  bergamotMinimumState: 0
+  poppyMinimumState: 0
+  thistleMinimumState: 0
+  sentences:
+  - character: 1
+    characterAnimator: 6
+    anim: 
+    sentence: "I\u2019ve asked my father for the family recipe of the carrot cake.
+      I actually know it\u2019s just from an old cookbook he has, but he always presents
+      it as some kind of family secret that passes on from generation to generation\u2026
+      He always enjoyed being dramatic."
+    voiceLine: PoVoice
+    activateButtons: 0
+  - character: 1
+    characterAnimator: 6
+    anim: 
+    sentence: "I didn\u2019t talk to my father in a while\u2026 Now I feel like I
+      should make up for the time we lost. I love my father. I should tell him\u2026
+      But one thing at a time, right?\r\n"
+    voiceLine: PoVoice
+    activateButtons: 0

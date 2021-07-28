@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
-  m_Name: Be_State40_Repeat
+  m_Name: Be_State49_Cut
   m_EditorClassIdentifier: 
   mainCharacter: 3
   getCoin: 0
   coinAmount: 0
-  isCutScene: 0
+  isCutScene: 1
   unlocksLevel: 0
   levelToUnlockIndex: 0
-  bergamotNewState: 41
+  bergamotNewState: 0
   poppyNewState: 0
   thistleNewState: 0
   bergamotMinimumState: 0
@@ -26,24 +26,33 @@ MonoBehaviour:
   thistleMinimumState: 0
   sentences:
   - character: 3
-    characterAnimator: 4
-    anim: Anim_Bergamot_Emote_haha
-    sentence: "Just tell me where you want to go in the forest and I\u2019ll follow
-      you! I\u2019m so glad to be useful to you, haha. "
+    characterAnimator: 5
+    anim: 
+    sentence: "Are we sure we want to continue? I\u2019m not sure the monsters appreciate
+      what we do\u2026 We should leave them alone, haha. "
     voiceLine: BeVoice
     activateButtons: 0
-  - character: 3
-    characterAnimator: 4
+  - character: 0
+    characterAnimator: 3
     anim: 
-    sentence: "You seemed so capable with Poppy and Thistle. I\u2019m sorry I didn\u2019t
-      notice you could need someone by your side too. I\u2019ll try to be there for
-      you more!"
-    voiceLine: BeVoice
+    sentence: Please, Bergamot, can you stay for me? I want to go to the end of this.
+    voiceLine: AnVoice
     activateButtons: 0
   - character: 3
-    characterAnimator: 4
+    characterAnimator: 5
     anim: 
-    sentence: "It\u2019s nice to have asked me when you could have asked Poppy or
-      Thistle. Thanks!"
+    sentence: "\u2026 Fine. We can just\u2026 Stay a minute here? "
+    voiceLine: BeVoice
+    activateButtons: 0
+  - character: 0
+    characterAnimator: 2
+    anim: 
+    sentence: Sure.
+    voiceLine: AnVoice
+    activateButtons: 0
+  - character: 3
+    characterAnimator: 5
+    anim: 
+    sentence: "Okay, we can go now! Good luck Ana\xEBl!"
     voiceLine: BeVoice
     activateButtons: 0

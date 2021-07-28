@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
+  m_Name: Be_State58_Cut
+  m_EditorClassIdentifier: 
+  mainCharacter: 3
+  getCoin: 0
+  coinAmount: 0
+  isCutScene: 1
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
+  bergamotNewState: 59
+  poppyNewState: 64
+  thistleNewState: 46
+  bergamotMinimumState: 0
+  poppyMinimumState: 0
+  thistleMinimumState: 0
+  sentences:
+  - character: 1
+    characterAnimator: 7
+    anim: 
+    sentence: 'Bergamot! You look amazing!
+
+'
+    voiceLine: PoVoice
+    activateButtons: 0
+  - character: 2
+    characterAnimator: 9
+    anim: 
+    sentence: "Now we\u2019re all matching!\n"
+    voiceLine: ThVoice
+    activateButtons: 0
+  - character: 1
+    characterAnimator: 7
+    anim: 
+    sentence: How was it ? You probably had a hard time. I prepared tea at my place,
+      you can rest and tell us the story!
+    voiceLine: PoVoice
+    activateButtons: 0
+  - character: 3
+    characterAnimator: 5
+    anim: 
+    sentence: "Oh, thanks everyone! I think I\u2019ll pass by my house first to breathe
+      a little. And then I\u2019ll join you to your place, Poppy, alright?"
+    voiceLine: BeVoice
+    activateButtons: 0
+  - character: 1
+    characterAnimator: 7
+    anim: 
+    sentence: Perfect, friend! Thistle, ready to go?
+    voiceLine: PoVoice
+    activateButtons: 0
+  - character: 2
+    characterAnimator: 9
+    anim: 
+    sentence: Ready!
+    voiceLine: ThVoice
+    activateButtons: 0

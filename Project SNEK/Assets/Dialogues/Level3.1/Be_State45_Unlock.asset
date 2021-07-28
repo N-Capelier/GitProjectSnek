@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
+  m_Name: Be_State45_Unlock
+  m_EditorClassIdentifier: 
+  mainCharacter: 3
+  getCoin: 0
+  coinAmount: 0
+  isCutScene: 0
+  unlocksLevel: 1
+  levelToUnlockIndex: 8
+  bergamotNewState: 46
+  poppyNewState: 0
+  thistleNewState: 0
+  bergamotMinimumState: 0
+  poppyMinimumState: 0
+  thistleMinimumState: 0
+  sentences:
+  - character: 3
+    characterAnimator: 4
+    anim: Anim_Bergamot_Emote_Approve
+    sentence: "Hey Ana\xEBl! "
+    voiceLine: BeVoice
+    activateButtons: 0
+  - character: 3
+    characterAnimator: 4
+    anim: 
+    sentence: I must tell you something. I know what the monsters in the forest are
+      about.
+    voiceLine: BeVoice
+    activateButtons: 0
+  - character: 3
+    characterAnimator: 4
+    anim: 
+    sentence: "They\u2019re the problems we\u2019re trying to run away from. I know
+      them. I know them quite well\u2026"
+    voiceLine: BeVoice
+    activateButtons: 0
+  - character: 3
+    characterAnimator: 4
+    anim: Anim_Bergamot_Emote_haha
+    sentence: "But even when I watched them in the eye, I never fought them. I just
+      thought they were here for good, and that I just ought to watch them consume
+      me\u2026 Haha. "
+    voiceLine: BeVoice
+    activateButtons: 0
+  - character: 3
+    characterAnimator: 4
+    anim: 
+    sentence: "Seeing you deal with them in the forest opened my eyes. They can be
+      dealt with. So\u2026 I\u2019d like to go to the forest with you!"
+    voiceLine: BeVoice
+    activateButtons: 0
+  - character: 3
+    characterAnimator: 4
+    anim: Anim_Bergamot_Emote_haha
+    sentence: 'You should say yes before I change my mind, haha. '
+    voiceLine: BeVoice
+    activateButtons: 0
+  - character: 3
+    characterAnimator: 4
+    anim: 
+    sentence: "Thank you! Let\u2019s go as soon as possible. "
+    voiceLine: BeVoice
+    activateButtons: 0

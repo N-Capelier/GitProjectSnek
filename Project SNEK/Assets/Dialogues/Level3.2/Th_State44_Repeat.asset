@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ead79dc4dbbe2428974a4e76cdedd5, type: 3}
+  m_Name: Th_State44_Repeat
+  m_EditorClassIdentifier: 
+  mainCharacter: 2
+  getCoin: 0
+  coinAmount: 0
+  isCutScene: 0
+  unlocksLevel: 0
+  levelToUnlockIndex: 0
+  bergamotNewState: 0
+  poppyNewState: 0
+  thistleNewState: 45
+  bergamotMinimumState: 0
+  poppyMinimumState: 0
+  thistleMinimumState: 0
+  sentences:
+  - character: 2
+    characterAnimator: 8
+    anim: 
+    sentence: "My favorite insects are dragonflies. They\u2019re so graceful. And
+      the name is so amazing, like, dragons! Wow!"
+    voiceLine: ThVoice
+    activateButtons: 0
+  - character: 2
+    characterAnimator: 8
+    anim: 
+    sentence: "Actually, are they even insects\u2026? I never counted to see if they
+      had six legs. Ah, that would mean I\u2019d have to find another favorite insect
+      then. "
+    voiceLine: ThVoice
+    activateButtons: 0
+  - character: 2
+    characterAnimator: 8
+    anim: 
+    sentence: "Mmh\u2026 Probably a Hercules beetle. They\u2019re badass.\r\n"
+    voiceLine: ThVoice
+    activateButtons: 0
