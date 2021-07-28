@@ -130,6 +130,9 @@ MonoBehaviour:
   killableMat: {fileID: 0}
   defaultMat: {fileID: 0}
   bullet: {fileID: 2403027144476230222, guid: ad6451b26c4ee7e4cad3dc348fc0c9ea, type: 3}
+  chargeParticle: {fileID: 4275822085711164366, guid: 10fed516d17bb6c4c9c61a65db649aa2,
+    type: 3}
+  particlePos: {fileID: 489606312225017000}
   attackRange: 13
   bulletSpeed: 100
 --- !u!65 &7820240960864877930
@@ -169,6 +172,36 @@ MonoBehaviour:
   rb: {fileID: 0}
   moveSpeed: 1
   isClone: 1
+--- !u!1 &4573524127137680799
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 489606312225017000}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &489606312225017000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4573524127137680799}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.31, y: 0.51, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3642282818567301866}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &8344828700921992025
 Animator:
   serializedVersion: 3
@@ -276,6 +309,12 @@ GameObject:
 --- !u!4 &8988436078730411530 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ea95c51e54ec8cb44ac3afc455baae13,
+    type: 3}
+  m_PrefabInstance: {fileID: 8878828527071959521}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3642282818567301866 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3910229013875068149, guid: ea95c51e54ec8cb44ac3afc455baae13,
     type: 3}
   m_PrefabInstance: {fileID: 8878828527071959521}
   m_PrefabAsset: {fileID: 0}

@@ -129,7 +129,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3217478127891413717
 Transform:
   m_ObjectHideFlags: 0
@@ -218,8 +218,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2374129549121576994, guid: adf9d201afa430c4db13c87c985a2c40,
         type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2374129549121576994, guid: adf9d201afa430c4db13c87c985a2c40,
+        type: 3}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2374129549121576994, guid: adf9d201afa430c4db13c87c985a2c40,
+        type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 20
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 2374129549121576995, guid: adf9d201afa430c4db13c87c985a2c40,
         type: 3}
@@ -275,6 +285,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2374129551007091156, guid: adf9d201afa430c4db13c87c985a2c40,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adf9d201afa430c4db13c87c985a2c40, type: 3}

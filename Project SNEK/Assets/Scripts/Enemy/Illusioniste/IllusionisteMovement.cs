@@ -11,6 +11,8 @@ namespace Enemy
         public EnemyAttackPattern[] patterns;
         public GameObject patternPos;
         public GameObject cloneParent;
+        public GameObject spawnParticle;
+        public GameObject despawnParticle;
         public int lifeTime;
         /*[HideInInspector]*/ public int patternCount = 0;
 
@@ -39,8 +41,22 @@ namespace Enemy
                 }             
 
                 yield return new WaitForSeconds(0.2f);
+
                 InstantiateClones();
+
                 yield return new WaitForSeconds(0.2f);
+
+                for (int i = 0; i < behaviour.clonesList.Count; i++)
+                {
+                    if (behaviour.clonesList[i] != null)
+                    {
+                        Instantiate(spawnParticle, behaviour.clonesList[i].transform.position, Quaternion.identity);
+                        yield return new WaitForSeconds(0.15f);
+                    }
+                }
+
+                yield return new WaitForSeconds(0.5f);
+
                 for (int i = 0; i < behaviour.clonesList.Count; i++)
                 {
                     if(behaviour.clonesList[i] != null)
@@ -49,6 +65,10 @@ namespace Enemy
                         yield return new WaitForSeconds(0.15f);
                     }
                 }
+
+                yield return new WaitForSeconds(0.5f);
+
+                StartCoroutine(behaviour.OnshouldAttack());
 
                 /*if (behaviour.clonesList.Count <= 1 && behaviour.isKillable == false)
                 {
@@ -60,10 +80,17 @@ namespace Enemy
 
             for (int i = 0; i < behaviour.clonesList.Count; i++)
             {
-                behaviour.clonesList[i].GetComponentInChildren<Animator>().SetBool("despawned", true);
+                behaviour.clonesList[i].GetComponentInChildren<Animator>().SetBool("despawned", true);                
             }
 
-            yield return new WaitForSeconds(1.3f);
+            yield return new WaitForSeconds(1f);
+
+            for (int i = 0; i < behaviour.clonesList.Count; i++)
+            {
+                Instantiate(despawnParticle, behaviour.clonesList[i].transform.position, Quaternion.identity);
+            }           
+
+            yield return new WaitForSeconds(0.4f);
 
             StartCoroutine(SpawnRoutine());
         }
@@ -130,9 +157,7 @@ namespace Enemy
                     patternCount = 0;
                     break;
 
-            }
-
-            StartCoroutine(behaviour.OnshouldAttack());
+            }            
         }
     }
 }
