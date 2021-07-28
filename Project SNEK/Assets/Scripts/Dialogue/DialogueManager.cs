@@ -38,6 +38,7 @@ namespace DialogueManagement
         bool skipSentence = false;
         bool waitForClick = false;
         bool levelUnlocked = false;
+        bool canTap = true;
         int sentenceIndex;
         Animator cinematicAnimator;
         int dialogCount;
@@ -64,7 +65,6 @@ namespace DialogueManagement
 
         [SerializeField] Sprite darkAnaelName;
         [SerializeField] Sprite darkAnaelBackground;
-
 
         private void Start()
         {
@@ -259,6 +259,7 @@ namespace DialogueManagement
             sentenceIndex++;
             isSpeaking = false;
             isTapped = false;
+            
 
             if (GameManager.Instance.gameState.ActiveState == GameState.Hub)
             {
@@ -271,37 +272,40 @@ namespace DialogueManagement
 
         void OnTap(InputType input)
         {
-            if (!isTapped)
+            if(canTap)
             {
-                isTapped = true;
-                return;
-            }
-            if (input == InputType.Tap && isRunningDialogue)
-            {
-                if(waitForClick)
+                if (!isTapped)
                 {
-                    waitForClick = false;
-                    isRunningDialogue = false;
-                    CutsceneManager.Instance.ResumeCutscene();
-                    SeeYouButton();
+                    isTapped = true;
                     return;
                 }
+                if (input == InputType.Tap && isRunningDialogue)
+                {
+                    if(waitForClick)
+                    {
+                        waitForClick = false;
+                        isRunningDialogue = false;
+                        CutsceneManager.Instance.ResumeCutscene();
+                        SeeYouButton();
+                        return;
+                    }
 
-                if (isSpeaking)
-                {
-                    if(!skipSentence)
-                        skipSentence = true;
-                }
-                else if(sentenceIndex < currentDialogue.sentences.Length)
-                {
-                    StartCoroutine(WriteNextLine());
-                    isTapped = false;
-                    AudioManager.Instance.PlaySoundEffect("UIClick");
-                }
-                else
-                {
-                    EndDialogue();
-                    AudioManager.Instance.PlaySoundEffect("UIClick");
+                    if (isSpeaking)
+                    {
+                        if(!skipSentence)
+                            skipSentence = true;
+                    }
+                    else if(sentenceIndex < currentDialogue.sentences.Length)
+                    {
+                        StartCoroutine(WriteNextLine());
+                        isTapped = false;
+                        AudioManager.Instance.PlaySoundEffect("UIClick");
+                    }
+                    else
+                    {
+                        EndDialogue();
+                        AudioManager.Instance.PlaySoundEffect("UIClick");
+                    }
                 }
             }
         }
@@ -547,6 +551,7 @@ namespace DialogueManagement
         {
             keepTalkingButton.SetActive(false);
             seeYouButton.SetActive(false);
+            StartCoroutine(LockTap());
             StartCoroutine(StartDialogue(currentInteraction.dialogue, currentInteraction.animator));
         }
 
@@ -568,6 +573,13 @@ namespace DialogueManagement
             isRunningDialogue = false;
             isTapped = false;
             currentDialogue = null;
+        }
+
+        private IEnumerator LockTap()
+        {
+            canTap = false;
+            yield return new WaitForSeconds(0.1f);
+            canTap = true;
         }
 
     }
