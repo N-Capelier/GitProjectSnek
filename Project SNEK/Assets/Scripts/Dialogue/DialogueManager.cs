@@ -28,7 +28,7 @@ namespace DialogueManagement
         [SerializeField] GameObject seeYouButton;
         [SerializeField] GameObject keepTalkingButton;
 
-        Dialogue currentDialogue;
+        [HideInInspector] public Dialogue currentDialogue;
         [HideInInspector] public DialogueInteraction currentInteraction;
 
         [HideInInspector] public bool isRunningDialogue = false;
@@ -96,6 +96,8 @@ namespace DialogueManagement
             //                  Debug
             //Debug.Log($"Playing dialog {dialogue.name}");
 
+
+
             if (GameManager.Instance.gameState.ActiveState != GameState.Cinematic && GameManager.Instance.gameState.ActiveState != GameState.Run)
             {
                 InteractionManager.Instance.camTarget.actions++;
@@ -122,6 +124,24 @@ namespace DialogueManagement
                 yield break;
             }
            pauseManager.HideOpenMenuButton();
+
+            switch (currentDialogue.mainCharacter)
+            {
+                case Character.Poppy:
+                    NPCManager.Instance.poppy.bubble.SetActive(false);
+                    NPCManager.Instance.poppy.exclamationMark.SetActive(false);
+                    break;
+                case Character.Thistle:
+                    NPCManager.Instance.thistle.bubble.SetActive(false);
+                    NPCManager.Instance.thistle.exclamationMark.SetActive(false);
+                    break;
+                case Character.Bergamot:
+                    NPCManager.Instance.bergamot.bubble.SetActive(false);
+                    NPCManager.Instance.bergamot.exclamationMark.SetActive(false);
+                    break;
+                default:
+                    break;
+            }
         }
 
         IEnumerator WriteNextLine()
@@ -545,9 +565,9 @@ namespace DialogueManagement
                 _face.SetMouthExpression(0);
             }
 
-            currentDialogue = null;
             isRunningDialogue = false;
             isTapped = false;
+            currentDialogue = null;
         }
 
     }

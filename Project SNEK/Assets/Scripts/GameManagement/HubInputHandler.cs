@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Hub.Interaction;
 using Rendering.Hub;
+using Saving;
 
 namespace GameManagement
 {
@@ -26,7 +27,7 @@ namespace GameManagement
 
                 if (Physics.Raycast(ray, out hit))
                 {
-                    if (hit.collider.gameObject.GetComponent<Interactor>())
+                    if (hit.collider.gameObject.GetComponent<Interactor>() && SaveManager.Instance.state.tutorialState != 0)
                     {
                         StartCoroutine(hit.collider.gameObject.GetComponent<Interactor>().BeginInteraction());
                     }
