@@ -60,14 +60,14 @@ namespace GameManagement
         /// 1 = left
         /// </summary>
         /// <param name="hand"></param>
-        public void SwapHand(int hand)
+        public void SwapHand(bool hand)
         {
-            if(hand == 1)
+            if(hand == true)
             {
                 spellLeft.SetActive(false);
                 spellRight.SetActive(true);
             }
-            else if(hand == 0)
+            else if(hand == false)
             {
                 spellLeft.SetActive(true);
                 spellRight.SetActive(false);

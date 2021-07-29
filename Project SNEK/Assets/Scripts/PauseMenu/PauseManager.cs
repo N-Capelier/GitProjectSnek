@@ -29,7 +29,7 @@ namespace PauseManagement
             ManageQualitySettings(SaveManager.Instance.state.quality);
             FadeBackground(false);
 
-            if(SaveManager.Instance.state.leftHanded == 0)
+            if(SaveManager.Instance.state.leftHanded == false)
             {
                 leftHandToggle.SetActive(false);
             }
@@ -164,12 +164,12 @@ namespace PauseManagement
             if(leftHandToggle.activeSelf)
             {
                 leftHandToggle.SetActive(false);
-                SaveManager.Instance.state.leftHanded = 0; 
+                SaveManager.Instance.state.leftHanded = false; 
             }
             else
             {
                 leftHandToggle.SetActive(true);
-                SaveManager.Instance.state.leftHanded = 1;
+                SaveManager.Instance.state.leftHanded = true;
             }
 
             if(GameManager.Instance.gameState.ActiveState == GameState.Run)

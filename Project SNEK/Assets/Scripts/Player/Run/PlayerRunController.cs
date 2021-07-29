@@ -46,13 +46,13 @@ namespace Player.Controller
             GameManager.Instance.uiHandler.spellLeft = spellUILeft;
             GameManager.Instance.uiHandler.spellRight = spellUIRight;
 
-            if(SaveManager.Instance.state.leftHanded == 0)
+            if(SaveManager.Instance.state.leftHanded == false)
             {
-                GameManager.Instance.uiHandler.SwapHand(0);
+                GameManager.Instance.uiHandler.SwapHand(false);
             }
             else
             {
-                GameManager.Instance.uiHandler.SwapHand(1);
+                GameManager.Instance.uiHandler.SwapHand(true);
             }
 
             switch (SceneManager.GetActiveScene().name)

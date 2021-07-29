@@ -22,11 +22,16 @@ namespace Saving
         {
             get
             {
-                if(PlayerManager.Instance.currentController is null)
+                if(PlayerManager.Instance != null)
                 {
-                    return null;
+                    if (PlayerManager.Instance.currentController is null)
+                    {
+                        return null;
+                    }
+                    return PlayerManager.Instance.currentController.animator;
                 }
-                return PlayerManager.Instance.currentController.animator;
+
+                return null;
             }
         }
 
