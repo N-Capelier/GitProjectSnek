@@ -21,8 +21,10 @@ namespace SpecialLD
 		[Range(.5f, 4f)]
 		[SerializeField] private float warmupTime; //must be lower than delay
 		[SerializeField] private float activationRange = 10;
+		[SerializeField] private float activationDelay;
 		private Transform playerTransform;
 		private Vector3 playerDistance;
+		[SerializeField] Animator animator;
 		#endregion
 
 		// Start is called before the first frame update
@@ -62,6 +64,7 @@ namespace SpecialLD
 				//warmupFx.Play();
 				yield return new WaitForSeconds(warmupTime);
 				//warmupFx.Stop();
+				animator.Play("animEyedFlowerShot");
 				incomingBullet = Instantiate(bullet, bulletSpawn.position, Quaternion.identity);
 				incomingBullet.GetComponent<Rigidbody>().velocity = directionVector * bulletSpeed;
 			}
@@ -77,7 +80,8 @@ namespace SpecialLD
             {
 				playerTransform = PlayerManager.Instance.currentController.transform;
 			}
-
+			animator.Play("animEyedFlowerOut");
+			yield return new WaitForSeconds(activationDelay);
 			StartCoroutine(ShootingLoop());
 		}
 	}
