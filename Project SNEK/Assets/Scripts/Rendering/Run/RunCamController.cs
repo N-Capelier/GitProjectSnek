@@ -4,6 +4,7 @@ using UnityEngine;
 
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
+using System.Collections;
 
 namespace Rendering.Run
 {
@@ -22,6 +23,7 @@ namespace Rendering.Run
     {
         public Camera cam;
         public CinemachineVirtualCamera vcam;
+        public CinemachineBrain brain;
         Animator animator;
         public CamState ActiveState { get; private set; }
         [SerializeField] CamState stateAutoApply;
@@ -66,6 +68,17 @@ namespace Rendering.Run
                 animator.Play(Animator.StringToHash(newState.ToString()));
                 ActiveState = newState;
             }
+        }
+
+        public void EnableVCAM()
+        {
+            StartCoroutine(EnableVCAMRoutine());
+        }
+
+        private IEnumerator EnableVCAMRoutine()
+        {
+            yield return null;
+            vcam.enabled = true;
         }
 
 #if UNITY_EDITOR
