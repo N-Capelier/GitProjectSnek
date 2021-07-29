@@ -14,6 +14,8 @@ namespace Enemy
         [HideInInspector] public Material defaultMat;
 
         public GameObject bullet;
+        public GameObject chargeParticle;
+        public Transform particlePos;
         GameObject incomingBullet;
         public float attackRange = 10;
         public float bulletSpeed = 10;
@@ -47,7 +49,10 @@ namespace Enemy
             }
             else
             {
+                
                 GetComponentInChildren<Animator>().SetBool("isAttacking", true);
+                yield return new WaitForSeconds(0.1f);
+                Instantiate(chargeParticle, particlePos.position, Quaternion.identity);
                 yield return new WaitForSeconds(1.2f);
                 GetComponentInChildren<Animator>().SetBool("isAttacking", false);
                 incomingBullet = Instantiate(bullet, gameObject.transform.position, Quaternion.identity);

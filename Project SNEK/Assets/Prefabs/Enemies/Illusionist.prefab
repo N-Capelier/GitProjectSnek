@@ -209,6 +209,10 @@ MonoBehaviour:
     - column: 000000000000000000
   patternPos: {fileID: 1392311476}
   cloneParent: {fileID: 1840348233}
+  spawnParticle: {fileID: 6458552456956392080, guid: ab0b8617a25315d45b9a6744c844740d,
+    type: 3}
+  despawnParticle: {fileID: 8687614943402499010, guid: 9d8ead1552df7164c8794e71a6fefd17,
+    type: 3}
   lifeTime: 6
   patternCount: 0
   index: 0
@@ -224,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 891fd462e2d92af4dbdfdb4bc63a23c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCooldown: 2
+  attackCooldown: 1
   movementCooldown: 10
   maxHp: 1
   currentHp: 0

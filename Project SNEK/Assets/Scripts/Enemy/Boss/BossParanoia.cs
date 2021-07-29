@@ -28,9 +28,11 @@ namespace Boss
         [SerializeField] float maxHp;
         float currentHp;
         [SerializeField] Transform patternPos;
+        Vector3 bulletDir;
 
         int patternCount = 0;
         bool canDoPattern = true;
+        bool canBeHit = false;
 
         [Space]
         [InspectorName("Pattern Wave")]
@@ -38,11 +40,24 @@ namespace Boss
         public EnemyAttackPattern[] waves;
         List<GameObject> incomingBombs;
         GameObject bullet;
-        Vector3 bulletDir;
+        int wavesIndex;
+        int waveCount;
         bool canSpawnWave = false;
         bool isWaveEnded = false;
         bool isShootingWave = false;
         bool isPatternWaveEnded = false;
+
+        [Space]
+        [InspectorName("Pattern Wave")]
+        public GameObject followParticle;
+        GameObject followObject;
+        public GameObject targetParticle;
+        GameObject targetObject;
+        public GameObject blastParticle;
+        GameObject blastObject;
+        public float timeToLock;
+        public float timeToBlast;
+        public Transform blastPos;
 
 
         [Space]
@@ -58,8 +73,7 @@ namespace Boss
         void Start()
         {
             rb = GetComponent<Rigidbody>();
-            currentHp = maxHp;
-            StartCoroutine(PatternWave());
+            currentHp = maxHp;            
         }
 
         private void OnEnable()
@@ -71,6 +85,30 @@ namespace Boss
         {
             UpdateMovement();
             UpdateBulletsMovement();
+
+            if (canDoPattern && !canBeHit)
+            {
+                switch (patternCount)
+                {
+                    case 0:
+                        canDoPattern = false;
+                        StartCoroutine(PatternWave());
+                        return;
+                    case 1:
+                        canDoPattern = false;
+                        StartCoroutine(PatternTarget());
+                        return;
+                    case 2:
+                        canDoPattern = false;
+                        //StartCoroutine(SpawnMouchou());
+                        return;
+                }
+            }
+
+            if(followObject != null)
+            {
+                followObject.transform.position = PlayerManager.Instance.currentController.transform.position;
+            }
         }
 
         void UpdateMovement()
@@ -99,10 +137,9 @@ namespace Boss
             }
         }
 
-        int wavesIndex;
-        int waveCount;
+
         IEnumerator PatternWave()
-        {           
+        {
             bulletDir = new Vector3(0, 0, -1);
             incomingBombs = new List<GameObject>();
 
@@ -220,6 +257,7 @@ namespace Boss
         {
             canSpawnWave = true;
         }
+
         public void AnimShootWave()
         {
             isShootingWave = true;
@@ -284,6 +322,35 @@ namespace Boss
             }
         }
 
+
+        IEnumerator PatternTarget()
+        {
+            yield return new WaitForSeconds(2);
+
+            animator.SetInteger("animPatternCount", 2);
+            animator.SetBool("animIsAttacking", true);
+
+            yield return new WaitForSeconds(0.5f);
+
+            followObject = Instantiate(followParticle, PlayerManager.Instance.currentController.transform.position, Quaternion.identity);
+
+            yield return new WaitForSeconds(timeToLock);
+
+            targetObject = Instantiate(targetParticle, followObject.transform.position, Quaternion.identity);
+            Destroy(followObject);
+
+            yield return new WaitForSeconds(timeToBlast);
+
+            animator.SetBool("animIsAttacking", false);
+
+            yield return new WaitForSeconds(1.5f);
+
+            bulletDir = (PlayerManager.Instance.currentController.transform.position - transform.position);
+            blastObject = Instantiate(blastParticle, blastPos.position, Quaternion.identity);
+            //blastObject.transform.Rotate(bulletDir.normalized);
+            Destroy(targetObject);
+
+        }
 
 
         IEnumerator DisplayHp()
