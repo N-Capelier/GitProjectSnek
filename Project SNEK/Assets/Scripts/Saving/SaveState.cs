@@ -69,7 +69,7 @@ namespace Saving
         /// 0 = false
         /// 1 = true
         /// </summary>
-        public int leftHanded = 0;
+        public bool leftHanded = false;
 
         public bool isTutorialFinished = false;
 
