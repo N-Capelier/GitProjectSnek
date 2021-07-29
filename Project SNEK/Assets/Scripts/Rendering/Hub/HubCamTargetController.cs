@@ -11,6 +11,7 @@ namespace Rendering.Hub
     {
         [SerializeField] [Range(0f, 1000f)] float cameraSpeed = 35f;
         [SerializeField] [Range(1f, 10f)] float horizontalSpeedModifier = 1.35f;
+        [SerializeField] [Range(0, 100f)] float cameraMaxSpeed = 50f;
 
         [SerializeField] Rigidbody rb;
 
@@ -18,7 +19,7 @@ namespace Rendering.Hub
 
         Clock interactionTimer;
         [HideInInspector] public bool movedCamera = false;
-        [SerializeField] float interactionCancelTime = 0.1f;
+        [SerializeField] float interactionCancelTime = .08f;
 
         float leftConfiner = -13.95685f;
         float rightConfiner = 11.03282f;
@@ -99,7 +100,8 @@ namespace Rendering.Hub
                     float _dist = Mathf.Abs(lastPos.magnitude - currentPos.magnitude);
                     Vector3 _moveDir = new Vector3(lastPos.x - currentPos.x, 0, lastPos.y - currentPos.y).normalized;
                     _moveDir = new Vector3(_moveDir.x * horizontalSpeedModifier, _moveDir.y, _moveDir.z);
-                    rb.velocity = _moveDir * Time.fixedDeltaTime * cameraSpeed * _dist * 0.1f;
+                    Vector3 _velocity = _moveDir * Time.fixedDeltaTime * cameraSpeed * _dist * 0.1f;
+                    rb.velocity = new Vector3(Mathf.Clamp(_velocity.x, -cameraMaxSpeed, cameraMaxSpeed), 0, Mathf.Clamp(_velocity.z, -cameraMaxSpeed, cameraMaxSpeed));
                 }
                 else
                 {
