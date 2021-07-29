@@ -248,7 +248,6 @@ namespace Player.Controller
                     playerRunSpirits.AddSpirit();
                 }
             }
-
             RunCamController.Instance.Set(CamState.PlayerScrolling, true);
 
             GameManager.Instance.uiHandler.levelProgressUI.FadeOut();
