@@ -28,6 +28,13 @@ namespace Player.Spells
             PlayerManager.Instance.currentController.playerRunSpell = this;
             spellCooldownTimer = new Clock();
             spellCooldownTimer.ClockEnded += OnCooldownEnded;
+
+            /// /////////////////////////// Remove when new spell getter is added
+            //if(SceneManager.GetActiveScene().name == "Level1_1"
+            //    || SceneManager.GetActiveScene().name == "TutorialMap")
+            //{
+            //    gameObject.SetActive(false);
+            //}
         }
 
         private void OnDestroy()
