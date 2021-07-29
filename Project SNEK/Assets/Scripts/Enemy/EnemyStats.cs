@@ -105,8 +105,8 @@ namespace Enemy
             }
             else
             {
-                AudioManager.Instance.PlaySoundEffect("ObjectSpiritCollect");
-                PlayerManager.Instance.currentController.playerRunSpirits.AddSpirit();
+                //AudioManager.Instance.PlaySoundEffect("ObjectSpiritCollect");
+                //PlayerManager.Instance.currentController.playerRunSpirits.AddSpirit();
                 Instantiate(hitFx, transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }                
