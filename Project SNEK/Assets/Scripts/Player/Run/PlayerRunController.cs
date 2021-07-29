@@ -95,6 +95,7 @@ namespace Player.Controller
                 SnapPosition();
                 UpdateMovement();
             }
+            
         }
 
         private void FixedUpdate()
@@ -170,6 +171,7 @@ namespace Player.Controller
                         nextDirection = PlayerDirection.Up;
                         inputSpeed = bonusInputSpeed;                        
                     }
+                    else if (currentDirection != PlayerDirection.Up) { AudioManager.Instance.PlaySoundEffect("UINoTurnOver"); }
                     break;
                 case InputType.SwipeRight:
                     if (currentDirection != PlayerDirection.Left && currentDirection != PlayerDirection.Right)
@@ -179,6 +181,7 @@ namespace Player.Controller
                         inputSpeed = bonusInputSpeed;                        
 
                     }
+                    else if (currentDirection != PlayerDirection.Right) { AudioManager.Instance.PlaySoundEffect("UINoTurnOver"); }
                     break;
                 case InputType.SwipeDown:
                     if (currentDirection != PlayerDirection.Up && currentDirection != PlayerDirection.Down)
@@ -188,6 +191,7 @@ namespace Player.Controller
                         inputSpeed = bonusInputSpeed;                        
 
                     }
+                    else if (currentDirection != PlayerDirection.Down) { AudioManager.Instance.PlaySoundEffect("UINoTurnOver"); }
                     break;
                 case InputType.SwipeLeft:
                     if (currentDirection != PlayerDirection.Right && currentDirection != PlayerDirection.Left)
@@ -196,6 +200,7 @@ namespace Player.Controller
                         inputSpeed = bonusInputSpeed;
                         nextDirection = PlayerDirection.Left;                        
                     }
+                    else if (currentDirection != PlayerDirection.Left) { AudioManager.Instance.PlaySoundEffect("UINoTurnOver"); }
                     break;
                 default:
                     break;

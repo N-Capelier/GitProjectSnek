@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AudioManagement;
 
 namespace Plates
 {
@@ -12,7 +13,8 @@ namespace Plates
 		
 		protected void CheckActivation()
         {
-			opener.plateActivationCount++;
+            AudioManager.Instance.PlaySoundEffect("LevelButtonOn");
+            opener.plateActivationCount++;
 			opener.CheckOpening();
         }
 
