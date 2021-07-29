@@ -5,6 +5,7 @@ using UnityEngine.Timeline;
 using Cinematic;
 using System.Collections;
 using System.Collections.Generic;
+using GameManagement;
 
 namespace Saving
 {
@@ -50,6 +51,7 @@ namespace Saving
 
         [Header("Feedback")]
         public GameObject exclamationMark;
+        public GameObject bubble;
         public virtual IEnumerator Start()
         {
             yield return new WaitForSeconds(0.1f);
@@ -72,9 +74,25 @@ namespace Saving
             started = true;
         }
 
+        private Coroutine feedbackCoroutine;
         protected void SetDialogue(Dialogue _dialogue)
         {
             dialogueInteraction.dialogue = _dialogue;
+
+            if (feedbackCoroutine != null)
+                StopCoroutine(feedbackCoroutine);
+
+            feedbackCoroutine = StartCoroutine(SetFeedback(_dialogue));
+        }
+
+        private IEnumerator SetFeedback(Dialogue dialogue)
+        {
+            yield return new WaitUntil(()=>GameManager.Instance.uiHandler.dialogueUI.currentDialogue == null);
+            if (dialogue.unlocksLevel)
+                exclamationMark.SetActive(true);
+            else
+                bubble.SetActive(true);
+
         }
 
         protected void PlayCutscene(TimelineAsset _cutscene)

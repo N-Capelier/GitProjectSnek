@@ -51,6 +51,7 @@ namespace Hub
                     playerHub.tutorialTarget = NPCManager.Instance.bergamot.transform;
 
                     NPCManager.Instance.bergamot.exclamationMark.SetActive(true);
+                    NPCManager.Instance.bergamot.bubble.SetActive(false);
 
                     //Quand le joueur est assez près de Bergamot passer au state suivant
                     StartCoroutine(tutorialCase0());
@@ -59,7 +60,7 @@ namespace Hub
 
                 case 1:
                     //Afficher la box interagir avec bergamot
-                    GameManager.Instance.uiHandler.hubUI.OpenTutoBox(0);
+                    GameManager.Instance.uiHandler.hubUI.OpenTutoBox(1);
 
                     playerHub = (PlayerHubController)PlayerManager.Instance.currentController;
 
@@ -68,7 +69,7 @@ namespace Hub
 
                 case 2:
                     //Afficher la box boite au lettre
-                    GameManager.Instance.uiHandler.hubUI.OpenTutoBox(0);
+                    GameManager.Instance.uiHandler.hubUI.OpenTutoBox(2);
 
                     playerHub = (PlayerHubController)PlayerManager.Instance.currentController;
 
@@ -76,13 +77,14 @@ namespace Hub
                     playerHub.tutorialTarget = NPCManager.Instance.bergamot.transform;
 
                     NPCManager.Instance.bergamot.exclamationMark.SetActive(true);
+                    NPCManager.Instance.bergamot.bubble.SetActive(false);
 
                     StartCoroutine(tutorialCase2());
                     break;
 
                 case 3:
                     //Afficher la box fontaine
-                    GameManager.Instance.uiHandler.hubUI.OpenTutoBox(0);
+                    GameManager.Instance.uiHandler.hubUI.OpenTutoBox(3);
 
                     playerHub = (PlayerHubController)PlayerManager.Instance.currentController;
                     playerHub.directionArrow.SetActive(true);
@@ -99,6 +101,8 @@ namespace Hub
 
         public IEnumerator tutorialCase0()
         {
+            yield return new WaitUntil(() => NPCManager.Instance.bergamot.bubble.activeSelf);
+            NPCManager.Instance.bergamot.bubble.SetActive(false);
             yield return new WaitUntil(() => (playerHub.tutorialTarget.transform.position - playerHub.objectRenderer.transform.position).magnitude < 2);
             playerHub.directionArrow.SetActive(false);
             UpdateTutorialState(1);
@@ -110,7 +114,7 @@ namespace Hub
             yield return new WaitUntil(()=> GameManager.Instance.uiHandler.dialogueUI.currentInteraction != null && GameManager.Instance.uiHandler.dialogueUI.currentInteraction.dialogue.mainCharacter == DialogueManagement.Character.Bergamot);
             NPCManager.Instance.bergamot.exclamationMark.SetActive(false);
 
-            yield return new WaitUntil(() => !GameManager.Instance.uiHandler.dialogueUI.isRunningDialogue);
+            yield return new WaitUntil(() => !GameManager.Instance.uiHandler.dialogueUI.isRunningDialogue && GameManager.Instance.uiHandler.dialogueUI.currentDialogue == null);
 
             playerHub.directionArrow.SetActive(true);
             playerHub.tutorialTarget = letterBoxTransform;
@@ -135,13 +139,13 @@ namespace Hub
 
             NPCManager.Instance.bergamot.exclamationMark.SetActive(false);
 
-            yield return new WaitUntil(() => !GameManager.Instance.uiHandler.dialogueUI.isRunningDialogue);
+            yield return new WaitUntil(() => !GameManager.Instance.uiHandler.dialogueUI.isRunningDialogue && GameManager.Instance.uiHandler.dialogueUI.currentDialogue == null);
             UpdateTutorialState(3); 
         }
 
         public IEnumerator tutorialCase3()
         {
-            yield return new WaitUntil(() => (playerHub.tutorialTarget.transform.position - playerHub.objectRenderer.transform.position).magnitude < 2);
+            yield return new WaitUntil(() => (playerHub.tutorialTarget.transform.position - playerHub.objectRenderer.transform.position).magnitude < 3);
             playerHub.directionArrow.SetActive(false);
             print("TUTORIAL FINISHED");
             SaveManager.Instance.state.isTutorialFinished = true;
