@@ -322,10 +322,11 @@ namespace Boss
             }
         }
 
-
+        int blastIndex = 0;
         IEnumerator PatternTarget()
         {
-            yield return new WaitForSeconds(2);
+            blastIndex++;
+            yield return new WaitForSeconds(4);
 
             animator.SetInteger("animPatternCount", 2);
             animator.SetBool("animIsAttacking", true);
@@ -347,9 +348,73 @@ namespace Boss
 
             bulletDir = (PlayerManager.Instance.currentController.transform.position - transform.position);
             blastObject = Instantiate(blastParticle, blastPos.position, Quaternion.identity);
-            //blastObject.transform.Rotate(bulletDir.normalized);
+            blastObject.transform.LookAt(targetObject.transform.position);
             Destroy(targetObject);
 
+            ResetPatternTarget();
+
+        }
+
+        IEnumerator FastPatternTarget()
+        {
+            blastIndex++;
+            animator.SetInteger("animPatternCount", 2);
+            animator.SetBool("animIsAttacking", true);
+
+            yield return new WaitForSeconds(0.5f);
+
+            followObject = Instantiate(followParticle, PlayerManager.Instance.currentController.transform.position, Quaternion.identity);
+
+            yield return new WaitForSeconds(timeToLock);
+
+            targetObject = Instantiate(targetParticle, followObject.transform.position, Quaternion.identity);
+            Destroy(followObject);
+
+            yield return new WaitForSeconds(timeToBlast);
+
+            animator.SetBool("animIsAttacking", false);
+
+            yield return new WaitForSeconds(1.5f);
+
+            bulletDir = (PlayerManager.Instance.currentController.transform.position - transform.position);
+            blastObject = Instantiate(blastParticle, blastPos.position, Quaternion.identity);
+            blastObject.transform.LookAt(targetObject.transform.position);
+            Destroy(targetObject);
+
+            ResetPatternTarget();
+
+        }
+
+        private void ResetPatternTarget()
+        {
+            switch (currentHp)
+            {
+                case 30:
+                    patternCount++;
+                    canDoPattern = true;
+                    blastIndex = 0;
+                    break;
+                case 20:
+                    if (blastIndex >= 3)
+                    {
+                        patternCount++;
+                        canDoPattern = true;
+                        blastIndex = 0;
+                    }
+                    else
+                        StartCoroutine(FastPatternTarget());
+                    break;
+                case 10:
+                    if (blastIndex >= 5)
+                    {
+                        patternCount++;
+                        canDoPattern = true;
+                        blastIndex = 0;
+                    }
+                    else
+                        StartCoroutine(FastPatternTarget());
+                    break;
+            }
         }
 
 
