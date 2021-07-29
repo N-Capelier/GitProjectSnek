@@ -143,7 +143,8 @@ namespace Rendering.Hub
                     float _dist = Mathf.Abs(lastPos.magnitude - currentPos.magnitude);
                     Vector3 _moveDir = new Vector3(lastPos.x - currentPos.x, 0, lastPos.y - currentPos.y).normalized;
                     _moveDir = new Vector3(_moveDir.x * horizontalSpeedModifier, _moveDir.y, _moveDir.z);
-                    rb.velocity = _moveDir * Time.fixedDeltaTime * cameraSpeed * _dist * 0.1f;
+                    Vector3 _velocity = _moveDir * Time.fixedDeltaTime * cameraSpeed * _dist * 0.1f;
+                    rb.velocity = new Vector3(Mathf.Clamp(_velocity.x, -cameraMaxSpeed, cameraMaxSpeed), 0, Mathf.Clamp(_velocity.z, -cameraMaxSpeed, cameraMaxSpeed));
                 }
                 else
                 {
