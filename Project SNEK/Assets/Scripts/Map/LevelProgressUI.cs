@@ -3,6 +3,7 @@ using Player;
 using Player.Controller;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -37,6 +38,11 @@ namespace Map
         [SerializeField] RectTransform finishLineTransform;
         [SerializeField] Sprite finishLineSprite;
 
+        [Header("Completion percentage")]
+        [SerializeField] TextMeshProUGUI completionText;
+        [SerializeField] CanvasGroup textCanvasGroup;
+
+
 
         void Start()
         {
@@ -60,6 +66,7 @@ namespace Map
             else
             {
                 currentProgression = player.transform.position.z / levelLength;
+                completionText.text = (int)(currentProgression * 100) + "%";
 
                 if(currentProgression != fillMask.fillAmount)
                 {
