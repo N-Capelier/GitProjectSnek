@@ -34,7 +34,7 @@ namespace Player.Controller
         public GameObject spellUILeft;
         public GameObject spellUIRight;
 
-        private void Start()
+        private IEnumerator Start()
         {
             animator = objectRenderer.GetComponent<Animator>();
             currentNode = startingNode;
@@ -67,6 +67,10 @@ namespace Player.Controller
             }
 
             InputHandler.InputReceived += HandleInput;
+
+            moveSpeed = 0.1f;
+            yield return new WaitForSeconds(3f);
+            moveSpeed = cachedMoveSpeed;
         }
 
         private void OnEnable()
