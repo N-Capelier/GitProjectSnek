@@ -559,6 +559,7 @@ namespace DialogueManagement
         {
             CloseDialogueBox(currentDialogue);
 
+           /* 
             NPCFaceManager _face;
             foreach(KeyValuePair<CharacterAnimator, Animator> entry in NPCManager.characterAnimatorDictionary)
             {
@@ -569,6 +570,7 @@ namespace DialogueManagement
                 _face.SetEyesExpression(0);
                 _face.SetMouthExpression(0);
             }
+           */
 
             isRunningDialogue = false;
             isTapped = false;
