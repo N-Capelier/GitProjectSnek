@@ -89,7 +89,10 @@ namespace Saving
         {
             yield return new WaitUntil(()=>GameManager.Instance.uiHandler.dialogueUI.currentDialogue == null);
             if (dialogue.unlocksLevel)
+            {
                 exclamationMark.SetActive(true);
+                bubble.SetActive(false);
+            }
             else
                 bubble.SetActive(true);
 
