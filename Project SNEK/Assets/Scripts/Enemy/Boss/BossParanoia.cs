@@ -59,6 +59,9 @@ namespace Boss
         public float timeToBlast;
         public Transform blastPos;
 
+        [Space]
+        [InspectorName("Pattern Wave")]
+        public GameObject mouchous;
 
         [Space]
         [InspectorName("UI")] 
@@ -100,7 +103,7 @@ namespace Boss
                         return;
                     case 2:
                         canDoPattern = false;
-                        //StartCoroutine(SpawnMouchou());
+                        StartCoroutine(PatternMouchou());
                         return;
                 }
             }
@@ -415,6 +418,18 @@ namespace Boss
                         StartCoroutine(FastPatternTarget());
                     break;
             }
+        }
+
+        IEnumerator PatternMouchou()
+        {
+            yield return new WaitForSeconds(2);
+
+            animator.SetInteger("animPatternCount", 3);
+            animator.SetBool("animIsAttacking", true);
+
+            yield return new WaitForSeconds(2);
+
+            Instantiate(mouchous, patternPos.position, Quaternion.identity, patternPos);
         }
 
 
