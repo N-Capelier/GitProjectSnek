@@ -12,6 +12,7 @@ namespace Door
 		public int spiritCeiling;
 		private int spiritsValue;
         public bool give;
+        [SerializeField] ParticleSystem positiveParticle, negativeParticle;
         #endregion
 
         private void OnTriggerEnter(Collider other)
@@ -21,6 +22,18 @@ namespace Door
 				GiveSpiritToAmount();
             }
 		}
+
+        private void Start()
+        {
+            if(give == true)
+            {
+                positiveParticle.Play();
+            }
+            else
+            {
+                negativeParticle.Play();
+            }
+        }
 
         private void GiveSpiritToAmount()
         {

@@ -25,6 +25,7 @@ namespace SpecialLD
 		private Transform playerTransform;
 		private Vector3 playerDistance;
 		[SerializeField] Animator animator;
+		[SerializeField] ParticleSystem windUp, shot;
 		#endregion
 
 		// Start is called before the first frame update
@@ -61,10 +62,11 @@ namespace SpecialLD
             {
 				yield return new WaitForSeconds(shootingDelay);
 
-				//warmupFx.Play();
+				windUp.Play();
 				yield return new WaitForSeconds(warmupTime);
-				//warmupFx.Stop();
+				windUp.Stop();
 				animator.Play("animEyedFlowerShot");
+				shot.Play();
 				incomingBullet = Instantiate(bullet, bulletSpawn.position, Quaternion.identity);
 				incomingBullet.GetComponent<Rigidbody>().velocity = directionVector * bulletSpeed;
 			}
