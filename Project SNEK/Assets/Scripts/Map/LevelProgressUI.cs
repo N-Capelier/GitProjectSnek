@@ -41,6 +41,7 @@ namespace Map
         [Header("Completion percentage")]
         [SerializeField] TextMeshProUGUI completionText;
         [SerializeField] CanvasGroup textCanvasGroup;
+        private float tempPercentage;
 
 
 
@@ -66,7 +67,8 @@ namespace Map
             else
             {
                 currentProgression = player.transform.position.z / levelLength;
-                completionText.text = (int)(currentProgression * 100) + "%";
+                tempPercentage = (int)(currentProgression * 100);
+                completionText.text = Mathf.Clamp(tempPercentage, 0, 100) + "%";
 
                 if(currentProgression != fillMask.fillAmount)
                 {

@@ -239,6 +239,7 @@ namespace Hub.UI
             {
                 InteractionManager.Instance.EndInteraction();
             }
+
         }
 
         public void OpenLetter(LetterMail letterContent)
@@ -344,11 +345,13 @@ namespace Hub.UI
         {
             tutoBoxes[index].SetActive(true);
             tutoBoxes[index].transform.LeanScale(Vector3.one, 0.2f);
+            GameManager.Instance.uiHandler.pauseUI.HideOpenMenuButton();
         }
 
         public void CloseTutoBox(int index)
         {
             tutoBoxes[index].LeanScale(Vector3.zero, 0.2f).setOnComplete(SetTutoBoxFalse);
+            GameManager.Instance.uiHandler.pauseUI.ShowOpenMenuButton();
         }
 
         public void CloseLetterBox()
@@ -496,11 +499,12 @@ namespace Hub.UI
         {
             if(state == true)
             {
-               pauseManager.HideOpenMenuButton();
+
+               GameManager.Instance.uiHandler.pauseUI.HideOpenMenuButton();
             }
             else
             {
-                pauseManager.ShowOpenMenuButton();
+                GameManager.Instance.uiHandler.pauseUI.ShowOpenMenuButton();
             }
 
         }
