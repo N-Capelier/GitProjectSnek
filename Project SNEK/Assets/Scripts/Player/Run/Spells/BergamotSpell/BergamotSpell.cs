@@ -26,7 +26,7 @@ namespace Player.Spells
 
             //PlayerManager.Instance.currentController.animator.Play(Animator.StringToHash("Anim_PlayerRun_Shield"));
             PlayerManager.Instance.currentController.spellMoveSpeedModifier = 0.01f;
-            yield return new WaitForSeconds(0.4f); //Cooldown Anim Flash
+            yield return new WaitForSeconds(0.8f); //Cooldown Anim Flash
             PlayerManager.Instance.currentController.spellMoveSpeedModifier = 1f;
 
 
@@ -59,8 +59,10 @@ namespace Player.Spells
             yield return new WaitForSeconds(spellDuration);
 
             if(target != null)
+            {
                 rd.material = mat;
                 hitbox.enabled = true;
+            }
 
         }
     }
