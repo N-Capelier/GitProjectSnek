@@ -15,6 +15,7 @@ namespace Player.Spells
 
         [Header("Feedbacks")]
         [SerializeField] Material transparentMaterial;
+        [SerializeField] GameObject cameraFlashFeedback;
 
         public override IEnumerator SpellCast(PlayerDirection direction)
         {
@@ -38,8 +39,8 @@ namespace Player.Spells
                     StartCoroutine(IntangibleCoroutine(MonochromElementsManager.Instance.elements[i]));
             }
 
-            //Feedback prefab ?
-
+            //Feedback prefab 
+            Instantiate(cameraFlashFeedback, this.transform.position, Quaternion.identity);
 
             yield return null;
         }

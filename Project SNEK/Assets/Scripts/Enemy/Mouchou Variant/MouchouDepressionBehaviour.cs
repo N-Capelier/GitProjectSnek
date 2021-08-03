@@ -9,7 +9,7 @@ namespace Enemy
 
         [SerializeField] EnemyStats stats;
 
-        [Header("Intangible behaviour")]
+        [Header("Intangible Behaviour")]
         [SerializeField] MeshRenderer maskRenderer;
         [SerializeField] Material intangibleMaterial;
         [SerializeField] Material defaultMaterial;
@@ -39,7 +39,7 @@ namespace Enemy
             stats.currentHp = 1;
             yield return new WaitUntil(() => maskRenderer.material.name == defaultMaterial.name);
             stats.currentHp = 10000;
-            yield return null;
+            intangibleCoroutine = null;
         }
     }
 
