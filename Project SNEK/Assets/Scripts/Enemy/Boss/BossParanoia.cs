@@ -31,7 +31,7 @@ namespace Boss
         Vector3 bulletDir;
 
         int patternCount = 0;
-        bool canDoPattern = true;
+        bool canDoPattern = false;
         bool canBeHit = false;
 
         [Space]
@@ -48,7 +48,7 @@ namespace Boss
         bool isPatternWaveEnded = false;
 
         [Space]
-        [InspectorName("Pattern Wave")]
+        [InspectorName("Pattern Target")]
         public GameObject followParticle;
         GameObject followObject;
         public GameObject targetParticle;
@@ -60,8 +60,14 @@ namespace Boss
         public Transform blastPos;
 
         [Space]
-        [InspectorName("Pattern Wave")]
-        public GameObject mouchous;
+        [InspectorName("Pattern Spawn")]
+        public GameObject mouchouPrefab;        
+        public GameObject shrubPrefab;
+        public GameObject spawnFx;
+        GameObject shrub;
+        List<GameObject> shrubs;
+        public EnemyAttackPattern pattern;
+        bool isSpawning = false;
 
         [Space]
         [InspectorName("UI")] 
@@ -76,7 +82,15 @@ namespace Boss
         void Start()
         {
             rb = GetComponent<Rigidbody>();
-            currentHp = maxHp;            
+            currentHp = maxHp;
+            StartCoroutine(DelayedStart());
+        }
+
+        IEnumerator DelayedStart()
+        {
+            yield return new WaitForSeconds(3);
+
+            canDoPattern = true;
         }
 
         private void OnEnable()
@@ -180,6 +194,7 @@ namespace Boss
                     }
                     break;
             }
+
 
             yield return new WaitForEndOfFrame();
             animator.SetInteger("animPatternCount", 1);
@@ -420,16 +435,58 @@ namespace Boss
             }
         }
 
+        int mouchouClone;
         IEnumerator PatternMouchou()
         {
+            switch (currentHp)
+            {
+                case 30:
+                    
+                    break;
+                case 20:
+                    
+                    break;
+                case 10:
+                    
+                    break;
+            }
+
             yield return new WaitForSeconds(2);
 
             animator.SetInteger("animPatternCount", 3);
             animator.SetBool("animIsAttacking", true);
 
-            yield return new WaitForSeconds(2);
+            yield return new WaitUntil(() => isSpawning);
 
-            Instantiate(mouchous, patternPos.position, Quaternion.identity, patternPos);
+            shrubs = new List<GameObject>();
+
+            for (int x = 0; x < pattern.row.Length; x++)
+            {
+                for (int y = 0; y < pattern.row[x].column.Length; y++)
+                {
+                    if (pattern.row[x].column[y] == true)
+                    {
+                        shrub = Instantiate(shrubPrefab, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x + 5))), Quaternion.identity);
+                        Instantiate(spawnFx, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x + 5))), Quaternion.identity);
+                        shrubs.Add(shrub);
+                    }
+                }
+            }
+
+            mouchouClone = Random.Range(0, shrubs.Count);
+            for (int i = 0; i < shrubs.Count; i++)
+            {
+                if (i == mouchouClone)
+                {
+                    Instantiate(mouchouPrefab, shrubs[i].transform.position, Quaternion.identity);
+                    Destroy(shrubs[i]);
+                }
+            }
+        }
+
+        public void AnimSpawn()
+        {
+            isSpawning = true;
         }
 
 
