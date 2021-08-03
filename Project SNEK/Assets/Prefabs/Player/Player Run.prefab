@@ -173,7 +173,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3490379264697547545
 RectTransform:
   m_ObjectHideFlags: 0
@@ -431,7 +431,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1753923876744744885}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f061ae958196a7c4d986ecd37a30da91, type: 3}
   m_Name: 
@@ -439,7 +439,6 @@ MonoBehaviour:
   spellCooldown: 4
   buttonImage: {fileID: 4107595485501648665}
   isSpellAccessible: 0
-  graphicRaycaster: {fileID: 8920380034232736572}
   bomb: {fileID: 6679387328982727670, guid: d2464c6438514734d9d95b3c77da392f, type: 3}
   kettleRenderer: {fileID: 0}
   animCooldown: 0.4
@@ -460,7 +459,6 @@ MonoBehaviour:
   spellCooldown: 7
   buttonImage: {fileID: 4107595485501648665}
   isSpellAccessible: 0
-  graphicRaycaster: {fileID: 8920380034232736572}
   shieldPrefab: {fileID: 6338540020315859434, guid: 9dc27007bfb542042a302da2f7121966,
     type: 3}
   shieldLifetime: 4
@@ -1402,6 +1400,7 @@ MonoBehaviour:
   playerRunAttack: {fileID: 0}
   playerRunSpell: {fileID: 0}
   playerRunSpirits: {fileID: 7253324390861353584}
+  runController: {fileID: 0}
   startingNode: {x: 5, y: 0, z: 0}
   currentDirection: 0
   nextDirection: 0
@@ -1432,6 +1431,11 @@ MonoBehaviour:
   spellUIContainer: {fileID: 898730620557796852}
   spellUILeft: {fileID: 2162079470081157486}
   spellUIRight: {fileID: 5354192149568733811}
+  poppySpell: {fileID: 4343268986745421070}
+  thistleSpell: {fileID: 5603598581476781069}
+  bergamotSpell: {fileID: 0}
+  spellCanvas: {fileID: 898730620557796852}
+  graphicRaycaster: {fileID: 8920380034232736572}
   holdFadeSpeed: 1.5
 --- !u!54 &4086522607183702087
 Rigidbody:

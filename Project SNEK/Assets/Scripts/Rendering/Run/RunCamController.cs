@@ -47,22 +47,10 @@ namespace Rendering.Run
 
             //Set(startingState, true);
 
-            SceneManager.activeSceneChanged += AAA;
-        }
-
-        void AAA(Scene _current, Scene _next)
-        {
-            print("Changed scene");
-        }
-
-        private void OnDestroy()
-        {
-            SceneManager.activeSceneChanged -= AAA;
         }
 
         public void Set(CamState newState, bool forceState = false)
         {
-            Debug.Log($"Input state: {newState}. forceState: {forceState}");
             if(ActiveState != newState || forceState == true)
             {
                 animator.Play(Animator.StringToHash(newState.ToString()));

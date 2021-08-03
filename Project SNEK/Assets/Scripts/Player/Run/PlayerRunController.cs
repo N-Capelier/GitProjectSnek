@@ -5,9 +5,22 @@ using AudioManagement;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using Saving;
+using Player.Spells;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 namespace Player.Controller
 {
+    public enum Spell
+    {
+        None,
+        Poppy,
+        Thistle,
+        Bergamot
+    }
+
+
     /// <summary>
     /// Nico
     /// </summary>
@@ -34,6 +47,63 @@ namespace Player.Controller
         public GameObject spellUILeft;
         public GameObject spellUIRight;
 
+        public PlayerSpell poppySpell, thistleSpell, bergamotSpell;
+
+        public GameObject spellCanvas;
+
+        [SerializeField] GraphicRaycaster graphicRaycaster;
+
+        public void SetSpell(Spell _spell)
+        {
+            if(playerRunSpell != null)
+                playerRunSpell.enabled = false;
+
+            switch (_spell)
+            {
+                case Spell.Poppy:
+                    poppySpell.enabled = true;
+                    spellCanvas.SetActive(true);
+                    break;
+                case Spell.Thistle:
+                    thistleSpell.enabled = true;
+                    spellCanvas.SetActive(true);
+                    break;
+                case Spell.Bergamot:
+                    bergamotSpell.enabled = false;
+                    spellCanvas.SetActive(true);
+                    break;
+                default:
+                    spellCanvas.SetActive(false);
+                    poppySpell.enabled = false;
+                    thistleSpell.enabled = false;
+                    bergamotSpell.enabled = false;
+                    break;
+            }
+        }
+
+        public bool RaySensorOnUI()
+        {
+            if (!PlayerManager.Instance.currentController.runController.spellCanvas.gameObject.activeSelf)
+                return false;
+
+            bool _rayHit = false;
+
+            PointerEventData _ped = new PointerEventData(GameManager.Instance.eventSystem);
+            _ped.position = Input.mousePosition;
+
+            List<RaycastResult> _results = new List<RaycastResult>();
+
+            graphicRaycaster.Raycast(_ped, _results);
+            foreach (RaycastResult result in _results)
+            {
+                if (result.gameObject.CompareTag("Interactable"))
+                {
+                    _rayHit = true;
+                }
+            }
+            return _rayHit;
+        }
+
         private IEnumerator Start()
         {
             animator = objectRenderer.GetComponent<Animator>();
@@ -41,6 +111,8 @@ namespace Player.Controller
             currentDirection = PlayerDirection.Up;
             nextDirection = PlayerDirection.Up;
             nextNode = GetNextNode();
+
+            runController = this;
 
             GameManager.Instance.uiHandler.spellUI = spellUIContainer;
             GameManager.Instance.uiHandler.spellLeft = spellUILeft;
