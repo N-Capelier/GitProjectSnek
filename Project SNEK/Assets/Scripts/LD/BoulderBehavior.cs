@@ -48,12 +48,12 @@ namespace SpecialLD
                 {
 					case PlayerDirection.Up:
 					case PlayerDirection.Down:
-						transform.position = new Vector3(other.transform.position.x, 0, other.transform.position.z + directionVector.z);
+						transform.position = new Vector3(transform.position.x, 0, other.transform.position.z - directionVector.z);
 						break;
 
 					case PlayerDirection.Left:
 					case PlayerDirection.Right:
-						transform.position = new Vector3(other.transform.position.x + directionVector.x, 0, other.transform.position.z);
+						transform.position = new Vector3(other.transform.position.x - directionVector.x, 0, transform.position.z);
 						break;
 				}
             }
