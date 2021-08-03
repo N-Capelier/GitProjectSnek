@@ -25,15 +25,19 @@ namespace SpecialLD
 				switch (direction)
 				{
 					case PlayerDirection.Up:
+						if (PlayerManager.Instance.currentController.transform.position.x != transform.position.x) return;
 						directionVector = Vector3.forward;
 						break;
 					case PlayerDirection.Down:
+						if (PlayerManager.Instance.currentController.transform.position.x != transform.position.x) return;
 						directionVector = -Vector3.forward;
 						break;
 					case PlayerDirection.Left:
+						if (PlayerManager.Instance.currentController.transform.position.z != transform.position.z) return;
 						directionVector = -Vector3.right;
 						break;
 					case PlayerDirection.Right:
+						if (PlayerManager.Instance.currentController.transform.position.z != transform.position.z) return;
 						directionVector = Vector3.right;
 						break;
 				}
