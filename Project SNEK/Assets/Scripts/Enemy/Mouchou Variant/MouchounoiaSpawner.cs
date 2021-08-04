@@ -19,13 +19,15 @@ namespace Enemy
         // Start is called before the first frame update
         void Start()
         {
+            shrubs = new List<GameObject>();
+
             for (int x = 0; x < pattern.row.Length; x++)
             {
                 for (int y = 0; y < pattern.row[x].column.Length; y++)
                 {
                     if (pattern.row[x].column[y] == true)
                     {
-                        shrub = Instantiate(shrubPrefab, (new Vector3((transform.position.x + y), (transform.position.y), (transform.position.z - x + 5))), Quaternion.identity);
+                        shrub = Instantiate(shrubPrefab, (new Vector3((transform.position.x + y), (transform.position.y), (transform.position.z - x))), Quaternion.identity);
                         Instantiate(spawnFx, (new Vector3((transform.position.x + y), (transform.position.y), (transform.position.z - x + 5))), Quaternion.identity);
                         shrubs.Add(shrub);
                     }
