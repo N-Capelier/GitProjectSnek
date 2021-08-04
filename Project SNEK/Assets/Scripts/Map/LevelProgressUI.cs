@@ -101,6 +101,7 @@ namespace Map
 
         void CheckpointFeedback()
         {
+            completionText.gameObject.transform.localScale = Vector3.one;
             for (int i = 0; i < checkpointPositions.Count; i++)
             {
                 if(!checkpoints[i].check)
@@ -112,9 +113,10 @@ namespace Map
                     else
                     {
                         checkpoints[i].check = true;
-                        //checkpoints[i].gameObject.SetActive(false);
                         checkpoints[i].gameObject.GetComponent<Image>().sprite = passedSprite;
                         checkpoints[i].gameObject.GetComponent<RectTransform>().pivot = passedSprite.pivot / passedSprite.rect.size;
+
+                        LeanTween.scale(completionText.gameObject, new Vector3(1.5f,1.5f,1), 0.3f).setLoopPingPong(1);
                         FadeOut();
                     }
                 }
