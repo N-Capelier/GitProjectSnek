@@ -68,6 +68,7 @@ namespace Boss
         List<GameObject> shrubs;
         public EnemyAttackPattern pattern;
         bool isSpawning = false;
+        int mouchouNumber;
 
         [Space]
         [InspectorName("UI")] 
@@ -441,13 +442,13 @@ namespace Boss
             switch (currentHp)
             {
                 case 30:
-                    
+                    mouchouNumber = 2;
                     break;
                 case 20:
-                    
+                    mouchouNumber = 4;
                     break;
                 case 10:
-                    
+                    mouchouNumber = 6;
                     break;
             }
 
@@ -473,15 +474,19 @@ namespace Boss
                 }
             }
 
-            mouchouClone = Random.Range(0, shrubs.Count);
-            for (int i = 0; i < shrubs.Count; i++)
+            for (int j = 0; j < mouchouNumber; j++)
             {
-                if (i == mouchouClone)
+                mouchouClone = Random.Range(0, shrubs.Count);
+                for (int i = 0; i < shrubs.Count; i++)
                 {
-                    Instantiate(mouchouPrefab, shrubs[i].transform.position, Quaternion.identity);
-                    Destroy(shrubs[i]);
+                    if (i == mouchouClone)
+                    {
+                        Instantiate(mouchouPrefab, shrubs[i].transform.position, Quaternion.identity);
+                        Destroy(shrubs[i]);
+                        shrubs.Remove(shrubs[i]);
+                    }
                 }
-            }
+            }            
         }
 
         public void AnimSpawn()
