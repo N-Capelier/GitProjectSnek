@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -29,6 +28,7 @@ namespace Player.Controller
         [HideInInspector] public PlayerRunAttack playerRunAttack;
         [HideInInspector] public PlayerSpell playerRunSpell;
         public SpiritManager playerRunSpirits;
+        [HideInInspector] public PlayerRunController runController;
 
         public delegate void PlayerDeath();
         public static event PlayerDeath PlayerDead;

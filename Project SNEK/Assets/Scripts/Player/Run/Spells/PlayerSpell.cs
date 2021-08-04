@@ -18,10 +18,8 @@ namespace Player.Spells
         Clock spellCooldownTimer;
         bool canAttack = true;
 
-        [SerializeField] Image buttonImage;
+        public Image buttonImage;
         [HideInInspector] public bool isSpellAccessible = false;
-
-        [SerializeField] GraphicRaycaster graphicRaycaster;
 
         private void Start()
         {
@@ -45,26 +43,6 @@ namespace Player.Spells
         private void Update()
         {
             buttonImage.fillAmount = 1 - spellCooldownTimer.time.Remap(0, spellCooldown, 0, 1);
-        }
-
-        public bool RaySensorOnUI()
-        {
-            bool _rayHit = false;
-
-            PointerEventData _ped = new PointerEventData(GameManager.Instance.eventSystem);
-            _ped.position = Input.mousePosition;
-
-            List<RaycastResult> _results = new List<RaycastResult>();
-
-            graphicRaycaster.Raycast(_ped, _results);
-            foreach (RaycastResult result in _results)
-            {
-                if (result.gameObject.CompareTag("Interactable"))
-                {
-                    _rayHit = true;
-                }
-            }
-            return _rayHit;
         }
 
         public void SpellCastFromButton()

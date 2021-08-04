@@ -110,11 +110,8 @@ namespace GameManagement
                     {
                         if (PlayerManager.Instance.currentController != null)
                         {
-                            if (PlayerManager.Instance.currentController.playerRunSpell != null)
-                            {
-                                if (!PlayerManager.Instance.currentController.playerRunSpell.RaySensorOnUI())
-                                    InputReceived?.Invoke(InputType.Tap);
-                            }
+                            if (!PlayerManager.Instance.currentController.runController.RaySensorOnUI())
+                                InputReceived?.Invoke(InputType.Tap);
                         }
                     }
                     else
@@ -221,11 +218,8 @@ namespace GameManagement
                         {
                             if (PlayerManager.Instance.currentController != null)
                             {
-                                if (PlayerManager.Instance.currentController.playerRunSpell != null)
-                                {
-                                    if (!PlayerManager.Instance.currentController.playerRunSpell.RaySensorOnUI())
-                                        InputReceived?.Invoke(InputType.Tap);
-                                }
+                                if (!PlayerManager.Instance.currentController.runController.RaySensorOnUI())
+                                    InputReceived?.Invoke(InputType.Tap);
                             }
                         }
                         else
@@ -306,13 +300,10 @@ namespace GameManagement
                 {
                     if (PlayerManager.Instance.currentController != null)
                     {
-                        if (PlayerManager.Instance.currentController.playerRunSpell != null)
+                        if (!PlayerManager.Instance.currentController.runController.RaySensorOnUI())
                         {
-                            if (!PlayerManager.Instance.currentController.playerRunSpell.RaySensorOnUI())
-                            {
-                                InputReceived?.Invoke(InputType.Tap);
-                                return;
-                            }
+                            InputReceived?.Invoke(InputType.Tap);
+                            return;
                         }
                     }
                 }

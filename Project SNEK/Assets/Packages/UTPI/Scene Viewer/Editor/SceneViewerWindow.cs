@@ -50,10 +50,8 @@ namespace UTPI.SceneViewer
 
         private void OnGUI()
         {
-            if (titleStyle is null)
-                titleStyle = GetTitleStyle();
-            if (buttonStyle is null)
-                buttonStyle = GetButtonStyle();
+            titleStyle = GetTitleStyle();
+            buttonStyle = GetButtonStyle();
 
             if (GUILayout.Button("Refresh project scenes", buttonStyle))
             {
