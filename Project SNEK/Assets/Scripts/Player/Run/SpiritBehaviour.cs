@@ -22,7 +22,7 @@ namespace Player.Spirits
 
         private void FixedUpdate()
         {
-            rb.velocity = rb.velocity.normalized * PlayerManager.Instance.currentController.rb.velocity.magnitude;
+            rb.velocity = rb.velocity.normalized * PlayerManager.Instance.currentController.rb.velocity.magnitude * /*Next part is a test to counter spirit chain gap*/PlayerManager.Instance.currentController.attackMoveSpeedModifier;
         }
 
         //public void UpdateSpeed()

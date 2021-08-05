@@ -141,8 +141,10 @@ namespace Player.Controller
             InputHandler.InputReceived += HandleInput;
 
             moveSpeed = 0.1f;
+            animator.Play("Anim_PlayerRun_Idle");
             yield return new WaitForSeconds(3f);
             moveSpeed = cachedMoveSpeed;
+            animator.Play("Anim_PlayerRun_Run");
         }
 
         private void OnEnable()
