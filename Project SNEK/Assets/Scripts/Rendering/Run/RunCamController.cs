@@ -49,6 +49,12 @@ namespace Rendering.Run
 
         }
 
+        private void Start()
+        {
+            if(SceneManager.GetActiveScene().name == "Boss Anorexia")
+                Set(CamState.SemiScrolling, true);
+        }
+
         public void Set(CamState newState, bool forceState = false)
         {
             if(ActiveState != newState || forceState == true)
