@@ -16,6 +16,7 @@ namespace Boss
     public class TestAnorexia : Singleton<TestAnorexia>
     {
         public GameObject mouchou;
+        public GameObject spellPickup;
 
         public GameObject targetMarker;
         public GameObject targetMarkerLong;
@@ -134,7 +135,7 @@ namespace Boss
             
             if(PlayerManager.Instance.currentController != null)
             {
-                if (PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits() >= 3 && isTaunt == false)
+                if (PlayerManager.Instance.currentController.runController.poppySpell.enabled == true && isTaunt == false)
                 {                    
                     animator.SetBool("animIsAttacking", false);
                     StopAllCoroutines();
@@ -283,22 +284,22 @@ namespace Boss
         {
             animator.SetBool("animIsAttacking", true);
             animator.SetInteger("animPatternCount", 3);
-            offset = Random.Range(-3, 3);
+            offset = Random.Range(-2, 2);
             Instantiate(MouchouParticle, new Vector3(transform.position.x + offset, transform.position.y, transform.position.z - 1), Quaternion.identity, transform);
             yield return new WaitForSeconds(2.5f);            
             AudioManager.Instance.PlayThisSoundEffect("SummonMouchou");
             Instantiate(mouchou, new Vector3(transform.position.x + offset, transform.position.y, transform.position.z -1), Quaternion.identity);            
-            offset = Random.Range(-3, 3);
+            offset = Random.Range(-2, 2);
             Instantiate(MouchouParticle, new Vector3(transform.position.x + offset, transform.position.y, transform.position.z - 1), Quaternion.identity, transform);
             yield return new WaitForSeconds(2.5f);
             AudioManager.Instance.PlayThisSoundEffect("SummonMouchou");
             Instantiate(mouchou, new Vector3(transform.position.x + offset, transform.position.y, transform.position.z -1), Quaternion.identity);
-            offset = Random.Range(-3, 3);
+            offset = Random.Range(-2, 2);
             animator.SetBool("animIsAttacking", false);
             Instantiate(MouchouParticle, new Vector3(transform.position.x + offset, transform.position.y, transform.position.z - 1), Quaternion.identity, transform);
             yield return new WaitForSeconds(2.5f);
             AudioManager.Instance.PlayThisSoundEffect("SummonMouchou");
-            Instantiate(mouchou, new Vector3(transform.position.x + offset, transform.position.y, transform.position.z - 1), Quaternion.identity);            
+            Instantiate(spellPickup, new Vector3(transform.position.x + offset, transform.position.y, transform.position.z - 1), Quaternion.identity);            
             yield return new WaitForSeconds(2);
             
             patternCount = 0;
@@ -359,6 +360,7 @@ namespace Boss
             moveSpeed = moveSpeed / 3;
             yield return new WaitForSeconds(1f);
             playerSpirits = PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits();
+            PlayerManager.Instance.currentController.runController.poppySpell.enabled = false;
             PlayerManager.Instance.currentController.playerRunSpirits.ConsumeSpirits(playerSpirits);
             yield return new WaitForSeconds(3f);
             canDoPattern = true;
