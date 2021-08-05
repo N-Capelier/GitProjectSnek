@@ -16,6 +16,7 @@ namespace Player.Spells
         [Header("Feedbacks")]
         [SerializeField] Material transparentMaterial;
         [SerializeField] GameObject cameraFlashFeedback;
+        [SerializeField] GameObject cameraObject;
 
         public override IEnumerator SpellCast(PlayerDirection direction)
         {
@@ -23,11 +24,11 @@ namespace Player.Spells
 
 
 
-            //  Play Animation and stop player for anim duration
-
-            //PlayerManager.Instance.currentController.animator.Play(Animator.StringToHash("Anim_PlayerRun_Shield"));
+            //Play Animation and stop player for anim duration
+            Instantiate(cameraObject, transform.position, Quaternion.identity);
+            PlayerManager.Instance.currentController.animator.Play(Animator.StringToHash("Anim_PlayerRun_Photo"));
             PlayerManager.Instance.currentController.spellMoveSpeedModifier = 0.01f;
-            yield return new WaitForSeconds(0.8f); //Cooldown Anim Flash
+            yield return new WaitForSeconds(0.5f); //Cooldown Anim Flash
             PlayerManager.Instance.currentController.spellMoveSpeedModifier = 1f;
 
 
@@ -40,7 +41,7 @@ namespace Player.Spells
             }
 
             //Feedback prefab 
-            Instantiate(cameraFlashFeedback, this.transform.position, Quaternion.identity);
+            Instantiate(cameraFlashFeedback, transform.position, Quaternion.identity);
 
             yield return null;
         }
