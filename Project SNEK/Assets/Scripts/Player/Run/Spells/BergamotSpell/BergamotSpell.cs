@@ -25,7 +25,23 @@ namespace Player.Spells
 
 
             //Play Animation and stop player for anim duration
-            Instantiate(cameraObject, transform.position, Quaternion.identity);
+            GameObject camera = Instantiate(cameraObject, transform.position, Quaternion.identity, PlayerManager.Instance.currentController.objectRenderer.transform);
+            switch (direction)
+            {
+                case PlayerDirection.Up:
+                    camera.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                    break;
+                case PlayerDirection.Down:
+                    camera.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                    break;
+                case PlayerDirection.Left:
+                    camera.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 270, 0));
+                    break;
+                case PlayerDirection.Right:
+                    camera.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
+                    break;
+            }
+
             PlayerManager.Instance.currentController.animator.Play(Animator.StringToHash("Anim_PlayerRun_Photo"));
             PlayerManager.Instance.currentController.spellMoveSpeedModifier = 0.01f;
             yield return new WaitForSeconds(0.5f); //Cooldown Anim Flash

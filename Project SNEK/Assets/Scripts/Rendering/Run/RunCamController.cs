@@ -37,6 +37,10 @@ namespace Rendering.Run
         [HideInInspector] public bool playing = false;
         [HideInInspector] public int index;
 
+        [Header("Camera Offset")]
+        public float yOffset;
+        public float zOffset;
+
 
         private void Awake()
         {
