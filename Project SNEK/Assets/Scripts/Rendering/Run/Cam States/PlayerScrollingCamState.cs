@@ -17,8 +17,8 @@ namespace Rendering.Run
 
             Vector3 temp = PlayerManager.Instance.currentController.gameObject.transform.position;
 
-            RunCamController.Instance.vcam.transform.position = new Vector3(5, temp.y + 9, temp.z - 5);
-            RunCamController.Instance.cam.transform.position = new Vector3(5, temp.y + 9, temp.z - 5);
+            RunCamController.Instance.vcam.transform.position = new Vector3(5, temp.y + RunCamController.Instance.yOffset, temp.z + RunCamController.Instance.zOffset);
+            RunCamController.Instance.cam.transform.position = new Vector3(5, temp.y + RunCamController.Instance.yOffset, temp.z + RunCamController.Instance.zOffset);
 
             RunCamController.Instance.EnableVCAM();
         }
