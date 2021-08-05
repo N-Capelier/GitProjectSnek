@@ -314,20 +314,17 @@ namespace GameManagement
                 }
             }
             swiped = false;
-#elif UNITY_ANDROID || UNITY_IOS
+#elif UNITY_ANDROID || UNITY_IOS                                              /////////////////////////
             if(Input.touchCount <= 0  && !swiped)
             {
                 if (GameManager.Instance.gameState.ActiveState == GameState.Run)
                 {
                     if (PlayerManager.Instance.currentController != null)
                     {
-                        if (PlayerManager.Instance.currentController.playerRunSpell != null)
+                        if (!PlayerManager.Instance.currentController.runController.RaySensorOnUI())
                         {
-                            if (!PlayerManager.Instance.currentController.playerRunSpell.RaySensorOnUI())
-                            {
-                                InputReceived?.Invoke(InputType.Tap);
-                                return;
-                            }
+                            InputReceived?.Invoke(InputType.Tap);
+                            return;
                         }
                     }
                 }
