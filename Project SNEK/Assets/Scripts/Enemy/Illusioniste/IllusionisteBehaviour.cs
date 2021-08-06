@@ -75,7 +75,7 @@ namespace Enemy
                     AudioManager.Instance.PlaySoundEffect("ObjectSpiritCollect");
                     if(clonesList.Count.Equals(0))
                     {
-                        PlayerManager.Instance.currentController.playerRunSpirits.AddSpirit();
+                        //PlayerManager.Instance.currentController.playerRunSpirits.AddSpirit();
                         Destroy(gameObject);
                     }
                     Destroy(index);

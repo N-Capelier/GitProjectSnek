@@ -64,6 +64,7 @@ namespace Boss
         public GameObject mouchouPrefab;        
         public GameObject shrubPrefab;
         public GameObject spawnFx;
+        public GameObject spellPickup;
         GameObject shrub;
         List<GameObject> shrubs;
         public EnemyAttackPattern pattern;
@@ -459,6 +460,8 @@ namespace Boss
 
             yield return new WaitUntil(() => isSpawning);
 
+            animator.SetBool("animIsAttacking", false);
+
             shrubs = new List<GameObject>();
 
             for (int x = 0; x < pattern.row.Length; x++)
@@ -486,7 +489,20 @@ namespace Boss
                         shrubs.Remove(shrubs[i]);
                     }
                 }
-            }            
+            } 
+            
+            Instantiate(spellPickup, (new Vector3((patternPos.transform.position.x + 4), (patternPos.transform.position.y), (patternPos.transform.position.z + 8))), Quaternion.identity);
+
+            yield return new WaitForSeconds(5);
+
+            ResetPatternSpawn();
+
+        }
+
+        private void ResetPatternSpawn()
+        {
+            patternCount++;
+            canDoPattern = true;
         }
 
         public void AnimSpawn()
