@@ -86,19 +86,22 @@ namespace Enemy
         {
             if (canMove == true)
             {
-                currentDirection = pattern.patternList[patternIndex];
-
-                if(patternIndex == pattern.patternList.Count - 1)
+                if(pattern.patternList.Count>0)
                 {
-                    patternIndex = 0;
-                }
-                else
-                {
-                    patternIndex ++;
-                }
+                    currentDirection = pattern.patternList[patternIndex];
+                    if(patternIndex < pattern.patternList.Count)
+                    {
+                        patternIndex++;
+                    }
+                    else
+                    {
+                        patternIndex = 0;
+                    }
 
-                GetNextNode();
-                UpdateMovement();
+
+                    GetNextNode();
+                    UpdateMovement();
+                }
             }
         }
 
