@@ -42,7 +42,6 @@ namespace GameManagement
         {
             levelProgressUI.gameObject.SetActive(true);
             pauseUI.gameObject.SetActive(true);
-            spellUI.SetActive(true);
         }
 
         public void HideUIHub()
