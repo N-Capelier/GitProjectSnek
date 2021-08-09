@@ -20,8 +20,7 @@ namespace GameManagement
         public LevelProgressUI levelProgressUI;
         public TutorialUIManager tutorialUI;
         public GameObject spellUI;
-        public GameObject spellLeft;
-        public GameObject spellRight;
+        public RectTransform spellButton;
 
         [Header("Hub UI")]
         public HubUiManager hubUI;
@@ -63,13 +62,13 @@ namespace GameManagement
         {
             if(hand == true)
             {
-                spellLeft.SetActive(false);
-                spellRight.SetActive(true);
+                spellButton.anchorMin = new Vector2(0.85f, 0);
+                spellButton.anchorMax = new Vector2(0.85f, 1);
             }
             else if(hand == false)
             {
-                spellLeft.SetActive(true);
-                spellRight.SetActive(false);
+                spellButton.anchorMin = new Vector2(0.15f, 0);
+                spellButton.anchorMax = new Vector2(0.15f, 1);
             }
         }
     }

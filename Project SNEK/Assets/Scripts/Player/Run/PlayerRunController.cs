@@ -44,14 +44,20 @@ namespace Player.Controller
         bool spellAvailable = false;
 
         public GameObject spellUIContainer;
-        public GameObject spellUILeft;
-        public GameObject spellUIRight;
+        public GameObject spellUIButton;
+        public Button spellButton;
 
         public PlayerSpell poppySpell, thistleSpell, bergamotSpell;
 
         public GameObject spellCanvas;
 
         [SerializeField] GraphicRaycaster graphicRaycaster;
+
+        [Header("Spell Sprites")]
+        [SerializeField] Sprite bergamotSpellSprite;
+        [SerializeField] Sprite poppySpellSprite;
+        [SerializeField] Sprite thistleSpellSprite;
+        
 
         public void SetSpell(Spell _spell)
         {
@@ -63,20 +69,42 @@ namespace Player.Controller
                 case Spell.Poppy:
                     poppySpell.enabled = true;
                     spellCanvas.SetActive(true);
+
+                    //Set Sprite
+                    spellButton.image.sprite = poppySpellSprite;
+                    //Set correct method to onclick on button
+                    spellButton.onClick.RemoveAllListeners();
+                    spellButton.onClick.AddListener(poppySpell.SpellCastFromButton);
                     break;
                 case Spell.Thistle:
                     thistleSpell.enabled = true;
                     spellCanvas.SetActive(true);
+
+                    //Set Sprite
+                    spellButton.image.sprite = thistleSpellSprite;
+                    //Set correct method to onclick on button
+                    spellButton.onClick.RemoveAllListeners();
+                    spellButton.onClick.AddListener(thistleSpell.SpellCastFromButton);
+
                     break;
                 case Spell.Bergamot:
                     bergamotSpell.enabled = false;
                     spellCanvas.SetActive(true);
+
+                    //Set Sprite
+                    spellButton.image.sprite = bergamotSpellSprite;
+                    //Set correct method to onclick on button
+                    spellButton.onClick.RemoveAllListeners();
+                    spellButton.onClick.AddListener(bergamotSpell.SpellCastFromButton);
+
                     break;
                 default:
                     spellCanvas.SetActive(false);
                     poppySpell.enabled = false;
                     thistleSpell.enabled = false;
                     bergamotSpell.enabled = false;
+
+
                     break;
             }
         }
@@ -115,8 +143,7 @@ namespace Player.Controller
             runController = this;
 
             GameManager.Instance.uiHandler.spellUI = spellUIContainer;
-            GameManager.Instance.uiHandler.spellLeft = spellUILeft;
-            GameManager.Instance.uiHandler.spellRight = spellUIRight;
+            GameManager.Instance.uiHandler.spellButton = spellUIButton.GetComponent<RectTransform>();
 
             if(SaveManager.Instance.state.leftHanded == false)
             {
