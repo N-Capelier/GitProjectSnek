@@ -72,6 +72,13 @@ namespace Boss
         int mouchouNumber;
 
         [Space]
+        [InspectorName("Pattern MegaBeam")]
+        bool isMegaBeam = false;
+        public GameObject megaBeamObject;
+        public GameObject hand1;
+        public GameObject hand2;
+
+        [Space]
         [InspectorName("UI")] 
         [SerializeField] GameObject hpUi;
         [SerializeField] TextMeshProUGUI hpText;
@@ -120,6 +127,10 @@ namespace Boss
                     case 2:
                         canDoPattern = false;
                         StartCoroutine(PatternMouchou());
+                        return;
+                    case 3:
+                        canDoPattern = false;
+                        StartCoroutine(MegaBeam());
                         return;
                 }
             }
@@ -234,10 +245,10 @@ namespace Boss
 
         public IEnumerator ShootWave()
         {
-            /*for (int j = 0; j < incomingBombs.Count; j++)
+            for (int j = 0; j < incomingBombs.Count; j++)
             {
                 incomingBombs[j].GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-            }*/
+            }
 
             switch (wavesIndex)
             {
@@ -493,7 +504,7 @@ namespace Boss
             
             Instantiate(spellPickup, (new Vector3((patternPos.transform.position.x + 4), (patternPos.transform.position.y), (patternPos.transform.position.z + 8))), Quaternion.identity);
 
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(7);
 
             ResetPatternSpawn();
 
@@ -502,12 +513,39 @@ namespace Boss
         private void ResetPatternSpawn()
         {
             patternCount++;
+            isSpawning = false;
             canDoPattern = true;
         }
 
         public void AnimSpawn()
         {
             isSpawning = true;
+        }
+
+        GameObject beam1;
+        GameObject beam2;
+        GameObject beam3;
+
+        IEnumerator MegaBeam()
+        {
+            animator.SetInteger("animPatternCount", 4);
+            animator.SetBool("animIsAttacking", true);
+
+            yield return new WaitUntil(() => isMegaBeam);
+
+            beam1 = Instantiate(megaBeamObject, blastPos);
+            beam2 = Instantiate(megaBeamObject, hand1.transform);
+            beam3 = Instantiate(megaBeamObject, hand2.transform);
+
+            beam1.transform.LookAt(PlayerManager.Instance.currentController.transform.position);
+            beam2.transform.LookAt(PlayerManager.Instance.currentController.transform.position);
+            beam3.transform.LookAt(PlayerManager.Instance.currentController.transform.position);
+
+        }
+
+        public void AnimMegaBeam()
+        {
+            isMegaBeam = true;
         }
 
 
