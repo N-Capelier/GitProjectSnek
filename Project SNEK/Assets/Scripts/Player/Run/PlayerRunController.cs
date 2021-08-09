@@ -145,14 +145,8 @@ namespace Player.Controller
             GameManager.Instance.uiHandler.spellUI = spellUIContainer;
             GameManager.Instance.uiHandler.spellButton = spellUIButton.GetComponent<RectTransform>();
 
-            if(SaveManager.Instance.state.leftHanded == false)
-            {
-                GameManager.Instance.uiHandler.SwapHand(false);
-            }
-            else
-            {
-                GameManager.Instance.uiHandler.SwapHand(true);
-            }
+            GameManager.Instance.uiHandler.SwapHand(SaveManager.Instance.state.uiAccessibility);
+            
 
             switch (SceneManager.GetActiveScene().name)
             {

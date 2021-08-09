@@ -66,10 +66,11 @@ namespace Saving
         public int unlockedLevels = 0;
 
         /// <summary>
-        /// 0 = false
-        /// 1 = true
+        /// 0 = Left
+        /// 1 = Center
+        /// 2 = Right
         /// </summary>
-        public bool leftHanded = false;
+        public int uiAccessibility = 0;
 
         public bool isTutorialFinished = false;
 
