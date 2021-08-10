@@ -15,7 +15,7 @@ namespace PauseManagement
         [SerializeField] GameObject[] qualityToggles;
         [SerializeField] GameObject background;
         [SerializeField] Slider soundSlider, musicSlider;
-        [SerializeField] GameObject leftHandToggle;
+        [SerializeField] GameObject[] accessibilityToggles;
         [HideInInspector] public bool opened;
         //bool occupied = false;
 
@@ -28,15 +28,7 @@ namespace PauseManagement
             pauseMenu.SetActive(false);
             ManageQualitySettings(SaveManager.Instance.state.quality);
             FadeBackground(false);
-
-            if(SaveManager.Instance.state.leftHanded == false)
-            {
-                leftHandToggle.SetActive(false);
-            }
-            else
-            {
-                leftHandToggle.SetActive(true);
-            }
+            ToggleAccessibility(SaveManager.Instance.state.uiAccessibility);
         }
 
         public void OpenPauseMenu()
@@ -159,22 +151,26 @@ namespace PauseManagement
         }
 
 
-        public void ToggleLeftHand()
+        public void ToggleAccessibility(int position)
         {
-            if(leftHandToggle.activeSelf)
+            for (int i = 0; i < qualityToggles.Length; i++)
             {
-                leftHandToggle.SetActive(false);
-                SaveManager.Instance.state.leftHanded = false; 
-            }
-            else
-            {
-                leftHandToggle.SetActive(true);
-                SaveManager.Instance.state.leftHanded = true;
+                if (i != position)
+                {
+                    accessibilityToggles[i].SetActive(false);
+                }
+                else
+                {
+                    accessibilityToggles[i].SetActive(true);
+                }
             }
 
-            if(GameManager.Instance.gameState.ActiveState == GameState.Run)
+            SaveManager.Instance.state.uiAccessibility = position;
+            SaveManager.Instance.Save();
+
+            if (GameManager.Instance.gameState.ActiveState == GameState.Run)
             {
-                GameManager.Instance.uiHandler.SwapHand(SaveManager.Instance.state.leftHanded);
+                GameManager.Instance.uiHandler.SwapHand(SaveManager.Instance.state.uiAccessibility);
             }
         }
 
