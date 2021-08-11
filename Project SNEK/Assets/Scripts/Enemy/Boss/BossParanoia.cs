@@ -92,6 +92,9 @@ namespace Boss
         Material defaultMatBody;
         Material defaultMatHands;
         [SerializeField] Material hitMaterial;
+        public PlayableDirector director;
+        public TimelineAsset endCinematic;
+        public TerrainGenerator generator;
 
         private void Awake()
         {
@@ -101,8 +104,9 @@ namespace Boss
         void Start()
         {
             rb = GetComponent<Rigidbody>();
-            currentHp = maxHp;
             StartCoroutine(DelayedStart());
+            //currentHp = SaveManager.Instance.state.bossParanoiaHp * 10;
+            currentHp = maxHp;
         }
 
         IEnumerator DelayedStart()
@@ -582,7 +586,7 @@ namespace Boss
         {
             yield return new WaitForSeconds(1.7f);
             moveSpeed = moveSpeed / 3;
-            //PlayerManager.Instance.currentController.runController.SetSpell(None);
+            PlayerManager.Instance.currentController.runController.SetSpell(Player.Controller.Spell.None);
             patternCount = 0;
             canDoPattern = true;
             canBeHit = false;
@@ -615,7 +619,7 @@ namespace Boss
         {
             currentHp -= damage;
             AudioManager.Instance.PlayThisSoundEffect("BossHit");
-            //SaveManager.Instance.state.bossAnorexiaHp--;
+            SaveManager.Instance.state.bossParanoiaHp--;
             SaveManager.Instance.Save();
 
             if (currentHp > 0)
@@ -628,17 +632,16 @@ namespace Boss
             {
                 StopAllCoroutines();
                 CutsceneManager.Instance.StopMusic();
-                /*director.playableAsset = endCinematic;
+                director.playableAsset = endCinematic;
                 bodyRenderer.enabled = false;
                 handsRenderer.enabled = false;
                 generator.bossIsDead = true;
                 generator.GenerateEndTerrains();
-                endGraphs.SetActive(true);
                 cam.SetActive(false);
-                SaveManager.Instance.state.isDemoFinished = true;
+                //SaveManager.Instance.state.isDemoFinished = true;
                 SaveManager.Instance.Save();
                 PlayerManager.Instance.currentController.gameObject.SetActive(false);
-                director.Play();*/
+                director.Play();
             }
 
             IEnumerator HitFeedback()
