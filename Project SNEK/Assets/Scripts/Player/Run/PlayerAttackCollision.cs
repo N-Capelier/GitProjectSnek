@@ -23,6 +23,12 @@ namespace Player.Attack
                 enemy.GetComponent<TestAnorexia>().TakeDamage(PlayerManager.Instance.currentController.playerRunAttack.attackDamages);
                 AudioManager.Instance.PlaySoundEffect("PlayerSwordImpact");
             }
+
+            if (enemy.gameObject.layer == LayerMask.NameToLayer("BossParanoia"))
+            {
+                enemy.GetComponent<BossParanoia>().TakeDamage(PlayerManager.Instance.currentController.playerRunAttack.attackDamages);
+                AudioManager.Instance.PlaySoundEffect("PlayerSwordImpact");
+            }
         }
     }
 }

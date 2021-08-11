@@ -77,11 +77,21 @@ namespace Boss
         public GameObject megaBeamObject;
         public GameObject hand1;
         public GameObject hand2;
+        public float timeOfBeam;
+        
 
         [Space]
         [InspectorName("UI")] 
         [SerializeField] GameObject hpUi;
         [SerializeField] TextMeshProUGUI hpText;
+
+        [Space]
+        [InspectorName("Render")]
+        [SerializeField] SkinnedMeshRenderer bodyRenderer;
+        [SerializeField] SkinnedMeshRenderer handsRenderer;
+        Material defaultMatBody;
+        Material defaultMatHands;
+        [SerializeField] Material hitMaterial;
 
         private void Awake()
         {
@@ -537,15 +547,47 @@ namespace Boss
             beam2 = Instantiate(megaBeamObject, hand1.transform);
             beam3 = Instantiate(megaBeamObject, hand2.transform);
 
-            beam1.transform.LookAt(PlayerManager.Instance.currentController.transform.position);
-            beam2.transform.LookAt(PlayerManager.Instance.currentController.transform.position);
-            beam3.transform.LookAt(PlayerManager.Instance.currentController.transform.position);
+            beam1.transform.LookAt(new Vector3(PlayerManager.Instance.currentController.transform.position.x, PlayerManager.Instance.currentController.transform.position.y, PlayerManager.Instance.currentController.transform.position.z - 4));
+            beam2.transform.LookAt(new Vector3(PlayerManager.Instance.currentController.transform.position.x, PlayerManager.Instance.currentController.transform.position.y, PlayerManager.Instance.currentController.transform.position.z - 4));
+            beam3.transform.LookAt(new Vector3(PlayerManager.Instance.currentController.transform.position.x, PlayerManager.Instance.currentController.transform.position.y, PlayerManager.Instance.currentController.transform.position.z - 4));
+
+            yield return new WaitForSeconds(timeOfBeam);
+
+            animator.SetBool("animIsAttacking", false);
+            Destroy(beam1);
+            Destroy(beam2);
+            Destroy(beam3);
+            canBeHit = true;
+            camDistance = 7;
 
         }
 
         public void AnimMegaBeam()
         {
             isMegaBeam = true;
+        }
+
+        void StunReset()
+        {
+            animator.SetBool("animIsHit", true);
+            animator.SetInteger("animPatternCount", 0);
+            animator.SetBool("animIsAttacking", false);            
+            camDistance = 13;
+            moveSpeed = moveSpeed * 3;
+            canBeHit = false;
+            StartCoroutine(ResetSpell());
+        }
+
+        IEnumerator ResetSpell()
+        {
+            yield return new WaitForSeconds(1.7f);
+            moveSpeed = moveSpeed / 3;
+            //PlayerManager.Instance.currentController.runController.SetSpell(None);
+            patternCount = 0;
+            canDoPattern = true;
+            canBeHit = false;
+            isMegaBeam = false;
+            animator.SetBool("animIsHit", false);
         }
 
 
@@ -567,7 +609,51 @@ namespace Boss
             }
             yield return new WaitForSeconds(3f);
             hpUi.transform.LeanScale(Vector3.zero, 0.2f);
+        }
 
+        public void TakeDamage(float damage)
+        {
+            currentHp -= damage;
+            AudioManager.Instance.PlayThisSoundEffect("BossHit");
+            //SaveManager.Instance.state.bossAnorexiaHp--;
+            SaveManager.Instance.Save();
+
+            if (currentHp > 0)
+            {
+                StartCoroutine(HitFeedback());
+                StunReset();
+                StartCoroutine(DisplayHp());
+            }
+            else if (currentHp <= 0)
+            {
+                StopAllCoroutines();
+                CutsceneManager.Instance.StopMusic();
+                /*director.playableAsset = endCinematic;
+                bodyRenderer.enabled = false;
+                handsRenderer.enabled = false;
+                generator.bossIsDead = true;
+                generator.GenerateEndTerrains();
+                endGraphs.SetActive(true);
+                cam.SetActive(false);
+                SaveManager.Instance.state.isDemoFinished = true;
+                SaveManager.Instance.Save();
+                PlayerManager.Instance.currentController.gameObject.SetActive(false);
+                director.Play();*/
+            }
+
+            IEnumerator HitFeedback()
+            {
+                defaultMatBody = bodyRenderer.material;
+                defaultMatHands = handsRenderer.material;
+
+                bodyRenderer.material = hitMaterial;
+                handsRenderer.material = hitMaterial;
+
+                yield return new WaitForSeconds(0.1f);
+
+                bodyRenderer.material = defaultMatBody;
+                handsRenderer.material = defaultMatHands;
+            }
         }
 
     }
