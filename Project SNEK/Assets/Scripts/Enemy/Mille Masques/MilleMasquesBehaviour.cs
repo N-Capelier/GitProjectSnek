@@ -14,7 +14,7 @@ namespace Enemy
 
         [Header("Body")]
         public int bodyPartsCount;
-        [SerializeField] GameObject head;
+        [SerializeField] public GameObject head;
         [SerializeField] GameObject bodyPartPrefab;
         [SerializeField] GameObject bodyPartMonochromPrefab;
         [SerializeField] GameObject bodyPartParent;
