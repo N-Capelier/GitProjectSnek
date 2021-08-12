@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 using Player;
 using GameManagement.GameStates;
 using GameManagement;
+using UnityEngine.SceneManagement;
 using Boss;
 
 namespace Boss
@@ -77,7 +78,10 @@ namespace Boss
             {
                 yield return new WaitForSeconds(25f);
                 StartCoroutine(TimedUpdate());
-                TestAnorexia.Instance.StartPatterns();
+                if(SceneManager.GetActiveScene().name == "Boss Anorexia")
+                {
+                    TestAnorexia.Instance.StartPatterns();
+                }                
             }          
             yield return new WaitForSeconds(1f);
             deathZone.SetActive(true);

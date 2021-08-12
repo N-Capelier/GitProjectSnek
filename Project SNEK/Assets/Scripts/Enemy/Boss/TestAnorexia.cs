@@ -360,7 +360,7 @@ namespace Boss
             moveSpeed = moveSpeed / 3;
             yield return new WaitForSeconds(1f);
             playerSpirits = PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits();
-            PlayerManager.Instance.currentController.runController.poppySpell.enabled = false;
+            PlayerManager.Instance.currentController.runController.SetSpell(Player.Controller.Spell.None);
             PlayerManager.Instance.currentController.playerRunSpirits.ConsumeSpirits(playerSpirits);
             yield return new WaitForSeconds(3f);
             canDoPattern = true;

@@ -93,6 +93,7 @@ namespace Boss
         Material defaultMatHands;
         [SerializeField] Material hitMaterial;
         public PlayableDirector director;
+        public TimelineAsset introCinematic;
         public TimelineAsset endCinematic;
         public TerrainGenerator generator;
 

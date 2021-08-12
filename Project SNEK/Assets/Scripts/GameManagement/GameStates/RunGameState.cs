@@ -43,6 +43,23 @@ namespace GameManagement.GameStates
                     GameManager.Instance.playedBossCinematic = true;
                 }
             }
+            if (SceneManager.GetActiveScene().name == "Boss Paranoia")
+            {
+                RunCamController.Instance.Set(CamState.SemiScrolling);
+                if (!playedBossCinematic)
+                {
+                    playedBossCinematic = true;
+                    SaveManager.Instance.state.bossParanoiaHp = 3;
+                    SaveManager.Instance.Save();
+
+                    //Set spellUI to UIHandler / Temporary ?? Thomas
+                    PlayerRunController temp = (PlayerRunController)PlayerManager.Instance.currentController;
+                    GameManager.Instance.uiHandler.spellUI = temp.spellUIContainer;
+
+                    CutsceneManager.Instance.PlayCutscene(BossParanoia.Instance.introCinematic);
+                    GameManager.Instance.playedBossCinematic = true;
+                }
+            }
             else
             {
                 RunCamController.Instance.Set(CamState.PlayerScrolling);
@@ -67,6 +84,13 @@ namespace GameManagement.GameStates
                 playedBossCinematic = false;
                 GameManager.Instance.playedBossCinematic = false;
                 SaveManager.Instance.state.bossAnorexiaHp = 3;
+            }
+
+            if (SceneManager.GetActiveScene().name == "Boss Paranoia")
+            {
+                playedBossCinematic = false;
+                GameManager.Instance.playedBossCinematic = false;
+                SaveManager.Instance.state.bossParanoiaHp = 3;
             }
 
             Destroy(PlayerManager.Instance.currentController.gameObject);
