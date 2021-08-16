@@ -80,6 +80,10 @@ namespace Saving
         /// 2 : Boite aux lettres
         /// 3 : La fontaine
         /// </summary>
-        public int tutorialState = 0; 
+        public int tutorialState = 0;
+
+        public bool useDarkBergamot = false;
+        public bool useDarkPoppy = false;
+        public bool useDarkThistle = false;
     }
 }

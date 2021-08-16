@@ -43,6 +43,9 @@ namespace Saving
         [SerializeField] DialogueInteraction dialogueInteraction;
         Clock startTimer;
         float startDelay = 1f;
+        [Space]
+
+        [SerializeField] protected SkinnedMeshRenderer meshRenderer;
 
         [Space]
         public Transform waypointOutOfVillage = null;
