@@ -131,6 +131,11 @@ namespace Saving
                 return;
             }
 
+            if (SaveManager.Instance.state.useDarkPoppy)
+            {
+                meshRenderer.material = NPCManager.Instance.darkPoppyMat;
+            }
+
             for (int i = 0; i < npcStates.Count; i++)
             {
                 if (npcStates[i].stateID == SaveManager.Instance.state.poppyState)

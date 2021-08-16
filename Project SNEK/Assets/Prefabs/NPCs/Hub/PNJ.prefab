@@ -154,6 +154,9 @@ MonoBehaviour:
   poppyCutscene: {fileID: 0}
   thistleCutscene: {fileID: 0}
   anaelRunCutscene: {fileID: 0}
+  darkBergamotMat: {fileID: 0}
+  darkPoppyMat: {fileID: 0}
+  darkThistleMat: {fileID: 0}
 --- !u!1 &761270440392642479
 GameObject:
   m_ObjectHideFlags: 0
@@ -583,6 +586,11 @@ PrefabInstance:
       propertyPath: waypoint29
       value: 
       objectReference: {fileID: 761270440392642448}
+    - target: {fileID: 3554876373576907463, guid: 2cfd9ee5c40677549880f36f205e5c3e,
+        type: 3}
+      propertyPath: meshRenderer
+      value: 
+      objectReference: {fileID: 1445741772288792311}
     - target: {fileID: 3554876373576907463, guid: 2cfd9ee5c40677549880f36f205e5c3e,
         type: 3}
       propertyPath: waypointTuto
@@ -1243,6 +1251,12 @@ Animator:
     type: 3}
   m_PrefabInstance: {fileID: 1041981890771605814}
   m_PrefabAsset: {fileID: 0}
+--- !u!137 &1445741772288792311 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1902088566270545857, guid: 2cfd9ee5c40677549880f36f205e5c3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1041981890771605814}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2762359700709366916
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1375,6 +1389,11 @@ PrefabInstance:
       propertyPath: waypoint15
       value: 
       objectReference: {fileID: 761270441063805513}
+    - target: {fileID: 5498806151726249057, guid: b491ee12bf6fe70498ab724d88c9f05b,
+        type: 3}
+      propertyPath: meshRenderer
+      value: 
+      objectReference: {fileID: 2396022377944159125}
     - target: {fileID: 5498806151726249057, guid: b491ee12bf6fe70498ab724d88c9f05b,
         type: 3}
       propertyPath: npcStates.Array.size
@@ -1764,6 +1783,12 @@ Animator:
     type: 3}
   m_PrefabInstance: {fileID: 2762359700709366916}
   m_PrefabAsset: {fileID: 0}
+--- !u!137 &2396022377944159125 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 510523226441207569, guid: b491ee12bf6fe70498ab724d88c9f05b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2762359700709366916}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8095820256903539225
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2045,6 +2070,11 @@ PrefabInstance:
       propertyPath: waypoint32
       value: 
       objectReference: {fileID: 761270440006037903}
+    - target: {fileID: 1804341654265897754, guid: bb1172ee930733b489d98f82cef1a795,
+        type: 3}
+      propertyPath: meshRenderer
+      value: 
+      objectReference: {fileID: 7653829883702283666}
     - target: {fileID: 1804341654265897754, guid: bb1172ee930733b489d98f82cef1a795,
         type: 3}
       propertyPath: npcStates.Array.size
@@ -2747,6 +2777,12 @@ MonoBehaviour:
 --- !u!95 &761270441278293086 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 8848081022269550151, guid: bb1172ee930733b489d98f82cef1a795,
+    type: 3}
+  m_PrefabInstance: {fileID: 8095820256903539225}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &7653829883702283666 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1904455412212410251, guid: bb1172ee930733b489d98f82cef1a795,
     type: 3}
   m_PrefabInstance: {fileID: 8095820256903539225}
   m_PrefabAsset: {fileID: 0}

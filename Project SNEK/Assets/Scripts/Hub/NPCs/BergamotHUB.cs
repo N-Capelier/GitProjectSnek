@@ -126,6 +126,11 @@ namespace Saving
                 SaveManager.Instance.state.bergamotState = 11f;
             }
 
+            if(SaveManager.Instance.state.useDarkBergamot)
+            {
+                meshRenderer.material = NPCManager.Instance.darkBergamotMat;
+            }
+
             for (int i = 0; i < npcStates.Count; i++)
             {
                 if(npcStates[i].stateID == SaveManager.Instance.state.bergamotState)

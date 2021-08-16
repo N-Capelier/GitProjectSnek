@@ -74,6 +74,11 @@ namespace Saving
                 return;
             }
 
+            if (SaveManager.Instance.state.useDarkThistle)
+            {
+                meshRenderer.material = NPCManager.Instance.darkThistleMat;
+            }
+
             for (int i = 0; i < npcStates.Count; i++)
             {
                 if (npcStates[i].stateID == SaveManager.Instance.state.thistleState)

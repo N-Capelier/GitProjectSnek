@@ -44,8 +44,11 @@ namespace Rendering.Hub
 
         private void FixedUpdate()
         {
-            if (actions > 0)
-                return;
+            if (actions > 0) //Cancels cam movement on interaction
+            {
+                rb.velocity = Vector3.zero;
+                //return;
+            }
 
             if (PlayerManager.Instance == null)
             {
@@ -149,7 +152,7 @@ namespace Rendering.Hub
                 else
                 {
                     rb.velocity = Vector3.zero;
-                    //currentPos = lastPos = Vector3.zero; //Testing for moving can during dialog bug
+                    //currentPos = lastPos = Vector3.zero; //Testing for moving cam during dialog bug
 
                     interactionTimer.SetTime(interactionCancelTime);
                 }

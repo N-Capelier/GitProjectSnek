@@ -17,6 +17,10 @@ namespace Saving
         [Space]
         public Animator anaelCutscene;
         public Animator bergamotCutscene, poppyCutscene, thistleCutscene, anaelRunCutscene;
+        [Space]
+        public Material darkBergamotMat;
+        public Material darkPoppyMat;
+        public Material darkThistleMat;
 
         public Animator anaelAnim
         {
