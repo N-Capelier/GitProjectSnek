@@ -16,7 +16,7 @@ namespace Enemy
         [SerializeField] ParticleSystem fx;
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController"))
+            if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController") && !PlayerManager.Instance.currentController.isInCutscene)
             {
                 PlayerManager.Instance.currentController.Death(deathIndex);
             }
