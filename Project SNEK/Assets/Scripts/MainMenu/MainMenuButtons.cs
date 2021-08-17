@@ -39,7 +39,7 @@ namespace MainMenu
             }
             else
             {
-                GameManager.Instance.gameState.Set(GameManager.Instance.gameState.ActiveState, "TutorialIntro");
+                GameManager.Instance.gameState.Set(GameManager.Instance.gameState.ActiveState, "IntroCinematic");
                 //SceneManager.LoadScene("TutorialIntro");
             }
         }
