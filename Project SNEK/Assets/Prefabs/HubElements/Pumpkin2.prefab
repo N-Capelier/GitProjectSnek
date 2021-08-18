@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8557815607465362673}
   - component: {fileID: 8557815607465362686}
-  - component: {fileID: 8557815607465362687}
   - component: {fileID: 8557815607465362684}
+  - component: {fileID: 456059601367131331}
   m_Layer: 0
   m_Name: Pumpkin2
   m_TagString: Untagged
@@ -48,24 +48,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5, z: 0.5}
   m_Center: {x: 0, y: 0.22, z: 0}
---- !u!114 &8557815607465362687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8557815607465362685}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49daca2c2099cfc49aed85b6552dceac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraTargetTransform: {fileID: 0}
-  playerTargetTransform: {fileID: 0}
-  animator: {fileID: 0}
-  orientation: 0
-  animationName: animPumpkin
-  objectAnimator: {fileID: 8557815607076958806}
 --- !u!208 &8557815607465362684
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -82,6 +64,26 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: 0.22, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &456059601367131331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8557815607465362685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d748eec56d34804aab707ab4e5659f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraTargetTransform: {fileID: 0}
+  playerTargetTransform: {fileID: 0}
+  animator: {fileID: 0}
+  orientation: 0
+  animationName: animPumpkin
+  soundEffectName: HubInteract
+  objectAnimator: {fileID: 8557815607076958806}
+  interacting: 0
 --- !u!1 &8557815607490877263
 GameObject:
   m_ObjectHideFlags: 0

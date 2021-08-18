@@ -14,9 +14,10 @@ namespace Hub.Interaction
 
         [Header("Simon Mini-Game")]
         public string scarecrowSoundEffectName;
-        public List<ObjectInteraction> pumpkinsList = new List<ObjectInteraction>();
+        public List<PumpkinInteraction> pumpkinsList = new List<PumpkinInteraction>();
         public float simonLength;
         private Coroutine simonCoroutine;
+        private Coroutine clockCoroutine;
 
         public override IEnumerator BeginInteraction()
         {
@@ -26,13 +27,11 @@ namespace Hub.Interaction
 
         protected override void Interact()
         {
-            interacting = true;
             objectAnimator.Play(Animator.StringToHash(animationName));
             AudioManager.Instance.PlaySoundEffect(scarecrowSoundEffectName);
 
-            StartCoroutine(Clock());
+            clockCoroutine = StartCoroutine(Clock());
             simonCoroutine = StartCoroutine(SimonCoroutine());
-            interacting = false;
         }
 
         private IEnumerator SimonCoroutine()
@@ -40,8 +39,13 @@ namespace Hub.Interaction
             for (int i = 0; i < pumpkinsList.Count; i++)
             {
                 yield return new WaitUntil(() => pumpkinsList[i].interacting);
-                print("pressed pumpkin" + i);
+                pumpkinsList[i].interacting = false;
+                print("pressed pumpkin " + i);
             }
+            if(clockCoroutine!=null)
+                StopCoroutine(clockCoroutine);
+
+            clockCoroutine = null;
             simonCoroutine = null;
             print("Finished Simon");
         }
@@ -54,8 +58,7 @@ namespace Hub.Interaction
                 StopCoroutine(simonCoroutine);
                 simonCoroutine = null;
             }
-
-            Debug.Log("Clock Finished Simon");
+            clockCoroutine = null;
         }
     }
 }
