@@ -38,6 +38,7 @@ namespace Hub.Interaction
         {
             for (int i = 0; i < pumpkinsList.Count; i++)
             {
+                pumpkinsList[i].interacting = false;
                 yield return new WaitUntil(() => pumpkinsList[i].interacting);
                 pumpkinsList[i].interacting = false;
                 print("pressed pumpkin " + i);
