@@ -10,7 +10,7 @@ namespace Hub.Interaction
         public string animationName;
         public string soundEffectName;
         public Animator objectAnimator;
-        [HideInInspector] public bool interacting;
+        public ScarecrowInteraction scarecrow;
 
         public override IEnumerator BeginInteraction()
         {
@@ -23,7 +23,8 @@ namespace Hub.Interaction
         {
             objectAnimator.Play(Animator.StringToHash(animationName));
             AudioManager.Instance.PlaySoundEffect(soundEffectName);
-            interacting = true;
+            if(scarecrow.simonCoroutine != null)
+                scarecrow.currentPumpkin = this;
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Hub.Interaction
         public Animator objectAnimator;
         [HideInInspector] public bool interacting;
         public GameObject feedback;
+        public GameObject fruitToActivate;
 
         public override IEnumerator BeginInteraction()
         {
@@ -26,6 +27,8 @@ namespace Hub.Interaction
             interacting = true;
             Instantiate(feedback, transform.position, Quaternion.identity);
             gameObject.SetActive(false);
+            if (fruitToActivate != null)
+                fruitToActivate.SetActive(true);
         }
     }
 

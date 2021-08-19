@@ -14,9 +14,12 @@ namespace Hub.Interaction
 
         [Header("Simon Mini-Game")]
         public string scarecrowSoundEffectName;
+        public string winSoundEffectName;
+        public string defeatSoundEffectName;
         public List<PumpkinInteraction> pumpkinsList = new List<PumpkinInteraction>();
+        public PumpkinInteraction currentPumpkin;
         public float simonLength;
-        private Coroutine simonCoroutine;
+        public Coroutine simonCoroutine;
         private Coroutine clockCoroutine;
 
         public override IEnumerator BeginInteraction()
@@ -30,24 +33,46 @@ namespace Hub.Interaction
             objectAnimator.Play(Animator.StringToHash(animationName));
             AudioManager.Instance.PlaySoundEffect(scarecrowSoundEffectName);
 
-            clockCoroutine = StartCoroutine(Clock());
-            simonCoroutine = StartCoroutine(SimonCoroutine());
+            if(simonCoroutine == null) // + check save state
+            {
+                clockCoroutine = StartCoroutine(Clock());
+                simonCoroutine = StartCoroutine(SimonCoroutine());
+            }
         }
 
         private IEnumerator SimonCoroutine()
         {
+            currentPumpkin = null;
             for (int i = 0; i < pumpkinsList.Count; i++)
             {
-                pumpkinsList[i].interacting = false;
-                yield return new WaitUntil(() => pumpkinsList[i].interacting);
-                pumpkinsList[i].interacting = false;
-                print("pressed pumpkin " + i);
+                yield return new WaitUntil(() => currentPumpkin!= null);
+
+                if (currentPumpkin == pumpkinsList[i])
+                {
+                    print("Pressed correct pumpkin");
+                    currentPumpkin = null;
+                    continue;
+                }
+                else
+                {
+                    print("You failed");
+                    //Play defeat sound
+                    AudioManager.Instance.PlaySoundEffect(defeatSoundEffectName);
+                    if (clockCoroutine != null)
+                        StopCoroutine(clockCoroutine);
+
+                    StopCoroutine(simonCoroutine);
+                }
+
             }
             if(clockCoroutine!=null)
                 StopCoroutine(clockCoroutine);
 
             clockCoroutine = null;
             simonCoroutine = null;
+
+            //Play victory sound and give reward + update save state
+            AudioManager.Instance.PlaySoundEffect(winSoundEffectName);
             print("Finished Simon");
         }
 

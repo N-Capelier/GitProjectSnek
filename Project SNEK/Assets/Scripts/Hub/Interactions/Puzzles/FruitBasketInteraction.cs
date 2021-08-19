@@ -12,7 +12,10 @@ namespace Hub.Interaction
 
         [Header("Fruits Mini-Game")]
         public string fruitBasketSoundEffectName;
+        public string winSoundEffectName;
+        public string defeatSoundEffectName;
         public List<FruitInteraction> fruitsList = new List<FruitInteraction>();
+        public List<GameObject> fruitsInBasket = new List<GameObject>();
         public float miniGameLength;
         private Coroutine miniGameCoroutine;
         private Coroutine clockCoroutine;
@@ -28,11 +31,18 @@ namespace Hub.Interaction
             objectAnimator.Play(Animator.StringToHash(animationName));
             AudioManager.Instance.PlaySoundEffect(fruitBasketSoundEffectName);
 
-            clockCoroutine = StartCoroutine(Clock());
-            miniGameCoroutine = StartCoroutine(MiniGameCoroutine());
-            for (int i = 0; i < fruitsList.Count; i++)
+            if(miniGameCoroutine == null)//+ check save state
             {
-                fruitsList[i].gameObject.SetActive(true);
+                clockCoroutine = StartCoroutine(Clock());
+                miniGameCoroutine = StartCoroutine(MiniGameCoroutine());
+                for (int i = 0; i < fruitsList.Count; i++)
+                {
+                    fruitsList[i].gameObject.SetActive(true);
+                }
+                for (int i = 0; i < fruitsInBasket.Count; i++)
+                {
+                    fruitsInBasket[i].SetActive(false);
+                }
             }
     
         }
@@ -47,6 +57,8 @@ namespace Hub.Interaction
 
             if (clockCoroutine != null)
                 StopCoroutine(clockCoroutine);
+
+            AudioManager.Instance.PlaySoundEffect(winSoundEffectName);//+ give reward
 
             clockCoroutine = null;
             miniGameCoroutine = null;
@@ -65,6 +77,11 @@ namespace Hub.Interaction
             {
                 fruitsList[i].gameObject.SetActive(false);
             }
+            for(int i = 0; i < fruitsInBasket.Count; i++)
+            {
+                fruitsInBasket[i].SetActive(true);
+            }
+            AudioManager.Instance.PlaySoundEffect(defeatSoundEffectName);
             clockCoroutine = null;
         }
     }
