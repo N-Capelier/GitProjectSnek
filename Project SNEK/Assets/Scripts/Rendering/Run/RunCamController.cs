@@ -59,6 +59,24 @@ namespace Rendering.Run
         //        Set(CamState.SemiScrolling, true);
         //}
 
+        private void OnEnable()
+        {
+            Debug.Log("OnEnable");
+
+            StartCoroutine(EnableCoroutine());
+        }
+
+        IEnumerator EnableCoroutine()
+        {
+            string _sceneName = SceneManager.GetActiveScene().name;
+            if (_sceneName != "Boss Anorexia" && _sceneName != "Boss Paranoia" && _sceneName != "Boss Depression")
+                yield break;
+
+            Debug.Log("Starting boss cam state");
+            yield return new WaitForEndOfFrame();
+            Set(CamState.SemiScrolling);
+        }
+
         public void Set(CamState newState, bool forceState = false)
         {
             if(ActiveState != newState || forceState == true)
@@ -90,6 +108,10 @@ namespace Rendering.Run
             //}
             if(Input.GetKey(KeyCode.D))
                 Debug.Log(ActiveState.ToString());
+            if(Input.GetKeyDown(KeyCode.X))
+            {
+                Set(CamState.SemiScrolling);
+            }
         }
 
 #endif
