@@ -125,56 +125,63 @@ namespace Player.Controller
             else if (deathAnimIndex == 1)
             { objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_deathPoison"); AudioManager.Instance.PlaySoundEffect("PlayerHitPoison"); }
 
-                //death sound
-                //AudioManager.Instance.PlaySoundEffect("PlayerHit");
+            //death sound
+            //AudioManager.Instance.PlaySoundEffect("PlayerHit");
 
-                //Wait until death anim ends
-                yield return new WaitForSeconds(1.5f);
+            //Wait until death anim ends
+            yield return new WaitForSeconds(1.5f);
 
-                //deactivate player during scene reload
-                PlayerManager.Instance.gameObject.SetActive(false);
+            //deactivate player during scene reload
+            PlayerManager.Instance.gameObject.SetActive(false);
 
-                // Reload scene
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            // Reload scene
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
-                //reactivate player
-                PlayerManager.Instance.gameObject.SetActive(true);
+            //reactivate player
+            PlayerManager.Instance.gameObject.SetActive(true);
 
-                //Align spirits
-                PlayerManager.Instance.currentController.playerRunSpirits.ResetSpiritsPositions();
+            //Align spirits
+            PlayerManager.Instance.currentController.playerRunSpirits.ResetSpiritsPositions();
 
-                //deactivate all spirit renderers
-                for (int i = 0; i < playerRunSpirits.spiritChain.Count; i++)
-                {
-                    playerRunSpirits.spiritChain[i].objectRenderer.SetActive(false);
-                }
-
-                if (_spiritCount > 0)
-                {
-                    for (int i = 0; i < _spiritCount; i++)
-                    {
-                        playerRunSpirits.AddSpirit();
-                    }
-                }
-
-                //Teleports player to checkpoint
-                transform.position = checkPoint.position;
-
-                //alive face
-                faceRenderer.material = faces[0];
-
-                //Camera reset
-                RunCamController.Instance.Set(CamState.PlayerScrolling, true);
-
-                //Appear ProgressBar
-                GameManager.Instance.uiHandler.levelProgressUI.FadeOut();
-
-                //Leave death "state"
-                isDead = false;
-
-                //Display hp
-                StartCoroutine(DisplayHp());
+            //deactivate all spirit renderers
+            for (int i = 0; i < playerRunSpirits.spiritChain.Count; i++)
+            {
+                playerRunSpirits.spiritChain[i].objectRenderer.SetActive(false);
             }
+
+            if (_spiritCount > 0)
+            {
+                for (int i = 0; i < _spiritCount; i++)
+                {
+                    playerRunSpirits.AddSpirit();
+                }
+            }
+
+            //Teleports player to checkpoint
+            transform.position = checkPoint.position;
+
+            //alive face
+            faceRenderer.material = faces[0];
+
+            //Camera reset
+            RunCamController.Instance.Set(CamState.PlayerScrolling, true);
+
+            //Appear ProgressBar
+            GameManager.Instance.uiHandler.levelProgressUI.FadeOut();
+
+            /// Bug with WaitForSeconds
+            //moveSpeed = 0.1f;
+            //animator.Play("Anim_PlayerRun_Spawn_2");
+            //yield return new WaitForSeconds(2f);
+            //moveSpeed = cachedMoveSpeed;
+            //animator.Play("Anim_PlayerRun_Run");
+
+            //Leave death "state"
+            isDead = false;
+
+            //Display hp
+            StartCoroutine(DisplayHp());
+        }
 
         IEnumerator DeathCoroutine(int deathAnimIndex)
         {
@@ -191,11 +198,12 @@ namespace Player.Controller
                 objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_deathPoison");
                 AudioManager.Instance.PlaySoundEffect("PlayerHitPoison");
             }
-            
+
             yield return new WaitForSeconds(1f);
             faceRenderer.material = faces[0];
             //GameManagement.GameManager.Instance.gameState.Set(GameManagement.GameState.Hub, "Hub");
             GameOverMenu.Instance.menuCanvas.SetActive(true);
+
             isDead = false;
         }
 
@@ -257,6 +265,12 @@ namespace Player.Controller
             RunCamController.Instance.Set(CamState.PlayerScrolling, true);
 
             GameManager.Instance.uiHandler.levelProgressUI.FadeOut();
+
+            moveSpeed = 0.1f;
+            animator.Play("Anim_PlayerRun_Spawn_1");
+            yield return new WaitForSeconds(3.625f);
+            moveSpeed = cachedMoveSpeed;
+            animator.Play("Anim_PlayerRun_Run");
 
             isDead = false;
         }
