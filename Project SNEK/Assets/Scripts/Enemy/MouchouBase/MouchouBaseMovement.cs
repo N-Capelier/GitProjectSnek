@@ -31,7 +31,7 @@ namespace Enemy
         public Animator anim;
 
         [SerializeField] MouchouPattern pattern;
-        int patternIndex = 0;
+        int patternIndex = -1;
 
 
         void Start()
@@ -86,10 +86,9 @@ namespace Enemy
         {
             if (canMove == true)
             {
-                if(pattern.patternList.Count>0)
+                if (pattern.patternList.Count > 0)
                 {
-                    currentDirection = pattern.patternList[patternIndex];
-                    if(patternIndex < pattern.patternList.Count)
+                    if (patternIndex < pattern.patternList.Count - 1)
                     {
                         patternIndex++;
                     }
@@ -98,6 +97,7 @@ namespace Enemy
                         patternIndex = 0;
                     }
 
+                    currentDirection = pattern.patternList[patternIndex];
 
                     GetNextNode();
                     UpdateMovement();

@@ -61,8 +61,6 @@ namespace Rendering.Run
 
         private void OnEnable()
         {
-            Debug.Log("OnEnable");
-
             StartCoroutine(EnableCoroutine());
         }
 
