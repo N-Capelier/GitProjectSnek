@@ -246,15 +246,17 @@ namespace Player.Controller
 
         float bonusInputSpeed = 1.75f;
 
+        InputType previousInputType;
         /// <summary>
         /// Get new direction on user input
         /// </summary>
         /// <param name="inputType"></param>
         void HandleInput(InputType inputType)
         {
-            if (isInCutscene)
+            if (isInCutscene || inputType == previousInputType)
                 return;
 
+            previousInputType = inputType;
             if (fadeToHoldCoroutine != null)
             {
                 StopCoroutine(fadeToHoldCoroutine);
@@ -268,7 +270,7 @@ namespace Player.Controller
                     {
                         //feedbacks.PlayAnimUp();
                         nextDirection = PlayerDirection.Up;
-                        inputSpeed = bonusInputSpeed;                        
+                        inputSpeed = bonusInputSpeed;
                     }
                     else if (currentDirection != PlayerDirection.Up) { AudioManager.Instance.PlaySoundEffect("UINoTurnOver"); }
                     break;
@@ -277,7 +279,7 @@ namespace Player.Controller
                     {
                         //feedbacks.PlayAnimRight();
                         nextDirection = PlayerDirection.Right;
-                        inputSpeed = bonusInputSpeed;                        
+                        inputSpeed = bonusInputSpeed;
 
                     }
                     else if (currentDirection != PlayerDirection.Right) { AudioManager.Instance.PlaySoundEffect("UINoTurnOver"); }
@@ -287,7 +289,7 @@ namespace Player.Controller
                     {
                         //feedbacks.PlayAnimDown();
                         nextDirection = PlayerDirection.Down;
-                        inputSpeed = bonusInputSpeed;                        
+                        inputSpeed = bonusInputSpeed;
 
                     }
                     else if (currentDirection != PlayerDirection.Down) { AudioManager.Instance.PlaySoundEffect("UINoTurnOver"); }
@@ -297,7 +299,7 @@ namespace Player.Controller
                     {
                         //feedbacks.PlayAnimLeft();
                         inputSpeed = bonusInputSpeed;
-                        nextDirection = PlayerDirection.Left;                        
+                        nextDirection = PlayerDirection.Left;
                     }
                     else if (currentDirection != PlayerDirection.Left) { AudioManager.Instance.PlaySoundEffect("UINoTurnOver"); }
                     break;
