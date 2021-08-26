@@ -103,7 +103,7 @@ namespace Hub
         {
             yield return new WaitUntil(() => NPCManager.Instance.bergamot.bubble.activeSelf);
             NPCManager.Instance.bergamot.bubble.SetActive(false);
-            yield return new WaitUntil(() => (playerHub.tutorialTarget.transform.position - playerHub.objectRenderer.transform.position).magnitude < 2);
+            yield return new WaitUntil(() => (playerHub.tutorialTarget.transform.position - playerHub.objectRenderer.transform.position).magnitude < 3);
             playerHub.directionArrow.SetActive(false);
             UpdateTutorialState(1);
         }
