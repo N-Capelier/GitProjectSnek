@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Collections;
 using Player;
 using Saving;
 using UnityEngine.Audio;
@@ -422,6 +423,60 @@ namespace AudioManagement
 
             audioSource.loop = false;
         }
+
+
+        public Source PlaySFXAfter(string soundName, float wait)
+        {
+            //On cherche le son que l'on va jouer dans la liste de son.
+
+            Sound s = Array.Find(soundsList.sounds, Sound => Sound.name == soundName);
+
+            //Ensuite, on cherche la première source qui n'est pas entrain de jouer un son et le fait jouer le son.
+            foreach (var source in sourcesAudio)
+            {
+
+                if (source.audioSource.isPlaying == false)
+                {
+                    Sound sound = new Sound();
+
+                    sound.clip = s.clip;
+                    sound.volume = s.volume * SoundEffectsVolume;
+
+                    sound.source = source.audioSource;
+
+                    sounds.Add(sound);
+
+                    source.audioSource.clip = s.clip;
+                    source.audioSource.volume = s.volume * SoundEffectsVolume;
+
+                    source.audioSource.loop = false;
+
+                    source.audioSource.outputAudioMixerGroup = sfxMixer;
+
+                    StartCoroutine(PlayAfter(wait, source));
+
+                    return source;                    
+                }
+            }
+
+            return null;
+
+        }
+
+        public IEnumerator PlayAfter(float wait, Source source)
+        {
+            yield return new WaitForSeconds(wait);
+            source.audioSource.Play();
+        }
+
+        public IEnumerator EndAfter(Source source, float wait)
+        {
+
+            yield return new WaitForSeconds(wait);
+            source.audioSource.Stop();
+
+        }
+
     }
 
 
