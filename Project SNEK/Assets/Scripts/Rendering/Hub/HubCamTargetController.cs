@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Player;
 using GameManagement;
+using Hub.Interaction;
 
 namespace Rendering.Hub
 {
@@ -91,6 +92,16 @@ namespace Rendering.Hub
 
         private void HandleStandaloneInputs()
         {
+            if (PlayerManager.Instance.currentController == null)
+            {
+                return;
+            }
+            else if (PlayerManager.Instance.currentController.isInCutscene || InteractionManager.Instance.isInteracting)
+            {
+                return;
+            }
+
+
             lastPos = currentPos;
             if (Input.GetMouseButton(0) && !GameManager.Instance.uiHandler.dialogueUI.isRunningDialogue)
             {
@@ -125,11 +136,11 @@ namespace Rendering.Hub
 
         private void HandleMobileTouchInputs()
         {
-            if (PlayerManager.Instance == null)
+            if (PlayerManager.Instance.currentController == null)
             {
                 return;
             }
-            else if (PlayerManager.Instance.currentController.isInCutscene)
+            else if (PlayerManager.Instance.currentController.isInCutscene || InteractionManager.Instance.isInteracting)
             {
                 return;
             }
