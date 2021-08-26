@@ -22,6 +22,9 @@ namespace Enemy
 
         private void Update()
         {
+            if (MapGrid.Instance == null)
+                return;
+
             if (isAttacking == false)
             {
                 if (mBm.isMoving == false)

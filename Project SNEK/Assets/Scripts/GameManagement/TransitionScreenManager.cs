@@ -10,7 +10,7 @@ namespace GameManagement
 
         public Image image;
 
-        public IEnumerator AlphaUp(float _speed, string _sceneName)
+        public IEnumerator AlphaUp(float _speed, string _sceneName = "")
         {
             image.gameObject.SetActive(true);
             while(image.color.a < 1)
@@ -19,7 +19,8 @@ namespace GameManagement
 
                 yield return new WaitForEndOfFrame();
             }
-            SceneManager.LoadSceneAsync(_sceneName);
+            if(_sceneName!= "")
+                SceneManager.LoadSceneAsync(_sceneName);
         }
 
         public IEnumerator AlphaDown(float _speed)
