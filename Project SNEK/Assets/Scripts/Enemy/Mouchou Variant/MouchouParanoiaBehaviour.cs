@@ -101,11 +101,11 @@ namespace Enemy
             renderGo.GetComponentInChildren<MeshRenderer>().material = mat[1];
             hadPoof = false;
             renderGo.transform.rotation = Quaternion.Euler(0, 0, 0);
-            if (hadPoofed == false)
-            {
-                Instantiate(poof, transform.position, Quaternion.identity);
-                hadPoofed = true;
-            }
+            //if (hadPoofed == false)
+            //{
+            //    Instantiate(poof, transform.position, Quaternion.identity);
+            //    hadPoofed = true;
+            //}
         }
 
         void TransformIntoMouchou()
