@@ -22,6 +22,11 @@ namespace Hub.Interaction
         public Coroutine simonCoroutine;
         private Coroutine clockCoroutine;
 
+        [Header("Feedback")]
+        public ParticleSystem startParticle;
+        public ParticleSystem winParticle;
+        public ParticleSystem failParticle;
+
         public override IEnumerator BeginInteraction()
         {
             Interact();
@@ -37,6 +42,7 @@ namespace Hub.Interaction
             {
                 clockCoroutine = StartCoroutine(Clock());
                 simonCoroutine = StartCoroutine(SimonCoroutine());
+                startParticle.Play();
             }
         }
 
@@ -57,11 +63,16 @@ namespace Hub.Interaction
                 {
                     print("You failed");
                     //Play defeat sound
+                    failParticle.Play();
                     AudioManager.Instance.PlaySoundEffect(defeatSoundEffectName);
                     if (clockCoroutine != null)
+                    {
                         StopCoroutine(clockCoroutine);
+                        clockCoroutine = null;
+                    }
 
                     StopCoroutine(simonCoroutine);
+                    simonCoroutine = null;
                 }
 
             }
@@ -73,6 +84,7 @@ namespace Hub.Interaction
 
             //Play victory sound and give reward + update save state
             AudioManager.Instance.PlaySoundEffect(winSoundEffectName);
+            winParticle.Play();
             print("Finished Simon");
         }
 
@@ -81,6 +93,10 @@ namespace Hub.Interaction
             yield return new WaitForSeconds(simonLength);
             if (simonCoroutine != null)
             {
+                print("You failed");
+                //Play defeat sound
+                failParticle.Play();
+                AudioManager.Instance.PlaySoundEffect(defeatSoundEffectName);
                 StopCoroutine(simonCoroutine);
                 simonCoroutine = null;
             }

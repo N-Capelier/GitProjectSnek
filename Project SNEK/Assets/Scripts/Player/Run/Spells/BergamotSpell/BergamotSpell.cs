@@ -71,6 +71,11 @@ namespace Player.Spells
 
             rd.material.mainTexture = mat.mainTexture;
 
+            if (target.shaderRenderer != null)
+                target.shaderRenderer.SetActive(false);
+            if (target.particles != null)
+                target.particles.SetActive(false);
+
             Collider hitbox = target.hitbox;
             hitbox.enabled = false;
 
@@ -80,6 +85,11 @@ namespace Player.Spells
             {
                 rd.material = mat;
                 hitbox.enabled = true;
+
+                if (target.shaderRenderer != null)
+                    target.shaderRenderer.SetActive(false);
+                if (target.particles != null)
+                    target.particles.SetActive(false);
             }
 
         }

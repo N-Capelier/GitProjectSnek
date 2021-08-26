@@ -13,7 +13,8 @@ namespace Enemy
         bool destroyedByShield = false;
 
         [SerializeField] GameObject objectRenderer;
-        [SerializeField] ParticleSystem fx, deathFx;
+        [SerializeField] ParticleSystem fx;
+        [SerializeField] GameObject deathFx;
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController") && !PlayerManager.Instance.currentController.isInCutscene)
@@ -54,12 +55,7 @@ namespace Enemy
             destroyedByShield = true;
             gameObject.GetComponent<BoxCollider>().enabled = false;
             objectRenderer.SetActive(false);
-            if (fx != null)
-            {
-                fx.Play();
-                //AudioManager.Instance.PlaySoundEffect(soundName);
-                yield return new WaitForSeconds(fx.main.duration);
-            }
+            yield return null;
             DeathFx();
             Destroy(gameObject);
         }

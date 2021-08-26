@@ -10,6 +10,8 @@ namespace Player.Spells
     {
         public Collider hitbox;
         public MeshRenderer rd;
+        public GameObject particles;
+        public GameObject shaderRenderer;
 
         private void Start()
         {

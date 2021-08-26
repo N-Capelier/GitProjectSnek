@@ -155,10 +155,10 @@ namespace Player.Attack
                     break;
             }
 
-            if(PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits() >= 5 && beamIsUp == true)
+            /*if(PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits() >= 5 && beamIsUp == true)
             {
                 StartCoroutine(BeamAttack());
-            }
+            }*/
 
             yield return new WaitForSeconds(0.3f);
             yield return new WaitForFixedUpdate();

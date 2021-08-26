@@ -20,6 +20,12 @@ namespace Hub.Interaction
         private Coroutine miniGameCoroutine;
         private Coroutine clockCoroutine;
 
+        [Header("Feedback")]
+        public ParticleSystem startParticle;
+        public ParticleSystem winParticle;
+        public ParticleSystem failParticle;
+
+
         public override IEnumerator BeginInteraction()
         {
             Interact();
@@ -35,6 +41,7 @@ namespace Hub.Interaction
             {
                 clockCoroutine = StartCoroutine(Clock());
                 miniGameCoroutine = StartCoroutine(MiniGameCoroutine());
+                startParticle.Play();
                 for (int i = 0; i < fruitsList.Count; i++)
                 {
                     fruitsList[i].gameObject.SetActive(true);
@@ -59,6 +66,7 @@ namespace Hub.Interaction
                 StopCoroutine(clockCoroutine);
 
             AudioManager.Instance.PlaySoundEffect(winSoundEffectName);//+ give reward
+            winParticle.Play();
 
             clockCoroutine = null;
             miniGameCoroutine = null;
@@ -82,6 +90,7 @@ namespace Hub.Interaction
                 fruitsInBasket[i].SetActive(true);
             }
             AudioManager.Instance.PlaySoundEffect(defeatSoundEffectName);
+            failParticle.Play();
             clockCoroutine = null;
         }
     }
