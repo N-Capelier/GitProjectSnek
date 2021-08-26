@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using Saving;
+using GameManagement;
 
 namespace Hub
 {
@@ -12,9 +13,8 @@ namespace Hub
 
         public void StartLevel(string levelName)
         {
-            //GameManager.Instance.gameState.Set(GameState.Run, "Level1_1");
             SaveManager.Instance.Save();
-            SceneManager.LoadScene(levelName);
+            StartCoroutine(GameManager.Instance.gameState.sceneTransition.AlphaUp(0.05f, levelName));
         }
     }
 }

@@ -23,7 +23,7 @@ namespace GameManagement
 
         [SerializeField] GameState startingState;
 
-        [SerializeField] TransitionScreenManager sceneTransition;
+        [SerializeField] public TransitionScreenManager sceneTransition;
 
         private void Awake()
         {
@@ -58,7 +58,7 @@ namespace GameManagement
 
         public void SetAlphaDown()
         {
-            StartCoroutine(sceneTransition.AlphaDown(.05f));
+            StartCoroutine(sceneTransition.AlphaDown(.025f));
         }
     }
 }

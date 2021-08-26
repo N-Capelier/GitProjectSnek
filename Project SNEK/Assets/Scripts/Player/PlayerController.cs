@@ -119,6 +119,9 @@ namespace Player.Controller
             //death face
             faceRenderer.material = faces[1];
 
+            //Fade to black
+            StartCoroutine(GameManager.Instance.gameState.sceneTransition.AlphaUp(0.04f));
+
             //death anim
             if (deathAnimIndex == 0)
             { objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_death"); AudioManager.Instance.PlaySoundEffect("PlayerHitWall"); }
@@ -181,6 +184,9 @@ namespace Player.Controller
 
             //Display hp
             StartCoroutine(DisplayHp());
+
+            //Fade to transparent
+            StartCoroutine(GameManager.Instance.gameState.sceneTransition.AlphaDown(0.05f));
         }
 
         IEnumerator DeathCoroutine(int deathAnimIndex)
@@ -198,6 +204,8 @@ namespace Player.Controller
                 objectRenderer.GetComponent<Animator>().Play("Anim_PlayerRun_deathPoison");
                 AudioManager.Instance.PlaySoundEffect("PlayerHitPoison");
             }
+            //Fade to black
+            StartCoroutine(GameManager.Instance.gameState.sceneTransition.AlphaUp(0.04f));
 
             yield return new WaitForSeconds(1f);
             faceRenderer.material = faces[0];

@@ -37,7 +37,8 @@ namespace Player.Spells
 
         private void OnDestroy()
         {
-            spellCooldownTimer.ClockEnded -= OnCooldownEnded;
+            if(spellCooldownTimer != null)
+                spellCooldownTimer.ClockEnded -= OnCooldownEnded;
         }
 
         private void Update()
