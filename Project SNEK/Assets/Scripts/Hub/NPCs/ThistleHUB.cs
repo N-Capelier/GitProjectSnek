@@ -96,7 +96,7 @@ namespace Saving
                             break;
                     }
 
-                    if (npcStates[i].stateID == 2)
+                    if (npcStates[i].forcePosition)
                         started = false;
 
                     if (npcStates[i].notInVillage)
