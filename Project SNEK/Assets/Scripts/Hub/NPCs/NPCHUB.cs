@@ -25,6 +25,7 @@ namespace Saving
         [Header("State content")]
         public bool notInVillage;
         public Transform waypoint;
+        public bool forcePosition;
         [Space]
         public NPCStateType stateType;
         public TimelineAsset cutscene;
