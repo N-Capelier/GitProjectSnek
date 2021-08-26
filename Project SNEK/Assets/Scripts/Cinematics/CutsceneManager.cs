@@ -20,6 +20,7 @@ namespace Cinematic
         [SerializeField] GameObject[] playableActors;
         [SerializeField] Material newNPCMaterial; // Pour l'instant c'est juste le materiel de Dark Poppy
         //Vector3[] actorsPositions;
+        [HideInInspector] public bool isBossFinished = false;
 
         Source musicAudio;
 
@@ -103,7 +104,14 @@ namespace Cinematic
 
                 //PlayerManager.Instance.currentController.isInCutscene = false;
 
-                GameManager.Instance.StartCoroutine(PlayerManager.Instance.currentController.RespawnAfterCutscene(spiritCount));
+                if(!isBossFinished)
+                {
+                    GameManager.Instance.StartCoroutine(PlayerManager.Instance.currentController.RespawnAfterCutscene(spiritCount));
+                }
+                else
+                {
+                    isBossFinished = false;
+                }
 
                 //Show UI elements
                 GameManager.Instance.uiHandler.ShowUIRun();
@@ -195,6 +203,7 @@ namespace Cinematic
             SaveManager.Instance.state.poppyState = 29;
             SaveManager.Instance.state.unlockedLetters = 4;
             SaveManager.Instance.state.canvasCurrentState = 3;
+            isBossFinished = true;
             EndCustscene();
             GameManager.Instance.gameState.Set(GameState.Hub, "Hub");
         }
