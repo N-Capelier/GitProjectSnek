@@ -450,16 +450,16 @@ namespace Hub.UI
                     SaveManager.Instance.state.heartCoinAmount -= 1;
                     SaveManager.Instance.state.spentHeartCoinAmount++;
                     SaveManager.Instance.state.powerLevel++;
-                    SaveManager.Instance.state.bonusHealth = 2;
-                    SaveManager.Instance.state.bonusRange = 1f;
+                    SaveManager.Instance.state.bonusHealth = 1;
+                    //SaveManager.Instance.state.bonusRange = 1f;
                     SaveManager.Instance.Save();
                     break;
                 case 1:
                     SaveManager.Instance.state.heartCoinAmount -= 2;
                     SaveManager.Instance.state.spentHeartCoinAmount += 2;
                     SaveManager.Instance.state.powerLevel++;
-                    SaveManager.Instance.state.bonusHealth = 3;
-                    SaveManager.Instance.state.bonusRange = 1.15f;
+                    SaveManager.Instance.state.bonusHealth = 2;
+                    //SaveManager.Instance.state.bonusRange = 1.15f;
                     SaveManager.Instance.Save();
                     break;
                 case 2:
@@ -467,21 +467,29 @@ namespace Hub.UI
                     SaveManager.Instance.state.spentHeartCoinAmount += 3;
                     SaveManager.Instance.state.powerLevel++;
                     SaveManager.Instance.state.bonusHealth = 4;
-                    SaveManager.Instance.state.bonusRange = 1.25f;
+                    //SaveManager.Instance.state.bonusRange = 1.25f;
                     SaveManager.Instance.Save();
                     break;
                 case 3:
                     SaveManager.Instance.state.heartCoinAmount -= 4;
                     SaveManager.Instance.state.spentHeartCoinAmount += 4;
                     SaveManager.Instance.state.powerLevel++;
-                    SaveManager.Instance.state.bonusHealth = 5;
-                    SaveManager.Instance.state.bonusRange = 1.4f;
+                    SaveManager.Instance.state.bonusHealth = 6;
+                    //SaveManager.Instance.state.bonusRange = 1.4f;
+                    SaveManager.Instance.Save();
+                    break;
+                case 4:
+                    SaveManager.Instance.state.heartCoinAmount -= 5;
+                    SaveManager.Instance.state.spentHeartCoinAmount += 5;
+                    SaveManager.Instance.state.powerLevel++;
+                    SaveManager.Instance.state.bonusHealth = 8;
+                    //SaveManager.Instance.state.bonusRange = 1.4f;
                     SaveManager.Instance.Save();
                     break;
             }
             CoinCountText.text = "x" + SaveManager.Instance.state.heartCoinAmount.ToString();
             FontainLevelUpBox.SetActive(true);
-            FontainLevelUpBox.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "You are now level " + SaveManager.Instance.state.powerLevel + " . You gain both attack range and vitality";
+            FontainLevelUpBox.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "You are now level " + SaveManager.Instance.state.powerLevel + " . Your max health raises to " + (SaveManager.Instance.state.bonusHealth + 6);
             FontainLevelUpBox.LeanScale(Vector3.one, 0.2f);
         }
 
