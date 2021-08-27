@@ -52,6 +52,9 @@ namespace SpecialLD
 
 		IEnumerator ShootingLoop()
         {
+			if (playerTransform == null)
+				yield break;
+
 			playerDistance = playerTransform.position - transform.position;
 
 			if(playerDistance.z > activationRange)
