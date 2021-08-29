@@ -15,6 +15,7 @@ namespace Enemy
         bool isAttacking = false;
         bool canAttack = true;
         public GameObject renderGo;
+        public int distance = 4;
 
         [Space]
         float distanceToPlayer;
@@ -49,7 +50,7 @@ namespace Enemy
             {
                 distanceToPlayer = Vector3.Distance(PlayerManager.Instance.currentController.transform.position, gameObject.GetComponentInParent<EnemyStats>().transform.position);
 
-                if (distanceToPlayer < 4)
+                if (distanceToPlayer < distance)
                 {
                     AttackPlayer();
                 }
