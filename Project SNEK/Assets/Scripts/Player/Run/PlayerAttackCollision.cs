@@ -14,8 +14,11 @@ namespace Player.Attack
         {
             if (enemy.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                enemy.GetComponent<EnemyStats>().TakeDamage(PlayerManager.Instance.currentController.playerRunAttack.attackDamages);
-                AudioManager.Instance.PlaySoundEffect("PlayerSwordImpact");
+                if(enemy != null)
+                {
+                    enemy.GetComponent<EnemyStats>().TakeDamage(PlayerManager.Instance.currentController.playerRunAttack.attackDamages);
+                    AudioManager.Instance.PlaySoundEffect("PlayerSwordImpact");
+                }
             }
 
             if (enemy.gameObject.layer == LayerMask.NameToLayer("Boss"))
