@@ -59,7 +59,7 @@ namespace UTPI.SceneViewer
             }
 
             if (scenesGUIDs is null)
-                return;
+                RefreshScenes();
             if (scenesGUIDs.Length == 0)
                 return;
 
@@ -69,22 +69,28 @@ namespace UTPI.SceneViewer
             {
                 items = AssetDatabase.GUIDToAssetPath(sceneGUID).Split('/');
 
-                if(currentFolderName != items[items.Length - 2])
+                if (items[1] != "Scenes")
+                    continue;
+
+                if (currentFolderName != items[items.Length - 2])
                 {
                     currentFolderName = items[items.Length - 2];
                     GUILayout.Label(currentFolderName, titleStyle);
                 }
 
                 GUILayout.BeginHorizontal();
-                if(GUILayout.Button(items[items.Length - 1], buttonStyle))
+                if (GUILayout.Button(items[items.Length - 1], buttonStyle))
                 {
-                    try
+                    if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
                     {
-                        EditorSceneManager.OpenScene(AssetDatabase.GUIDToAssetPath(sceneGUID).ToString());
-                    }
-                    catch
-                    {
-                        Debug.LogError("Scene not found, try refreshing the scene viewer.");
+                        try
+                        {
+                            EditorSceneManager.OpenScene(AssetDatabase.GUIDToAssetPath(sceneGUID).ToString());
+                        }
+                        catch
+                        {
+                            Debug.LogError("Scene not found, try refreshing the scene viewer.");
+                        }
                     }
                 }
                 GUILayout.EndHorizontal();
