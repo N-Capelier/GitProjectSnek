@@ -21,7 +21,7 @@ namespace Enemy
             {
                 PlayerManager.Instance.currentController.Death(deathIndex);
             }
-            else if (other.gameObject.layer == LayerMask.NameToLayer("Wall") || other.gameObject.layer == LayerMask.NameToLayer("Shield"))
+            else if (/*other.gameObject.layer == LayerMask.NameToLayer("Wall") ||*/ other.gameObject.layer == LayerMask.NameToLayer("Shield"))
             {
                 StartCoroutine(Destroyed());
             }
