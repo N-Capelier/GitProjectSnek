@@ -70,7 +70,6 @@ namespace Rendering.Run
             if (_sceneName != "Boss Anorexia" && _sceneName != "Boss Paranoia" && _sceneName != "Boss Depression")
                 yield break;
 
-            Debug.Log("Starting boss cam state");
             yield return new WaitForEndOfFrame();
             Set(CamState.SemiScrolling);
         }
