@@ -22,6 +22,23 @@ namespace Enemy
         void Start()
         {
             pattern = behaviour.pattern;
+            switch (pattern.patternList[0])
+            {
+                case MouchouDirection.Up:
+                    behaviour.head.transform.forward = new Vector3(0,0,1);
+                    break;
+                case MouchouDirection.Right:
+                    behaviour.head.transform.forward = new Vector3(1,0,0);
+                    break;
+                case MouchouDirection.Down:
+                    behaviour.head.transform.forward = new Vector3(0,0,-1);
+                    break;
+                case MouchouDirection.Left:
+                    behaviour.head.transform.forward = new Vector3(-1,0,0);
+                    break;
+                default:
+                    break;
+            }
         }
 
         // Update is called once per frame

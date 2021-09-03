@@ -19,12 +19,13 @@ namespace Enemy
         [SerializeField] GameObject bodyPartMonochromPrefab;
         [SerializeField] GameObject bodyPartParent;
         [SerializeField] public  List<GameObject> bodyParts = new List<GameObject>();
-        [SerializeField] MonochromElement headMonochromComponent;
+        [SerializeField] public MonochromElement headMonochromComponent;
 
         [SerializeField] bool isMonochrom;
 
         [Header("Hearts")]
         [SerializeField] public List<MilleMasquesHeart> hearts = new List<MilleMasquesHeart>();
+        [HideInInspector] public bool canDie = false;
 
         [Header("Movement")]
         public MouchouPattern pattern;
@@ -56,7 +57,7 @@ namespace Enemy
         {
             RotateBodyPart();
 
-            if(hearts.Count == 0)
+            if(hearts.Count == 0 && !isMonochrom && canDie)
             {
                 if (destroyCoroutine == null)
                     destroyCoroutine = StartCoroutine(DestroyCoroutine());

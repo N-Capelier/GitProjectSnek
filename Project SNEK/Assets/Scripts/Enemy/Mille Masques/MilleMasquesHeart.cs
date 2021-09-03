@@ -33,7 +33,7 @@ public class MilleMasquesHeart : MonoBehaviour
         objectRenderer.SetActive(false);
         binding.enabled = false;
         behaviour.hearts.Remove(this);
-
+        behaviour.canDie = true;
         if (fx != null)
         {
             fx.Play();
@@ -45,6 +45,10 @@ public class MilleMasquesHeart : MonoBehaviour
 
     public void Update()
     {
-        binding.SetPosition(1, behaviour.head.transform.position + new Vector3(0, 1, 0));
+        if(behaviour!= null)
+        {
+            binding.SetPosition(0, transform.position + new Vector3(0, 1, 0));
+            binding.SetPosition(1, behaviour.head.transform.position + new Vector3(0, 1, 0));
+        }
     }
 }

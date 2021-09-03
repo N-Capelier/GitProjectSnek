@@ -58,13 +58,13 @@ namespace Boss
             Destroy(rightCliffs[0]);
             rightCliffs.RemoveAt(0);
 
-            leftCliffs.Add(Instantiate(cliff[Random.Range(0,cliff.Length)], new Vector3(0, 0, cliffIndex * 6.14f), Quaternion.identity, leftCliffParent.transform));
-            rightCliffs.Add(Instantiate(invertedCliff[Random.Range(0, invertedCliff.Length)], new Vector3(10, 0, cliffIndex * 6.14f), Quaternion.identity, rightCliffParent.transform));
+            leftCliffs.Add(Instantiate(cliff[Random.Range(0,cliff.Length)], new Vector3(0, 0, cliffIndex * 6f), Quaternion.identity, leftCliffParent.transform));
+            rightCliffs.Add(Instantiate(invertedCliff[Random.Range(0, invertedCliff.Length)], new Vector3(10, 0, cliffIndex * 6f), Quaternion.identity, rightCliffParent.transform));
             rightCliffs[rightCliffs.Count - 1].transform.Rotate(0, 180, 0);
 
             cliffIndex++;
 
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 6.14f);
+            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 6f);
         }
 
         private IEnumerator Start()
@@ -76,7 +76,7 @@ namespace Boss
             }
             else
             {
-                yield return new WaitForSeconds(25f);
+                yield return new WaitForSeconds(10f);
                 StartCoroutine(TimedUpdate());
                 if(SceneManager.GetActiveScene().name == "Boss Anorexia")
                 {
