@@ -12,6 +12,9 @@ namespace Rendering.Run
     {
         GameObject deathZone;
 
+        float zVelocity = 0f;
+        float xVelocity = 0f;
+
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
@@ -22,27 +25,31 @@ namespace Rendering.Run
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if(PlayerManager.Instance.currentController.transform.position.z - 5f> RunCamController.Instance.vcam.transform.position.z)
+            if(PlayerManager.Instance.currentController.transform.position.z - 5f > RunCamController.Instance.vcam.transform.position.z)
             {
-                RunCamController.Instance.rb.velocity = new Vector3(0, 0, PlayerManager.Instance.currentController.rb.velocity.z);
+                zVelocity = PlayerManager.Instance.currentController.rb.velocity.z;
             }
             else
             {
-                RunCamController.Instance.rb.velocity = new Vector3(0, 0, 0 /*RunCamController.Instance.scrollSpeed * 2.5f*/);
+                zVelocity = 0f;
             }
 
+            //xVelocity = Mathf.Lerp(
+            //    RunCamController.Instance.transform.position.x,
+            //    PlayerManager.Instance.currentController.transform.position.x,
+            //    .5f);
+
+            xVelocity = (PlayerManager.Instance.currentController.rb.transform.position.x - RunCamController.Instance.rb.transform.position.x) * 3.5f;
+
+            //RunCamController.Instance.rb.velocity = new Vector3(
+            //    xVelocity,
+            //    RunCamController.Instance.rb.velocity.y,
+            //    zVelocity);
+
             RunCamController.Instance.rb.velocity = new Vector3(
-                PlayerManager.Instance.currentController.rb.velocity.x,
+                xVelocity,
                 RunCamController.Instance.rb.velocity.y,
-                RunCamController.Instance.rb.velocity.z);
-
-            //if(PlayerManager.Instance.currentController.transform.position.x != RunCamController.Instance.transform.position.x)
-            //{
-            //    RunCamController.Instance.transform.position = new Vector3(PlayerManager.Instance.currentController.transform.position.x - 5,
-            //        RunCamController.Instance.transform.position.y,
-            //        RunCamController.Instance.transform.position.z);
-
-            //}
+                zVelocity);
         }
 
         // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
