@@ -208,6 +208,18 @@ namespace Cinematic
             GameManager.Instance.gameState.Set(GameState.Hub, "Hub");
         }
 
+        public void BackToHubFromLvl2_1()
+        {
+            //Add to save state
+            SaveManager.Instance.state.bergamotState = 32;
+            SaveManager.Instance.state.thistleState = 20;
+            SaveManager.Instance.state.poppyState = 36;
+            SaveManager.Instance.state.unlockedLetters = 5;
+            SaveManager.Instance.state.canvasCurrentState = 4;
+            EndCustscene();
+            GameManager.Instance.gameState.Set(GameState.Hub, "Hub");
+        }
+
         public void PlayMusic(string name)
         {
             MusicManager.Instance.Music(name);
