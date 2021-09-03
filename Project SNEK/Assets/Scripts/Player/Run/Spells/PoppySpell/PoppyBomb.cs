@@ -58,7 +58,7 @@ namespace Player.Spells
 
         IEnumerator Absorb(bool hitWall)
         {
-            Source sourceTemp;
+            //Source sourceTemp;
 
             rb.velocity = Vector3.zero;
             transform.position = new Vector3(

@@ -11,7 +11,7 @@ namespace Map
         [SerializeField] int index;
         private void OnTriggerEnter(Collider other)
         {
-            if(other.CompareTag("Player"))
+            if (other.CompareTag("Player"))
             {
                 //GameManagement.GameManager.Instance.gameState.Set(GameManagement.GameState.Cinematic);
                 switch (index)
