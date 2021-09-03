@@ -32,6 +32,12 @@ namespace Player.Attack
                 enemy.GetComponent<BossParanoia>().TakeDamage(PlayerManager.Instance.currentController.playerRunAttack.attackDamages);
                 AudioManager.Instance.PlaySoundEffect("PlayerSwordImpact");
             }
+
+            if (enemy.gameObject.layer == LayerMask.NameToLayer("BossDepression"))
+            {
+                enemy.GetComponent<BossDepression>().TakeDamage(PlayerManager.Instance.currentController.playerRunAttack.attackDamages);
+                AudioManager.Instance.PlaySoundEffect("PlayerSwordImpact");
+            }
         }
     }
 }
