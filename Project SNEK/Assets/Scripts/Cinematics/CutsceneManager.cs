@@ -212,10 +212,22 @@ namespace Cinematic
         {
             //Add to save state
             SaveManager.Instance.state.bergamotState = 32;
-            SaveManager.Instance.state.thistleState = 20;
+            SaveManager.Instance.state.thistleState = 19;
             SaveManager.Instance.state.poppyState = 36;
             SaveManager.Instance.state.unlockedLetters = 5;
             SaveManager.Instance.state.canvasCurrentState = 4;
+            EndCustscene();
+            GameManager.Instance.gameState.Set(GameState.Hub, "Hub");
+        }
+
+        public void BackToHubFromLvl2_2()
+        {
+            //Add to save state
+            SaveManager.Instance.state.bergamotState = 37;
+            SaveManager.Instance.state.thistleState = 25;
+            SaveManager.Instance.state.poppyState = 42;
+            SaveManager.Instance.state.unlockedLetters = 6;
+            SaveManager.Instance.state.canvasCurrentState = 5;
             EndCustscene();
             GameManager.Instance.gameState.Set(GameState.Hub, "Hub");
         }
