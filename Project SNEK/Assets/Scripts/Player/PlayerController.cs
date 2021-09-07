@@ -175,18 +175,25 @@ namespace Player.Controller
             /// Bug with WaitForSeconds
             //moveSpeed = 0.1f;
             //animator.Play("Anim_PlayerRun_Spawn_2");
+            StartCoroutine(FixedRespawn());
+        }
+
+        private IEnumerator FixedRespawn()
+        {
             //yield return new WaitForSeconds(2f);
             //moveSpeed = cachedMoveSpeed;
             //animator.Play("Anim_PlayerRun_Run");
 
             //Leave death "state"
             isDead = false;
+            runController.previousInputType = InputType.None;
 
             //Display hp
             StartCoroutine(DisplayHp());
 
             //Fade to transparent
             StartCoroutine(GameManager.Instance.gameState.sceneTransition.AlphaDown(0.05f));
+            yield return null;
         }
 
         IEnumerator DeathCoroutine(int deathAnimIndex)
@@ -251,9 +258,13 @@ namespace Player.Controller
             //isInCutscene = false;
 
             ////////////////////////////
+            //Fade to black
+            StartCoroutine(GameManager.Instance.gameState.sceneTransition.AlphaUp(1));
 
             isInCutscene = false;
             yield return null;
+
+
 
             PlayerManager.Instance.gameObject.SetActive(false);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -271,16 +282,21 @@ namespace Player.Controller
                 }
             }
             RunCamController.Instance.Set(CamState.PlayerScrolling, true);
+            
+            //Fade to transparent
+            StartCoroutine(GameManager.Instance.gameState.sceneTransition.AlphaDown(0.05f));
 
             GameManager.Instance.uiHandler.levelProgressUI.FadeOut();
 
-            moveSpeed = 0.1f;
+            moveSpeed = 0.0f;
             animator.Play("Anim_PlayerRun_Spawn_1");
             yield return new WaitForSeconds(3.625f);
             moveSpeed = cachedMoveSpeed;
             animator.Play("Anim_PlayerRun_Run");
 
+
             isDead = false;
+            runController.previousInputType = InputType.None;
         }
 
         IEnumerator DisplayHp()

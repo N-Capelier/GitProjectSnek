@@ -161,7 +161,8 @@ namespace Player.Controller
 
             InputHandler.InputReceived += HandleInput;
 
-            moveSpeed = 0.1f;
+
+            moveSpeed = 0f;
             animator.Play("Anim_PlayerRun_Spawn_1");
             yield return new WaitForSeconds(3.625f);
             moveSpeed = cachedMoveSpeed;
@@ -246,7 +247,7 @@ namespace Player.Controller
 
         float bonusInputSpeed = 1.75f;
 
-        InputType previousInputType;
+        [HideInInspector] public InputType previousInputType;
         /// <summary>
         /// Get new direction on user input
         /// </summary>

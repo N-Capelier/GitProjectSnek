@@ -9,11 +9,10 @@ namespace Enemy
     {
         public int deathIndex;
         public float bulletLifetime;
-
+        public bool isDestroyableByWall;
         bool destroyedByShield = false;
 
         [SerializeField] GameObject objectRenderer;
-        [SerializeField] ParticleSystem fx;
         [SerializeField] GameObject deathFx;
         private void OnTriggerEnter(Collider other)
         {
@@ -21,9 +20,17 @@ namespace Enemy
             {
                 PlayerManager.Instance.currentController.Death(deathIndex);
             }
-            else if (/*other.gameObject.layer == LayerMask.NameToLayer("Wall") ||*/ other.gameObject.layer == LayerMask.NameToLayer("Shield"))
+            else if (other.gameObject.layer == LayerMask.NameToLayer("Shield"))
             {
                 StartCoroutine(Destroyed());
+            }
+
+            if(isDestroyableByWall)
+            {
+                if(other.gameObject.layer == LayerMask.NameToLayer("Wall"))
+                {
+                    StartCoroutine(Destroyed());
+                }
             }
         }
 
@@ -39,12 +46,7 @@ namespace Enemy
             {
                 gameObject.GetComponent<BoxCollider>().enabled = false;
                 objectRenderer.SetActive(false);
-                if (fx != null)
-                {
-                    fx.Play();
-                    //AudioManager.Instance.PlaySoundEffect(soundName);
-                    yield return new WaitForSeconds(fx.main.duration);
-                }
+
                 DeathFx();
                 Destroy(gameObject);
             }
