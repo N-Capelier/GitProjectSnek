@@ -31,6 +31,21 @@ namespace Player.Spells
             if (shield != null)
                 shield.transform.position = transform.position + Vector3.up * 0.5f;
         }
+
+        public void Abort()
+        {
+            print(PlayerManager.Instance.currentController.playerRunSpell);
+            if (PlayerManager.Instance.currentController.playerRunSpell.currentSpellCast != null)
+            {
+                shield.GetComponent<ParticleSystem>().Stop();
+                shield.SetActive(false);
+                StopCoroutine(PlayerManager.Instance.currentController.playerRunSpell.currentSpellCast);
+                PlayerManager.Instance.currentController.spellMoveSpeedModifier = 1f;
+                PlayerManager.Instance.currentController.playerRunSpell.spellCooldownTimer.Stop();
+
+            }
+        }
+
     }
 
 }

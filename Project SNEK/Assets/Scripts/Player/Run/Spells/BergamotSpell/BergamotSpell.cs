@@ -20,10 +20,6 @@ namespace Player.Spells
 
         public override IEnumerator SpellCast(PlayerDirection direction)
         {
-            //Find all possible intangible objects
-
-
-
             //Play Animation and stop player for anim duration
             GameObject camera = Instantiate(cameraObject, transform.position, Quaternion.identity, PlayerManager.Instance.currentController.objectRenderer.transform);
             switch (direction)
@@ -91,7 +87,16 @@ namespace Player.Spells
                 if (target.particles != null)
                     target.particles.SetActive(false);
             }
+        }
 
+        public void Abort()
+        {
+            if (PlayerManager.Instance.currentController.playerRunSpell.currentSpellCast != null)
+            {
+                StopCoroutine(PlayerManager.Instance.currentController.playerRunSpell.currentSpellCast);
+                PlayerManager.Instance.currentController.spellMoveSpeedModifier = 1f;
+                PlayerManager.Instance.currentController.playerRunSpell.spellCooldownTimer.Stop();
+            }
         }
     }
 }

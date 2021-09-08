@@ -61,9 +61,6 @@ namespace Player.Controller
 
         public void SetSpell(Spell _spell)
         {
-            if(playerRunSpell != null)
-                playerRunSpell.enabled = false;
-
             switch (_spell)
             {
                 case Spell.Poppy:
@@ -88,7 +85,7 @@ namespace Player.Controller
 
                     break;
                 case Spell.Bergamot:
-                    bergamotSpell.enabled = false;
+                    bergamotSpell.enabled = true;
                     spellCanvas.SetActive(true);
 
                     //Set Sprite
@@ -98,11 +95,30 @@ namespace Player.Controller
                     spellButton.onClick.AddListener(bergamotSpell.SpellCastFromButton);
 
                     break;
+
+
+
                 default:
+                    if (poppySpell.enabled)
+                    {
+                        PoppySpell spell = (PoppySpell)poppySpell;
+                        spell.Abort();
+                        poppySpell.enabled = false; 
+                    }
+                    else if (thistleSpell.enabled)
+                    {
+                        ThistleSpell spell = (ThistleSpell)thistleSpell;
+                        spell.Abort();
+                        thistleSpell.enabled = false;
+                    }
+                    else if (bergamotSpell.enabled)
+                    {
+                        BergamotSpell spell = (BergamotSpell)bergamotSpell;
+                        spell.Abort();
+                        bergamotSpell.enabled = false;
+                    }
+
                     spellCanvas.SetActive(false);
-                    poppySpell.enabled = false;
-                    thistleSpell.enabled = false;
-                    bergamotSpell.enabled = false;
 
 
                     break;

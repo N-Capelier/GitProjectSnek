@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3700035221951136516}
   - component: {fileID: 3883664842125812205}
   - component: {fileID: 4192908653974122296}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,8 +77,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathIndex: 0
   bulletLifetime: 5
+  isDestroyableByWall: 0
   objectRenderer: {fileID: 4437115876193207791}
-  fx: {fileID: 0}
   deathFx: {fileID: 5848889965215644657, guid: 67ad4b8f7df8e67438bc6c44fbb15c8c, type: 3}
 --- !u!1 &4437115876193207791
 GameObject:
@@ -89,7 +89,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 517909801949961563}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 4844280537470536161}
   - component: {fileID: 1063756169062753094}
   - component: {fileID: 1805306425954247776}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,6 +217,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ParticleIllusionistLightball
       objectReference: {fileID: 0}
+    - target: {fileID: 2374129549121576992, guid: adf9d201afa430c4db13c87c985a2c40,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2374129549121576994, guid: adf9d201afa430c4db13c87c985a2c40,
         type: 3}
       propertyPath: looping
@@ -291,6 +296,11 @@ PrefabInstance:
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2374129551007091177, guid: adf9d201afa430c4db13c87c985a2c40,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adf9d201afa430c4db13c87c985a2c40, type: 3}

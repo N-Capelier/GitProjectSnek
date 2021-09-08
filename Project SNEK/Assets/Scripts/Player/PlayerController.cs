@@ -116,6 +116,9 @@ namespace Player.Controller
             //death fx
             Instantiate(deathFx, transform.position, Quaternion.identity);
 
+            //Reset Spell
+            runController.SetSpell(Spell.None);
+
             //death face
             faceRenderer.material = faces[1];
 
@@ -258,6 +261,10 @@ namespace Player.Controller
             //isInCutscene = false;
 
             ////////////////////////////
+            ///
+            //Reset Spell
+            runController.SetSpell(Spell.None);
+
             //Fade to black
             StartCoroutine(GameManager.Instance.gameState.sceneTransition.AlphaUp(1));
 
