@@ -37,8 +37,11 @@ namespace Player.Spells
             print(PlayerManager.Instance.currentController.playerRunSpell);
             if (PlayerManager.Instance.currentController.playerRunSpell.currentSpellCast != null)
             {
-                shield.GetComponent<ParticleSystem>().Stop();
-                shield.SetActive(false);
+                if(shield!= null)
+                {
+                    shield.GetComponent<ParticleSystem>().Stop();
+                    shield.SetActive(false);
+                }
                 StopCoroutine(PlayerManager.Instance.currentController.playerRunSpell.currentSpellCast);
                 PlayerManager.Instance.currentController.spellMoveSpeedModifier = 1f;
                 PlayerManager.Instance.currentController.playerRunSpell.spellCooldownTimer.Stop();
