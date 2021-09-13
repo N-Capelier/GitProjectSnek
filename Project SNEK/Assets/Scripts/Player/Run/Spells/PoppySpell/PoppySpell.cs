@@ -63,6 +63,16 @@ namespace Player.Spells
             yield return new WaitForSeconds(animCooldown);
             PlayerManager.Instance.currentController.spellMoveSpeedModifier = 1f;
         }
+
+        public void Abort()
+        {
+            if(PlayerManager.Instance.currentController.playerRunSpell.currentSpellCast != null)
+            {
+                StopCoroutine(PlayerManager.Instance.currentController.playerRunSpell.currentSpellCast);
+                PlayerManager.Instance.currentController.spellMoveSpeedModifier = 1f;
+                PlayerManager.Instance.currentController.playerRunSpell.spellCooldownTimer.Stop();
+            }
+        }
     }
 }
 

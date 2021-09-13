@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3700035221951136516}
   - component: {fileID: 3883664842125812205}
   - component: {fileID: 4192908653974122296}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: FlowerBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,8 +77,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathIndex: 0
   bulletLifetime: 5
+  isDestroyableByWall: 1
   objectRenderer: {fileID: 4437115876193207791}
-  fx: {fileID: 132665890436081665}
   deathFx: {fileID: 254090022867493519, guid: 62e73d7efae9bf549b4f24bde95a6029, type: 3}
 --- !u!1 &4437115876193207791
 GameObject:
@@ -89,7 +89,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 517909801949961563}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,6 +118,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 517909801949961563}
     m_Modifications:
+    - target: {fileID: 7859593341859142665, guid: 05bf860daddfbeb4eaf5007e9ec6d92a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7859593342645899532, guid: 05bf860daddfbeb4eaf5007e9ec6d92a,
         type: 3}
       propertyPath: m_RootOrder
@@ -178,17 +183,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: ParticleLeaveShot
       objectReference: {fileID: 0}
+    - target: {fileID: 7859593342645899535, guid: 05bf860daddfbeb4eaf5007e9ec6d92a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05bf860daddfbeb4eaf5007e9ec6d92a, type: 3}
 --- !u!4 &132665890436081664 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7859593342645899532, guid: 05bf860daddfbeb4eaf5007e9ec6d92a,
-    type: 3}
-  m_PrefabInstance: {fileID: 7837864706461137164}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &132665890436081665 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 7859593342645899533, guid: 05bf860daddfbeb4eaf5007e9ec6d92a,
     type: 3}
   m_PrefabInstance: {fileID: 7837864706461137164}
   m_PrefabAsset: {fileID: 0}

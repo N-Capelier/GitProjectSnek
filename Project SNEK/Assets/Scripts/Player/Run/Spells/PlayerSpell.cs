@@ -15,11 +15,13 @@ namespace Player.Spells
     {
         [SerializeField] [Range(0, 10)] float spellCooldown = 4;
 
-        Clock spellCooldownTimer;
+        public Clock spellCooldownTimer;
         bool canAttack = true;
 
         public Image buttonImage;
         [HideInInspector] public bool isSpellAccessible = false;
+
+        [HideInInspector] public Coroutine currentSpellCast;
 
         private void Start()
         {
@@ -57,13 +59,13 @@ namespace Player.Spells
             //if (SceneManager.GetActiveScene().name == "Level1_3" || SceneManager.GetActiveScene().name == "Boss Anorexia" || SceneManager.GetActiveScene().name == "Level1_2V2")
             //{
             if (canAttack /*&& PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits() >= 3*/)
-                {
-                    canAttack = false;
-                    spellCooldownTimer.SetTime(spellCooldown);
-                    buttonImage.color = new Color(1f, 1f, 1f, .25f);
+            {
+                canAttack = false;
+                spellCooldownTimer.SetTime(spellCooldown);
+                buttonImage.color = new Color(1f, 1f, 1f, .25f);
 
-                    StartCoroutine(SpellCast(spellDirection));
-                }
+                currentSpellCast = StartCoroutine(SpellCast(spellDirection));
+            }
             //}
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         }

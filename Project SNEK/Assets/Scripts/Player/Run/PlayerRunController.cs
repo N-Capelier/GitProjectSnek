@@ -61,9 +61,6 @@ namespace Player.Controller
 
         public void SetSpell(Spell _spell)
         {
-            if(playerRunSpell != null)
-                playerRunSpell.enabled = false;
-
             switch (_spell)
             {
                 case Spell.Poppy:
@@ -88,7 +85,7 @@ namespace Player.Controller
 
                     break;
                 case Spell.Bergamot:
-                    bergamotSpell.enabled = false;
+                    bergamotSpell.enabled = true;
                     spellCanvas.SetActive(true);
 
                     //Set Sprite
@@ -98,11 +95,30 @@ namespace Player.Controller
                     spellButton.onClick.AddListener(bergamotSpell.SpellCastFromButton);
 
                     break;
+
+
+
                 default:
+                    if (poppySpell.enabled)
+                    {
+                        PoppySpell spell = (PoppySpell)poppySpell;
+                        spell.Abort();
+                        poppySpell.enabled = false; 
+                    }
+                    else if (thistleSpell.enabled)
+                    {
+                        ThistleSpell spell = (ThistleSpell)thistleSpell;
+                        spell.Abort();
+                        thistleSpell.enabled = false;
+                    }
+                    else if (bergamotSpell.enabled)
+                    {
+                        BergamotSpell spell = (BergamotSpell)bergamotSpell;
+                        spell.Abort();
+                        bergamotSpell.enabled = false;
+                    }
+
                     spellCanvas.SetActive(false);
-                    poppySpell.enabled = false;
-                    thistleSpell.enabled = false;
-                    bergamotSpell.enabled = false;
 
 
                     break;
@@ -161,7 +177,8 @@ namespace Player.Controller
 
             InputHandler.InputReceived += HandleInput;
 
-            moveSpeed = 0.1f;
+
+            moveSpeed = 0f;
             animator.Play("Anim_PlayerRun_Spawn_1");
             yield return new WaitForSeconds(3.625f);
             moveSpeed = cachedMoveSpeed;
@@ -246,7 +263,7 @@ namespace Player.Controller
 
         float bonusInputSpeed = 1.75f;
 
-        InputType previousInputType;
+        [HideInInspector] public InputType previousInputType;
         /// <summary>
         /// Get new direction on user input
         /// </summary>
