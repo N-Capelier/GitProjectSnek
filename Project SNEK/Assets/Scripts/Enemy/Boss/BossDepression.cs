@@ -59,6 +59,10 @@ namespace Boss
         public GameObject[] monochromObjects;
         private EnemyAttackPattern pattern;
         public EnemyAttackPattern[] monochromObjectsPatterns;
+        public GameObject spellPickup;
+        private Coroutine waitForSpellRoutine;
+        private Coroutine resetStateRoutine;
+        public EnemyAttackPattern panicPattern;
 
 
         [Space]
@@ -160,13 +164,13 @@ namespace Boss
                     //Spawn Mille masque phase 2
                     index = 1;
                     prefab = snakeMilleMasques;
-                    currentHeartList = heartsPhase1;
+                    currentHeartList = heartsPhase2;
                     break;
                 case 10:
                     //Spawn Mille masque phase 3
                     index = 2;
                     prefab = snakeMilleMasques;
-                    currentHeartList = heartsPhase1;
+                    currentHeartList = heartsPhase3;
                     break;
             }
 
@@ -177,7 +181,7 @@ namespace Boss
                 {
                     if (milleMasqueStartPositions[index].row[x].column[y] == true)
                     {
-                        GameObject milleMasque = Instantiate(prefab, new Vector3(patternPos.transform.position.x + y, patternPos.transform.position.y , patternPos.transform.position.z - x), prefab.transform.rotation);
+                        GameObject milleMasque = Instantiate(prefab, new Vector3(patternPos.transform.position.x + y, 0 , patternPos.transform.position.z - x), prefab.transform.rotation);
                         for (int i = 0; i < currentHeartList[count].row.Length; i++)
                         {
                             for (int j = 0; j < currentHeartList[count].row[i].column.Length; j++)
@@ -244,7 +248,7 @@ namespace Boss
             for (int i = 0; i < projectilesCount; i++)
             {
                 //ThrowCoroutine
-                StartCoroutine(ThrowProjectile(projectiles[Random.Range(0, projectiles.Count-1)], projectileLifetime, PlayerManager.Instance.currentController.objectRenderer.transform.position + new Vector3(0,0,3)));
+                StartCoroutine(ThrowProjectile(projectiles[Random.Range(0, projectiles.Count-1)], projectileLifetime));
             }
 
             yield return new WaitForEndOfFrame();
@@ -301,20 +305,13 @@ namespace Boss
                 }
             }
 
-            yield return new WaitForSeconds(5);
-            camDistance = 7;
-            canBeHit = true;
+            GameObject pickup = Instantiate(spellPickup, (new Vector3((patternPos.transform.position.x + 4), (patternPos.transform.position.y), (patternPos.transform.position.z + 8))), Quaternion.identity);
 
-
-            yield return new WaitForSeconds(5);
-            patternCount = 0;
-            canDoPattern = true;
-            camDistance = 13;
-            canBeHit = false;
-
+            waitForSpellRoutine = StartCoroutine(WaitForPickup(pickup));
+            resetStateRoutine = StartCoroutine(ResetState(pickup));
         }
 
-        private IEnumerator ThrowProjectile(GameObject projectile, float lifetime, Vector3 target)
+        private IEnumerator ThrowProjectile(GameObject projectile, float lifetime)
         {
             yield return new WaitForSeconds(1f);
             Coroutine rotate = StartCoroutine(RotateProjectile(projectile, lifetime+1));
@@ -328,7 +325,7 @@ namespace Boss
             }
 
             float timer = 0;
-            Vector3 direction = target - projectile.transform.position;
+            Vector3 direction = (PlayerManager.Instance.currentController.objectRenderer.transform.position + new Vector3(0, 0, 3)) - projectile.transform.position;
 
             while(timer < lifetime)
             {
@@ -352,6 +349,52 @@ namespace Boss
                 projectile.transform.rotation *= Quaternion.Euler(randRotation.x * timer, randRotation.y * timer, randRotation.z * timer);
                 timer += Time.deltaTime;
                 yield return new WaitForEndOfFrame();
+            }
+        }
+
+        private IEnumerator WaitForPickup(GameObject pickup)
+        {
+            yield return new WaitUntil(()=> pickup == null);
+            StopCoroutine(resetStateRoutine);
+            StartCoroutine(PanicPattern());
+        }
+
+        private IEnumerator ResetState(GameObject pickup)
+        {
+            yield return new WaitForSeconds(15);
+            StopCoroutine(waitForSpellRoutine);
+            Instantiate(appearFeedback, pickup.transform.position, Quaternion.identity);
+            Destroy(pickup);
+            patternCount = 0;
+            canDoPattern = true;
+            canBeHit = false;
+        }
+
+        private IEnumerator PanicPattern()
+        {
+            for (int x = 0; x < panicPattern.row.Length; x++)
+            {
+                for (int y = 0; y < panicPattern.row[x].column.Length; y++)
+                {
+                    if (panicPattern.row[x].column[y] == true)
+                    {
+                        //spawn random monochrom object
+                        GameObject prefab = monochromObjects[Random.Range(0, monochromObjects.Length)];
+                        Instantiate(prefab, new Vector3((int)patternPos.transform.position.x + y, (int)patternPos.transform.position.y, (int)patternPos.transform.position.z - x), prefab.transform.rotation);
+                    }
+                }
+            }
+
+            yield return new WaitUntil(() => PlayerManager.Instance.currentController.isDead || PlayerManager.Instance.currentController.playerRunSpell.buttonImage.fillAmount < 1);
+
+            if (PlayerManager.Instance.currentController.isDead)
+            {
+                yield return null;
+            }
+            else
+            {
+                canBeHit = true;
+                camDistance = 7;
             }
         }
 
