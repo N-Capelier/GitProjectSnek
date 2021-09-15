@@ -248,7 +248,7 @@ namespace Boss
             for (int i = 0; i < projectilesCount; i++)
             {
                 //ThrowCoroutine
-                StartCoroutine(ThrowProjectile(projectiles[Random.Range(0, projectiles.Count-1)], projectileLifetime, PlayerManager.Instance.currentController.objectRenderer.transform.position + new Vector3(0,0,3)));
+                StartCoroutine(ThrowProjectile(projectiles[Random.Range(0, projectiles.Count-1)], projectileLifetime));
             }
 
             yield return new WaitForEndOfFrame();
@@ -311,7 +311,7 @@ namespace Boss
             resetStateRoutine = StartCoroutine(ResetState(pickup));
         }
 
-        private IEnumerator ThrowProjectile(GameObject projectile, float lifetime, Vector3 target)
+        private IEnumerator ThrowProjectile(GameObject projectile, float lifetime)
         {
             yield return new WaitForSeconds(1f);
             Coroutine rotate = StartCoroutine(RotateProjectile(projectile, lifetime+1));
@@ -325,7 +325,7 @@ namespace Boss
             }
 
             float timer = 0;
-            Vector3 direction = target - projectile.transform.position;
+            Vector3 direction = (PlayerManager.Instance.currentController.objectRenderer.transform.position + new Vector3(0, 0, 3)) - projectile.transform.position;
 
             while(timer < lifetime)
             {
