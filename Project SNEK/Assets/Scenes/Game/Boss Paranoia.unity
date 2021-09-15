@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1388,7 +1388,7 @@ PrefabInstance:
     - target: {fileID: 3036670980514337178, guid: 22f398b678a4cb54587020cbbb7237b2,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3088804441869012685, guid: 22f398b678a4cb54587020cbbb7237b2,
         type: 3}
@@ -1483,7 +1483,7 @@ PrefabInstance:
     - target: {fileID: 3290385745384671440, guid: 22f398b678a4cb54587020cbbb7237b2,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3344976228302200579, guid: 22f398b678a4cb54587020cbbb7237b2,
         type: 3}
@@ -2293,7 +2293,7 @@ PrefabInstance:
     - target: {fileID: 7199402492238690489, guid: 22f398b678a4cb54587020cbbb7237b2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 19.84
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7199402492238690489, guid: 22f398b678a4cb54587020cbbb7237b2,
         type: 3}
@@ -3328,17 +3328,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SceneBindings.Array.data[72].value
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 495820297}
     - target: {fileID: 7235010767457603476, guid: 22f398b678a4cb54587020cbbb7237b2,
         type: 3}
       propertyPath: m_SceneBindings.Array.data[73].value
       value: 
-      objectReference: {fileID: 283633011}
+      objectReference: {fileID: 283633010}
     - target: {fileID: 7235010767457603476, guid: 22f398b678a4cb54587020cbbb7237b2,
         type: 3}
       propertyPath: m_SceneBindings.Array.data[74].value
       value: 
-      objectReference: {fileID: 1184942300}
+      objectReference: {fileID: 283633010}
     - target: {fileID: 7235010767457603476, guid: 22f398b678a4cb54587020cbbb7237b2,
         type: 3}
       propertyPath: m_SceneBindings.Array.data[75].value
@@ -3423,7 +3423,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SceneBindings.Array.data[95].value
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 495820297}
     - target: {fileID: 7235010767457603476, guid: 22f398b678a4cb54587020cbbb7237b2,
         type: 3}
       propertyPath: m_SceneBindings.Array.data[96].value
@@ -4768,6 +4768,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7225952527071754773, guid: 344929a75410193458dfb4c21cbeab09,
     type: 3}
   m_PrefabInstance: {fileID: 489486239}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &495820297 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3290385745384671440, guid: 22f398b678a4cb54587020cbbb7237b2,
+    type: 3}
+  m_PrefabInstance: {fileID: 283632997}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &507589772
 PrefabInstance:
@@ -13779,12 +13785,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd2cfbee82c43664ca1ebb87d5681b3c, type: 3}
---- !u!1 &1184942300 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3036670980514337178, guid: 22f398b678a4cb54587020cbbb7237b2,
-    type: 3}
-  m_PrefabInstance: {fileID: 283632997}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1188246160
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17712,6 +17712,12 @@ PrefabInstance:
       propertyPath: generator
       value: 
       objectReference: {fileID: 1081703275}
+    - target: {fileID: 4643507836205989663, guid: 1a6d971f373ef854aba1160589eba36e,
+        type: 3}
+      propertyPath: endCinematic
+      value: 
+      objectReference: {fileID: 11400000, guid: 10fa555b9c6f25344bb0e6827ae57d49,
+        type: 2}
     - target: {fileID: 4643507836205989663, guid: 1a6d971f373ef854aba1160589eba36e,
         type: 3}
       propertyPath: introCinematic
