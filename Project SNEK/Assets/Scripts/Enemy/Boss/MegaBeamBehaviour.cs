@@ -39,7 +39,6 @@ namespace Enemy
         {
             if (hasHitShield && !PlayerManager.Instance.currentController.runController.playerRunSpell.GetComponent<ThistleSpell>().shield.activeSelf)
             {
-                Debug.Log("shield over");
                 BossParanoia.Instance.isMegaBeamOver = true;
             }
         }

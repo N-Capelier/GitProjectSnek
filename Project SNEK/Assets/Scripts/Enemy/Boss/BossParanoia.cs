@@ -67,7 +67,7 @@ namespace Boss
         public GameObject spellPickup;
         GameObject shrub;
         List<GameObject> shrubs;
-        public EnemyAttackPattern pattern;
+        public EnemyAttackPattern[] pattern;
         bool isSpawning = false;
         int mouchouNumber;
 
@@ -76,6 +76,7 @@ namespace Boss
         bool isMegaBeam = false;
         [HideInInspector] public bool isMegaBeamOver = false;
         public GameObject megaBeamObject;
+        public GameObject eye;
         public GameObject hand1;
         public GameObject hand2;
         public float timeOfBeam;
@@ -310,33 +311,12 @@ namespace Boss
                 incomingBombs[j].GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
             }
 
-            switch (wavesIndex)
+            for (int i = incomingBombs.Count - 1; i >= 0; i--)
             {
-                case 0:
-                    for (int i = incomingBombs.Count - 1; i >= 0; i--)
-                    {
-                        incomingBombs[i].GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-                        incomingBombs[i].GetComponent<Rigidbody>().AddForce(bulletDir.normalized * bulletSpeed, ForceMode.Force);
-                        yield return new WaitForSeconds(0.25f);
-                    }
-                    break;
-                case 1:
-                    for (int i = 0; i < incomingBombs.Count; i++)
-                    {
-                        incomingBombs[i].GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-                        incomingBombs[i].GetComponent<Rigidbody>().AddForce(bulletDir.normalized * bulletSpeed, ForceMode.Force);
-                        yield return new WaitForSeconds(0.25f);
-                    }
-                    break;
-                case 2:
-                    for (int i = incomingBombs.Count - 1; i >= 0; i--)
-                    {
-                        incomingBombs[i].GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-                        incomingBombs[i].GetComponent<Rigidbody>().AddForce(bulletDir.normalized * bulletSpeed, ForceMode.Force);
-                        yield return new WaitForSeconds(0.25f);
-                    }
-                    break;
-            }
+                incomingBombs[i].GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                incomingBombs[i].GetComponent<Rigidbody>().AddForce(bulletDir.normalized * bulletSpeed, ForceMode.Force);
+                yield return new WaitForSeconds(0.25f);
+            }            
 
             animator.SetBool("animIsAttacking", false);
 
@@ -486,7 +466,7 @@ namespace Boss
                     blastIndex = 0;
                     break;
                 case 20:
-                    if (blastIndex >= 3)
+                    if (blastIndex >= 2)
                     {
                         patternCount++;
                         canDoPattern = true;
@@ -496,7 +476,7 @@ namespace Boss
                         StartCoroutine(FastPatternTarget());
                     break;
                 case 10:
-                    if (blastIndex >= 5)
+                    if (blastIndex >= 3)
                     {
                         patternCount++;
                         canDoPattern = true;
@@ -509,18 +489,22 @@ namespace Boss
         }
 
         int mouchouClone;
+        int mouchouIndex;
         IEnumerator PatternMouchou()
         {
             switch (currentHp)
             {
                 case 30:
-                    mouchouNumber = 2;
+                    mouchouIndex = 0;
+                    mouchouNumber = 1;
                     break;
                 case 20:
-                    mouchouNumber = 4;
+                    mouchouIndex = 1;
+                    mouchouNumber = 3;
                     break;
                 case 10:
-                    mouchouNumber = 6;
+                    mouchouIndex = 2;
+                    mouchouNumber = 5;
                     break;
             }
 
@@ -535,11 +519,11 @@ namespace Boss
 
             shrubs = new List<GameObject>();
 
-            for (int x = 0; x < pattern.row.Length; x++)
+            for (int x = 0; x < pattern[mouchouIndex].row.Length; x++)
             {
-                for (int y = 0; y < pattern.row[x].column.Length; y++)
+                for (int y = 0; y < pattern[mouchouIndex].row[x].column.Length; y++)
                 {
-                    if (pattern.row[x].column[y] == true)
+                    if (pattern[mouchouIndex].row[x].column[y] == true)
                     {
                         shrub = Instantiate(shrubPrefab, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x + 5))), Quaternion.identity);
                         Instantiate(spawnFx, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x + 5))), Quaternion.identity);
@@ -593,9 +577,13 @@ namespace Boss
 
             yield return new WaitUntil(() => isMegaBeam);
 
-            beam1 = Instantiate(megaBeamObject, blastPos);
+            beam1 = Instantiate(megaBeamObject, eye.transform);
             beam2 = Instantiate(megaBeamObject, hand1.transform);
             beam3 = Instantiate(megaBeamObject, hand2.transform);
+
+            beam1.transform.localPosition = new Vector3(1.4f, -1.1f, -0.05f);
+            beam2.transform.localPosition = new Vector3(0.32f, -0.7f, -0.81f);
+            beam3.transform.localPosition = new Vector3(-0.5f, -0.62f, -0.77f);
 
             beam1.transform.LookAt(new Vector3(PlayerManager.Instance.currentController.transform.position.x, PlayerManager.Instance.currentController.transform.position.y, PlayerManager.Instance.currentController.transform.position.z - 4));
             beam2.transform.LookAt(new Vector3(PlayerManager.Instance.currentController.transform.position.x, PlayerManager.Instance.currentController.transform.position.y, PlayerManager.Instance.currentController.transform.position.z - 4));
