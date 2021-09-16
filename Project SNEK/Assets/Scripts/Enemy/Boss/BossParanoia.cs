@@ -74,6 +74,7 @@ namespace Boss
         [Space]
         [InspectorName("Pattern MegaBeam")]
         bool isMegaBeam = false;
+        [HideInInspector] public bool isMegaBeamOver = false;
         public GameObject megaBeamObject;
         public GameObject hand1;
         public GameObject hand2;
@@ -201,8 +202,10 @@ namespace Boss
                         animator.SetBool("rightSide", false);
                     }
                     else
+                    {
                         wavesIndex = 2;
-                    animator.SetBool("rightSide", true);
+                        animator.SetBool("rightSide", true);
+                    }                        
                     break;
                 case 10:
                     if (waveCount == 0)
@@ -243,18 +246,60 @@ namespace Boss
 
         private IEnumerator SpawnWave()
         {
-            for (int x = 0; x < waves[wavesIndex].row.Length; x++)
+            switch (wavesIndex)
             {
-                for (int y = 0; y < waves[wavesIndex].row[x].column.Length; y++)
-                {
-                    if (waves[wavesIndex].row[x].column[y] == true)
+                case 0:
                     {
-                        bullet = Instantiate(projectile, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x - 2))), Quaternion.identity, patternPos);
-                        incomingBombs.Add(bullet);
-                        yield return new WaitForSeconds(0.07f);
+                        for (int x = 0; x < waves[wavesIndex].row.Length; x++)
+                        {
+                            for (int y = 0; y < waves[wavesIndex].row[x].column.Length; y++)
+                            {
+                                if (waves[wavesIndex].row[x].column[y] == true)
+                                {
+                                    bullet = Instantiate(projectile, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x - 2))), Quaternion.identity, patternPos);
+                                    incomingBombs.Add(bullet);
+                                    yield return new WaitForSeconds(0.07f);
+                                }
+                            }
+                        }
+                        break;
                     }
-                }
+                case 1:
+                    {
+                        for (int x = 0; x < waves[wavesIndex].row.Length; x++)
+                        {
+                            for (int y = waves[wavesIndex].row[x].column.Length -1; y >= 0 ; y--)
+                            {
+                                if (waves[wavesIndex].row[x].column[y] == true)
+                                {
+                                    bullet = Instantiate(projectile, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x - 2))), Quaternion.identity, patternPos);
+                                    incomingBombs.Add(bullet);
+                                    yield return new WaitForSeconds(0.07f);
+                                }
+                            }
+                        }
+                        break;
+                    }
+                case 2:
+                    {
+                        for (int x = 0; x < waves[wavesIndex].row.Length; x++)
+                        {
+                            for (int y = 0; y < waves[wavesIndex].row[x].column.Length; y++)
+                            {
+                                if (waves[wavesIndex].row[x].column[y] == true)
+                                {
+                                    bullet = Instantiate(projectile, (new Vector3((patternPos.transform.position.x + y), (patternPos.transform.position.y), (patternPos.transform.position.z - x - 2))), Quaternion.identity, patternPos);
+                                    incomingBombs.Add(bullet);
+                                    yield return new WaitForSeconds(0.07f);
+                                }
+                            }
+                        }
+                        break;
+                    }
+
             }
+
+            
             waveCount++;
         }
 
@@ -556,7 +601,7 @@ namespace Boss
             beam2.transform.LookAt(new Vector3(PlayerManager.Instance.currentController.transform.position.x, PlayerManager.Instance.currentController.transform.position.y, PlayerManager.Instance.currentController.transform.position.z - 4));
             beam3.transform.LookAt(new Vector3(PlayerManager.Instance.currentController.transform.position.x, PlayerManager.Instance.currentController.transform.position.y, PlayerManager.Instance.currentController.transform.position.z - 4));
 
-            yield return new WaitForSeconds(timeOfBeam);
+            yield return new WaitUntil(() => isMegaBeamOver);
 
             animator.SetBool("animIsAttacking", false);
             Destroy(beam1);
@@ -592,6 +637,7 @@ namespace Boss
             canDoPattern = true;
             canBeHit = false;
             isMegaBeam = false;
+            isMegaBeamOver = false;
             animator.SetBool("animIsHit", false);
         }
 
