@@ -62,6 +62,7 @@ namespace Boss
         public GameObject spellPickup;
         private Coroutine waitForSpellRoutine;
         private Coroutine resetStateRoutine;
+        private Coroutine stunExit;
         public EnemyAttackPattern panicPattern;
 
 
@@ -396,10 +397,23 @@ namespace Boss
                 canBeHit = true;
                 camDistance = 7;
             }
+
+            stunExit = StartCoroutine(StunExit());
+        }
+
+        IEnumerator StunExit()
+        {
+            yield return new WaitForSeconds(10);
+            StunReset();
+
         }
 
         void StunReset()
         {
+            if (stunExit != null)
+            {
+                StopCoroutine(stunExit);
+            }
             animator.SetBool("animIsHit", true);
             animator.SetInteger("animPatternCount", 0);
             animator.SetBool("animIsAttacking", false);            
