@@ -242,6 +242,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitbox: {fileID: 2286362319164567016}
   rd: {fileID: 7897247392796743311}
+  particles: {fileID: 0}
+  shaderRenderer: {fileID: 0}
 --- !u!1 &8545673587034961754
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,7 +356,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5432276
+  m_Radius: 0.45
   m_Center: {x: -0.009415269, y: 0.039388686, z: 0.51342165}
 --- !u!114 &1338999955159704247
 MonoBehaviour:
@@ -428,6 +430,7 @@ MonoBehaviour:
   headMonochromComponent: {fileID: 6508702456256237965}
   isMonochrom: 0
   hearts: []
+  canDie: 0
   pattern: {fileID: 0}
   currentHeadDir: {x: 0, y: 0, z: 0}
   feedbackObject: {fileID: 3893877149857393849, guid: 776a358c2e98ba8409c4035d37f35e3f,
