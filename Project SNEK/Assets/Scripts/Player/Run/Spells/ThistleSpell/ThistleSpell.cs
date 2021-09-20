@@ -8,7 +8,7 @@ namespace Player.Spells
     public class ThistleSpell : PlayerSpell
     {
         public GameObject shieldPrefab;
-        private GameObject shield;
+        [HideInInspector] public GameObject shield;
         [SerializeField] private float shieldLifetime;
         public override IEnumerator SpellCast(PlayerDirection spellDirection)
         {
