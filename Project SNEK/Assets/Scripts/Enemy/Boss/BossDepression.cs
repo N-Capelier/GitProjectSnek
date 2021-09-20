@@ -62,6 +62,7 @@ namespace Boss
         public GameObject spellPickup;
         private Coroutine waitForSpellRoutine;
         private Coroutine resetStateRoutine;
+        private Coroutine stunExit;
         public EnemyAttackPattern panicPattern;
 
 
@@ -117,15 +118,21 @@ namespace Boss
                 {
                     case 0:
                         canDoPattern = false;
-                        StartCoroutine(PatternMilleMasques());
+                        animator.SetInteger("patternIndex", 1);
+                        animator.SetBool("animIsAttacking", true);
+                        //StartCoroutine(PatternMilleMasques());
                         return;
                     case 1:
                         canDoPattern = false;
-                        StartCoroutine(PatternTelekinesis());
+                        animator.SetInteger("patternIndex", 2);
+                        animator.SetBool("animIsAttacking", true);
+                        //StartCoroutine(PatternTelekinesis());
                         return;
                     case 2:
                         canDoPattern = false;
-                        StartCoroutine(PatternMonochromObjects());
+                        animator.SetInteger("patternIndex", 3);
+                        animator.SetBool("animIsAttacking", true);
+                        //StartCoroutine(PatternMonochromObjects());
                         return;
                 }
             }
@@ -205,8 +212,7 @@ namespace Boss
             }
 
             yield return new WaitForEndOfFrame();
-            animator.SetInteger("animPatternCount", 1);
-            animator.SetBool("animIsAttacking", true);
+            animator.SetBool("animIsAttacking", false);
 
             yield return new WaitForSeconds(10);
             patternCount++;
@@ -251,9 +257,7 @@ namespace Boss
                 StartCoroutine(ThrowProjectile(projectiles[Random.Range(0, projectiles.Count-1)], projectileLifetime));
             }
 
-            yield return new WaitForEndOfFrame();
-            animator.SetInteger("animPatternCount", 1);
-            animator.SetBool("animIsAttacking", true);
+            animator.SetBool("animIsAttacking", false);
 
             yield return new WaitForSeconds(10);
             patternCount++;
@@ -283,14 +287,8 @@ namespace Boss
                     break;
             }
 
-            yield return new WaitForSeconds(2);
+            yield return null;
 
-            animator.SetInteger("animPatternCount", 3);
-            animator.SetBool("animIsAttacking", true);
-
-            // yield return new WaitUntil anim event
-
-            animator.SetBool("animIsAttacking", false);
 
             for (int x = 0; x < pattern.row.Length; x++)
             {
@@ -307,6 +305,7 @@ namespace Boss
 
             GameObject pickup = Instantiate(spellPickup, (new Vector3((patternPos.transform.position.x + 4), (patternPos.transform.position.y), (patternPos.transform.position.z + 8))), Quaternion.identity);
 
+            animator.SetBool("animIsAttacking", false);
             waitForSpellRoutine = StartCoroutine(WaitForPickup(pickup));
             resetStateRoutine = StartCoroutine(ResetState(pickup));
         }
@@ -393,14 +392,32 @@ namespace Boss
             }
             else
             {
+                yield return new WaitForSeconds(0.3f);
+                animator.SetBool("animIsHit", false);
+                animator.SetBool("animIsStunned", true);
                 canBeHit = true;
                 camDistance = 7;
             }
+
+            stunExit = StartCoroutine(StunExit());
+        }
+
+        IEnumerator StunExit()
+        {
+            yield return new WaitForSeconds(10);
+
+            StunReset();
+
         }
 
         void StunReset()
         {
-            animator.SetBool("animIsHit", true);
+            if (stunExit != null)
+            {
+                StopCoroutine(stunExit);
+            }
+            animator.SetBool("animIsStunned", false);
+
             animator.SetInteger("animPatternCount", 0);
             animator.SetBool("animIsAttacking", false);            
             camDistance = 13;
@@ -442,6 +459,7 @@ namespace Boss
 
         public void TakeDamage(float damage)
         {
+
             currentHp -= damage;
             AudioManager.Instance.PlayThisSoundEffect("BossHit");
             SaveManager.Instance.state.bossParanoiaHp--;
@@ -449,6 +467,7 @@ namespace Boss
 
             if (currentHp > 0)
             {
+                animator.SetBool("animIsHit", true);
                 StartCoroutine(HitFeedback());
                 StunReset();
                 StartCoroutine(DisplayHp());
