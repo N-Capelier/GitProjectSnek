@@ -55,6 +55,7 @@ namespace Saving
         public bool isDemoFinished = false;
         public int bossAnorexiaHp = 3;
         public int bossParanoiaHp = 3;
+        public int bossDepressionHp = 3;
 
         /// <summary>
         /// 0 = none

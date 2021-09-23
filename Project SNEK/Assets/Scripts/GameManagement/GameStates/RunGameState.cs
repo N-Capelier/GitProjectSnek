@@ -60,6 +60,23 @@ namespace GameManagement.GameStates
                     GameManager.Instance.playedBossCinematic = true;
                 }
             }
+            if (SceneManager.GetActiveScene().name == "Boss Depression")
+            {
+                RunCamController.Instance.Set(CamState.SemiScrolling);
+                if (!playedBossCinematic)
+                {
+                    playedBossCinematic = true;
+                    SaveManager.Instance.state.bossDepressionHp = 3;
+                    SaveManager.Instance.Save();
+
+                    //Set spellUI to UIHandler / Temporary ?? Thomas
+                    PlayerRunController temp = (PlayerRunController)PlayerManager.Instance.currentController;
+                    GameManager.Instance.uiHandler.spellUI = temp.spellUIContainer;
+
+                    CutsceneManager.Instance.PlayCutscene(BossDepression.Instance.introCinematic);
+                    GameManager.Instance.playedBossCinematic = true;
+                }
+            }
             else
             {
                 RunCamController.Instance.Set(CamState.PlayerScrolling);
