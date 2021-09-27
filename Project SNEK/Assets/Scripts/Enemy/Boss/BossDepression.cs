@@ -92,8 +92,8 @@ namespace Boss
         {
             rb = GetComponent<Rigidbody>();
             StartCoroutine(DelayedStart());
-            //currentHp = SaveManager.Instance.state.bossParanoiaHp * 10;
-            currentHp = maxHp;
+            currentHp = SaveManager.Instance.state.bossParanoiaHp * 10;
+            //currentHp = maxHp;
         }
 
         IEnumerator DelayedStart()
@@ -462,7 +462,7 @@ namespace Boss
 
             currentHp -= damage;
             AudioManager.Instance.PlayThisSoundEffect("BossHit");
-            SaveManager.Instance.state.bossParanoiaHp--;
+            SaveManager.Instance.state.bossDepressionHp--;
             SaveManager.Instance.Save();
 
             if (currentHp > 0)
