@@ -178,7 +178,7 @@ namespace Player.Controller
             InputHandler.InputReceived += HandleInput;
 
 
-            moveSpeed = 0f;
+            moveSpeed = .1f;
             animator.Play("Anim_PlayerRun_Spawn_1");
             yield return new WaitForSeconds(3.625f);
             moveSpeed = cachedMoveSpeed;
