@@ -32,6 +32,12 @@ namespace Map
                     case 4:
                         GameManager.Instance.gameState.Set(GameState.Cinematic, "Level2_2End");
                         break;
+                    case 5:
+                        GameManager.Instance.gameState.Set(GameState.Cinematic, "Level3_1End");
+                        break;
+                    case 6:
+                        GameManager.Instance.gameState.Set(GameState.Cinematic, "Level3_2End");
+                        break;
                 }
             }
         }
