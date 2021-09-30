@@ -425,7 +425,7 @@ namespace AudioManagement
         }
 
 
-        public Source PlaySFXAfter(string soundName, float wait)
+        public Source PlaySFXAfter(string soundName, float wait, bool loop)
         {
             //On cherche le son que l'on va jouer dans la liste de son.
 
@@ -449,7 +449,7 @@ namespace AudioManagement
                     source.audioSource.clip = s.clip;
                     source.audioSource.volume = s.volume * SoundEffectsVolume;
 
-                    source.audioSource.loop = false;
+                    source.audioSource.loop = loop;
 
                     source.audioSource.outputAudioMixerGroup = sfxMixer;
 

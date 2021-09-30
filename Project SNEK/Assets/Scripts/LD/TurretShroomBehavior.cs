@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Player.Controller;
 using Player;
+using AudioManagement;
 
 namespace SpecialLD
 {
@@ -66,13 +67,15 @@ namespace SpecialLD
 				yield return new WaitForSeconds(shootingDelay);
 
 				windUp.Play();
+                AudioManager.Instance.PlayThisSoundEffect("FleurTourelleCharge", transform);
 				yield return new WaitForSeconds(warmupTime);
 				windUp.Stop();
 				animator.Play("animEyedFlowerShot");
 				shot.Play();
 				incomingBullet = Instantiate(bullet, bulletSpawn.position, Quaternion.identity);
 				incomingBullet.GetComponent<Rigidbody>().velocity = directionVector * bulletSpeed;
-			}
+                AudioManager.Instance.PlayThisSoundEffect("FleurTourelleTir", transform);
+            }
 			
 			StartCoroutine(ShootingLoop());
 		}
