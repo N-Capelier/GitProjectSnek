@@ -7,6 +7,7 @@ namespace UTPI.SceneViewer
     public class SceneViewerWindow : EditorWindow
     {
         static SceneViewerWindow sceneViewer;
+        Vector2 scrollPosition = Vector2.zero;
 
         [MenuItem("Window/General/Scene Viewer", priority = 1)]
         public static void Init()
@@ -65,6 +66,8 @@ namespace UTPI.SceneViewer
 
             currentFolderName = "";
 
+            scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
+
             foreach (string sceneGUID in scenesGUIDs)
             {
                 items = AssetDatabase.GUIDToAssetPath(sceneGUID).Split('/');
@@ -95,6 +98,8 @@ namespace UTPI.SceneViewer
                 }
                 GUILayout.EndHorizontal();
             }
+
+            EditorGUILayout.EndScrollView();
         }
     }
 }
