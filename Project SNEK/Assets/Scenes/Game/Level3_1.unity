@@ -2360,8 +2360,19 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6085007838338155285, guid: 1fcaf01ca1ef8eb499becf4b967a2127,
+        type: 3}
+      propertyPath: confinerCollider
+      value: 
+      objectReference: {fileID: 319352732}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fcaf01ca1ef8eb499becf4b967a2127, type: 3}
+--- !u!65 &319352732 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 4679592421427037703, guid: 1fcaf01ca1ef8eb499becf4b967a2127,
+    type: 3}
+  m_PrefabInstance: {fileID: 319352731}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &348085592
 PrefabInstance:
   m_ObjectHideFlags: 0
