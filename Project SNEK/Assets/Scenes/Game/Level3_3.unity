@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1200,12 +1200,17 @@ PrefabInstance:
     - target: {fileID: 4679592421427037703, guid: 1fcaf01ca1ef8eb499becf4b967a2127,
         type: 3}
       propertyPath: m_Size.x
-      value: 4
+      value: 5.4
       objectReference: {fileID: 0}
     - target: {fileID: 4679592421427037703, guid: 1fcaf01ca1ef8eb499becf4b967a2127,
         type: 3}
       propertyPath: m_Size.z
       value: 171.71835
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679592421427037703, guid: 1fcaf01ca1ef8eb499becf4b967a2127,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4679592421427037703, guid: 1fcaf01ca1ef8eb499becf4b967a2127,
         type: 3}
@@ -1277,6 +1282,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6085007838338155285, guid: 1fcaf01ca1ef8eb499becf4b967a2127,
+        type: 3}
+      propertyPath: confinerCollider
+      value: 
+      objectReference: {fileID: 656511640}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fcaf01ca1ef8eb499becf4b967a2127, type: 3}
 --- !u!1001 &348085592
@@ -29873,6 +29883,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 651478101}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &656511640 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 4679592421427037703, guid: 1fcaf01ca1ef8eb499becf4b967a2127,
+    type: 3}
+  m_PrefabInstance: {fileID: 319352731}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &663845620
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50904,7 +50920,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4154132965579954691
 Transform:
   m_ObjectHideFlags: 0
