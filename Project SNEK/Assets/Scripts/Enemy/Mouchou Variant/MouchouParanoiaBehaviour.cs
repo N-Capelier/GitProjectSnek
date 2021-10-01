@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Player;
 using Map;
+using AudioManagement;
 
 namespace Enemy
 {
@@ -120,6 +121,9 @@ namespace Enemy
             if (hadPoof == false)
             {
                 Instantiate(poof, transform.position, Quaternion.identity);
+
+                AudioManager.Instance.PlaySoundEffect("MouchouTransform");
+
                 hadPoof = true;
             }
         }

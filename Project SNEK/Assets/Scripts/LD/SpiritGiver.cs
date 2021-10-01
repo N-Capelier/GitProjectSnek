@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Player;
 using System;
+using AudioManagement;
 
 namespace Door
 {
@@ -39,6 +40,8 @@ namespace Door
         {
             if(give == true)
             {
+                AudioManager.Instance.PlaySoundEffect("LevelSpiritGateStart");
+
                 int playerSpirits = PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits(); ;
 
                 if (playerSpirits < spiritCeiling)
@@ -54,6 +57,8 @@ namespace Door
             }
             else if (give == false)
             {
+                AudioManager.Instance.PlaySoundEffect("LevelSpiritGateEnd");
+
                 int playerSpirits = PlayerManager.Instance.currentController.playerRunSpirits.GetActiveSpirits(); ;
                 PlayerManager.Instance.currentController.playerRunSpirits.ConsumeSpirits(playerSpirits);
             }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Enemy;
+using AudioManagement;
 
 namespace Player.Technique
 {
@@ -15,10 +16,15 @@ namespace Player.Technique
         bool canHit = true;
         public BubbleShieldTechnique shieldTechnique;
         public ParticleSystem shieldFx, shieldDeathFx;
+        private Source bubbleLoop;
 
         private void Start()
         {
             shieldFx.Play();
+
+            AudioManager.Instance.PlaySoundEffect("BubbleStart");
+
+            bubbleLoop = AudioManager.Instance.PlaySFXAfter("BubbleLoop", 0.27f, true);
         }
         private void OnTriggerStay(Collider other)
         {
@@ -52,7 +58,9 @@ namespace Player.Technique
             shieldFx.Stop();
             gameObject.GetComponent<Collider>().enabled = false;
             Instantiate(shieldDeathFx, transform.position, Quaternion.identity);
+            AudioManager.Instance.PlaySoundEffect("BubbleEnd");
             yield return new WaitForSeconds(0.3f);
+            bubbleLoop.audioSource.Stop();
             Destroy(gameObject);
         }
     }

@@ -39,12 +39,17 @@ namespace Enemy
         int index = 0;
         public IEnumerator OnshouldAttack()
         {
+            AudioManager.Instance.PlaySoundEffect("IllusionisteCharge");
+
+
             yield return new WaitForSeconds(stats.attackCooldown);
 
             if(isKillable == false)
             {
                 index = Random.Range(0, clonesList.Count);
                 StartCoroutine(clonesList[index].GetComponent<IllusionisteClone>().Fire());
+
+                AudioManager.Instance.PlaySoundEffect("IllusionisteTir");
             }
         }
 
