@@ -461,6 +461,7 @@ MonoBehaviour:
   isSpellAccessible: 0
   shieldPrefab: {fileID: 6338540020315859434, guid: 9dc27007bfb542042a302da2f7121966,
     type: 3}
+  shield: {fileID: 0}
   shieldLifetime: 4
 --- !u!114 &2261647684975231066
 MonoBehaviour:
@@ -1503,6 +1504,7 @@ MonoBehaviour:
     type: 3}
   thistleSpellSprite: {fileID: -5818804042162181420, guid: 17f129881d2769747a0d77326ef5afcb,
     type: 3}
+  previousInputType: 0
   holdFadeSpeed: 1.5
 --- !u!54 &4086522607183702087
 Rigidbody:
@@ -1948,6 +1950,7 @@ GameObject:
   - component: {fileID: 1312349439345242684}
   - component: {fileID: 4404281885528204060}
   - component: {fileID: 5202018978002591122}
+  - component: {fileID: 2530822733733710183}
   m_Layer: 8
   m_Name: Mesh
   m_TagString: Player
@@ -1994,6 +1997,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaafcd53bfbcf974c8a84ac2cf4af813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2530822733733710183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8950491788631335909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa3746a126641e408cc0ace16a0c029, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  confinerLargeSizeWidth: 6
 --- !u!1001 &1396609520474308841
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2647,15 +2663,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 626141cb8c01e71498fdacacce68e058, type: 3}
---- !u!1 &5225814901702059555 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 831756616574768418, guid: 626141cb8c01e71498fdacacce68e058,
-    type: 3}
-  m_PrefabInstance: {fileID: 4832130176846525185}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &966483438162909502 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5649360406668274239, guid: 626141cb8c01e71498fdacacce68e058,
+    type: 3}
+  m_PrefabInstance: {fileID: 4832130176846525185}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5225814901702059555 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 831756616574768418, guid: 626141cb8c01e71498fdacacce68e058,
     type: 3}
   m_PrefabInstance: {fileID: 4832130176846525185}
   m_PrefabAsset: {fileID: 0}

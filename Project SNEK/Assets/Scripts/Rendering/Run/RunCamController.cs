@@ -41,6 +41,8 @@ namespace Rendering.Run
         public float yOffset;
         public float zOffset;
 
+        [Header("Level Elements")]
+        public BoxCollider confinerCollider; 
 
         private void Awake()
         {
