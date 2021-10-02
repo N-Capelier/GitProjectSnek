@@ -125,23 +125,27 @@ namespace DialogueManagement
             }
            pauseManager.HideOpenMenuButton();
 
-            switch (currentDialogue.mainCharacter)
+            if(NPCManager.Instance!=null)
             {
-                case Character.Poppy:
-                    NPCManager.Instance.poppy.bubble.SetActive(false);
-                    NPCManager.Instance.poppy.exclamationMark.SetActive(false);
-                    break;
-                case Character.Thistle:
-                    NPCManager.Instance.thistle.bubble.SetActive(false);
-                    NPCManager.Instance.thistle.exclamationMark.SetActive(false);
-                    break;
-                case Character.Bergamot:
-                    NPCManager.Instance.bergamot.bubble.SetActive(false);
-                    NPCManager.Instance.bergamot.exclamationMark.SetActive(false);
-                    break;
-                default:
-                    break;
+                switch (currentDialogue.mainCharacter)
+                {
+                    case Character.Poppy:
+                        NPCManager.Instance.poppy.bubble.SetActive(false);
+                        NPCManager.Instance.poppy.exclamationMark.SetActive(false);
+                        break;
+                    case Character.Thistle:
+                        NPCManager.Instance.thistle.bubble.SetActive(false);
+                        NPCManager.Instance.thistle.exclamationMark.SetActive(false);
+                        break;
+                    case Character.Bergamot:
+                        NPCManager.Instance.bergamot.bubble.SetActive(false);
+                        NPCManager.Instance.bergamot.exclamationMark.SetActive(false);
+                        break;
+                    default:
+                        break;
+                }
             }
+
         }
 
         IEnumerator WriteNextLine()
