@@ -224,7 +224,7 @@ namespace Cinematic
         {
             //Add to save state
             SaveManager.Instance.state.bergamotState = 37;
-            SaveManager.Instance.state.thistleState = 26;
+            SaveManager.Instance.state.thistleState = 25;
             SaveManager.Instance.state.poppyState = 42;
             SaveManager.Instance.state.unlockedLetters = 6;
             SaveManager.Instance.state.canvasCurrentState = 5;
@@ -236,7 +236,7 @@ namespace Cinematic
         {
             //Add to save state
             SaveManager.Instance.state.bergamotState = 39;
-            SaveManager.Instance.state.thistleState = 31;
+            SaveManager.Instance.state.thistleState = 30;
             SaveManager.Instance.state.poppyState = 48;
             SaveManager.Instance.state.unlockedLetters = 7;
             SaveManager.Instance.state.canvasCurrentState = 6;
@@ -247,7 +247,7 @@ namespace Cinematic
         public void BackToHubFromLvl3_1()
         {
             //Add to save state
-            SaveManager.Instance.state.bergamotState = 45;
+            SaveManager.Instance.state.bergamotState = 44;
             SaveManager.Instance.state.thistleState = 36;
             SaveManager.Instance.state.poppyState = 52;
             SaveManager.Instance.state.unlockedLetters = 8;
@@ -259,7 +259,7 @@ namespace Cinematic
         public void BackToHubFromLvl3_2()
         {
             //Add to save state
-            SaveManager.Instance.state.bergamotState = 51;
+            SaveManager.Instance.state.bergamotState = 50;
             SaveManager.Instance.state.thistleState = 41;
             SaveManager.Instance.state.poppyState = 58;
             SaveManager.Instance.state.unlockedLetters = 9;
@@ -271,7 +271,7 @@ namespace Cinematic
         public void BackToHubFromLvl3_3()
         {
             //Add to save state
-            SaveManager.Instance.state.bergamotState = 58;
+            SaveManager.Instance.state.bergamotState = 57;
             SaveManager.Instance.state.thistleState = 46;
             SaveManager.Instance.state.poppyState = 64;
             SaveManager.Instance.state.unlockedLetters = 10;
