@@ -21,6 +21,12 @@ public class GoToBoss : MonoBehaviour
                     GameManager.Instance.gameState.Set(GameState.Cinematic, "Boss Paranoia");
                 }
                 break;
+            case 2:
+                if (other.gameObject.layer == LayerMask.NameToLayer("PlayerController"))
+                {
+                    GameManager.Instance.gameState.Set(GameState.Cinematic, "Boss Depressionn");
+                }
+                break;
         }
 
         
