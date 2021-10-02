@@ -232,6 +232,54 @@ namespace Cinematic
             GameManager.Instance.gameState.Set(GameState.Hub, "Hub");
         }
 
+        public void BackToHubFromLvl2_3()
+        {
+            //Add to save state
+            SaveManager.Instance.state.bergamotState = 39;
+            SaveManager.Instance.state.thistleState = 31;
+            SaveManager.Instance.state.poppyState = 48;
+            SaveManager.Instance.state.unlockedLetters = 7;
+            SaveManager.Instance.state.canvasCurrentState = 6;
+            EndCustscene();
+            GameManager.Instance.gameState.Set(GameState.Hub, "Hub");
+        }
+
+        public void BackToHubFromLvl3_1()
+        {
+            //Add to save state
+            SaveManager.Instance.state.bergamotState = 45;
+            SaveManager.Instance.state.thistleState = 36;
+            SaveManager.Instance.state.poppyState = 52;
+            SaveManager.Instance.state.unlockedLetters = 8;
+            SaveManager.Instance.state.canvasCurrentState = 7;
+            EndCustscene();
+            GameManager.Instance.gameState.Set(GameState.Hub, "Hub");
+        }
+
+        public void BackToHubFromLvl3_2()
+        {
+            //Add to save state
+            SaveManager.Instance.state.bergamotState = 51;
+            SaveManager.Instance.state.thistleState = 41;
+            SaveManager.Instance.state.poppyState = 58;
+            SaveManager.Instance.state.unlockedLetters = 9;
+            SaveManager.Instance.state.canvasCurrentState = 8;
+            EndCustscene();
+            GameManager.Instance.gameState.Set(GameState.Hub, "Hub");
+        }
+
+        public void BackToHubFromLvl3_3()
+        {
+            //Add to save state
+            SaveManager.Instance.state.bergamotState = 58;
+            SaveManager.Instance.state.thistleState = 46;
+            SaveManager.Instance.state.poppyState = 64;
+            SaveManager.Instance.state.unlockedLetters = 10;
+            SaveManager.Instance.state.canvasCurrentState = 9;
+            EndCustscene();
+            GameManager.Instance.gameState.Set(GameState.Hub, "Hub");
+        }
+
         public void PlayMusic(string name)
         {
             MusicManager.Instance.Music(name);
